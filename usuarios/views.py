@@ -32,17 +32,3 @@ class loginView(FormView):
 		login(self.request, form.user_cache)
 		return super(loginView, self).form_valid(form)
 
-class UserViewSet(viewsets.ViewSet):
-	def create(self, request):
-		#queryset = UserProfile.objects.all()
-		#response = request.data['username']+request.data['email']+request.data['password']
-		username = request.data['username']
-		email = request.data['email']
-		password = request.data['password']
-		tel = request.data['telefono']
-		user = User.objects.create_user(username,email,password)
-
-		user_profile = UserProfile(user=user, telefono=tel)
-		user_profile.save()
-				
-		return Response('ok')
