@@ -18,7 +18,7 @@ class registroView(FormView):
 	form_class = registroForm
 	template_name = 'registro.html'
 	success_url = '/'
-
+	
 	def form_valid(self,form):
 		form.save()
 		return HttpResponseRedirect(self.get_success_url())

@@ -6,8 +6,9 @@ from django.contrib.auth.models import User
 from models import perfilUsuarioModel
 
 class loginForm(AuthenticationForm):
-	username = forms.CharField(widget=forms.TextInput(attrs={'class':'input'}))
-	password = forms.CharField(widget=forms.PasswordInput(attrs={'class':'input'}))
+	username = forms.CharField(error_messages={'required': 'Ingresa tu Usuario, '},widget=forms.TextInput(attrs={'class':'form-control ','placeholder':'nombre de usuario','autofocus':''}))
+	password = forms.CharField(error_messages={'required': 'Ingresa tu Contraseña'},widget=forms.PasswordInput(attrs={'class':'form-control','placeholder':'Contraseña'}))
+	
 
 class registroForm(forms.Form):
 	name = forms.CharField(max_length=20,required=True,widget=forms.TextInput(attrs={'placeholder':'Nombres'}),)
