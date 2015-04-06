@@ -1,48 +1,38 @@
-{% load staticfiles %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
+{% extends "index.html" %}
+{% block head %}
 	<title>Ingresar | Oportunidapp</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
-	<link href="{% static 'css/flat-ui.min.css' %}" rel="stylesheet">
-	<link href="{% static 'css/style.css' %}" rel="stylesheet">
-	<link href="{% static 'fonts/flaticon/flaticon.css' %}" rel="stylesheet">
-	<link href="{% static 'img/favicon.ico' %}" rel="shortcut icon" >
-</head>
-<body>
-	<h3 class="logo">
-		<a href="/">
-			<span class="blue-color">Oportunid</span>
-			<span class="green-color">App</span>
-		</a>
-	</h3>
-	
-	<div class="container center">
-		<div class="container-logo">
-			<h6>Bienvenido!</h6>
-			<form action="" method="post">
-				{% csrf_token %}
-				<div class="error-space">
-					{{ form.non_field_errors.as_ul|cut:"*" }}
-					{{ form.username.errors.as_ul|cut:"*" }}
-					{{ form.password.errors.as_ul|cut:"*" }}
-				</div>
-				 <div class="form-group">
-					{{ form.username }}
-				 </div>
-				 <div class="form-group">
-				 	{{ form.password }}
-				 </div>
-				<input class="btn btn-success btn-lg btn-block" type="submit" value="Ingresar">
-			</form>
+{% endblock %}
+{% block content  %}
+	<body>
+		<h3 class="logo">
+			<a href="/">
+				<span class="blue-color">Oportunid</span>
+				<span class="green-color">App</span>
+			</a>
+		</h3>
+		
+		<div class="container center">
+			<div class="container-logo">
+				<h6>Bienvenido!</h6>
+				<form action="" method="post">
+					{% csrf_token %}
+					<div class="error-space">
+						{{ form.non_field_errors.as_ul|cut:"*" }}
+						{{ form.username.errors.as_ul|cut:"*" }}
+						{{ form.password.errors.as_ul|cut:"*" }}
+					</div>
+					 <div class="form-group">
+						{{ form.username }}
+					 </div>
+					 <div class="form-group">
+					 	{{ form.password }}
+					 </div>
+					<input class="btn btn-success btn-lg btn-block" type="submit" value="Ingresar">
+				</form>
+			</div>
+			<a href="{% url 'signup' %}">No tienes cuenta? <span class="blue-color underline">Registrate aqui!</span></a><br>
+			<a href="#">olvido su contraseña?</a>
 		</div>
-		<a href="{% url 'signup' %}">No tienes cuenta? <span class="blue-color underline">Registrate aqui!</span></a><br>
-		<a href="#">olvido su contraseña?</a>
-	</div>
-</body>
-<script src="{% static 'jslibraries/jquery.min.js' %}"></script>
-<script src="{% static 'jslibraries/video.js' %}"></script>
-<script src="{% static 'jslibraries/flat-ui.min.js' %}"></script>
+	</body>
+{% endblock %} 
 </html>
