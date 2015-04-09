@@ -1,6 +1,7 @@
-from django.shortcuts import render
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
+from django.shortcuts import render
 
 from serializers import habilidadesSerializer
 from models import habilidadesModel
@@ -19,8 +20,10 @@ from rest_framework import viewsets
 		#return Response(request.data['nombre_habilidad'])
 """
 
+@login_required()
 def habilidades(request):
-	return render(request,'habilidades.html')
+	user = request.user
+	return render(request,'habilidades.html',{'user':user})
 
 
 class habilidadesViewSet(viewsets.ModelViewSet):
