@@ -1,4 +1,0 @@
-heroku	https://git.heroku.com/young-mountain-5407.git (fetch)
-heroku	https://git.heroku.com/young-mountain-5407.git (push)
-origin	https://github.com/heroku/python-getting-started.git (fetch)
-origin	https://github.com/heroku/python-getting-started.git (push)

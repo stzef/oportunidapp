@@ -1,6 +1,5 @@
 # -*- encoding: utf-8 -*-
 from django import forms
-from validations import *
 from django.contrib.auth import authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
