@@ -1,1 +1,68 @@
 {% extends "template.html" %}
+{% block head %}
+	<title>Habilidades | OportunidApp </title>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+	<div class="full col-sm-12">
+		<div class="col-md-offset-3">
+			<ul class="nav nav-pills">
+				<li><a href="#"><i class="glyphicon glyphicon-user desc2"></i>  <span class="desc">Te necesito</span></a></li>
+				<li><a href="#"><i class="glyphicon glyphicon-thumbs-up desc2"></i> <span class="desc">Habilidades</span></a></li>
+				<li><a href="#"><i class="glyphicon glyphicon-list-alt desc2"></i> <span class="desc">Trabajos</span></a></li>
+				<li><a href="#"><i class="glyphicon glyphicon-pushpin desc2"></i> <span class="desc">Solicitudes</span></a></li>
+			</ul>
+		</div>  
+	</div>
+</div>
+<div class="col-sm-12">
+	<div class="well"> 
+       <form class="form-horizontal" role="form">
+        	<h4>Nueva Habilidad</h4>
+         	<div class="form-group" style="padding:14px;">
+          		<input class="form-control" placeholder="Nombre"></input>
+          		<textarea class="form-control" placeholder="Describe tu Habilidad"></textarea>
+        	</div>
+        	<button class="btn btn-primary pull-right" type="button">Agregar</button>
+        	<ul class="list-inline">
+        		<li><a href=""><i class="glyphicon glyphicon-camera"></i></a></li>
+        	</ul>
+      	</form>
+  </div>
+</div>
+<div class="habilidad-item">
+	<div class="col-sm-12">   
+		<div class="row panel panel-default">
+			<div class="col-sm-6 text-center">
+				<img src="https://lh3.googleusercontent.com/uFp_tsTJboUY7kue5XAsGA=s28" class="desc-img img-rounded" alt="Responsive image">
+			</div>
+			<div class="col-sm-6">
+				<h3>Habilidad No. 1</h3>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+				<div class="text-center">
+					<span class="label label-success">Puntuación: <strong>6</strong></span>
+					<span class="label label-success">contrataciones: <strong>10</strong></span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="habilidad-item">
+	<div class="col-sm-12">   
+		<div class="row panel panel-default">
+			<div class="col-sm-6 text-center">
+				<img src="https://lh3.googleusercontent.com/uFp_tsTJboUY7kue5XAsGA=s28" class="desc-img img-rounded" alt="Responsive image">
+			</div>
+			<div class="col-sm-6">
+				<h3>Habilidad No. 2</h3>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+				<div class="text-center">
+					<span class="label label-success">Puntuación: <strong>2</strong></span>
+					<span class="label label-success">contrataciones: <strong>1</strong></span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
