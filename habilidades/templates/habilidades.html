@@ -1,8 +1,8 @@
 {% extends "template.html" %}
+{% load staticfiles %}
 {% block head %}
 	<title>Habilidades | OportunidApp </title>
 {% endblock %}
-
 {% block content %}
 <div class="row">
 	<div class="full col-sm-12">
@@ -16,19 +16,27 @@
 		</div>  
 	</div>
 </div>
-<div class="row habilidad-item">
-	<div class="col-sm-12">   
-		<div class="panel panel-default">
-			<div class="media">
-				<div class="media-left">
-					<img src="https://lh3.googleusercontent.com/uFp_tsTJboUY7kue5XAsGA=s28" class="media-object img-responsive img-circle" alt="Responsive image">
-				</div>
-				<div class="media-body">
-					<h4 class="media-heading" id="media-heading">Ole</h4>
-				</div>
-			</div>
+<div class="row">
+	<form id="form-createHabilidad" method="post">
+		{% csrf_token %}
+		<div class="form-group">
+			<label for="{{ form.id_categori.name }}">Categoria: </label>
+			{{ form.id_categoria }}
 		</div>
-	</div>
+		<div class="form-group">
+			<label for="{{ form.nhabilidad.name }}">Habilidad: </label>
+			{{ form.nhabilidad }}
+		</div>
+		<div>
+			<label for="{{ form.descripcion.name }}">Descripción: </label>
+			{{ form.descripcion }}
+		</div>
+		<div class="form-group">
+			<label for="{{ form.precio.name }}">Precio: </label>
+			{{ form.precio }}
+		</div>
+		<input type="submit" value="Guardar">
+	</form>
 </div>
 <div class="row habilidad-item">
 	<div class="col-sm-12">   
@@ -44,4 +52,47 @@
 		</div>
 	</div>
 </div>
+<div class="row habilidad-item">
+	<div class="col-sm-12">   
+		<div class="panel panel-default">
+			<div class="media">
+				<div class="media-left">
+					<img src="https://lh3.googleusercontent.com/uFp_tsTJboUY7kue5XAsGA=s28" class="media-object img-responsive img-circle" alt="Responsive image">
+				</div>
+				<div class="media-body">
+					<h4 class="media-heading" id="media-heading">Ole</h4>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+{% block scripts %}
+	<script src="{% static 'jsapp/csrf_load.js' %}"></script>
+	<script>
+		$(function() {
+			$('#form-createHabilidad').on('submit', function(event){
+				event.preventDefault();
+				crearHabilidad();
+			});
+			function crearHabilidad () {
+				$.ajax({
+					url: "/api/habilidades/",
+					type: "POST",
+					data: {
+						id_categoria: $('#id_id_categoria').val(),
+						nhabilidad: $('#id_nhabilidad').val(),
+						descripcion: $('#id_descripcion').val(),
+						precio: $('#id_precio').val(),
+					},
+					success: function(json){
+						console.log(json.data);
+					},
+					error: function(err) {
+						console.log(err)
+					}
+				}); 
+			};
+		});
+	</script>
 {% endblock %}

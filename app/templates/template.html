@@ -1,7 +1,7 @@
 {% load staticfiles %}
 <!DOCTYPE html>
 <!--  WELCOME TO OPORTUNIDAPP CODE -->
-<html lang="en">
+<html lang="en" ng-app="oportunidapp">
 	<head>
 		<meta charset="utf-8">
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
@@ -63,9 +63,10 @@
       </div>
     </div>
 	</body>
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"> </script>
   <script src="{% static 'jslibraries/bootstrap.min.js' %}"></script>
   <script src="{% static 'jslibraries/scripts.js' %}"></script>
+  <script src="{% static 'jslibraries/angular.min.js' %}"></script>
   {% block scripts %}
 
   {% endblock %} 

@@ -21,7 +21,7 @@ class habilidadesModel(models.Model):
 	#foto = models.ImageField(upload_to="/")
 	val_promedio = models.IntegerField(blank=True,null=True)
 	num_solicitudes = models.IntegerField(blank=True,null=True)
-	estado = models.CharField(choices=ESTADO_OPCIONES,max_length=1,blank=False,null=False,default='Activo')
+	estado = models.CharField(choices=ESTADO_OPCIONES,max_length=1,blank=False,null=False,default='1')
 	precio = models.DecimalField(max_digits=12,decimal_places=2,blank=True,null=True)
 
 	def __str__(self):
