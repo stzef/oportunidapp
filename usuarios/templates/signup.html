@@ -4,13 +4,24 @@
 	<title>Registro | Oportunidapp</title>
 {% endblock %}
 {% block content  %}
-<body>
-	<h3>Registro</h3>
-	<form action="" method="post">
-		{% csrf_token %}
-
-		{{  form.as_p }}
-		<input type="submit" value="Registrarme">
-	</form>
+<body class="body-login">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6 col-md-4 col-md-offset-4">
+				<div class="account-wall">
+					<h3 class="text-center">
+						<a href="/">
+							<span class="blue-color">Oportunid</span><span class="green-color">App</span>
+						</a>
+					</h3>
+					<form action="" method="post" class="form-registry text-center">
+						{% csrf_token %}
+						{{  form.as_p }}
+						<input class="btn btn-success btn-lg btn-block" type="submit" value="Registrarme">
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 {% endblock %}

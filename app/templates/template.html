@@ -42,8 +42,9 @@
             <div class="navbar navbar-blue navbar-static-top">
               <div class="navbar-user">
                 <div class="dropdown">
-                  <p>{{ user.username }}</p>
-                  <img src="https://lh3.googleusercontent.com/uFp_tsTJboUY7kue5XAsGA=s28" class="media-object img-responsive user" alt="Responsive image" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                  <a href="#" class="dropdown-toggle profile-image" data-toggle="dropdown">
+                    <img src="https://lh3.googleusercontent.com/uFp_tsTJboUY7kue5XAsGA=s28" class="special-img">{{ user.username }}<b class="carret"></b>
+                  </a>
                   <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
                     <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Mis Datos</a></li>
                     <li role="presentation">
