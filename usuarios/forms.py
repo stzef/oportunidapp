@@ -33,23 +33,23 @@ class emailLoginForm(forms.Form):
 		return self.user_cache
 
 class registroForm(forms.Form):
-	name = forms.CharField(max_length=20,required=True,widget=forms.TextInput(attrs={'placeholder':'Nombres'}),)
-	lastname = forms.CharField(max_length=20,required=True,widget=forms.TextInput(attrs={'placeholder':'Apellidos'}),)
-	username = forms.CharField(max_length=20,required=True,widget=forms.TextInput(attrs={'placeholder':'Usuario'}),)
-	email = forms.CharField(max_length=30,required=True,widget=forms.TextInput(attrs={'placeholder':'Email'}),)
-	password = forms.CharField(max_length=20,required=True,widget=forms.PasswordInput(attrs={'placeholder':'Contraseña'}),)
-	fnacimiento = forms.DateField(required=False,widget=forms.TextInput(attrs={'placeholder':'Fecha de nacimiento'}),)
-	genero  = forms.ChoiceField(choices=(('M','Masculino'),('F', 'Femenino'),('O','Otro'),),required=True,widget=forms.Select(),)
-	celular = forms.IntegerField(required=False,widget=forms.TextInput(attrs={'placeholder':'Numero Celular'}),)
+	name = forms.CharField(max_length=20,required=True,widget=forms.TextInput(attrs={'placeholder':'Nombres', 'class':'form-control '}),)
+	lastname = forms.CharField(max_length=20,required=True,widget=forms.TextInput(attrs={'placeholder':'Apellidos', 'class':'form-control '}),)
+	username = forms.CharField(max_length=20,required=True,widget=forms.TextInput(attrs={'placeholder':'Usuario', 'class':'form-control '}),)
+	email = forms.CharField(max_length=30,required=True,widget=forms.TextInput(attrs={'placeholder':'Email', 'class':'form-control '}),)
+	password = forms.CharField(max_length=20,required=True,widget=forms.PasswordInput(attrs={'placeholder':'Contraseña', 'class':'form-control '}),)
+	fnacimiento = forms.DateField(required=False,widget=forms.TextInput(attrs={'placeholder':'Fecha de nacimiento', 'class':'form-control '}),)
+	genero  = forms.ChoiceField(choices=(('M','Masculino'),('F', 'Femenino'),('O','Otro'),),required=True,widget=forms.Select(attrs={'class':'form-control '}),)
+	celular = forms.IntegerField(required=False,widget=forms.TextInput(attrs={'placeholder':'Numero Celular', 'class':'form-control '}),)
 	#Validaciones
 	def clean_username(self):
 		username = self.cleaned_data.get('username')
-		validate_username(username)
+		#validate_username(username)
 		return username
 
 	def clean_email(self):
 		email = self.cleaned_data.get('email')
-		validate_email(email)
+		#validate_email(email)
 		return email
 
 	def save(self):
