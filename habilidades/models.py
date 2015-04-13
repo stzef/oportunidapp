@@ -14,8 +14,8 @@ class habilidadesModel(models.Model):
 		('3','Eliminado'),
 	)
 
-	id_usuario = models.ForeignKey(perfilUsuarioModel)
-	id_categoria = models.ForeignKey(habCategoriasModel)
+	usuario = models.ForeignKey(perfilUsuarioModel)
+	categoria = models.ForeignKey(habCategoriasModel)
 	nhabilidad = models.CharField(max_length=30,blank=False,null=False)
 	descripcion = models.CharField(max_length=250,blank=False,null=False)
 	#foto = models.ImageField(upload_to="/")

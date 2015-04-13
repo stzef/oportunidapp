@@ -16,51 +16,33 @@
 		</div>  
 	</div>
 </div>
-<div class="row">
-	<form id="form-createHabilidad" method="post">
-		{% csrf_token %}
-		<div class="form-group">
-			<label for="{{ form.id_categori.name }}">Categoria: </label>
-			{{ form.id_categoria }}
-		</div>
-		<div class="form-group">
-			<label for="{{ form.nhabilidad.name }}">Habilidad: </label>
-			{{ form.nhabilidad }}
-		</div>
-		<div>
-			<label for="{{ form.descripcion.name }}">Descripción: </label>
-			{{ form.descripcion }}
-		</div>
-		<div class="form-group">
-			<label for="{{ form.precio.name }}">Precio: </label>
-			{{ form.precio }}
-		</div>
-		<input type="submit" value="Guardar">
-	</form>
-</div>
-<div class="row habilidad-item">
-	<div class="col-sm-12">   
-		<div class="panel panel-default">
-			<div class="media">
-				<div class="media-left">
-					<img src="https://lh3.googleusercontent.com/uFp_tsTJboUY7kue5XAsGA=s28" class="media-object img-responsive img-circle" alt="Responsive image">
-				</div>
-				<div class="media-body">
-					<h4 class="media-heading" id="media-heading">Ole</h4>
-				</div>
+<div class="col-sm-12">
+	<div class="well"> 
+		<form id="nueva-habilidad-form" method="post">
+			<h4>Nueva Habilidad</h4>
+
+			<div class="form-group" style="padding:14px;">
+				{{ form.as_p }}
 			</div>
-		</div>
+			<input type="submit" value="Agregar + " class="btn btn-primary pull-right">
+			<ul class="list-inline">
+				<li><a href=""><i class="glyphicon glyphicon-camera"></i></a></li>
+			</ul>
+		</form>
 	</div>
 </div>
-<div class="row habilidad-item">
-	<div class="col-sm-12">   
-		<div class="panel panel-default">
-			<div class="media">
-				<div class="media-left">
-					<img src="https://lh3.googleusercontent.com/uFp_tsTJboUY7kue5XAsGA=s28" class="media-object img-responsive img-circle" alt="Responsive image">
-				</div>
-				<div class="media-body">
-					<h4 class="media-heading" id="media-heading">Ole</h4>
+<div class="habilidad-item">
+	<div class="col-sm-12">
+		<div class="row panel panel-default">
+			<div class="col-sm-6 text-center">
+				<img src="https://lh3.googleusercontent.com/uFp_tsTJboUY7kue5XAsGA=s28" class="desc-img img-rounded" alt="Responsive image">
+			</div>
+			<div class="col-sm-6">
+				<h3>Habilidad No. 1</h3>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+				<div class="text-center">
+					<span class="label label-success">Puntuación: <strong>6</strong></span>
+					<span class="label label-success">contrataciones: <strong>10</strong></span>
 				</div>
 			</div>
 		</div>
@@ -71,26 +53,23 @@
 	<script src="{% static 'jsapp/csrf_load.js' %}"></script>
 	<script>
 		$(function() {
-			$('#form-createHabilidad').on('submit', function(event){
+			$('#nueva-habilidad-form').on('submit', function(event){
 				event.preventDefault();
-				crearHabilidad();
+				nuevaHabilidad();
 			});
-			function crearHabilidad () {
+			function nuevaHabilidad () {
 				$.ajax({
-					url: "/api/habilidades/",
+					url: '/habilidades/nueva/',
 					type: "POST",
 					data: {
-						id_categoria: $('#id_id_categoria').val(),
+						categoria: $('#id_categoria').val(),
 						nhabilidad: $('#id_nhabilidad').val(),
 						descripcion: $('#id_descripcion').val(),
 						precio: $('#id_precio').val(),
 					},
 					success: function(json){
-						console.log(json.data);
+						console.log(json);
 					},
-					error: function(err) {
-						console.log(err)
-					}
 				}); 
 			};
 		});
