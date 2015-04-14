@@ -17,6 +17,9 @@
 	</div>
 </div>
 <div class="col-sm-12">
+	<a href="" class="btn btn-primary pull" id="hbl">Nueva Habilidad</a>
+</div>
+<div class="col-sm-12">
 	<div class="well"> 
 		<form id="nueva-habilidad-form" method="post">
 			<h4>Nueva Habilidad</h4>
@@ -24,38 +27,50 @@
 			<div class="form-group" style="padding:14px;">
 				{{ form.as_p }}
 			</div>
-			<input type="submit" value="Agregar + " class="btn btn-primary pull-right">
+			<div class="pull-right">
+				<a href="" class="btn btn-danger" id="cancel">Cancelar</a>
+				<input type="submit" value="Agregar + " class="btn btn-primary">
+			</div>
 			<ul class="list-inline">
 				<li><a href=""><i class="glyphicon glyphicon-camera"></i></a></li>
 			</ul>
 		</form>
 	</div>
 </div>
-{% if habilidades %}
-	{% for hab in habilidades %}
-		<div class="habilidad-item">
-			<div class="col-sm-12">
-				<div class="row panel panel-default">
-					<div class="col-sm-6 text-center">
-						<img src="">
-					</div>
-					<div class="col-sm-6">
-						<h3>{{ hab.nhabilidad }}</h3>
-						<p>{{ hab.descripcion }}</p>
-						<div class="text-center">
-							<span class="label label-success">Puntuación: <strong>{{ hab.val_promedio }}</strong></span>
-							<span class="label label-success">contrataciones: <strong>{{ hab.num_solicitudes }}</strong></span>
-						</div>
-					</div>	
+<div class="habilidad-item">
+	<div class="col-sm-12">
+		<div class="row panel panel-default">
+			<div class="col-sm-6 col-md-4 text-center">
+				<img src="http://straightlinem.com/wp-content/uploads/2014/11/california-contractor-insurance.jpg" class="desc-img img-rounded" alt="Responsive image">
+			</div>
+			<div class="col-sm-6 col-md-8">
+				<h3>Habilidad No. 1</h3>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+			</div>
+			<div class="col-sm-12 col-md-12">
+				<div class="text-top text-center">
+					<p><span class="label label-success">Puntuación: <strong>6</strong></span>
+					<span class="label label-success">contrataciones: <strong>10</strong></span></p>
 				</div>
 			</div>
 		</div>
-	{% endfor %}
-{% endif %}
+	</div>
+</div>
 {% endblock %}
 {% block scripts %}
 	<script src="{% static 'jsapp/csrf_load.js' %}"></script>
 	<script>
+		$('.well').hide();
+		$('#hbl').click(function(event){
+			$('.well').show();	
+			$('#hbl').hide();
+			event.preventDefault();
+		});
+		$('#cancel').click(function(event){
+			$('.well').hide();
+			$('#hbl').show();
+			event.preventDefault();
+		});
 		$(function() {
 			$('#nueva-habilidad-form').on('submit', function(event){
 				event.preventDefault();
