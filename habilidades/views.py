@@ -18,25 +18,31 @@ import json
 @login_required()
 def habilidades(request):
 	user = request.user
-	return render(request,'habilidades.html',{'user':user,'form': nuevaHabilidadForm})
+	habilidades = habilidadesModel.objects.filter(usuario_id=user.id).order_by('-val_promedio')
+	return render(request,'habilidades.html',{'user':user,'form': nuevaHabilidadForm,'habilidades':habilidades})
 
 def nuevaHabilidad(request):	
 	if request.method == 'POST':
 		form = nuevaHabilidadForm(request.POST)
 		if form.is_valid():
+			response_data = {}
 			habilidad = form.save(commit=False)
 			usuario = perfilUsuarioModel.objects.get(pk=request.user.id)
 			habilidad.usuario = usuario
 			habilidad.save()
+
+			response_data['pk'] = habilidad.pk
+
 			return HttpResponse(
-				json.dumps({'status':1,'message':'Habilidad agregada +'}),
+				#json.dumps({'status':1,'message':'Habilidad agregada +'}),
+				json.dumps(response_data),
 				content_type="application/json"
 			)
 
 		else:
-			#data_error = json.loads(form.errors.as_json())
+			data_error = json.loads(form.errors.as_json())
 			return HttpResponse(
-				json.dumps({"massage":"Revisa que toda la información este bien"}),
+				json.dumps(data_error),
 				content_type="application/json"
 			)
 

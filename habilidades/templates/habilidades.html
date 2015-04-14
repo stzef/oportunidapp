@@ -31,23 +31,27 @@
 		</form>
 	</div>
 </div>
-<div class="habilidad-item">
-	<div class="col-sm-12">
-		<div class="row panel panel-default">
-			<div class="col-sm-6 text-center">
-				<img src="https://lh3.googleusercontent.com/uFp_tsTJboUY7kue5XAsGA=s28" class="desc-img img-rounded" alt="Responsive image">
-			</div>
-			<div class="col-sm-6">
-				<h3>Habilidad No. 1</h3>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-				<div class="text-center">
-					<span class="label label-success">Puntuación: <strong>6</strong></span>
-					<span class="label label-success">contrataciones: <strong>10</strong></span>
+{% if habilidades %}
+	{% for hab in habilidades %}
+		<div class="habilidad-item">
+			<div class="col-sm-12">
+				<div class="row panel panel-default">
+					<div class="col-sm-6 text-center">
+						<img src="">
+					</div>
+					<div class="col-sm-6">
+						<h3>{{ hab.nhabilidad }}</h3>
+						<p>{{ hab.descripcion }}</p>
+						<div class="text-center">
+							<span class="label label-success">Puntuación: <strong>{{ hab.val_promedio }}</strong></span>
+							<span class="label label-success">contrataciones: <strong>{{ hab.num_solicitudes }}</strong></span>
+						</div>
+					</div>	
 				</div>
 			</div>
 		</div>
-	</div>
-</div>
+	{% endfor %}
+{% endif %}
 {% endblock %}
 {% block scripts %}
 	<script src="{% static 'jsapp/csrf_load.js' %}"></script>
@@ -61,6 +65,7 @@
 				$.ajax({
 					url: '/habilidades/nueva/',
 					type: "POST",
+					dataType: 'json',
 					data: {
 						categoria: $('#id_categoria').val(),
 						nhabilidad: $('#id_nhabilidad').val(),
@@ -68,6 +73,7 @@
 						precio: $('#id_precio').val(),
 					},
 					success: function(json){
+						//var data = jQuery.parseJSON(json);
 						console.log(json);
 					},
 				}); 
