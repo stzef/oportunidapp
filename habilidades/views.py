@@ -3,24 +3,26 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
+from django.core import serializers
+
 
 from serializers import habilidadesSerializer
 from models import habilidadesModel
 from forms import nuevaHabilidadForm
-from permissions import IsOwnerOrReadOnly
 from usuarios.models import perfilUsuarioModel
 
 import json
 
 
-
-
+#Servir Template
 @login_required()
 def habilidades(request):
 	user = request.user
 	habilidades = habilidadesModel.objects.filter(usuario_id=user.id).order_by('-val_promedio')
 	return render(request,'habilidades.html',{'user':user,'form': nuevaHabilidadForm,'habilidades':habilidades})
 
+#Crear nueva Habilidad request POST return JSON
+@login_required()
 def nuevaHabilidad(request):	
 	if request.method == 'POST':
 		form = nuevaHabilidadForm(request.POST)
@@ -46,6 +48,24 @@ def nuevaHabilidad(request):
 				content_type="application/json"
 			)
 
+#Listar Habilidades activas del usuario request POST return JSON
+@login_required()
+def listHabilidadesActivas(request):
+	if request.method == 'GET':
+		data = serializers.serialize(
+			"json",
+			habilidadesModel.objects.all().filter(usuario_id=request.user.id),
+			fields= ('pk','categoria','descripcion','val_promedio','num_solicitudes','precio'),
+		)
+
+		data_response = json.loads(data)
+		for d in data_response:
+			del d['model']
+			
+		return HttpResponse(
+			json.dumps(data_response),
+			content_type = "application/json"
+		)
 
 
 
@@ -58,6 +78,7 @@ def nuevaHabilidad(request):
 
 #from rest_framework.permissions import IsAuthenticated
 #from rest_framework import viewsets
+#from permissions import IsOwnerOrReadOnly
 
 
 """class habilidadesViewSet(viewsets.ViewSet):

@@ -9,7 +9,7 @@
 		<div class="nav-center">
 			<ul class="nav nav-pills">
 				<li><a href="#"><i class="glyphicon glyphicon-user desc2"></i>  <span class="desc">Te necesito</span></a></li>
-				<li><a href="#"><i class="glyphicon glyphicon-thumbs-up desc2"></i> <span class="desc">Habilidades</span></a></li>
+				<li class="active"><a href="#"><i class="glyphicon glyphicon-thumbs-up desc2"></i> <span class="desc">Habilidades</span></a></li>
 				<li><a href="#"><i class="glyphicon glyphicon-list-alt desc2"></i> <span class="desc">Trabajos</span></a></li>
 				<li><a href="#"><i class="glyphicon glyphicon-pushpin desc2"></i> <span class="desc">Solicitudes</span></a></li>
 			</ul>
@@ -18,6 +18,7 @@
 </div>
 <div class="col-sm-12">
 	<a href="" class="btn btn-primary pull" id="hbl">Nueva Habilidad</a>
+	<button id="gethab"> List</button>
 </div>
 <div class="col-sm-12">
 	<div class="well"> 
@@ -28,7 +29,7 @@
 				{{ form.as_p }}
 				<p>
 					<label for="exampleInputFile">Subir Imagen</label>
-    				<input type="file" id="exampleInputFile">
+    				<input type="file" class="file">
 				</p>
 			</div>
 			<div class="text-right">
@@ -43,38 +44,32 @@
 <div class="habilidad-item">
 	<div class="col-sm-12">
 		<div class="row panel panel-default">
-			<div class="col-sm-6 col-md-4 text-center">
-				<img src="http://straightlinem.com/wp-content/uploads/2014/11/california-contractor-insurance.jpg" class="desc-img img-rounded" alt="Responsive image">
+			<div class="col-sm-12 col-md-4 col-lg-3 div-align">
+				<img src="http://straightlinem.com/wp-content/uploads/2014/11/california-contractor-insurance.jpg" class="desc-img" alt="Responsive image">
 			</div>
-			<div class="col-sm-6 col-md-8">
+			<div class="col-sm-12 col-md-5 col-lg-6 div-align">
 				<h3>Habilidad No. 1</h3>
 				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 			</div>
-			<div class="col-sm-12 col-md-12">
-				<div class="text-top text-center">
-						<span class="label label-warning">Puntuación: <strong>6</strong></span>
-						<span class="label label-success">Solicitudes: <strong>10</strong></span>
-						<span class="label label-danger">Precio: <strong>$ 10</strong></span>
+			<div class="col-sm-12 col-md-3 col-lg-3">
+				<div class="text-top text-center col-xs-12 col-sm-4 col-md-12 col-lg-12">
+					<div class="label-descp label-warning">Puntuación: <strong>6</strong></div>
+				</div>
+				<div class="text-top text-center col-xs-12 col-sm-4 col-md-12 col-lg-12">
+					<div class="label-descp label-success">Solicitudes: <strong>10</strong></div>
+				</div>
+				<div class="text-top text-center col-xs-12 col-sm-4 col-md-12 col-lg-12">
+					<div class="label-descp label-danger">Precio: <strong>$ 10</strong></div>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+
 {% endblock %}
 {% block scripts %}
 	<script src="{% static 'jsapp/csrf_load.js' %}"></script>
 	<script>
-		$('.well').hide();
-		$('#hbl').click(function(event){
-			$('.well').show();	
-			$('#hbl').hide();
-			event.preventDefault();
-		});
-		$('#cancel').click(function(event){
-			$('.well').hide();
-			$('#hbl').show();
-			event.preventDefault();
-		});
 		$(function() {
 			$('#nueva-habilidad-form').on('submit', function(event){
 				event.preventDefault();
@@ -97,6 +92,31 @@
 					},
 				}); 
 			};
+			$('#gethab').click(function(){
+				getHabilidades();
+			});
+			function getHabilidades () {
+				$.ajax({
+					url: '/habilidades/list/',
+					type: "GET",
+					success: function(json){
+						console.log(json);
+					},
+				}); 
+			};
+			
+		});
+
+		$('.well').hide();
+		$('#hbl').click(function(event){
+			$('.well').show();	
+			$('#hbl').hide();
+			event.preventDefault();
+		});
+		$('#cancel').click(function(event){
+			$('.well').hide();
+			$('#hbl').show();
+			event.preventDefault();
 		});
 	</script>
 {% endblock %}

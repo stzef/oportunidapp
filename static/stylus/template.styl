@@ -7,7 +7,7 @@ body
 
 .nav
   font-family Arial,sans-serif
-  font-size 15px
+  font-size 17px
 
 a
   color #222222
@@ -203,7 +203,7 @@ h3
   letter-spacing 2px
 
 .panel{
-  padding 20px
+  //padding 20px
   margin 0 0 20px 0
 }
 
@@ -244,6 +244,41 @@ small.text-muted
   font-family courier,courier-new,monospace
 
 /* adjust the contents on smaller devices */
+
+.file::-webkit-file-upload-button
+  visibility hidden
+
+.file::before
+  content 'Seleccione una Imagen'
+  display inline-block
+  background #3498DB
+  border-radius 3px
+  padding 5px 8px
+  outline none
+  white-space nowrap
+  -webkit-user-select none
+  cursor pointer
+  color #fff
+  font-weight 700
+  font-size 10pt
+
+.file:hover::before
+  border-color black
+
+.file:active::before
+  background #27ae60
+
+@media screen and (max-width 991px)
+  .desc-sign
+    display: none
+  
+  .div-align
+    text-align center
+    padding 0 10px 0 10px
+    
+  .text-top
+    margin-bottom 10px
+
 @media (max-width 768px)
   .column .padding
     padding 7px
@@ -263,6 +298,7 @@ small.text-muted
  * off canvas sidebar
  * --------------------------------------------------
  */
+
 @media screen and (max-width 768px)
   .row-offcanvas
     position relative
