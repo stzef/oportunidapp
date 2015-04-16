@@ -6,7 +6,7 @@
 {% block content %}
 <div class="row">
 	<div class="full col-sm-12">
-		<div class="col-md-offset-3">
+		<div class="nav-center">
 			<ul class="nav nav-pills">
 				<li><a href="#"><i class="glyphicon glyphicon-user desc2"></i>  <span class="desc">Te necesito</span></a></li>
 				<li><a href="#"><i class="glyphicon glyphicon-thumbs-up desc2"></i> <span class="desc">Habilidades</span></a></li>
@@ -26,13 +26,16 @@
 
 			<div class="form-group" style="padding:14px;">
 				{{ form.as_p }}
+				<p>
+					<label for="exampleInputFile">Subir Imagen</label>
+    				<input type="file" id="exampleInputFile">
+				</p>
 			</div>
-			<div class="pull-right">
+			<div class="text-right">
 				<a href="" class="btn btn-danger" id="cancel">Cancelar</a>
 				<input type="submit" value="Agregar + " class="btn btn-primary">
 			</div>
 			<ul class="list-inline">
-				<li><a href=""><i class="glyphicon glyphicon-camera"></i></a></li>
 			</ul>
 		</form>
 	</div>
@@ -49,8 +52,9 @@
 			</div>
 			<div class="col-sm-12 col-md-12">
 				<div class="text-top text-center">
-					<p><span class="label label-success">Puntuación: <strong>6</strong></span>
-					<span class="label label-success">contrataciones: <strong>10</strong></span></p>
+						<span class="label label-warning">Puntuación: <strong>6</strong></span>
+						<span class="label label-success">Solicitudes: <strong>10</strong></span>
+						<span class="label label-danger">Precio: <strong>$ 10</strong></span>
 				</div>
 			</div>
 		</div>
