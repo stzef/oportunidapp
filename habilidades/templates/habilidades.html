@@ -18,7 +18,6 @@
 </div>
 <div class="col-sm-12">
 	<a href="" class="btn btn-primary pull" id="hbl">Nueva Habilidad</a>
-	<button id="gethab"> List</button>
 </div>
 <div class="col-sm-12">
 	<div class="well"> 
@@ -55,37 +54,49 @@
 			<div class="col-sm-12 col-md-5 col-lg-6 div-align">
 				<h3>{{ fields.nhabilidad }}</h3>
 				<p>{{ fields.descripcion }}</p>
-				<div class="col-sm-12 col-md-3 col-lg-3">
-					<div class="text-top text-center col-xs-12 col-sm-4 col-md-12 col-lg-12">
-						<div class="label-descp label-warning">
-							Puntuación: <strong>{{ fields.val_promedio }}</strong>
-						</div>
+			</div>
+			<div class="col-sm-12 col-md-3 col-lg-3">
+				<div class="text-top text-center col-xs-4 col-sm-4 col-md-12 col-lg-12">
+					<div class="label-descp label-warning">
+						<i class="glyphicon glyphicon-star desc3"></i> <span class="desc">Puntuacion: </span></a><strong class="desc3">{{ fields.val_promedio }}</strong>
 					</div>
-					<div class="text-top text-center col-xs-12 col-sm-4 col-md-12 col-lg-12">
-						<div class="label-descp label-success">
-							Solicitudes: <strong>{{ fields.num_solicitudes }}</strong>
-						</div>
+				</div>
+				<div class="text-top text-center col-xs-4 col-sm-4 col-md-12 col-lg-12">
+					<div class="label-descp label-success">
+						<i class="glyphicon glyphicon-th-list desc3"></i> <span class="desc">Solicitudes: </span></a><strong class="desc3">{{ fields.num_solicitudes }}</strong>
 					</div>
-					<div class="text-top text-center col-xs-12 col-sm-4 col-md-12 col-lg-12">
-						<div class="label-descp label-danger">
-							Precio: <strong>$ {{ fields.precio }}</strong>
-						</div>
+				</div>
+				<div class="text-top text-center col-xs-4 col-sm-4 col-md-12 col-lg-12">
+					<div class="label-descp label-danger">
+						<i class="glyphicon glyphicon-usd desc3"></i> <span class="desc">Precio: </span></a><strong class="desc3">{{ fields.precio }}</strong>
 					</div>
 				</div>
 			</div>
-		<div>
+		</div>
 	</div>
 </div>
 {{/each}}
 </script>
 </ul>
 {%endverbatim%}
-
 {% endblock %}
 {% block scripts %}
 	<script src="{% static 'jsapp/csrf_load.js' %}"></script>
 	<script>
 		$(function() {
+			getHabilidades();
+			function getHabilidades () {
+				$.ajax({
+					url: '/habilidades/list/',
+					type: "GET",
+					success: function(json){
+						var source   = $("#habilidadesTempl").html();
+						var template = Handlebars.compile(source);
+						t = template(json);
+						$("#listul").append(t); 
+					},
+				});
+			};
 			$('#nueva-habilidad-form').on('submit', function(event){
 				event.preventDefault();
 				nuevaHabilidad();
@@ -107,37 +118,17 @@
 					},
 				}); 
 			};
-
-			$('#gethab').click(function(){
-				getHabilidades();
-			});
-			function getHabilidades () {
-				$.ajax({
-					url: '/habilidades/list/',
-					type: "GET",
-					success: function(json){
-						console.log(json);
-						var source   = $("#habilidadesTempl").html();
-						var template = Handlebars.compile(source);
-						t = template(json);
-						console.log(t);
-						$("#listul").append(t); 
-					},
-				});
-			};
-			
-		});
-
-		$('.well').hide();
-		$('#hbl').click(function(event){
-			$('.well').show();	
-			$('#hbl').hide();
-			event.preventDefault();
-		});
-		$('#cancel').click(function(event){
 			$('.well').hide();
-			$('#hbl').show();
-			event.preventDefault();
+			$('#hbl').click(function(event){
+				$('.well').show();	
+				$('#hbl').hide();
+				event.preventDefault();
+			});
+			$('#cancel').click(function(event){
+				$('.well').hide();
+				$('#hbl').show();
+				event.preventDefault();
+			});
 		});
 	</script>
 {% endblock %}
