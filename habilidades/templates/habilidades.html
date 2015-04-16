@@ -40,8 +40,10 @@
 		</form>
 	</div>
 </div>
+<p id="foo">
+	
+</p>
 {%verbatim%}
-
 <ul id="listul">
 <script id="habilidadesTempl" type="text/x-handlebars-template">
 {{#each this }}
@@ -85,14 +87,20 @@
 	<script>
 		$(function() {
 			getHabilidades();
+			var spinner;
 			function getHabilidades () {
 				$.ajax({
 					url: '/habilidades/list/',
 					type: "GET",
+					beforeSend: function(){
+						var target = document.getElementById('foo');
+						spinner = new Spinner().spin(target);
+					},
 					success: function(json){
 						var source   = $("#habilidadesTempl").html();
 						var template = Handlebars.compile(source);
 						t = template(json);
+						spinner.stop();
 						$("#listul").append(t); 
 					},
 				});
