@@ -41,30 +41,45 @@
 		</form>
 	</div>
 </div>
+{%verbatim%}
+
+<ul id="listul">
+<script id="habilidadesTempl" type="text/x-handlebars-template">
+{{#each this }}
 <div class="habilidad-item">
-	<div class="col-sm-12">
+	<div className="col-sm-12">
 		<div class="row panel panel-default">
 			<div class="col-sm-12 col-md-4 col-lg-3 div-align">
 				<img src="http://straightlinem.com/wp-content/uploads/2014/11/california-contractor-insurance.jpg" class="desc-img" alt="Responsive image">
 			</div>
 			<div class="col-sm-12 col-md-5 col-lg-6 div-align">
-				<h3>Habilidad No. 1</h3>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+				<h3>{{ fields.nhabilidad }}</h3>
+				<p>{{ fields.descripcion }}</p>
+				<div class="col-sm-12 col-md-3 col-lg-3">
+					<div class="text-top text-center col-xs-12 col-sm-4 col-md-12 col-lg-12">
+						<div class="label-descp label-warning">
+							Puntuación: <strong>{{ fields.val_promedio }}</strong>
+						</div>
+					</div>
+					<div class="text-top text-center col-xs-12 col-sm-4 col-md-12 col-lg-12">
+						<div class="label-descp label-success">
+							Solicitudes: <strong>{{ fields.num_solicitudes }}</strong>
+						</div>
+					</div>
+					<div class="text-top text-center col-xs-12 col-sm-4 col-md-12 col-lg-12">
+						<div class="label-descp label-danger">
+							Precio: <strong>$ {{ fields.precio }}</strong>
+						</div>
+					</div>
+				</div>
 			</div>
-			<div class="col-sm-12 col-md-3 col-lg-3">
-				<div class="text-top text-center col-xs-12 col-sm-4 col-md-12 col-lg-12">
-					<div class="label-descp label-warning">Puntuación: <strong>6</strong></div>
-				</div>
-				<div class="text-top text-center col-xs-12 col-sm-4 col-md-12 col-lg-12">
-					<div class="label-descp label-success">Solicitudes: <strong>10</strong></div>
-				</div>
-				<div class="text-top text-center col-xs-12 col-sm-4 col-md-12 col-lg-12">
-					<div class="label-descp label-danger">Precio: <strong>$ 10</strong></div>
-				</div>
-			</div>
-		</div>
+		<div>
 	</div>
 </div>
+{{/each}}
+</script>
+</ul>
+{%endverbatim%}
 
 {% endblock %}
 {% block scripts %}
@@ -92,6 +107,7 @@
 					},
 				}); 
 			};
+
 			$('#gethab').click(function(){
 				getHabilidades();
 			});
@@ -101,8 +117,13 @@
 					type: "GET",
 					success: function(json){
 						console.log(json);
+						var source   = $("#habilidadesTempl").html();
+						var template = Handlebars.compile(source);
+						t = template(json);
+						console.log(t);
+						$("#listul").append(t); 
 					},
-				}); 
+				});
 			};
 			
 		});

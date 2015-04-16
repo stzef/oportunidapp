@@ -55,13 +55,13 @@ def listHabilidadesActivas(request):
 		data = serializers.serialize(
 			"json",
 			habilidadesModel.objects.all().filter(usuario_id=request.user.id),
-			fields= ('pk','categoria','descripcion','val_promedio','num_solicitudes','precio'),
+			fields= ('pk','categoria','nhabilidad','descripcion','val_promedio','num_solicitudes','precio'),
 		)
 
 		data_response = json.loads(data)
 		for d in data_response:
 			del d['model']
-			
+
 		return HttpResponse(
 			json.dumps(data_response),
 			content_type = "application/json"
