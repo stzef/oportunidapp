@@ -16,10 +16,10 @@
 		</div>  
 	</div>
 </div>
-<div class="col-sm-12">
+<div class="row">
 	<a href="" class="btn btn-primary pull" id="hbl">Nueva Habilidad</a>
 </div>
-<div class="col-sm-12">
+<div class="row">
 	<div class="well"> 
 		<form id="nueva-habilidad-form" method="post">
 			<h4>Nueva Habilidad</h4>
@@ -47,9 +47,14 @@
 <ul id="listul">
 <script id="habilidadesTempl" type="text/x-handlebars-template">
 {{#each this }}
+<div class="col-md-12">
+	<div class="label-category label-description text-center">
+		<strong class="desc3">Categoria Construcción</strong>
+	</div>
+</div>	
 <div class="habilidad-item">
 	<div className="col-sm-12">
-		<div class="row panel panel-default">
+		<div class="row panel panel-default">	
 			<div class="col-sm-12 col-md-4 col-lg-3 div-align">
 				<img src="http://straightlinem.com/wp-content/uploads/2014/11/california-contractor-insurance.jpg" class="desc-img" alt="Responsive image">
 			</div>
@@ -128,6 +133,7 @@
 			};
 			$('.well').hide();
 			$('#hbl').click(function(event){
+				toastr.success('Hide');
 				$('.well').show();	
 				$('#hbl').hide();
 				event.preventDefault();

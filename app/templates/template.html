@@ -8,7 +8,7 @@
 		<meta name="generator" content="Bootply" />
 		<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
 		<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
-		<link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
     <script src="{% static 'jslibraries/handlebars.js' %}"></script>
     <script src="{% static 'jslibraries/spin.js' %}"></script>
     {% block head %}
@@ -24,7 +24,7 @@
         <div class="row row-offcanvas row-offcanvas-left">
           <div class="column col-sm-2 col-xs-1 sidebar-offcanvas" id="sidebar">
            	<ul class="nav">
-          		<li><a href="#" data-toggle="offcanvas" class="visible-xs text-center"><i class="glyphicon glyphicon-chevron-right"></i></a></li>
+          		<li><a href="#" data-toggle="offcanvas" id="offcanvas" class="visible-xs text-center"><i class="glyphicon glyphicon-chevron-right"></i></a></li>
             </ul>   
             <ul class="nav hidden-xs" id="lg-menu">
               <li class="active"><a href="#featured"><i class="glyphicon glyphicon-list-alt"></i> Featured</a></li>
@@ -70,7 +70,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"> </script>
   <script src="{% static 'jslibraries/bootstrap.min.js' %}"></script>
   <script src="{% static 'jslibraries/scripts.js' %}"></script>
+  <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
   {% block scripts %}
 
-  {% endblock %} 
+  {% endblock %}
 </html>
