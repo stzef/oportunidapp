@@ -20,16 +20,12 @@
 	<a href="" class="btn btn-primary pull" id="hbl">Nueva Habilidad</a>
 </div>
 <div class="col-sm-12">
-	<div class="well"> 
-		<form id="nueva-habilidad-form" method="post">
+	<div class="well" style="display:none"> 
+		<form id="nueva-habilidad-form" method="post" enctype='multipart/form-data'>
 			<h4>Nueva Habilidad</h4>
 
 			<div class="form-group" style="padding:14px;">
 				{{ form.as_p }}
-				<p>
-					<label for="exampleInputFile">Subir Imagen</label>
-    				<input type="file" class="file">
-				</p>
 			</div>
 			<div class="text-right">
 				<a href="" class="btn btn-danger" id="cancel">Cancelar</a>
@@ -51,7 +47,8 @@
 	<div className="col-sm-12">
 		<div class="row panel panel-default">
 			<div class="col-sm-12 col-md-4 col-lg-3 div-align">
-				<img src="http://straightlinem.com/wp-content/uploads/2014/11/california-contractor-insurance.jpg" class="desc-img" alt="Responsive image">
+				
+				<img src="/media/{{ fields.foto }}" class="desc-img" alt="Responsive image">
 			</div>
 			<div class="col-sm-12 col-md-5 col-lg-6 div-align">
 				<h3>{{ fields.nhabilidad }}</h3>
@@ -85,6 +82,7 @@
 {% block scripts %}
 	<script src="{% static 'jsapp/csrf_load.js' %}"></script>
 	<script>
+		//toastr.success("Hola Bienvenido A OportunidApp");
 		$(function() {
 			getHabilidades();
 			var spinner;
@@ -107,9 +105,6 @@
 			};
 			$('#nueva-habilidad-form').on('submit', function(event){
 				event.preventDefault();
-				nuevaHabilidad();
-			});
-			function nuevaHabilidad () {
 				$.ajax({
 					url: '/habilidades/nueva/',
 					type: "POST",
@@ -119,13 +114,15 @@
 						nhabilidad: $('#id_nhabilidad').val(),
 						descripcion: $('#id_descripcion').val(),
 						precio: $('#id_precio').val(),
+						foto: $('#id_foto').val(),
 					},
 					success: function(json){
 						//var data = jQuery.parseJSON(json);
 						console.log(json);
 					},
-				}); 
-			};
+				});
+			});
+
 			$('.well').hide();
 			$('#hbl').click(function(event){
 				$('.well').show();	
