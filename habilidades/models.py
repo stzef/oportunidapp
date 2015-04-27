@@ -1,15 +1,18 @@
 from django.db import models
 from usuarios.models import perfilUsuarioModel
 
-class habCategoriasModel(models.Model):
-	categoria = models.CharField(max_length=30,blank=False,null=False)
-
-	def __str__(self):
-		return u'%s' % (self.categoria)
-
+class habCategoriasModelManager(models.Manager):
 	def get_by_natural_key(self, categoria):
 		return self.get(categoria=categoria)
 
+class habCategoriasModel(models.Model):
+	categoria = models.CharField(max_length=30,blank=False,null=False)
+	objects = habCategoriasModelManager()
+	def __str__(self):
+		return u'%s' % (self.categoria)
+
+	def natural_key(self):
+		return (self.categoria)
 
 class habilidadesModel(models.Model):
 	ESTADO_OPCIONES = (

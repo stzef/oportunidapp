@@ -47,7 +47,7 @@
 {{#each this }}
 <div class="col-md-12">
 	<div class="label-category label-description text-center">
-		<strong class="desc3">Categoria Construcción</strong>
+		<strong class="desc3">{{ fields.categoria }}</strong>
 	</div>
 </div>	
 <div class="habilidad-item">
@@ -73,7 +73,12 @@
 				</div>
 				<div class="text-top text-center col-xs-4 col-sm-4 col-md-12 col-lg-12">
 					<div class="label-descp label-danger">
-						<i class="glyphicon glyphicon-usd desc3"></i> <span class="desc">Precio: </span></a><strong class="desc3">{{ fields.precio }}</strong>
+						{{#if fields.precio}}
+						<i class="glyphicon glyphicon-usd desc3"></i> 
+						<span class="desc">Precio: </span></a><strong class="desc3">{{ fields.precio }}</strong>
+						{{else}}
+							<span><b>ninguno</b></span>
+						{{/if}}
 					</div>
 				</div>
 			</div>
