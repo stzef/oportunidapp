@@ -21,11 +21,12 @@ class habilidadesModel(models.Model):
 	categoria = models.ForeignKey(habCategoriasModel)
 	nhabilidad = models.CharField(max_length=30,blank=False,null=False)
 	descripcion = models.CharField(max_length=250,blank=False,null=False)
-	foto = models.ImageField(upload_to="habilidades/img/",blank=True,null=True)
-	val_promedio = models.IntegerField(blank=True,null=True)
-	num_solicitudes = models.IntegerField(blank=True,null=True)
+	foto = models.ImageField(upload_to="habilidades/img/",blank=True,null=True, default="habilidades/img/no_image.png")
+	val_promedio = models.IntegerField(blank=True,null=True,default=4)
+	num_solicitudes = models.IntegerField(blank=True,null=True,default=0)
 	estado = models.CharField(choices=ESTADO_OPCIONES,max_length=1,blank=False,null=False,default='1')
 	precio = models.DecimalField(max_digits=12,decimal_places=2,blank=True,null=True)
+	fecha_creacion =  models.DateTimeField(auto_now=True,null=False,blank=True)
 
 	def __str__(self):
 		return u'%s' % (self.nhabilidad)

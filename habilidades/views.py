@@ -18,7 +18,7 @@ import json
 @login_required()
 def habilidades(request):
 	user = request.user
-	habilidades = habilidadesModel.objects.filter(usuario_id=user.id).order_by('-val_promedio')
+	#habilidades = habilidadesModel.objects.filter(usuario_id=user.id).order_by('-fecha_creacion')
 	return render(request,'habilidades.html',{'user':user,'form': nuevaHabilidadForm,'habilidades':habilidades})
 
 #Crear nueva Habilidad request POST return JSON
@@ -53,7 +53,7 @@ def listHabilidadesActivas(request):
 	if request.method == 'GET':
 		data = serializers.serialize(
 			"json",
-			habilidadesModel.objects.all().filter(usuario_id=request.user.id),
+			habilidadesModel.objects.all().filter(usuario_id=request.user.id).order_by('-fecha_creacion'),
 			fields= ('pk','categoria','nhabilidad','foto','descripcion','val_promedio','num_solicitudes','precio'),
 			use_natural_foreign_keys=True,
 		)
