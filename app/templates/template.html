@@ -28,6 +28,10 @@
           		<li><a href="#" data-toggle="offcanvas" id="offcanvas" class="visible-xs text-center"><i class="glyphicon glyphicon-chevron-right"></i></a></li>
             </ul>   
             <ul class="nav hidden-xs" id="lg-menu">
+              <li class="text-center">
+                <img src="https://lh3.googleusercontent.com/uFp_tsTJboUY7kue5XAsGA=s28" class="img-circle img-nav text-center">
+                <a>{{ user.username }}</a>
+              </li>
               <li class="active"><a href="#featured"><i class="glyphicon glyphicon-list-alt"></i> Featured</a></li>
               <li><a href="#stories"><i class="glyphicon glyphicon-list"></i> Stories</a></li>
               <li><a href="#"><i class="glyphicon glyphicon-paperclip"></i> Saved</a></li>
@@ -49,7 +53,7 @@
                     <img src="https://lh3.googleusercontent.com/uFp_tsTJboUY7kue5XAsGA=s28" class="special-img">
                   </a>
                   <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dropdownMenu1">
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Mis Datos</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Perfil</a></li>
                     <li role="presentation">
                       <a role="menuitem" tabindex="-1" href="{% url 'logout' %}">Salir</a>
                     </li>

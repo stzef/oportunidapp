@@ -17,7 +17,7 @@ from forms import emailLoginForm
 
 #@login_required(login_url='/ingresar')
 #def perfilView(request):
-#	return render(request,'profile.html')
+#	return redirect('/')
 
 def logoutView(request):
 	logout(request)
