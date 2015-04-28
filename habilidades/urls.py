@@ -2,9 +2,9 @@ from django.conf.urls import patterns, include, url
 
 
 urlpatterns = patterns('',
-	url(r'^perfil/habilidades','habilidades.views.habilidades',name='habilidades'),
-	url(r'^habilidades/nueva','habilidades.views.nuevaHabilidad',name='nuevaHabilidad'),
-	url(r'^habilidades/list','habilidades.views.listHabilidadesActivas',name='listarHabilidades'),
+	url(r'^habilidad/','habilidades.views.habilidades',name='habilidades'),
+	url(r'^habilidades/nueva/','habilidades.views.nuevaHabilidad',name='nuevaHabilidad'),
+	url(r'^habilidades/list/','habilidades.views.listHabilidadesActivas',name='listarHabilidades'),
 )
 
 

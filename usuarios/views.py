@@ -19,9 +19,13 @@ from forms import emailLoginForm
 #def perfilView(request):
 #	return render(request,'profile.html')
 
+
 def logoutView(request):
 	logout(request)
 	return redirect('/')
+
+def profileView(request):
+	return render (request,'profile.html')
 
 def loginEmail(request):
 	form = emailLoginForm(request.POST or None)
@@ -42,7 +46,7 @@ class registroView(FormView):
 class loginView(FormView):
 	form_class = loginForm
 	template_name = 'login.html'
-	success_url = '/perfil/habilidades'
+	success_url = '/habilidad/'
 
 	def form_valid(self, form):
 		login(self.request, form.user_cache)
