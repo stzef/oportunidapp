@@ -33,7 +33,7 @@
 		    <h4>Integer facilisis tortor a pharetra porta.</h4>
 	    	<form class="form-find">
 	    		<div class="col-md-8 col-md-offset-2 input-group">
-	    			<input type="text" class="form-control text-center" placeholder="Que Buscas?">
+	    			<input id="search-word" type="text" class="form-control text-center" placeholder="Que Buscas?">
 				    <span class="input-group-btn">
 				    	<button class="btn btn-block btn-lg btn-find" type="button">Buscar</button>
 				    </span>
@@ -175,4 +175,36 @@
 	  </div>
 	</div>    
 </body>
+{% endblock %}
+
+{% block scripts %}
+	<script src="{% static 'jsapp/csrf_load.js' %}"></script>
+	<script src="{% static 'jslibraries/jquery.autocomplete.min.js' %}"></script>
+	<script>
+		$(function () {
+			var jobs = [
+				{ value: 'Software Developer', data: '1'},
+				{ value: 'Designer', data: '2'},
+				{ value: 'Backend Developer', data: '3'},
+				{ value: 'Front end Developer', data: '4'},
+			];
+			console.log(jobs);
+			var data2;
+			$.ajax({
+				url: '/habilidades/list/',
+				type: 'GET',
+				success: function(json){
+					data2 = [
+						{ value: json[0].fields.nhabilidad,data: '1'},
+						{ value: json[1].fields.nhabilidad,data: '2'},
+					];
+					console.log(data2);
+					$("#search-word").autocomplete({
+						lookup : jobs,
+					});
+				},
+			});
+			
+		});
+	</script>
 {% endblock %}

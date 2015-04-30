@@ -1,0 +1,41 @@
+{% extends "template.html" %}
+{% load staticfiles %}
+{% block head %}
+	<title>Habilidades | OportunidApp </title>
+{% endblock %}
+{% block content %}
+<div class="row">
+	<div class="full">
+		<div class="col-xs-12 col-md-9 desc-profile"> 
+			<div class="col-md-4 text-center">
+            	<img src="https://lh3.googleusercontent.com/uFp_tsTJboUY7kue5XAsGA=s28" class="img-circle img-profile">
+            </div>
+            <div class="col-md-8">
+            	<h2>{{ user.username }}</h2>
+            	<p>consectetur adipiscing elit</p><br>
+            	<div class="label-descp black col-xs-4 col-md-4">
+					<i class="glyphicon glyphicon-star desc3"></i> <span class="desc">Item1: </span></a><strong class="desc3">3</strong>
+				</div>
+				<div class="label-descp black col-xs-4 col-md-4">
+					<i class="glyphicon glyphicon-star desc3"></i> <span class="desc">Item2: </span></a><strong class="desc3">3</strong>
+				</div>
+				<div class="label-descp black col-xs-4 col-md-4">
+					<i class="glyphicon glyphicon-star desc3"></i> <span class="desc">Item2: </span></a><strong class="desc3">3</strong>
+				</div>
+            </div>
+            <div class="col-xs-12 col-md-12 description">
+            	<p class="text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam consequat nibh risus, vel ornare orci feugiat at. Integer in auctor nisi. Quisque posuere sodales imperdiet. Suspendisse lacinia pellentesque orci, et dictum massa pellentesque id. Vestibulum facilisis ut massa et sollicitudin. In in massa auctor, auctor justo rhoncus, aliquam nulla. Integer vehicula, risus vitae faucibus blandit, ante massa eleifend lectus, sit amet tristique lacus eros eget justo.</p>
+            </div>
+		</div>
+		<div class="col-xs-12 col-md-3 new-profile">
+			<ul>
+				<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+				<li>Nunc eget magna sed sem fringilla elementum.</li>
+				<li>Mauris ac risus in dolor aliquam interdum.</li>
+				<li>Integer eget nunc fermentum, luctus ligula eget, scelerisque arcu.</li>
+				<li>Curabitur egestas augue vel nunc tincidunt, et hendrerit leo ultricies.</li>
+			</ul>
+		</div>
+	</div>
+</div>
+{% endblock %}

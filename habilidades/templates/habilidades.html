@@ -47,7 +47,7 @@
 {{#each this }}
 <div class="col-md-12">
 	<div class="label-category label-description text-center">
-		<strong class="desc3">Categoria Construcción</strong>
+		<strong class="desc3">{{ fields.categoria }}</strong>
 	</div>
 </div>	
 <div class="habilidad-item">
@@ -57,7 +57,7 @@
 				<img src="/media/{{ fields.foto }}" class="desc-img" alt="{{ fields.nhabilidad }}">
 			</div>
 			<div class="col-sm-12 col-md-5 col-lg-6 div-align">
-				<h3>{{ fields.nhabilidad }}</h3>
+				<h3><a href="{% url 'detalle' %}">{{ fields.nhabilidad }}</a></h3>
 				<p>{{ fields.descripcion }}</p>
 			</div>
 			<div class="col-sm-12 col-md-3 col-lg-3">
@@ -73,7 +73,12 @@
 				</div>
 				<div class="text-top text-center col-xs-4 col-sm-4 col-md-12 col-lg-12">
 					<div class="label-descp label-danger">
-						<i class="glyphicon glyphicon-usd desc3"></i> <span class="desc">Precio: </span></a><strong class="desc3">{{ fields.precio }}</strong>
+						{{#if fields.precio}}
+						<i class="glyphicon glyphicon-usd desc3"></i> 
+						<span class="desc">Precio: </span></a><strong class="desc3">{{ fields.precio }}</strong>
+						{{else}}
+							<span><b>ninguno</b></span>
+						{{/if}}
 					</div>
 				</div>
 			</div>
