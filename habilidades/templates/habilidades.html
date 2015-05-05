@@ -57,7 +57,7 @@
 				<img src="/media/{{ fields.foto }}" class="desc-img" alt="{{ fields.nhabilidad }}">
 			</div>
 			<div class="col-sm-12 col-md-5 col-lg-6 div-align">
-				<h3>{{ fields.nhabilidad }}</h3>
+				<h3><a href="{% url 'detalle' %}">{{ fields.nhabilidad }}</a></h3>
 				<p>{{ fields.descripcion }}</p>
 			</div>
 			<div class="col-sm-12 col-md-3 col-lg-3">

@@ -23,38 +23,34 @@
     <div class="wrapper">
       <div class="box">
         <div class="row row-offcanvas row-offcanvas-left">
-          <div class="column col-sm-2 col-xs-1 sidebar-offcanvas" id="sidebar">
+          <div class="column col-sm-2 col-xs-2 sidebar-offcanvas" id="sidebar">
            	<ul class="nav">
           		<li><a href="#" data-toggle="offcanvas" id="offcanvas" class="visible-xs text-center"><i class="glyphicon glyphicon-chevron-right"></i></a></li>
             </ul>   
             <ul class="nav hidden-xs" id="lg-menu">
-              <li class="active"><a href="#featured"><i class="glyphicon glyphicon-list-alt"></i> Featured</a></li>
-              <li><a href="#stories"><i class="glyphicon glyphicon-list"></i> Stories</a></li>
-              <li><a href="#"><i class="glyphicon glyphicon-paperclip"></i> Saved</a></li>
-              <li><a href="#"><i class="glyphicon glyphicon-refresh"></i> Refresh</a></li>
+              <li class="dropdown text-center">
+                <img src="https://lh3.googleusercontent.com/uFp_tsTJboUY7kue5XAsGA=s28" class="img-circle img-nav text-center">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ user.username }}</a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a class="link-user" href="{% url 'profile' %}">Perfil</a></li>
+                  <li><a class="link-user" href="{% url 'logout' %}">Salir</a></li>
+                </ul>
+              </li> 
+              <li><a class="a-padding" href="#"><i class="glyphicon glyphicon-list-alt"></i> Featured</a></li>
+              <li><a class="a-padding" href="#"><i class="glyphicon glyphicon-list"></i> Stories</a></li>
+              <li><a class="a-padding" href="#"><i class="glyphicon glyphicon-paperclip"></i> Saved</a></li>
+              <li><a class="a-padding" href="#"><i class="glyphicon glyphicon-refresh"></i> Refresh</a></li>
             </ul>
             <ul class="nav visible-xs" id="xs-menu">
-             	<li><a href="#featured" class="text-center"><i class="glyphicon glyphicon-list-alt"></i></a></li>
-              <li><a href="#stories" class="text-center"><i class="glyphicon glyphicon-list"></i></a></li>
+             	<li><a href="#" class="text-center"><i class="glyphicon glyphicon-list-alt"></i></a></li>
+              <li><a href="#" class="text-center"><i class="glyphicon glyphicon-list"></i></a></li>
              	<li><a href="#" class="text-center"><i class="glyphicon glyphicon-paperclip"></i></a></li>
               <li><a href="#" class="text-center"><i class="glyphicon glyphicon-refresh"></i></a></li>
             </ul>  
           </div>
-          <div class="column col-sm-10 col-xs-11" id="main">
+          <div class="column col-sm-10 col-xs-10" id="main">
             <div class="navbar navbar-blue navbar-static-top">
-              <div class="navbar-user">
-                <div class="dropdown">
-                  <a href="#" class="dropdown-toggle profile-image" data-toggle="dropdown">
-                    {{ user.username }}<b class="carret"></b>
-                    <img src="https://lh3.googleusercontent.com/uFp_tsTJboUY7kue5XAsGA=s28" class="special-img">
-                  </a>
-                  <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dropdownMenu1">
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Mis Datos</a></li>
-                    <li role="presentation">
-                      <a role="menuitem" tabindex="-1" href="{% url 'logout' %}">Salir</a>
-                    </li>
-                  </ul>
-                </div>                        
+              <div class="navbar-user">                       
               </div>
             </div>
             <div class="padding">

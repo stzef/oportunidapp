@@ -3,6 +3,7 @@ from views import loginView, registroView
 
 
 urlpatterns = patterns('',
+	#url(r'^perfil/','usuarios.views.profileView',name='perfil'),
 	#url(r'^perfil/','usuarios.views.perfilView',name='profile'),
 	url(r'^perfil/','usuarios.views.profileView',name='profile'),
 	url(r'^registro/',registroView.as_view(),name='signup'),

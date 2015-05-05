@@ -21,6 +21,10 @@ def habilidades(request):
 	#habilidades = habilidadesModel.objects.filter(usuario_id=user.id).order_by('-fecha_creacion')
 	return render(request,'habilidades.html',{'user':user,'form': nuevaHabilidadForm,'habilidades':habilidades})
 
+@login_required
+def detalle(request):
+	return render(request,'detalle.html')
+
 #Crear nueva Habilidad request POST return JSON
 @login_required()
 def nuevaHabilidad(request):	
