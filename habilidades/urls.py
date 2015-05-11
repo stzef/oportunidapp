@@ -1,11 +1,17 @@
+
 from django.conf.urls import patterns, include, url
 
-
 urlpatterns = patterns('',
-	url(r'^habilidad/','habilidades.views.habilidades',name='habilidades'),
-	url(r'^habilidades/detalle/','habilidades.views.detalle',name='detalle'),
-	url(r'^habilidades/nueva/','habilidades.views.nuevaHabilidad',name='nuevaHabilidad'),
-	url(r'^habilidades/list/','habilidades.views.listHabilidadesActivas',name='listarHabilidades'),
+
+	url(r'^habilidades/$','habilidades.views.habilidades',name='habilidades'),
+	url(r'^habilidades/(?P<pk>[\w\-]+)/$','habilidades.views.detalle',name='detalle'),
+	
+	url(r'^nuevahabilidad/$','habilidades.views.nuevaHabilidad',name='nuevaHabilidad'),
+	url(r'^listarhabilidades/$','habilidades.views.listHabilidadesActivas',name='listarHabilidades'),
+	
+	url(r'^categoriaslistar/$','habilidades.views.categoriasListar',name='categoriasListar'),
+	url(r'^personaslistar$','app.views.personasListar',name='personasListar'),
+
 )
 
 

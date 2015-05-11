@@ -57,7 +57,11 @@
 				<img src="/media/{{ fields.foto }}" class="desc-img" alt="{{ fields.nhabilidad }}">
 			</div>
 			<div class="col-sm-12 col-md-5 col-lg-6 div-align">
-				<h3><a href="{% url 'detalle' %}">{{ fields.nhabilidad }}</a></h3>
+				<h3>
+					<a href="/habilidades/{{ pk }}">
+						{{ fields.nhabilidad }}
+					</a>
+				</h3>
 				<p>{{ fields.descripcion }}</p>
 			</div>
 			<div class="col-sm-12 col-md-3 col-lg-3">
@@ -98,7 +102,7 @@
 			var spinner;
 			function getHabilidades () {
 				$.ajax({
-					url: '/habilidades/list/',
+					url: '{% url 'listarHabilidades' %}',
 					type: "GET",
 					beforeSend: function(){
 						var target = document.getElementById('foo');
@@ -111,14 +115,14 @@
 						setTimeout(function(){
 							spinner.stop();
 							$("#results").html(t);
-						},2000);
+						},1500);
 					},
 				});
 			};
 			$('#nueva-habilidad-form').on('submit', function(event){
 				event.preventDefault();
 				$.ajax({
-					url: '/habilidades/nueva/',
+					url: '{% url 'nuevaHabilidad' %}',
 					type: "POST",
 					dataType: 'json',
 					data: {
@@ -129,7 +133,7 @@
 						foto: $('#id_foto').val(),
 					},
 					success: function(json){
-						toastr.success('');
+						toastr.success('Nueva Habilidad guardada exitosamente!!');
 						$("#nueva-habilidad-form").trigger('reset');
 						$('.well').hide(100);
 						$('#hbl').show(200);

@@ -4,13 +4,16 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from django.core import serializers
+from django.shortcuts import get_object_or_404
 
 
 from serializers import habilidadesSerializer
-from models import habilidadesModel
+from models import habilidadesModel, habCategoriasModel
 from forms import nuevaHabilidadForm
 from usuarios.models import perfilUsuarioModel
 
+
+from app.views import cleanJsonModel
 import json
 
 
@@ -22,8 +25,9 @@ def habilidades(request):
 	return render(request,'habilidades.html',{'user':user,'form': nuevaHabilidadForm,'habilidades':habilidades})
 
 @login_required
-def detalle(request):
-	return render(request,'detalle.html')
+def detalle(request,pk):
+	habilidad = get_object_or_404(habilidadesModel,id=pk)
+	return render(request,'detalle.html',{'habilidad': habilidad})
 
 #Crear nueva Habilidad request POST return JSON
 @login_required()
@@ -58,13 +62,11 @@ def listHabilidadesActivas(request):
 		data = serializers.serialize(
 			"json",
 			habilidadesModel.objects.all().filter(usuario_id=request.user.id).order_by('-fecha_creacion'),
-			fields= ('pk','categoria','nhabilidad','foto','descripcion','val_promedio','num_solicitudes','precio'),
+			fields = ('pk','categoria','nhabilidad','foto','descripcion','val_promedio','num_solicitudes','precio'),
 			use_natural_foreign_keys=True,
 		)
 
-		data_response = json.loads(data)
-		for d in data_response:
-			del d['model']
+		data_response = cleanJsonModel(json.loads(data))
 
 		return HttpResponse(
 			json.dumps(data_response),
@@ -72,8 +74,21 @@ def listHabilidadesActivas(request):
 		)
 
 
+#Listar Categorias
+def categoriasListar(request):
+	if request.method == "GET":
+		data = serializers.serialize(
+			"json",
+			habCategoriasModel.objects.all().order_by('categoria'),
+			fields = ('pk','categoria'),
+		)
 
+		data_response = cleanJsonModel(json.loads(data))
 
+		return HttpResponse(
+			json.dumps(data_response),
+			content_type = "application/json"
+		)
 
 
 
