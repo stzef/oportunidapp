@@ -7,7 +7,7 @@ body
 
 .nav
   font-family Arial,sans-serif
-  font-size 17px
+  font-size 15px
 
 a
   color #222222
@@ -111,9 +111,6 @@ hr
   background-color #34495e
   padding-left 0px
   font-size 14px
-  
-.a-padding
-  padding-left 10px !important
 
 #sidebar .nav li>a:hover
   border-left-style solid
@@ -163,6 +160,9 @@ h1,
 h2,
 h3
   font-weight 800
+
+.navbar-nav
+    margin-left 10px
 
 .navbar-toggle,
 .close
@@ -267,6 +267,72 @@ small.text-muted
 
 .file:active::before
   background #27ae60
+  
+.icon-menu
+  padding-right 7px
+  
+.nav>li>a
+  transition all 0.2s
+
+.a-padding
+  padding 12px 15px 12px !important
+  
+.name-nav
+  padding-top 10px
+  
+.navbar-nav>li>a:hover
+  background-color #34495e
+  color #fff
+  
+.nav .open>a, .nav .open>a:hover, .nav .open>a:focus
+  background-color #34495e !important
+  
+.min-nav>a:focus 
+  background-color #34495e !important
+  color #fff !important
+  
+.dropdown-menu>li>a:hover
+  background-color #2980b9 !important
+
+.navbar-nav
+  margin 4px auto !important
+
+.well
+  background-color #fff !important
+  
+.label-back
+  background-color #3498db
+  text-align center
+  color #fff
+  width 200px
+  height auto
+  padding 2px
+  font-size 16px
+  float left
+
+.image-logo
+  display none
+
+.img-logo
+  width 50px
+  height auto
+
+.label-back:hover
+  color #fff
+  
+.label-descp-3
+  margin 0 auto
+  padding 5px
+  color #fff
+  font-size 18px
+  border-radius .25em
+  margin-bottom 5px
+  
+.name-user-h4
+  margin-bottom -5px
+  
+.find
+  margin-top 120px
 
 @media screen and (max-width 991px)
   .desc-sign
@@ -294,6 +360,12 @@ small.text-muted
   
   .desc-img
     display none
+    
+  .logo-app
+    display none
+    
+  .image-logo
+    display inline-block  
 /*
  * off canvas sidebar
  * --------------------------------------------------
@@ -329,3 +401,18 @@ small.text-muted
     top 0
     width 33%
     margin-left 5px
+  
+  .min-nav
+    width 100px
+    text-align center
+    display inline-block !important
+    
+  .navbar-nav .open .dropdown-menu
+    position absolute
+    
+@media screen and (max-width 350px)
+  .icon-menu
+    display none
+    
+  .label-category
+    width 170px !important

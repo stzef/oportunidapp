@@ -24,22 +24,22 @@
       <div class="box">
         <div class="row row-offcanvas row-offcanvas-left">
           <div class="column col-sm-2 col-xs-2 sidebar-offcanvas" id="sidebar">
+            <h4 class="text-center logo-app"><strong><span class="blue-color">Oportunid</span><span class="green-color">App</span></strong></h4>
+            <div class="image-logo text-center">
+              <img src="{% static 'img/logo.png' %}" class="img-logo" />
+            </div>
            	<ul class="nav">
           		<li><a href="#" data-toggle="offcanvas" id="offcanvas" class="visible-xs text-center"><i class="glyphicon glyphicon-chevron-right"></i></a></li>
             </ul>   
             <ul class="nav hidden-xs" id="lg-menu">
               <li class="dropdown text-center">
-                <img src="https://lh3.googleusercontent.com/uFp_tsTJboUY7kue5XAsGA=s28" class="img-circle img-nav text-center">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ user.username }}</a>
-                <ul class="dropdown-menu" role="menu">
-                  <li><a class="link-user" href="{% url 'profile' %}">Perfil</a></li>
-                  <li><a class="link-user" href="{% url 'logout' %}">Salir</a></li>
-                </ul>
+                <img src="http://www.ryanhanley.com/wp-content/uploads/2013/09/person-to-person-business.jpg" class="img-circle img-nav text-center">
+                <p class="text-center name-nav">{{ user.first_name }}</p>
               </li> 
-              <li><a class="a-padding" href="#"><i class="glyphicon glyphicon-list-alt"></i> Featured</a></li>
-              <li><a class="a-padding" href="#"><i class="glyphicon glyphicon-list"></i> Stories</a></li>
-              <li><a class="a-padding" href="#"><i class="glyphicon glyphicon-paperclip"></i> Saved</a></li>
-              <li><a class="a-padding" href="#"><i class="glyphicon glyphicon-refresh"></i> Refresh</a></li>
+              <li><a class="a-padding" href="#"><i class="glyphicon glyphicon-user icon-menu"></i>Te necesito</a></li>
+              <li><a class="a-padding" href="{% url 'habilidades' %}"><i class="glyphicon glyphicon-thumbs-up icon-menu"></i>Habilidades</a></li>
+              <li><a class="a-padding" href="#"><i class="glyphicon glyphicon-list-alt icon-menu"></i>Trabajos</a></li>
+              <li><a class="a-padding" href="#"><i class="glyphicon glyphicon-pushpin icon-menu"></i>Solicitudes</a></li>
             </ul>
             <ul class="nav visible-xs" id="xs-menu">
               <li class="dropdown text-center">
@@ -47,20 +47,24 @@
                   <img src="https://lh3.googleusercontent.com/uFp_tsTJboUY7kue5XAsGA=s28" class="img-circle img-nav-2 text-center">
                 </a>
               </li> 
-             	<li><a href="#" class="text-center"><i class="glyphicon glyphicon-list-alt"></i></a></li>
-              <li><a href="#" class="text-center"><i class="glyphicon glyphicon-list"></i></a></li>
-             	<li><a href="#" class="text-center"><i class="glyphicon glyphicon-paperclip"></i></a></li>
-              <li><a href="#" class="text-center"><i class="glyphicon glyphicon-refresh"></i></a></li>
+              <li><a href="#" class="text-center"><i class="glyphicon glyphicon-user"></i></a></li>
+              <li><a href="{% url 'habilidades' %}" class="text-center"><i class="glyphicon glyphicon-thumbs-up"></i></a></li>
+              <li><a href="#" class="text-center"><i class="glyphicon glyphicon-list-alt"></i></a></li>
+              <li><a href="#" class="text-center"><i class="glyphicon glyphicon-pushpin"></i></a></li>
             </ul>  
           </div>
           <div class="column col-sm-10 col-xs-10" id="main">
             <div class="navbar navbar-blue navbar-static-top">
               <ul class="nav navbar-nav">
-                <li><a class="a-padding" href="#"><i class="glyphicon glyphicon-list-alt"></i> Featured</a></li>
-                <li><a class="a-padding" href="#"><i class="glyphicon glyphicon-list"></i> Stories</a></li>
+                <li class="min-nav"><a href="#">Inicio</a></li>
+                <li class="dropdown text-center min-nav">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ user.username }}</a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a class="link-user" href="{% url 'profile' %}">Perfil</a></li>
+                    <li><a class="link-user" href="{% url 'logout' %}">Salir</a></li>
+                  </ul>
+                </li> 
               </ul>
-              <div class="navbar-user">                       
-              </div>
             </div>
             <div class="padding">
               {% block content %}

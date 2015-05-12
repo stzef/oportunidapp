@@ -6,42 +6,36 @@
 {% block content %}
 <div class="row">
 	<div class="full col-sm-12">
-		<div class="nav-center">
-			<ul class="nav nav-pills">
-				<li><a href="#"><i class="glyphicon glyphicon-user desc2"></i><br><span class="desc">Te necesito</span></a></li>
-				<li class="active"><a href="#"><i class="glyphicon glyphicon-thumbs-up desc2"></i><br><span class="desc">Habilidades</span></a></li>
-				<li><a href="#"><i class="glyphicon glyphicon-list-alt desc2"></i><br><span class="desc">Trabajos</span></a></li>
-				<li><a href="#"><i class="glyphicon glyphicon-pushpin desc2"></i><br><span class="desc">Solicitudes</span></a></li>
-			</ul>
-		</div>  
+		<a href="" class="btn btn-primary pull" id="hbl">Añadir Habilidad</a>
 	</div>
 </div>
 <div class="row">
-	<a href="" class="btn btn-primary pull" id="hbl">Añadir Habilidad</a>
+	<div class="col-sm-12">
+		<div class="well" style="display:none"> 
+			<form id="nueva-habilidad-form" method="post" enctype='multipart/form-data'>
+
+				<h4>Nueva Habilidad</h4>
+
+				<div class="form-group">
+					{{ form.as_p }}
+				</div>
+				<div class="text-right">
+					<a href="" class="btn btn-danger" id="cancel">Cancelar</a>
+					<input type="submit" value="Agregar + " class="btn btn-primary">
+				</div>
+				<ul class="list-inline">
+				</ul>
+			</form>
+		</div>
 </div>
-<div class="col-sm-12">
-	<div class="well" style="display:none"> 
-		<form id="nueva-habilidad-form" method="post" enctype='multipart/form-data'>
-
-			<h4>Nueva Habilidad</h4>
-
-			<div class="form-group">
-				{{ form.as_p }}
-			</div>
-			<div class="text-right">
-				<a href="" class="btn btn-danger" id="cancel">Cancelar</a>
-				<input type="submit" value="Agregar + " class="btn btn-primary">
-			</div>
-			<ul class="list-inline">
-			</ul>
-		</form>
-	</div>
 </div>
 {%verbatim%}
 <ul id="listul">
 </ul>
 <p id="foo"></p>
-<div id="results"></div>
+<div class="row">
+	<div id="results"></div>
+</div>
 
 <script id="habilidadesTempl" type="text/x-handlebars-template">
 {{#each this }}
@@ -57,21 +51,25 @@
 				<img src="/media/{{ fields.foto }}" class="desc-img" alt="{{ fields.nhabilidad }}">
 			</div>
 			<div class="col-sm-12 col-md-5 col-lg-6 div-align">
-				<h3><a href="{% url 'detalle' %}">{{ fields.nhabilidad }}</a></h3>
+				<h3>
+					<a href="/habilidades/{{ pk }}">
+						{{ fields.nhabilidad }}
+					</a>
+				</h3>
 				<p>{{ fields.descripcion }}</p>
 			</div>
 			<div class="col-sm-12 col-md-3 col-lg-3">
-				<div class="text-top text-center col-xs-4 col-sm-4 col-md-12 col-lg-12">
+				<div class="text-top text-center col-xs-6 col-sm-4 col-md-12 col-lg-12">
 					<div class="label-descp label-warning">
 						<i class="glyphicon glyphicon-star desc3"></i> <span class="desc">Puntuacion: </span></a><strong class="desc3">{{ fields.val_promedio }}</strong>
 					</div>
 				</div>
-				<div class="text-top text-center col-xs-4 col-sm-4 col-md-12 col-lg-12">
+				<div class="text-top text-center col-xs-6 col-sm-4 col-md-12 col-lg-12">
 					<div class="label-descp label-success">
 						<i class="glyphicon glyphicon-th-list desc3"></i> <span class="desc">Solicitudes: </span></a><strong class="desc3">{{ fields.num_solicitudes }}</strong>
 					</div>
 				</div>
-				<div class="text-top text-center col-xs-4 col-sm-4 col-md-12 col-lg-12">
+				<div class="text-top text-center col-xs-6 col-sm-4 col-md-12 col-lg-12">
 					<div class="label-descp label-danger">
 						{{#if fields.precio}}
 						<i class="glyphicon glyphicon-usd desc3"></i> 
@@ -98,7 +96,7 @@
 			var spinner;
 			function getHabilidades () {
 				$.ajax({
-					url: '/habilidades/list/',
+					url: '{% url 'listarHabilidades' %}',
 					type: "GET",
 					beforeSend: function(){
 						var target = document.getElementById('foo');
@@ -111,14 +109,14 @@
 						setTimeout(function(){
 							spinner.stop();
 							$("#results").html(t);
-						},2000);
+						},1500);
 					},
 				});
 			};
 			$('#nueva-habilidad-form').on('submit', function(event){
 				event.preventDefault();
 				$.ajax({
-					url: '/habilidades/nueva/',
+					url: '{% url 'nuevaHabilidad' %}',
 					type: "POST",
 					dataType: 'json',
 					data: {
@@ -129,7 +127,7 @@
 						foto: $('#id_foto').val(),
 					},
 					success: function(json){
-						toastr.success('');
+						toastr.success('Nueva Habilidad guardada exitosamente!!');
 						$("#nueva-habilidad-form").trigger('reset');
 						$('.well').hide(100);
 						$('#hbl').show(200);
