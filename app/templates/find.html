@@ -56,6 +56,7 @@
 						</div>
 					</div>
 				</div>
+				<p id="spin"></p>
 				<div id = "resultados" class="col-md-9">
 					<!--<div class="row">
 						5.012.435 Resultados para: Lo buscado
@@ -100,7 +101,7 @@
 
 {% block scripts %}
 	<script src="{% static 'jsapp/csrf_load.js' %}"></script>
-	<script src="{% static 'jslibraries/jquery.autocomplete.min.js' %}"></script>
+	<script src="{% static 'jslibraries/jquery.autocomplete.js' %}"></script>
 	<script>
 		$(function () {
 			$('.categoria-item').on('click',function(e){
@@ -110,6 +111,7 @@
 				buscarCategoria(e.target.id);
 			});
 			
+			var spinner;
 			var sourceHabilidadesSearch = $('#resultHabilidadesSearch').html();
 			var templateHabilidadesSearch = Handlebars.compile(sourceHabilidadesSearch);
 
@@ -117,53 +119,34 @@
 				$.ajax({
 					url: '{% url 'personasListar' %}',
 					type: "GET",
-					data: 
-					{ 
-						categoria: categoria_id,
-					},
+					data: { categoria: categoria_id,},
 					beforeSend: function(){
-						//var target = document.getElementById('foo');
-						//spinner = new Spinner().spin(target);
+						var target = document.getElementById('spin');
+						spinner = new Spinner().spin(target);
 					},
 					success:function(json){
 						buildHabilidadesSearch = templateHabilidadesSearch (json);
-						$('#resultados').html(buildHabilidadesSearch);
+						setTimeout(function(){
+							spinner.stop();
+							$('#resultados').html(buildHabilidadesSearch);
+						},1500);
 					},
 				});
 			}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 			/*var jobs = [
 				{ value: 'Software Developer', data: '1'},
 				{ value: 'Designer', data: '2'},
 				{ value: 'Backend Developer', data: '3'},
 				{ value: 'Front end Developer', data: '4'},
-			];
-			console.log(jobs);
+			];*/
 			var data2;
 			$.ajax({
 				url: '{% url 'listarHabilidades' %}',
-				type: 'GET',
+				type: "GET",
 				success: function(json){
+					console.log(json);
 					data2 = [
 						{ value: json[0].fields.nhabilidad,data: '1'},
-						{ value: json[1].fields.nhabilidad,data: '2'},
 					];
 					console.log(data2);
 					$("#search-word").autocomplete({
@@ -171,7 +154,6 @@
 					});
 				},
 			});
-			*/
 		});
 	</script>
 {% endblock %}

@@ -5,10 +5,10 @@ urlpatterns = patterns('',
 
 	url(r'^habilidades/$','habilidades.views.habilidades',name='habilidades'),
 	url(r'^habilidades/(?P<pk>[\w\-]+)/$','habilidades.views.detalle',name='detalle'),
-	
+
 	url(r'^nuevahabilidad/$','habilidades.views.nuevaHabilidad',name='nuevaHabilidad'),
 	url(r'^listarhabilidades/$','habilidades.views.listHabilidadesActivas',name='listarHabilidades'),
-	
+
 	url(r'^categoriaslistar/$','habilidades.views.categoriasListar',name='categoriasListar'),
 	url(r'^personaslistar$','app.views.personasListar',name='personasListar'),
 

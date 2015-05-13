@@ -7,7 +7,7 @@ from forms import loginForm,registroForm
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from forms import emailLoginForm
 
@@ -33,6 +33,19 @@ def loginEmail(request):
 		login(request,form.get_user())
 	return render(request, 'loginEmail.html',{'form':form})
 
+#Registro de usuarios
+#def registroView(request):
+#	form = registroForm
+#	if request.method == "POST":
+#		form = registroForm(request.POST or None)
+#		if form.is_valid():
+#			return HttpResponse('ok')
+#		else:
+#			return HttpResponse('No')
+#	return render(request, 'signup.html',{'form':form})
+
+
+
 
 class registroView(FormView):
 	form_class = registroForm
@@ -42,6 +55,10 @@ class registroView(FormView):
 	def form_valid(self,form):
 		form.save()
 		return HttpResponseRedirect(self.get_success_url())
+
+	def form_invalid(self, form):
+		#return HttpResponse(self.get_context_data(form=form))
+		return self.render_to_response(self.get_context_data(form=form))
 
 class loginView(FormView):
 	form_class = loginForm
