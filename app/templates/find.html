@@ -4,7 +4,7 @@
 <title>Buscar | OportunidApp</title>
 {% endblock %}
 {% block content %}
-<body>
+<body class="body-img">
 	<nav class="navbar navbar-default navbar-fixed-top">
 	  <div class="container-fluid col-xs-12 col-sm-12 col-md-8 col-lg-8">
 	    <div class="navbar-header">
@@ -22,7 +22,7 @@
 	    </div>
 	  </div>
 	  <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-	    <ul class="nav navbar-nav navbar-right nav-align col-xs-12 col-sm-12">
+	    <ul class="nav navbar-nav navi navbar-right nav-align col-xs-12 col-sm-12">
 	      <li class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-center"><a href="{% url 'login' %}" class="blue-color-2">Entrar</a></li>
 	      <li class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-center"><a href="{% url 'signup' %}" class="registry">Registro</a></li>
 	    </ul>
@@ -47,7 +47,7 @@
 				<div class="col-md-3 col-lg-3">
 					<div class="left">
 						<div class="col-xs-6 col-md-12">
-							<h6>Categorias</h6>
+							<h5 class="blue-color">Categorias</h5>
 							<div class="list-group categorias-list" id="">
 								{% for categoria in categorias %}
 									<a id="{{ categoria.pk }}" class="list-group-item categoria-item ">{{ categoria.categoria }}</a>
