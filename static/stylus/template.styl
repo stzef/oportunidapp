@@ -7,7 +7,10 @@ body
 
 .nav
   font-family Arial,sans-serif
-  font-size 17px
+  font-size 15px
+
+.grey
+  background-color #F5F5F5
 
 a
   color #222222
@@ -111,12 +114,11 @@ hr
   background-color #34495e
   padding-left 0px
   font-size 14px
-  
-.a-padding
-  padding-left 10px !important
 
 #sidebar .nav li>a:hover
-  background-color #393939
+  border-left-style solid
+  border-left-color #2e8ece
+  background-color #2C3E50
 
 .logo
   display block
@@ -161,6 +163,9 @@ h1,
 h2,
 h3
   font-weight 800
+
+.navbar-nav
+    margin-left 10px
 
 .navbar-toggle,
 .close
@@ -265,6 +270,121 @@ small.text-muted
 
 .file:active::before
   background #27ae60
+  
+.icon-menu
+  padding-right 7px
+  
+.nav>li>a
+  transition all 0.2s
+
+.a-padding
+  padding 12px 15px 12px !important
+  
+.name-nav
+  padding-top 10px
+  
+.navbar-nav>li>a:hover
+  background-color #34495e
+  color #fff
+  
+.nav .open>a, .nav .open>a:hover, .nav .open>a:focus
+  background-color #34495e !important
+  
+.min-nav>a:focus 
+  background-color #34495e !important
+  color #fff !important
+  
+.dropdown-menu>li>a:hover
+  background-color #2980b9 !important
+
+.navbar-nav
+  margin 4px auto !important
+
+.well
+  background-color #fff !important
+  
+.label-back
+  background-color #3498db
+  text-align center
+  color #fff
+  width 200px
+  height auto
+  padding 2px
+  font-size 16px
+  float left
+
+.image-logo
+  display none
+
+.img-logo
+  width 50px
+  height auto
+
+.label-back:hover
+  color #fff
+  
+.label-descp-3
+  margin 0 auto
+  padding 5px
+  color #fff
+  font-size 18px
+  border-radius .25em
+  margin-bottom 5px
+  
+.name-user-h4
+  margin-bottom -5px
+  
+.find
+  margin-top 120px
+
+.content-comment
+  margin-bottom 10px
+  background-color #fff
+  height auto
+  width 100%
+  padding 10px
+  border-radius: 5px 5px 5px 5px;
+  -moz-border-radius: 5px 5px 5px 5px;
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border: 0px solid #000000;
+  -webkit-box-shadow: 0px 5px 10px -5px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 5px 10px -5px rgba(0,0,0,0.75);
+  box-shadow: 0px 5px 10px -5px rgba(0,0,0,0.75);
+  
+.comment
+  font-size 16px
+  line-height 23px
+  
+.need
+  margin-top 50px
+  margin-bottom 50px
+  
+.n-red
+  padding 3px
+  border-radius: 5px 5px 5px 5px;
+  -moz-border-radius: 5px 5px 5px 5px;
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border: 0px solid #000000;
+  
+.date-need
+  float right
+  font-style italic
+
+.spacing
+  margin-bottom 10px
+  
+.content-modal
+  padding 10px
+  
+.accept
+  text-align center
+  margin-top 20px
+  margin-bottom  20px
+  
+.red-color
+  color #fff
+  background-color #e74c3c
+  padding 15px
 
 @media screen and (max-width 991px)
   .desc-sign
@@ -292,6 +412,12 @@ small.text-muted
   
   .desc-img
     display none
+    
+  .logo-app
+    display none
+    
+  .image-logo
+    display inline-block  
 /*
  * off canvas sidebar
  * --------------------------------------------------
@@ -327,3 +453,17 @@ small.text-muted
     top 0
     width 33%
     margin-left 5px
+  
+  .min-nav
+    text-align center
+    display inline-block !important
+    
+  .navbar-nav .open .dropdown-menu
+    position absolute
+    
+@media screen and (max-width 350px)
+  .icon-menu
+    display none
+    
+  .label-category
+    width 170px !important

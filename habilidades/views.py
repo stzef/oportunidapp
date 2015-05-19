@@ -6,12 +6,10 @@ from django.shortcuts import render
 from django.core import serializers
 from django.shortcuts import get_object_or_404
 
-
 from serializers import habilidadesSerializer
 from models import habilidadesModel, habCategoriasModel
 from forms import nuevaHabilidadForm
 from usuarios.models import perfilUsuarioModel
-
 
 from app.views import cleanJsonModel
 import json
@@ -73,7 +71,6 @@ def listHabilidadesActivas(request):
 			content_type = "application/json"
 		)
 
-
 #Listar Categorias
 def categoriasListar(request):
 	if request.method == "GET":
@@ -90,15 +87,9 @@ def categoriasListar(request):
 			content_type = "application/json"
 		)
 
-
-
-
-
-
 #from rest_framework.permissions import IsAuthenticated
 #from rest_framework import viewsets
 #from permissions import IsOwnerOrReadOnly
-
 
 """class habilidadesViewSet(viewsets.ViewSet):
 	permission_classes = (IsAuthenticated,) 
@@ -120,4 +111,3 @@ class habilidadesViewSet(viewsets.ModelViewSet):
 		return HttpResponse(serializer.data)
 
 """
-

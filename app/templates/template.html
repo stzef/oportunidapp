@@ -24,39 +24,51 @@
       <div class="box">
         <div class="row row-offcanvas row-offcanvas-left">
           <div class="column col-sm-2 col-xs-2 sidebar-offcanvas" id="sidebar">
+            <h4 class="text-center logo-app"><strong><span class="blue-color">Oportunid</span><span class="green-color">App</span></strong></h4>
            	<ul class="nav">
-          		<li><a href="#" data-toggle="offcanvas" id="offcanvas" class="visible-xs text-center"><i class="glyphicon glyphicon-chevron-right"></i></a></li>
+          		<li class="text-center"><a href="#" data-toggle="offcanvas" id="offcanvas" class="visible-xs text-center"><i class="glyphicon glyphicon-chevron-right"></i></a></li>
             </ul>   
             <ul class="nav hidden-xs" id="lg-menu">
               <li class="dropdown text-center">
-                <img src="https://lh3.googleusercontent.com/uFp_tsTJboUY7kue5XAsGA=s28" class="img-circle img-nav text-center">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ user.username }}</a>
-                <ul class="dropdown-menu" role="menu">
-                  <li><a class="link-user" href="{% url 'profile' %}">Perfil</a></li>
-                  <li><a class="link-user" href="{% url 'logout' %}">Salir</a></li>
-                </ul>
+              {% if user.foto %}
+                  <img src="/media/{{ user.foto }}" alt="{{ user.first_name }} {{ user.last_name }}" class="img-circle img-nav text-center">
+              {% else %}
+                  <img src="http://www.ryanhanley.com/wp-content/uploads/2013/09/person-to-person-business.jpg" class="img-circle img-nav text-center">
+              {% endif %}
+                <p class="text-center name-nav">{{ user.first_name }} {{ user.last_name }}</p>
               </li> 
-              <li><a class="a-padding" href="#"><i class="glyphicon glyphicon-list-alt"></i> Featured</a></li>
-              <li><a class="a-padding" href="#"><i class="glyphicon glyphicon-list"></i> Stories</a></li>
-              <li><a class="a-padding" href="#"><i class="glyphicon glyphicon-paperclip"></i> Saved</a></li>
-              <li><a class="a-padding" href="#"><i class="glyphicon glyphicon-refresh"></i> Refresh</a></li>
+              <li><a class="a-padding" href="{% url 'necesito' %}"><i class="glyphicon glyphicon-user icon-menu"></i>Te necesito</a></li>
+              <li><a class="a-padding" href="{% url 'habilidades' %}"><i class="glyphicon glyphicon-thumbs-up icon-menu"></i>Habilidades</a></li>
+              <li><a class="a-padding" href="#"><i class="glyphicon glyphicon-list-alt icon-menu"></i>Trabajos</a></li>
+              <li><a class="a-padding" href="#"><i class="glyphicon glyphicon-pushpin icon-menu"></i>Solicitudes</a></li>
             </ul>
             <ul class="nav visible-xs" id="xs-menu">
               <li class="dropdown text-center">
                 <a class="text-center" href="#">
-                  <img src="https://lh3.googleusercontent.com/uFp_tsTJboUY7kue5XAsGA=s28" class="img-circle img-nav-2 text-center">
+                  <img src="http://www.ryanhanley.com/wp-content/uploads/2013/09/person-to-person-business.jpg" class="img-circle img-nav-2 text-center">
                 </a>
               </li> 
-             	<li><a href="#" class="text-center"><i class="glyphicon glyphicon-list-alt"></i></a></li>
-              <li><a href="#" class="text-center"><i class="glyphicon glyphicon-list"></i></a></li>
-             	<li><a href="#" class="text-center"><i class="glyphicon glyphicon-paperclip"></i></a></li>
-              <li><a href="#" class="text-center"><i class="glyphicon glyphicon-refresh"></i></a></li>
+              <li><a href="{% url 'necesito' %}" class="text-center"><i class="glyphicon glyphicon-user"></i></a></li>
+              <li><a href="{% url 'habilidades' %}" class="text-center"><i class="glyphicon glyphicon-thumbs-up"></i></a></li>
+              <li><a href="#" class="text-center"><i class="glyphicon glyphicon-list-alt"></i></a></li>
+              <li><a href="#" class="text-center"><i class="glyphicon glyphicon-pushpin"></i></a></li>
             </ul>  
           </div>
           <div class="column col-sm-10 col-xs-10" id="main">
             <div class="navbar navbar-blue navbar-static-top">
-              <div class="navbar-user">                       
-              </div>
+              <ul class="nav navbar-nav">
+                <li class="min-nav text-center"><a href="#"><span class="glyphicon glyphicon-home desc3"></span> <span class="desc">Inicio</span></a></li>
+                <li class="min-nav text-center"><a href="#"><span class="glyphicon glyphicon-globe desc3"></span> <span class="desc">Notificaciones</span> <span class="n-red label-danger">5</span></a></li>
+                <li class="min-nav text-center"><a href="#"><span class="glyphicon glyphicon-envelope desc3"></span> <span class="desc">Mensajes</span> <span class="n-red label-danger">2</span></a></li>
+                <li class="dropdown text-center min-nav">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                  <span class="glyphicon glyphicon-cog desc3"></span> <span class="desc">Mi Usuario</span></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a class="link-user" href="{% url 'profile' %}">Perfil</a></li>
+                    <li><a class="link-user" href="{% url 'logout' %}">Salir</a></li>
+                  </ul>
+                </li> 
+              </ul>
             </div>
             <div class="padding">
               {% block content %}

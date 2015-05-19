@@ -71,7 +71,7 @@
 										<img src="https://randomuser.me/api/portraits/med/men/10.jpg" class="desc-img-2 img-rounded" alt="Responsive image">
 									</div>
 									<div class="col-xs-12 col-sm-9 col-md-9">
-										<h5>{{ this.userfirstname }} {{ this.userlastname }}</h5>
+										<h5><a href="/Buscar/{{ this.habilidad_id }}">{{ this.userfirstname }} {{ this.userlastname }}</a></h5>
 										<p class="text">{{ this.descripcion }}</p>
 										<div class="label-descp-2 label-warning col-xs-6 col-md-6 text-center">
 											<i class="glyphicon glyphicon-star desc3"></i></a><strong class="desc3">{{ this.habilidad_val }}</strong>
@@ -111,7 +111,7 @@
 				buscarCategoria(e.target.id);
 			});
 			
-			var spinner;
+			//var spinner;
 			var sourceHabilidadesSearch = $('#resultHabilidadesSearch').html();
 			var templateHabilidadesSearch = Handlebars.compile(sourceHabilidadesSearch);
 
@@ -121,24 +121,25 @@
 					type: "GET",
 					data: { categoria: categoria_id,},
 					beforeSend: function(){
-						var target = document.getElementById('spin');
-						spinner = new Spinner().spin(target);
+						//var target = document.getElementById('spin');
+						//spinner = new Spinner().spin(target);
 					},
 					success:function(json){
 						buildHabilidadesSearch = templateHabilidadesSearch (json);
 						setTimeout(function(){
-							spinner.stop();
+							//spinner.stop();
 							$('#resultados').html(buildHabilidadesSearch);
 						},1500);
 					},
 				});
 			}
-			/*var jobs = [
+			/*
+			var jobs = [
 				{ value: 'Software Developer', data: '1'},
 				{ value: 'Designer', data: '2'},
 				{ value: 'Backend Developer', data: '3'},
 				{ value: 'Front end Developer', data: '4'},
-			];*/
+			];
 			var data2;
 			$.ajax({
 				url: '{% url 'listarHabilidades' %}',
@@ -154,6 +155,7 @@
 					});
 				},
 			});
+			*/
 		});
 	</script>
 {% endblock %}

@@ -1,0 +1,61 @@
+{% extends "template.html" %}
+{% load staticfiles %}
+{% block head %}
+	<title>Habilidades | OportunidApp </title>
+{% endblock %}
+{% block content %}
+<div class="row">
+	<div class="full">
+		<div class="col-md-12 desc-profile spacing">
+			<h3><a href="#" data-toggle="modal" data-target="#myModal">Ghonk Gorrizd</a></h3>
+			<p>Sed nulla risus, ultrices in rutrum nec, condimentum vel tortor. In faucibus mattis metus a vulputate. Phasellus gravida vestibulum ornare. Donec rhoncus finibus pulvinar. Donec pellentesque ipsum ac ipsum elementum, porttitor mollis ex placerat. Vivamus diam tellus, venenatis euismod egestas quis, consequat eget risus.</p>
+			<span class="date-need">Miércoles, 15 Agosto 2015</span>
+		</div>
+		<div class="col-md-12 desc-profile spacing">
+			<h3><a href="#" data-toggle="modal" data-target="#myModal">Karol Rojas</a></h3>
+			<p>Aliquam eget porttitor risus. Phasellus ultricies sapien ac consectetur pulvinar. Vestibulum sapien augue, interdum eu pellentesque at, venenatis at justo. Donec aliquet vel nisl ut fermentum. Cras ultrices tristique augue, et efficitur ante lacinia id. Aliquam tortor nulla, hendrerit non commodo ac, auctor sit amet nunc. </p>
+			<span class="date-need">Lunes, 10 Agosto 2015</span>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  	<div class="modal-dialog">
+    	<div class="modal-content">
+      		<div class="modal-header">
+        		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        		<h4 class="modal-title" id="myModalLabel">Ghonk Gorrizd</h4>
+      		</div>
+      		<div class="modal-body">
+        		<div class="content-modal">
+        			<p>Sed nulla risus, ultrices in rutrum nec, condimentum vel tortor. In faucibus mattis metus a vulputate. Phasellus gravida vestibulum ornare. Donec rhoncus finibus pulvinar. Donec pellentesque ipsum ac ipsum elementum, porttitor mollis ex placerat. Vivamus diam tellus, venenatis euismod egestas quis, consequat eget risus.</p>
+        			<div class="accept">
+        				<a href="#" class="blue-color-2">Aceptar Te Necesito</a>
+        				<a href="#" class="red-color">Eliminar Te Necesito</a>
+        			</div>
+        			<h4>Comments</h4>
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<div class="row">
+		        				<div class="col-md-2 text-right">
+		        					<strong>Contratante:</strong>
+		        				</div>
+		        				<div class="col-md-10">
+		        					<p>In ut dui dapibus, vehicula massa at, scelerisque ex. Sed tortor nunc, ornare in sem at, porttitor venenatis neque. Vestibulum ut sapien nec mi sodales viverra.</p>
+		        				</div>
+		        			</div>
+		        			<div class="row">
+		        				<div class="col-md-2 text-right">
+		        					<strong>Yo:</strong>
+		        				</div>
+		        				<div class="col-md-10">
+		        					<p>Donec pretium imperdiet viverra. Cras eget diam rhoncus, mollis sem eu, porta mauris. Aenean a posuere ligula.</p>
+		        				</div>
+		        			</div>
+	        			</div>
+					</div>
+        		</div>
+      		</div>
+    	</div>
+  	</div>
+</div>
+{% endblock %}
