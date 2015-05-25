@@ -7,8 +7,8 @@
 <div class="row">
 	<div class="full col-sm-12">
 		<a href="#" class="btn btn-primary pull" id="hbl">Nueva</a>
-		<a class="btn btn-primary pull" id="">Activas</a>
-		<a class="btn btn-primary pull" id="">Desactivadas</a>
+		<a class="btn btn-success pull" id="btn-habilidades-activas">Activas</a>
+		<a class="btn btn-default pull" id="btn-habilidades-noActivas">Desactivadas</a>
 	</div>
 </div>
 <div class="row">
@@ -58,6 +58,7 @@
 						{{ fields.nhabilidad }}
 					</a>
 				</h3>
+
 				<p>{{ fields.descripcion }}</p>
 			</div>
 			<div class="col-sm-12 col-md-3 col-lg-3">
@@ -106,11 +107,12 @@
 	<script>
 		//toastr.success("Hola Bienvenido A OportunidApp");
 		$(function() {
-			getHabilidades();
+			listarHabilidadesActivas();
 			var spinner;
-			function getHabilidades () {
+
+			function listarHabilidadesActivas () {
 				$.ajax({
-					url: '{% url 'listarHabilidades' %}',
+					url: '{% url 'habilidadesActivas' %}',
 					type: "GET",
 					beforeSend: function(){
 						var target = document.getElementById('foo');
@@ -127,6 +129,27 @@
 					},
 				});
 			};
+
+			function listarHabilidadesNoActivas(){
+				$.ajax({
+					url : '{% url 'habilidadesNoActivas' %}',
+					type : "GET",
+					beforeSend : function(){
+						var target = document.getElementById('foo');
+						spinner = new Spinner().spin(target);
+					},
+					success: function(json){
+						var source   = $("#habilidadesTempl").html();
+						var template = Handlebars.compile(source);
+						t = template(json);
+						setTimeout(function(){
+							spinner.stop();
+							$("#results").html(t);
+						},1500);
+					},
+				});
+			};
+
 			$('#nueva-habilidad-form').on('submit', function(event){
 				event.preventDefault();
 				$.ajax({
@@ -145,7 +168,7 @@
 						$("#nueva-habilidad-form").trigger('reset');
 						$('.well').hide(100);
 						$('#hbl').show(200);
-						getHabilidades();
+						listarHabilidadesActivas();
 						//console.log(json);
 					},
 				});
@@ -163,6 +186,19 @@
 				$('#hbl').show();
 				event.preventDefault();
 			});
+
+			$('#btn-habilidades-activas').click(function(){
+				$('#btn-habilidades-noActivas').removeClass("btn-success").addClass("btn-default");
+				$('#btn-habilidades-activas').removeClass("btn-default").addClass("btn-success");
+				listarHabilidadesActivas();
+			});
+
+			$('#btn-habilidades-noActivas').click(function(){
+				$('#btn-habilidades-activas').removeClass("btn-success").addClass("btn-default");
+				$('#btn-habilidades-noActivas').removeClass("btn-default").addClass("btn-success");
+				listarHabilidadesNoActivas();
+			});
+
 		});
 	</script>
 {% endblock %}

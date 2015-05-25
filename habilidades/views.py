@@ -91,24 +91,13 @@ def desactivarHabilidad(request):
 		return render(request,'no_permitido.html')
 
 
-
-
-
-
-
-
-
-
-
-
-
 #Listar Habilidades activas del usuario request POST return JSON
 @login_required()
-def listHabilidadesActivas(request):
+def listarHabilidadesActivas(request):
 	if request.method == 'GET':
 		data = serializers.serialize(
 			"json",
-			habilidadesModel.objects.all().filter(usuario_id=request.user.id).order_by('-fecha_creacion'),
+			habilidadesModel.objects.all().filter(usuario_id=request.user.id,estado=True).order_by('-fecha_creacion'),
 			fields = ('pk','categoria','nhabilidad','foto','descripcion','val_promedio','num_solicitudes','precio'),
 			use_natural_foreign_keys=True,
 		)
@@ -119,6 +108,38 @@ def listHabilidadesActivas(request):
 			json.dumps(data_response),
 			content_type = "application/json"
 		)
+
+#Listar Habilidades No Activas del usuario request POST return JSON
+@login_required()
+def listarHabilidadesNoActivas(request):
+	if request.method == 'GET':
+		data = serializers.serialize(
+			"json",
+			habilidadesModel.objects.all().filter(usuario_id=request.user.id,estado=False).order_by('-fecha_creacion'),
+			fields = ('pk','categoria','nhabilidad','foto','descripcion','val_promedio','num_solicitudes','precio'),
+			use_natural_foreign_keys = True,
+		)
+		data_response = cleanJsonModel(json.loads(data))
+		return HttpResponse(
+			json.dumps(data_response),
+			content_type = "application/json"
+		)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #Listar Categorias
 def categoriasListar(request):

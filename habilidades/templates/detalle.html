@@ -16,8 +16,12 @@
 		<span class="glyphicon glyphicon-cog desc3"></span> 
 		<span class="desc">opciones</span></a>
 		<ul class="dropdown-menu" role="menu">
-			<li><a class="link-user" href="#">Editar</a></li>
-			<li><a class="link-user" href="#">Cambiar foto</a></li>
+			<li>
+				<a class="link-user" data-toggle="modal" data-target="#editarHabilidadModal">Editar</a>
+				</li>
+			<li>
+				<a class="link-user" href="#">Cambiar foto</a>
+			</li>
 			{% if habilidad.estado %}
 				<li><a class="link-user" data-toggle="modal" data-target="#desactivarHabilidadModal">desactivar</a></li>
 			{% else %}
@@ -79,17 +83,16 @@
 							Esto significa que las personas no podrán encontrarte si buscan un servicio como este o similar.
 						</p>
 						<div class="accept">
-							<a id="btn-desactivar-habilidad" class="blue-color-2">Si, seguro</a>
-							<a href="#" class="red-color" data-dismiss="modal">No, Salir</a>
+							<button id="btn-desactivar-habilidad" class="btn btn-success">Si, seguro</button>
+							<button class="btn btn-link" data-dismiss="modal">No, Salir</button>
 						</div>
 					</div>
 	      		</div>
-	      		
 	    	</div>
 	  	</div>
 	</div>
 {% else %}
-	<div class="modal fade" id="activarHabilidadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal fade" id="activarHabilidadModal" tabindex="-1" role="dialog" aria-hidden="true">
 		<div class="modal-dialog">
 	    	<div class="modal-content">
 	      		<div class="modal-header">
@@ -104,8 +107,8 @@
 							Al activar la habilidad: <b><h4>"{{ habilidad.nhabilidad }}"</h4></b> permitiras que otras personas te encuentran si buscan un servicio como este o similar. 
 						</p>
 						<div class="accept">
-							<a id="btn-activar-habilidad" class="blue-color-2">Si, seguro</a>
-							<a href="#" class="red-color" data-dismiss="modal">No, Salir</a>
+							<button id="btn-activar-habilidad" class="btn btn-success">Si, seguro</button>
+							<button href="#" class="btn btn-link" data-dismiss="modal">No, Salir</button>
 						</div>
 					</div>
 	      		</div>
@@ -114,6 +117,42 @@
 	  	</div>
 	</div>
 {% endif %}
+<div class="modal fade" id="editarHabilidadModal" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog">
+    	<div class="modal-content">
+      		<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" >
+					Editar Habilidad
+				</h4>
+			</div>
+			<div class="modal-body">
+				<div class="content-modal">
+					<form action="">
+						<div class="form-group">
+							<p>
+								<label for="">Habilidad: </label>
+								<input type="text" class="form-control" id="" value="{{habilidad.nhabilidad}}" autofocus>
+							</p>
+							<p>
+								<label for="">Descripción: </label>
+								<textarea id="" class="form-control" cols="40"  maxlength="250" name="descripcion" rows="2" style="height:101px;border: 1px solid gainsboro;" required>{{habilidad.descripcion}}
+								</textarea>
+							</p>
+							<p>
+								<input type="submit" value="Guardar" class="btn btn-success">
+								<button class="btn btn-link" data-dismiss="modal">Cancelar</button>
+							</p>
+						</div>
+					</form>
+				</div>
+      		</div>
+      		
+    	</div>
+  	</div>
+</div>
+
+
 {% endblock %}
 {% block scripts %}
 	<script src="{% static 'jsapp/csrf_load.js' %}"></script>

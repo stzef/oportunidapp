@@ -8,7 +8,13 @@ urlpatterns = patterns('',
 	url(r'^desactivarhabilidad/$','habilidades.views.desactivarHabilidad',name='desactivarHabilidad'),
 
 	url(r'^nuevahabilidad/$','habilidades.views.crearNuevaHabilidad',name='nuevaHabilidad'),
-	url(r'^listarhabilidades/$','habilidades.views.listHabilidadesActivas',name='listarHabilidades'),
+
+	#Listar Habilidades Activas
+	url(r'^habilidades-activas/$','habilidades.views.listarHabilidadesActivas',name='habilidadesActivas'),
+
+	#Listar Habilidades No Activas
+	url(r'^habilidades-no-activas/$','habilidades.views.listarHabilidadesNoActivas',name='habilidadesNoActivas'),
+
 
 	url(r'^categoriaslistar/$','habilidades.views.categoriasListar',name='categoriasListar'),
 	url(r'^personaslistar$','app.views.personasListar',name='personasListar'),
