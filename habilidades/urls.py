@@ -3,10 +3,11 @@ from django.conf.urls import patterns, include, url
 
 urlpatterns = patterns('',
 
-	url(r'^habilidades/$','habilidades.views.habilidades',name='habilidades'),
+	url(r'^habilidades/$','habilidades.views.habilidadesViewTemplate',name='habilidades'),
 	url(r'^habilidades/(?P<pk>[\w\-]+)/$','habilidades.views.detalle',name='detalle'),
+	url(r'^desactivarhabilidad/$','habilidades.views.desactivarHabilidad',name='desactivarHabilidad'),
 
-	url(r'^nuevahabilidad/$','habilidades.views.nuevaHabilidad',name='nuevaHabilidad'),
+	url(r'^nuevahabilidad/$','habilidades.views.crearNuevaHabilidad',name='nuevaHabilidad'),
 	url(r'^listarhabilidades/$','habilidades.views.listHabilidadesActivas',name='listarHabilidades'),
 
 	url(r'^categoriaslistar/$','habilidades.views.categoriasListar',name='categoriasListar'),

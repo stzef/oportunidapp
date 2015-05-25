@@ -1,4 +1,4 @@
-{% extends "template.html" %}
+	{% extends "template.html" %}
 {% load staticfiles %}
 {% block head %}
 	<title>Habilidades | OportunidApp </title>
@@ -6,7 +6,9 @@
 {% block content %}
 <div class="row">
 	<div class="full col-sm-12">
-		<a href="" class="btn btn-primary pull" id="hbl">Añadir Habilidad</a>
+		<a href="#" class="btn btn-primary pull" id="hbl">Nueva</a>
+		<a class="btn btn-primary pull" id="">Activas</a>
+		<a class="btn btn-primary pull" id="">Desactivadas</a>
 	</div>
 </div>
 <div class="row">
@@ -61,12 +63,24 @@
 			<div class="col-sm-12 col-md-3 col-lg-3">
 				<div class="text-top text-center col-xs-6 col-sm-4 col-md-12 col-lg-12">
 					<div class="label-descp label-warning">
-						<i class="glyphicon glyphicon-star desc3"></i> <span class="desc">Puntuacion: </span></a><strong class="desc3">{{ fields.val_promedio }}</strong>
+						<i class="glyphicon glyphicon-star desc3"></i>
+						{{#if fields.val_promedio}}
+							<span class="desc">Puntuacion: </span>
+							<strong class="desc3">{{ fields.val_promedio }}</strong>
+						{{else}}
+							<strong class="desc3">ninguno</strong>
+						{{/if}}
 					</div>
 				</div>
 				<div class="text-top text-center col-xs-6 col-sm-4 col-md-12 col-lg-12">
 					<div class="label-descp label-success">
-						<i class="glyphicon glyphicon-th-list desc3"></i> <span class="desc">Solicitudes: </span></a><strong class="desc3">{{ fields.num_solicitudes }}</strong>
+						<i class="glyphicon glyphicon-th-list desc3"></i> 
+						{{#if fields.num_solicitudes}}
+							<span class="desc">Solicitudes: </span>
+							<strong class="desc3">{{ fields.num_solicitudes }}</strong>
+						{{else}}
+							<strong class="desc3">ninguno</strong>
+						{{/if}}
 					</div>
 				</div>
 				<div class="text-top text-center col-xs-6 col-sm-4 col-md-12 col-lg-12">

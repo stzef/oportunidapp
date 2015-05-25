@@ -15,9 +15,11 @@ import json
 def inicio(request):
 	return render(request,'home.html')
 
-def find(request):
-	categorias = habCategoriasModel.objects.all().order_by('categoria')
-	return render(request,'find.html',{'categorias':categorias})
+# [busquedasViewTemplate] View encargada de retornar el template de busquedas
+def busquedasViewTemplate(request):
+	TodasLasCategorias = habCategoriasModel.objects.all().order_by('categoria')
+	return render(request,'buscar.html',{'categorias':TodasLasCategorias})
+
 
 def personasListar(request):
 	if request.is_ajax():
