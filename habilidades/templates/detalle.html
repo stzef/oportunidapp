@@ -128,22 +128,29 @@
 			</div>
 			<div class="modal-body">
 				<div class="content-modal">
-					<form action="">
+					<form id="editar-habilidad-form" method="post">
 						<div class="form-group">
+							<input id="id_habilidad" type="hidden" name="id" value="{{habilidad.id}}">
+							<input id="{{form.categoria.id_for_label}}" type="hidden" name="{{form.categoria.id_for_label}}" value="{{form.categoria.value}}">
+							{% csrf_token %}
 							<p>
-								<label for="">Habilidad: </label>
-								<input type="text" class="form-control" id="" value="{{habilidad.nhabilidad}}" autofocus>
+								{{form.nhabilidad.label_tag}}
+								{{form.nhabilidad}}
 							</p>
 							<p>
-								<label for="">Descripción: </label>
-								<textarea id="" class="form-control" cols="40"  maxlength="250" name="descripcion" rows="2" style="height:101px;border: 1px solid gainsboro;" required>{{habilidad.descripcion}}
-								</textarea>
+								{{form.descripcion.label_tag}}
+								{{form.descripcion}}
+							</p>
+							<p>
+								{{form.precio.label_tag}}
+								{{form.precio}}
 							</p>
 							<p>
 								<input type="submit" value="Guardar" class="btn btn-success">
 								<button class="btn btn-link" data-dismiss="modal">Cancelar</button>
 							</p>
 						</div>
+
 					</form>
 				</div>
       		</div>
@@ -169,6 +176,34 @@
 			});
 		});
 
+		$('#btn-activar-habilidad').click(function(){
+			$.ajax({
+				url : '{% url 'activarHabilidad' %}',
+				type : 'POST',
+				data : {habilidad_id : '{{habilidad.id}}'},
+				success:function(json){
+					
+				}
+			});
+		})
+
+		$('#editar-habilidad-form').on('submit', function(event){
+			event.preventDefault();
+			$.ajax({
+				url: '{% url 'editarHabilidad' %}',
+				type: "POST",
+				dataType: 'json',
+				data : {
+					id : $('#id_habilidad').val(),
+					categoria: $('#id_categoria').val(),
+					nhabilidad: $('#id_nhabilidad').val(),
+					descripcion: $('#id_descripcion').val(),
+					precio: $('#id_precio').val(),
+				},
+				success: function(json){
+				},
+			});
+		});
 	});
 	</script>
 {% endblock %}

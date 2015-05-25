@@ -28,7 +28,6 @@ def habilidadesViewTemplate(request):
 		'user':user,
 		'form': nuevaHabilidadForm,
 	}
-
 	return render(request,'habilidades.html',contexto)
 
 
@@ -65,14 +64,35 @@ def crearNuevaHabilidad(request):
 def detalle(request,pk):
 	habilidadBuscada = get_object_or_404(habilidadesModel,id=pk)
 	templateRespuesta = 'no_permitido.html'
-	#contexto = {}
+	form = nuevaHabilidadForm(instance=habilidadBuscada)
+
 	if habilidadBuscada.usuario_id == request.user.id:
 		templateRespuesta = 'detalle.html'
 		contexto = {
 			'habilidad': habilidadBuscada,
+			'form' : form,
 		}
 		return render(request,templateRespuesta, contexto)
 	return render(request,templateRespuesta)
+
+#[editarHabilidad] View encargada editar una habilidad
+@login_required
+def editarHabilidad(request):
+	if request.method == "POST":
+		form = nuevaHabilidadForm(request.POST or None)
+		if form.is_valid():
+			habilidadParaEditar = habilidadesModel.objects.get(id=request.POST['id'])
+			if habilidadParaEditar.usuario_id == request.user.id:
+				habilidadParaEditar.nhabilidad = request.POST['nhabilidad']
+				habilidadParaEditar.descripcion = request.POST['descripcion']
+				habilidadParaEditar.precio = request.POST['precio']
+
+			else:
+				return render(request,'no_permitido.html')
+		else:
+			return HttpResponse('NO')
+
+
 
 
 #[desactivarHabilidad] View encargada desactivar una habilidad
@@ -90,6 +110,18 @@ def desactivarHabilidad(request):
 	else:
 		return render(request,'no_permitido.html')
 
+def activarHabilidad(request):
+	if request.is_ajax() and request.method == "POST":
+		habilidad_id = request.POST['habilidad_id']
+		habilidadPorActivar = get_object_or_404 (habilidadesModel,id = habilidad_id)
+		if habilidadPorActivar.usuario_id == request.user.id:
+			habilidadPorActivar.estado = True
+			habilidadPorActivar.save(update_fields=["estado"])
+			return HttpResponseRedirect('/habilidades/')
+		else:
+			return render(request,'no_permitido.html')
+	else:
+		return render(request,'no_permitido.html')
 
 #Listar Habilidades activas del usuario request POST return JSON
 @login_required()
