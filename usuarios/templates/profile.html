@@ -6,34 +6,42 @@
 {% block content %}
 <div class="row">
 	<div class="full">
-		<div class="col-xs-12 col-md-9 desc-profile"> 
+		<div class="col-md-12">
+			<div id="alert"></div>
+		</div>
+		<div class="col-md-12 desc-profile"> 
 			<div class="col-md-4 text-center">
-            	<img src="http://www.ryanhanley.com/wp-content/uploads/2013/09/person-to-person-business.jpg" class="img-circle img-profile">
+            	<img src="http://www.ryanhanley.com/wp-content/uploads/2013/09/person-to-person-business.jpg" class="img-profile"><br>
+            	<a href="#" class="btn btn-danger btn-photo">Cambiar Foto</a>
             </div>
             <div class="col-md-8">
-            	<h2>{{ user.first_name }} {{ user.last_name }}</h2>
-            	<p>{{ user.email }}</p><br>
-            	<div class="label-descp-3 label-warning text-center col-md-12">
-            		<span>Solicitudes Realizadas: </span></a><strong class="desc3">3</strong>
-				</div>
-				<div class="label-descp-3 label-success text-center col-md-12">
-					<span>Puntuación Total: </span></a><strong class="desc3">3</strong>
-				</div>
+            	<h2 id="name">{{ user.first_name }} {{ user.last_name }}</h2>
+            	<p>Correo Eléctronico: <strong id="email">{{ user.email }}</strong></p>
+            	<p>Número de Documento: <strong id="cedula">{{ profile.cedula }}</strong></p>
+            	<p>Número Celular: <strong id="celular1">{{ profile.celular1 }}</strong></p>
+            	<a href="{% url 'edit-profile' %}" class="btn btn-primary" id="edit-profile">Editar mis Datos</a>
+            	<a href="{% url 'edit-password' %}" class="btn btn-primary" id="edit-password">Cambiar Contraseña</a>
             </div>
-            <div class="col-xs-12 col-md-12 description">
-            	<h3>Acerda de mi</h3>
-            	<p class="text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam consequat nibh risus, vel ornare orci feugiat at. Integer in auctor nisi. Quisque posuere sodales imperdiet. Suspendisse lacinia pellentesque orci, et dictum massa pellentesque id. Vestibulum facilisis ut massa et sollicitudin. In in massa auctor, auctor justo rhoncus, aliquam nulla. Integer vehicula, risus vitae faucibus blandit, ante massa eleifend lectus, sit amet tristique lacus eros eget justo.</p>
-            </div>
-		</div>
-		<div class="col-xs-12 col-md-3 new-profile">
-			<ul>
-				<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-				<li>Nunc eget magna sed sem fringilla elementum.</li>
-				<li>Mauris ac risus in dolor aliquam interdum.</li>
-				<li>Integer eget nunc fermentum, luctus ligula eget, scelerisque arcu.</li>
-				<li>Curabitur egestas augue vel nunc tincidunt, et hendrerit leo ultricies.</li>
-			</ul>
 		</div>
 	</div>
 </div>
+<div id="modal-form"></div>
+{% endblock %}
+{% block scripts %}
+	<script>
+	$('#edit-profile').click(function(event){
+		target = $(this).attr('href');
+		event.preventDefault();
+		$('#modal-form').load(target, function(){
+			$('#modal-pro').modal('show');			
+		});
+	});
+	$('#edit-password').click(function(event){
+		target = $(this).attr('href');
+		event.preventDefault();
+		$('#modal-form').load(target, function(){
+			$('#modal-pass').modal('show');			
+		});
+	});
+	</script>
 {% endblock %}

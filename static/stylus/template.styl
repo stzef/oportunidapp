@@ -73,7 +73,8 @@ hr
   font-family arial,sans-serif
   top 0
   position fixed
-  width inherit
+  width 100%
+  z-index 100
 
 .navbar-blue li > a,
 .navbar-toggle
@@ -165,7 +166,7 @@ h3
   font-weight 800
 
 .navbar-nav
-  margin-left 10px
+  text-align center
 
 .navbar-toggle,
 .close
@@ -412,6 +413,10 @@ small.text-muted
     
   .image-logo
     display inline-block  
+    
+@media (max-width 1000px)
+  .right-noticie
+    display none
 /*
  * off canvas sidebar
  * --------------------------------------------------

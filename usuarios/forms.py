@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from models import perfilUsuarioModel
+from django.core.exceptions import ValidationError
 
 class loginForm(AuthenticationForm):
 	username = forms.CharField(error_messages={'required': 'Ingresa tu Usuario, '},widget=forms.TextInput(attrs={'class':'form-control ','placeholder':'nombre de usuario','autofocus':''}))
@@ -33,23 +34,26 @@ class emailLoginForm(forms.Form):
 		return self.user_cache
 
 class registroForm(forms.Form):
-	name = forms.CharField(max_length=20,required=True,widget=forms.TextInput(attrs={'placeholder':'Nombres', 'class':'form-control col-md-11'}),)
-	lastname = forms.CharField(max_length=20,required=True,widget=forms.TextInput(attrs={'placeholder':'Apellidos', 'class':'form-control col-md-11'}),)
-	username = forms.CharField(max_length=20,required=True,widget=forms.TextInput(attrs={'placeholder':'Usuario', 'class':'form-control col-md-11'}),)
-	email = forms.CharField(max_length=30,required=True,widget=forms.TextInput(attrs={'placeholder':'Email', 'class':'form-control col-md-11'}),)
-	password = forms.CharField(max_length=20,required=True,widget=forms.PasswordInput(attrs={'placeholder':'Contraseña', 'class':'form-control col-md-11'}),)
-	fnacimiento = forms.DateField(required=False,widget=forms.TextInput(attrs={'placeholder':'Fecha de nacimiento', 'class':'form-control col-md-11'}),)
+
+	name = forms.CharField(max_length=20,required=True,widget=forms.TextInput(attrs={'required': 'required', 'placeholder':'Nombres', 'class':'form-control col-md-11'}),)
+	lastname = forms.CharField(max_length=20,required=True,widget=forms.TextInput(attrs={'required': 'required', 'placeholder':'Apellidos', 'class':'form-control col-md-11'}),)
+	username = forms.CharField(max_length=20,required=True,widget=forms.TextInput(attrs={'required': 'required', 'placeholder':'Usuario', 'class':'form-control col-md-11'}),)
+	email = forms.EmailField(max_length=30,required=True,widget=forms.TextInput(attrs={'type': 'email', 'required': 'required', 'placeholder':'Email', 'class':'form-control col-md-11'}),)
+	password = forms.CharField(max_length=20,required=True,widget=forms.PasswordInput(attrs={'required': 'required', 'placeholder':'Contraseña', 'class':'form-control col-md-11'}),)
+	fnacimiento = forms.DateField(required=False,widget=forms.TextInput(attrs={'type': 'date', 'required': 'required', 'placeholder':'Fecha de nacimiento', 'class':'form-control col-md-11'}),)
 	genero  = forms.ChoiceField(choices=(('M','Masculino'),('F', 'Femenino'),('O','Otro'),),required=True,widget=forms.Select(attrs={'class':'form-control col-md-11'}),)
-	celular = forms.IntegerField(required=False,widget=forms.TextInput(attrs={'placeholder':'Numero Celular', 'class':'form-control col-md-11'}),)
+	celular = forms.IntegerField(required=False,widget=forms.TextInput(attrs={'required': 'required', 'placeholder':'Numero Celular', 'class':'form-control col-md-11'}),)
 	#Validaciones
 	def clean_username(self):
 		username = self.cleaned_data.get('username')
-		#validate_username(username)
+		if User.objects.filter(username=username).exists():
+			raise forms.ValidationError('Usuario en uso. Ingresa otro')
 		return username
 
 	def clean_email(self):
 		email = self.cleaned_data.get('email')
-		#validate_email(email)
+		if User.objects.filter(email=email).exists():
+			raise forms.ValidationError('Email en uso. Ingresa otro')
 		return email
 
 	def save(self):
@@ -61,7 +65,6 @@ class registroForm(forms.Form):
 		fnacimiento = self.cleaned_data.get("fnacimiento")
 		genero = self.cleaned_data.get("genero")
 		celular = self.cleaned_data.get("celular")
-
 		user = User.objects.create_user(username, email, password)
 		user.first_name = name
 		user.last_name = lastname
@@ -69,3 +72,37 @@ class registroForm(forms.Form):
 
 		perfil = perfilUsuarioModel(usuario= user,fnacimiento=fnacimiento,genero=genero,celular1=celular)
 		perfil.save()
+
+class userForm(forms.ModelForm):
+	class Meta:
+		model = User
+		fields = ['first_name', 'last_name']
+
+	#username = forms.CharField(max_length=20,required=True,widget=forms.TextInput(attrs={'required': 'required', 'placeholder':'Usuario', 'class':'form-control col-md-11'}),)
+	first_name = forms.CharField(max_length=20,required=True,widget=forms.TextInput(attrs={'required': 'required', 'placeholder':'Nombres', 'class':'form-control col-md-11'}),)
+	last_name = forms.CharField(max_length=20,required=True,widget=forms.TextInput(attrs={'required': 'required', 'placeholder':'Apellidos', 'class':'form-control col-md-11'}),)
+
+	def clean_username(self):
+		username = self.cleaned_data.get('username')
+		"""
+		id = self.cleaned_data.get('id')
+		if User.objects.exclude(pk = self.instance.pk).filter(username = username).exists():
+			raise forms.ValidationError('Usuario en uso. Ingresa otro')
+		"""
+		return username
+
+class profileForm(forms.ModelForm):
+	class Meta:
+		model = perfilUsuarioModel
+		fields = ['cedula', 'genero', 'fnacimiento', 'celular1']
+
+	cedula = forms.IntegerField(required=True,widget=forms.TextInput(attrs={'required': 'required', 'placeholder':'Cedula', 'class':'form-control col-md-11'}),)
+	genero  = forms.ChoiceField(choices=(('M','Masculino'),('F', 'Femenino'),('O','Otro'),),required=True,widget=forms.Select(attrs={'class':'form-control col-md-11'}),)
+	fnacimiento = forms.DateField(required=True,widget=forms.TextInput(attrs={'type': 'date', 'required': 'required', 'placeholder':'Fecha de nacimiento', 'class':'form-control col-md-11'}),)
+	celular1 = forms.IntegerField(required=True,widget=forms.TextInput(attrs={'required': 'required', 'placeholder':'Numero Celular', 'class':'form-control col-md-11'}),)
+
+class passForm(forms.Form):
+
+	#password_old = forms.CharField(max_length=20,required=True,widget=forms.PasswordInput(attrs={'required': 'required', 'placeholder':'Ingresa tu contraseña actual', 'class':'form-control col-md-11'}),)
+	password_new = forms.CharField(max_length=20,required=True,widget=forms.PasswordInput(attrs={'required': 'required', 'placeholder':'Ingresa tu contraseña nueva', 'class':'form-control col-md-11'}),)
+	password_confirm = forms.CharField(max_length=20,required=True,widget=forms.PasswordInput(attrs={'required': 'required', 'placeholder':'Confirma tu contraseña', 'class':'form-control col-md-11'}),)
