@@ -2,6 +2,7 @@
 # Importaciones desde Django
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from django.core import serializers
@@ -36,7 +37,7 @@ def habilidadesViewTemplate(request):
 @login_required()
 def crearNuevaHabilidad(request):	
 	if request.method == "POST":
-		form = nuevaHabilidadForm(request.POST, request.FILES)
+		form = nuevaHabilidadForm(request.POST)
 		if form.is_valid():
 			response_data = {}
 
@@ -60,7 +61,7 @@ def crearNuevaHabilidad(request):
 			)
 
 #[detalleHabilidadView] View encargada de retornar template del detalle de una habilidad
-@login_required
+@login_required()
 def detalle(request,pk):
 	habilidadBuscada = get_object_or_404(habilidadesModel,id=pk)
 	templateRespuesta = 'no_permitido.html'
@@ -76,48 +77,69 @@ def detalle(request,pk):
 	return render(request,templateRespuesta)
 
 #[editarHabilidad] View encargada editar una habilidad
-@login_required
+@login_required()
 def editarHabilidad(request):
 	if request.method == "POST":
 		form = nuevaHabilidadForm(request.POST or None)
 		if form.is_valid():
 			habilidadParaEditar = habilidadesModel.objects.get(id=request.POST['id'])
+			response_data = {}
 			if habilidadParaEditar.usuario_id == request.user.id:
 				habilidadParaEditar.nhabilidad = request.POST['nhabilidad']
 				habilidadParaEditar.descripcion = request.POST['descripcion']
 				habilidadParaEditar.precio = request.POST['precio']
+				habilidadParaEditar.save(update_fields=['nhabilidad','descripcion','precio'])
 
+				response_data['message'] = 'Edición exitosa'
+				return HttpResponse(
+					json.dumps(response_data),
+					content_type="application/json"
+				)
 			else:
 				return render(request,'no_permitido.html')
 		else:
 			return HttpResponse('NO')
 
 
-
-
 #[desactivarHabilidad] View encargada desactivar una habilidad
-@login_required
+@login_required()
 def desactivarHabilidad(request):
 	if request.is_ajax() and request.method == "POST":
 		habilidad_id = request.POST['habilidad_id']
 		habilidadPorDesactivar = get_object_or_404 (habilidadesModel,id = habilidad_id)
 		if habilidadPorDesactivar.usuario_id == request.user.id:
+			response_data = {}
 			habilidadPorDesactivar.estado = False
 			habilidadPorDesactivar.save(update_fields=["estado"])
-			return HttpResponseRedirect('/habilidades/')
+
+			response_data['message'] = 'Habilidad activada'
+			return HttpResponse(
+				json.dumps(response_data),
+				content_type="application/json"
+			)
+
+
 		else:
 			return render(request,'no_permitido.html')
 	else:
 		return render(request,'no_permitido.html')
 
+@login_required()
 def activarHabilidad(request):
 	if request.is_ajax() and request.method == "POST":
 		habilidad_id = request.POST['habilidad_id']
 		habilidadPorActivar = get_object_or_404 (habilidadesModel,id = habilidad_id)
 		if habilidadPorActivar.usuario_id == request.user.id:
+			response_data = {}
 			habilidadPorActivar.estado = True
 			habilidadPorActivar.save(update_fields=["estado"])
-			return HttpResponseRedirect('/habilidades/')
+
+			response_data['message'] = 'Habilidad activada'
+			return HttpResponse(
+				json.dumps(response_data),
+				content_type="application/json"
+			)
+
 		else:
 			return render(request,'no_permitido.html')
 	else:
@@ -157,7 +179,26 @@ def listarHabilidadesNoActivas(request):
 			content_type = "application/json"
 		)
 
+@csrf_exempt
+@login_required
+def cambiarFotoHabilidad(request):
+	habilidad = habilidadesModel.objects.get(id=request.POST['habilidad'])
+	foto = request.FILES['foto']
 
+	foto.name = habilidad.nhabilidad.replace(' ','_')+str(habilidad.id)
+	#Metodo borrar imagen anterior
+
+	if habilidad.usuario_id == request.user.id:
+		habilidad.foto = foto
+		habilidad.save(update_fields=["foto"])
+
+	response_data = {}
+	response_data['message'] = 'OK !!!!'
+	
+	return HttpResponse(
+		json.dumps(response_data),
+		content_type="application/json"
+	)
 
 
 

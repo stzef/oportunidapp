@@ -103,7 +103,6 @@
 {% block scripts %}
 	<script src="{% static 'jsapp/csrf_load.js' %}"></script>
 	<script>
-		//toastr.success("Hola Bienvenido A OportunidApp");
 		$(function() {
 			listarHabilidadesActivas();
 			var spinner;
@@ -161,7 +160,6 @@
 						precio: $('#id_precio').val(),
 					},
 					success: function(json){
-						toastr.success('Nueva Habilidad guardada exitosamente!!');
 						$("#nueva-habilidad-form").trigger('reset');
 						$('.well').hide(100);
 						$('#hbl').show(200);

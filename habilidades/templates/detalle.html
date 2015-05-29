@@ -6,34 +6,45 @@
 {% block content %}
 <div class="row">
 	<div class="full col-md-12">
-		<a href="{% url 'habilidades' %}" class="btn btn-primary">Atrás</a>
+		<a href="{% url 'habilidades' %}" class="btn btn-primary left">Atrás</a>
+		<div class="left content-options-habilidad">
+			<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+				Opciones
+				<span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu" role="menu">
+				<li>
+					<a class="link-user" data-toggle="modal" data-target="#editarHabilidadModal">Editar</a>
+					</li>
+				<li>
+					<a class="link-user" data-toggle="modal" data-target="#editarFotoModal">Cambiar foto</a>
+				</li>
+				{% if habilidad.estado %}
+					<li><a class="link-user" data-toggle="modal" data-target="#desactivarHabilidadModal">desactivar</a></li>
+				{% else %}
+					<li><a class="link-user" data-toggle="modal" data-target="#activarHabilidadModal">activar</a></li>
+				{% endif %}
+			</ul>
+		</div>
 	</div>	
+</div>
+<div class="label-category label-description text-center">
+	<strong class="desc3">{{habilidad.categoria}}</strong>
 </div>
 <div class="row well">
 	<div class="text-center col-sm-12"> 
-	<div class="rigth-actions-ability">
-		<a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-expanded="false">
-		<span class="glyphicon glyphicon-cog desc3"></span> 
-		<span class="desc">opciones</span></a>
-		<ul class="dropdown-menu" role="menu">
-			<li>
-				<a class="link-user" data-toggle="modal" data-target="#editarHabilidadModal">Editar</a>
-				</li>
-			<li>
-				<a class="link-user" href="#">Cambiar foto</a>
-			</li>
-			{% if habilidad.estado %}
-				<li><a class="link-user" data-toggle="modal" data-target="#desactivarHabilidadModal">desactivar</a></li>
-			{% else %}
-				<li><a class="link-user" data-toggle="modal" data-target="#activarHabilidadModal">activar</a></li>
-			{% endif %}
-		</ul>
+	<div>
+		{% if habilidad.estado%}
+			<span>Activada</span>
+		{% else %}
+			<span>Desactivada</span>
+		{% endif%}
 	</div>
 	<img src="/media/{{ habilidad.foto }}" class="img-rounded img-detail">
 	<h3>{{ habilidad.nhabilidad }}</h3>
-    <p> {{ habilidad.descripcion }}</p>
+	<p> {{ habilidad.descripcion }}</p>
 	<div class="text-top col-xs-6 col-md-4">
-		<div class="label-descp label-warning">
+		<div class="label-descp label-warning " data-toggle="tooltip" data-placement="top" title="Puntos">
 			<i class="glyphicon glyphicon-star desc3"></i> 
 			{% if habilidad.val_promedio %}
 				<span class="desc">Puntuacion: </span>
@@ -44,7 +55,7 @@
 		</div>
 	</div>
 	<div class="text-top col-xs-6 col-md-4">
-		<div class="label-descp label-success">
+		<div class="label-descp label-success" data-toggle="tooltip" data-placement="top" title="Solicitudes">
 			<i class="glyphicon glyphicon-th-list desc3"></i> 
 			{% if habilidad.val_promedio %}
 				<span class="desc">Solicitudes: </span>
@@ -55,11 +66,11 @@
 		</div>
 	</div>
 	<div class="text-top col-xs-6 col-md-4">
-		<div class="label-descp label-danger">
+		<div class="label-descp label-danger" data-toggle="tooltip" data-placement="top" title="Precio">
 			<i class="glyphicon glyphicon-usd desc3"></i> 
 			{% if habilidad.precio %}
 				<span class="desc">Precio: </span>
-				<strong class="desc3">{{ habilidades.precio }}</strong>
+				<strong class="desc3">{{ habilidad.precio }}</strong>
 			{% else %}
 				<strong class="desc3">ninguno</strong>
 			{% endif %}
@@ -73,7 +84,7 @@
 	      		<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					<h4 class="modal-title" id="myModalLabel">
-						Desactivar Habilidad
+						<b>Desactivar Habilidad</b>
 					</h4>
 				</div>
 				<div class="modal-body">
@@ -98,13 +109,13 @@
 	      		<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					<h4 class="modal-title" id="myModalLabel">
-						Activar Habilidad
+						<b>Activar Habilidad</b>
 					</h4>
 				</div>
 				<div class="modal-body">
 					<div class="content-modal">
 						<p>
-							Al activar la habilidad: <b><h4>"{{ habilidad.nhabilidad }}"</h4></b> permitiras que otras personas te encuentran si buscan un servicio como este o similar. 
+							Al activar la habilidad: <b><h4>"{{ habilidad.nhabilidad }}"</h4></b> permitiras que otras personas te encuentren si buscan un servicio como este o similar. 
 						</p>
 						<div class="accept">
 							<button id="btn-activar-habilidad" class="btn btn-success">Si, seguro</button>
@@ -123,7 +134,7 @@
       		<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				<h4 class="modal-title" >
-					Editar Habilidad
+					<b>Editar Habilidad</b>
 				</h4>
 			</div>
 			<div class="modal-body">
@@ -150,7 +161,6 @@
 								<button class="btn btn-link" data-dismiss="modal">Cancelar</button>
 							</p>
 						</div>
-
 					</form>
 				</div>
       		</div>
@@ -158,20 +168,64 @@
     	</div>
   	</div>
 </div>
-
+<div class="modal fade" id="editarFotoModal" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog">
+    	<div class="modal-content">
+      		<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" >
+					<b>Editar Foto</b>
+				</h4>
+			</div>
+			<div class="modal-body">
+				<div class="content-modal">
+					<h4>
+						Selecciona una foto para tu habilidad
+					</h4>
+					<p>
+						Esta foto aparecera cuando otras personas busquen un servicio como este o similar. <br> <span class="font-descrip-min">Puedes cargar archivos JPEG, PNG (tamaño max. 2MB)</span>
+					</p>
+					<div>
+						<form id="subir-foto-form" enctype="multipart/form-data">
+							<p>
+								<input type="file" id="archivo-foto" name="foto" onchange="mostrarFoto(event)" />
+							</p>
+							<div class="preview-foto-habilidad">
+								<figure >
+									<img id="preview-img-habilidad" src="">
+								</figure>
+							</div>
+							<p>
+								<input type="submit" value="guardar" class="btn btn-success">
+								<button href="#" class="btn btn-link" data-dismiss="modal">Cancelar</button>
+							</p>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 
 {% endblock %}
 {% block scripts %}
 	<script src="{% static 'jsapp/csrf_load.js' %}"></script>
 	<script>
+	var mostrarFoto = function(event) {
+		var preview = document.getElementById('preview-img-habilidad');
+		preview.src = URL.createObjectURL(event.target.files[0]);
+	};
+
 	$(function () {
+		$('[data-toggle="tooltip"]').tooltip();
+
 		$('#btn-desactivar-habilidad').click(function () {
 			$.ajax({
 				url: '{% url 'desactivarHabilidad' %}',
 				type: 'POST',
 				data: { habilidad_id : '{{ habilidad.id }}'},
 				success: function (json) {
-					
+					location.reload();
 				},
 			});
 		});
@@ -182,7 +236,7 @@
 				type : 'POST',
 				data : {habilidad_id : '{{habilidad.id}}'},
 				success:function(json){
-					
+					location.reload();
 				}
 			});
 		})
@@ -201,8 +255,49 @@
 					precio: $('#id_precio').val(),
 				},
 				success: function(json){
+					location.reload();
 				},
 			});
+		});
+
+		$('#subir-foto-form').on('submit',function(event)
+		{
+			event.preventDefault();
+			archivoSeleccionado = document.getElementById('archivo-foto');
+
+			var archivo = archivoSeleccionado.files[0];
+			var formData = new FormData();
+
+			formData.append('habilidad', {{habilidad.id}});
+
+			if (archivo.type.match('image.*'))
+			{
+				if (archivo.size < 1024 * 1024 * 2)
+				{
+					formData.append('foto', archivo);
+					var xhr = new XMLHttpRequest();
+
+					xhr.open('POST', '{% url 'fotoHabilidad' %}', true);
+					xhr.send(formData);
+					xhr.onload = function () {
+						if (xhr.status === 200) {
+							console.log(xhr.response);
+							location.reload();
+						}
+						else {
+							alert('Ha ocurrido un error, Intentelo nuevamente!');
+						}
+					};
+				}
+				else
+				{
+					alert('Archivo muy grande');
+				}
+			}
+			else
+			{
+				alert('Esto No es una imagen');
+			}
 		});
 	});
 	</script>
