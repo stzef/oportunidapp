@@ -5,8 +5,6 @@ from usuarios import views
 
 
 urlpatterns = patterns('',
-	#url(r'^perfil/','usuarios.views.profileView',name='perfil'),
-	#url(r'^perfil/','usuarios.views.perfilView',name='profile'),
 	url(r'^perfil/$','usuarios.views.profileView',name='profile'),
 	url(r'^perfil/edit/$','usuarios.views.EditProfile',name='edit-profile'),
 	url(r'^perfil/edit-password/$','usuarios.views.EditPassword', name='edit-password'),

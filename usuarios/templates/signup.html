@@ -1,5 +1,4 @@
 {% extends "index.html" %}
-
 {% block head %}
 	<title>Registro | Oportunidapp</title>
 	<script src="//cdn.jsdelivr.net/webshim/1.14.5/polyfiller.js"></script>
@@ -7,6 +6,16 @@
    		webshims.setOptions('forms-ext', {types: 'date'});
 		webshims.polyfill('forms forms-ext');
 	</script>
+	<style>
+		.errorlist{
+			color: #db2c2c;
+			font-size: 15px;
+			position: absolute;
+			z-index: 2;
+			top: 20px;
+			width: 100%;
+		}
+	</style>
 {% endblock %}
 {% block content  %}
 <body class="body-login">
@@ -23,28 +32,46 @@
 						{% csrf_token %}
 						<div class="form-group col-md-6">
 							<label>Nombre Completo:</label>						
+							{% if form.name.errors %}
+								{{ form.name.errors }}
+							{% endif%}
 							{{  form.name }}
 						</div>
 						<div class="form-group col-md-6">
 							<label>Apellidos:</label>						
+							{% if form.lastname.errors %}
+								{{ form.lastname.errors }}
+							{% endif%}
 							{{  form.lastname }}
 						</div>
 						<div class="form-group col-md-6">
-							<label>Usuario:</label>						
+							<label>Usuario:</label>
+							{% if form.username.errors %}
+								{{ form.username.errors }}
+							{% endif%}						
 							{{  form.username }}
 							{{ form.username.errors.as_ul|cut:"*" }}
 						</div>
 						<div class="form-group col-md-6">
-							<label>Correo Electrónico:</label>						
+							<label>Correo Electrónico:</label>
+							{% if form.email.errors %}
+								{{ form.email.errors }}
+							{% endif%}	
 							{{  form.email }}
 							{{ form.email.errors.as_ul|cut:"*" }}
 						</div>
 						<div class="form-group col-md-6">
-							<label>Contraseña:</label>						
+							<label>Contraseña:</label>
+							{% if form.password.errors %}
+								{{ form.password.errors }}
+							{% endif%}
 							{{  form.password }}
 						</div>
 						<div class="form-group col-md-6">
-							<label>Fecha Nacimiento:</label>						
+							<label>Fecha Nacimiento:</label>
+							{% if form.fnacimiento.errors %}
+								{{ form.fnacimiento.errors }}
+							{% endif%}						
 							{{  form.fnacimiento }}
 						</div>
 						<div class="form-group col-md-6">
@@ -52,7 +79,10 @@
 							{{  form.genero }}
 						</div>
 						<div class="form-group col-md-6">
-							<label>Numero Celular:</label>						
+							<label>Numero Celular:</label>
+							{% if form.celular.errors %}
+								{{ form.celular.errors }}
+							{% endif%}							
 							{{  form.celular }}
 						</div>
 						<input class="btn btn-success btn-lg btn-block" type="submit" value="Registrarme">

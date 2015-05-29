@@ -5,6 +5,8 @@ from django.contrib.auth.models import User
 from habilidades.models import habilidadesModel, habCategoriasModel
 from usuarios.models import perfilUsuarioModel
 
+from django.shortcuts import get_object_or_404
+
 
 from django.http import HttpResponse
 import json
@@ -13,9 +15,11 @@ import json
 def inicio(request):
 	return render(request,'home.html')
 
-def find(request):
-	categorias = habCategoriasModel.objects.all().order_by('categoria')
-	return render(request,'find.html',{'categorias':categorias})
+# [busquedasViewTemplate] View encargada de retornar el template de busquedas
+def busquedasViewTemplate(request):
+	TodasLasCategorias = habCategoriasModel.objects.all().order_by('categoria')
+	return render(request,'buscar.html',{'categorias':TodasLasCategorias})
+
 
 def personasListar(request):
 	if request.is_ajax():
@@ -50,11 +54,16 @@ def personasListar(request):
 			content_type = "application/json"
 		)
 
+def findDetail(request,pk):
+	habilidad = get_object_or_404(habilidadesModel,id=pk)
+	usuario = User.objects.get(id=habilidad.usuario_id)
+	perfil_usuario = perfilUsuarioModel.objects.get(usuario=usuario)
+	return render(request,'FindDetail.html',{'habilidad':habilidad, 'usuario':usuario, 'perfil':perfil_usuario})
+
+
+
 #Limpia el key 'Model' retornado por el serializador de Modelos
 def cleanJsonModel(data):
 	for d in data:
 		del d['model']
 	return data
-
-def FindDetail(request):
-	return render(request,'FindDetail.html')

@@ -4,6 +4,6 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^blog/', include('blog.urls')),
     url(r'^$', 'app.views.inicio',name='inicio'),
-    url(r'^Buscar/', 'app.views.find',name='find'),
-    url(r'^Buscar-category/', 'app.views.FindDetail',name='FindDetail'),
+    url(r'^buscar/$', 'app.views.busquedasViewTemplate',name='buscar'),
+    url(r'^Buscar/(?P<pk>[\w\-]+)/$', 'app.views.findDetail',name='findDetail'),
 )

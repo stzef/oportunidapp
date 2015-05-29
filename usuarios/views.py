@@ -46,6 +46,10 @@ class registroView(FormView):
 		form.save()
 		return HttpResponseRedirect(self.get_success_url())
 
+	def form_invalid(self, form):
+		#return HttpResponse(self.get_context_data(form=form))
+		return self.render_to_response(self.get_context_data(form=form))
+
 class loginView(FormView):
 	form_class = loginForm
 	template_name = 'login.html'

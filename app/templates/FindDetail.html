@@ -33,18 +33,23 @@
 			<div class="col-xs-12 col-sm-6 col-md-6 text-center">
 				<img src="https://randomuser.me/api/portraits/med/men/10.jpg" class="desc-img-2 img-rounded" alt="	Responsive image">
 			</div>
-			<div class="col-xs-12 col-sm-6 col-md-6 top">
-				<div class="label-descp-2 label-warning col-xs-12 col-md-6">
+			<div class="col-xs-12 col-sm-6 col-md-6">
+				<h4 class="name-user-h4">{{ usuario.first_name }} {{ usuario.last_name }}</h4>
+				<p>{{ habilidad.nhabilidad }}</p>
+				<p>{{ habilidad.descripcion }}</p>
+			</div>
+			<div class="col-sm-12 col-md-4 text-center">
+				<div class="label-descp-2 label-warning col-xs-12 col-md-6 text-center">
 					<i class="glyphicon glyphicon-star desc3"></i> 
-					<span class="desc">Puntuación: </span><strong class="desc3">5</strong>
+					<span class="desc">Puntuación: </span><strong class="desc3">{{ habilidad.val_promedio }}</strong>
 				</div>
 				<div class="label-descp-2 label-telephone col-xs-12 col-md-6">
 					<i class="glyphicon glyphicon-phone-alt desc3"></i>
-					<span class="desc">Teléfono: </span><strong class="desc3">(+57) 342 87689 89</strong>
+					<span class="desc">Teléfono: </span><strong class="desc3">{{ perfil.celular1 }}</strong>
 				</div>
 				<div class="label-descp-2 label-danger col-xs-12 col-md-6">
 					<i class="glyphicon glyphicon-usd desc3"></i> 
-					<span class="desc">Precio: </span><strong class="desc3">10</strong>
+					<span class="desc">Precio: </span><strong class="desc3">{{ habilidad.precio }}</strong>
 				</div>
 			</div>
 			<div class="col-md-12">
