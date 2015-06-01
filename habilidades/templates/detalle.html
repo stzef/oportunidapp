@@ -28,17 +28,10 @@
 		</div>
 	</div>	
 </div>
+<div class="label-category label-description text-center">
+	<strong class="desc3">{{habilidad.categoria}}</strong>
+</div>
 <div class="row well text-center">
-	<div class="label-category label-description text-center">
-		<strong class="desc3">{{habilidad.categoria}}</strong>
-	</div>
-	<div class="text-center col-sm-12">
-		{% if habilidad.estado%}
-			<span>Activada</span>
-		{% else %}
-			<span>Desactivada</span>
-		{% endif%}
-	</div>
 	<img src="/media/{{ habilidad.foto }}" class="img-rounded img-detail">
 	<h3>{{ habilidad.nhabilidad }}</h3>
 	<p> {{ habilidad.descripcion }}</p>
