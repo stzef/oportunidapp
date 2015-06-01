@@ -11,8 +11,8 @@
 		</div>
 		<div class="col-md-12 desc-profile"> 
 			<div class="col-md-4 text-center">
-            	<img src="http://www.ryanhanley.com/wp-content/uploads/2013/09/person-to-person-business.jpg" class="img-profile"><br>
-            	<a href="#" class="btn btn-danger btn-photo">Cambiar Foto</a>
+				<img src="/media/{{ profile.foto }}" class="img-profile"><br>
+            	<a href="#" class="btn btn-danger btn-photo" data-toggle="modal" data-target="#modal-photo">Cambiar Foto</a>
             </div>
             <div class="col-md-8">
             	<h2 id="name">{{ user.first_name }} {{ user.last_name }}</h2>
@@ -26,22 +26,87 @@
 	</div>
 </div>
 <div id="modal-form"></div>
+<div class="modal fade" id="modal-photo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  	<div class="modal-dialog">
+    	<div class="modal-content">
+      		<div class="modal-header">
+        		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        		<h4 class="modal-title" id="myModalLabel">Editar Foto</h4>
+      		</div>
+	      	<div class="modal-body">
+	      		<div class="content-modal">
+		        	<h4>Selecciona una foto para tu habilidad</h4>
+					<p>Esta foto aparecera cuando otras personas busquen un servicio como este o similar. <br> <span class="font-descrip-min">Puedes cargar archivos JPEG, PNG (tamaño max. 2MB)</span></p>
+					<form id="subir-foto-form" enctype="multipart/form-data">
+						<input type="file" id="archivo-foto" name="foto"/>
+						<div class="preview-foto-habilidad text-center">
+							<img id="preview-img-habilidad" src="">
+						</div>
+						<input type="submit" value="guardar" class="btn btn-success">
+					</form>
+				</div>
+	      	</div>
+	      	<div class="modal-footer">
+	        	<button href="#" class="btn btn-link" data-dismiss="modal">Cancelar</button>
+	      	</div>
+    	</div>
+  	</div>
+</div>
 {% endblock %}
 {% block scripts %}
 	<script>
-	$('#edit-profile').click(function(event){
-		target = $(this).attr('href');
-		event.preventDefault();
-		$('#modal-form').load(target, function(){
-			$('#modal-pro').modal('show');			
+		function ShowPhoto(input) { 
+			if (input.files && input.files[0]) { 
+				var reader = new FileReader(); 
+				reader.onload = function (e) { 
+					$('#preview-img-habilidad').attr('src', e.target.result); 
+				} 
+				reader.readAsDataURL(input.files[0]); 
+			} 
+		} 
+		$("#archivo-foto").change(function(){ 
+			ShowPhoto(this); 
 		});
-	});
-	$('#edit-password').click(function(event){
-		target = $(this).attr('href');
-		event.preventDefault();
-		$('#modal-form').load(target, function(){
-			$('#modal-pass').modal('show');			
+		$('#edit-profile').click(function(event){
+			target = $(this).attr('href');
+			event.preventDefault();
+			$('#modal-form').load(target, function(){
+				$('#modal-pro').modal('show');			
+			});
 		});
-	});
+		$('#edit-password').click(function(event){
+			target = $(this).attr('href');
+			event.preventDefault();
+			$('#modal-form').load(target, function(){
+				$('#modal-pass').modal('show');			
+			});
+		});
+		$('#subir-foto-form').on('submit',function(event){
+			event.preventDefault();
+			archivoSeleccionado = document.getElementById('archivo-foto');
+			var archivo = archivoSeleccionado.files[0];
+			var formData = new FormData();
+			formData.append('usuario_id', {{ profile.usuario_id }});
+			if (archivo.type.match('image.*')){
+				if (archivo.size < 1024 * 1024 * 2){
+					formData.append('foto', archivo);
+					var xhr = new XMLHttpRequest();
+					xhr.open('POST', '{% url 'fotoPerfil' %}', true);
+					xhr.send(formData);
+					xhr.onload = function (){
+						if (xhr.status === 200) {
+							console.log(xhr.response);
+							location.reload();
+						}else {
+							alert('Ha ocurrido un error, Intentelo nuevamente!');
+						}
+					};
+				}else {
+					alert('Archivo muy grande');
+				}
+			}else {
+				alert('Esto No es una imagen');
+			}
+		});
 	</script>
 {% endblock %}

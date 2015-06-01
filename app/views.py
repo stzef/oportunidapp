@@ -46,6 +46,7 @@ def personasListar(request):
 				'habilidad_id': habilidad.id,
 				'habilidad_val':habilidad.val_promedio,
 				'habilidad_nsol':habilidad.num_solicitudes,
+				'foto':perfilusuario.foto.name,
 			}
 			data.append(item)
 
