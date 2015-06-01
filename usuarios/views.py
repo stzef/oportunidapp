@@ -40,7 +40,7 @@ def loginEmail(request):
 class registroView(FormView):
 	form_class = registroForm
 	template_name = 'signup.html'
-	success_url = '/'
+	success_url = '/ingresar/'
 	
 	def form_valid(self,form):
 		form.save()
