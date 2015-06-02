@@ -4,7 +4,7 @@
 	<title>Habilidades | OportunidApp </title>
 {% endblock %}
 {% block content %}
-<div class="row">
+<div class="row first">
 	<div class="full col-md-12">
 		<a href="{% url 'habilidades' %}" class="btn btn-primary left">Atrás</a>
 		<div class="left content-options-habilidad">
@@ -28,47 +28,112 @@
 		</div>
 	</div>	
 </div>
-<div class="label-category label-description text-center">
-	<strong class="desc3">{{habilidad.categoria}}</strong>
+<div class="row second">
+	<div class="notice text-center col-xs-12 col-md-12">
+		<div class="col-md-12">
+			<img src="/media/{{ habilidad.foto }}" class="img-detail-2" alt="">
+		</div>
+		<div class="col-md-12">
+			<h3>{{ habilidad.nhabilidad }}</h3>
+			<p>{{ habilidad.descripcion }}</p>
+		</div>
+		<div class="col-md-12">
+			<div class="text-top text-center col-xs-4 col-md-4">
+				<div class="label-descp label-warning " data-toggle="tooltip" data-placement="top" title="Puntos">
+					<i class="glyphicon glyphicon-star desc3"></i> 
+					{% if habilidad.val_promedio %}
+						<span class="desc">Puntuacion: </span>
+						<strong class="desc3">{{ habilidad.val_promedio}}</strong>
+					{% else %}
+						<strong class="desc3">ninguno</strong>
+					{% endif %}
+				</div>
+			</div>
+			<div class="text-top text-center col-xs-4 col-md-4">
+				<div class="label-descp label-success" data-toggle="tooltip" data-placement="top" title="Solicitudes">
+					<i class="glyphicon glyphicon-th-list desc3"></i> 
+					{% if habilidad.val_promedio %}
+						<span class="desc">Solicitudes: </span>
+						<strong class="desc3">{{ habilidad.num_solicitudes }}</strong>
+					{% else %}
+						<strong class="desc3">ninguno</strong>
+					{% endif %}
+				</div>
+			</div>
+			<div class="text-top text-center col-xs-4 col-md-4">
+				<div class="label-descp label-danger" data-toggle="tooltip" data-placement="top" title="Precio">
+					<i class="glyphicon glyphicon-usd desc3"></i> 
+					{% if habilidad.precio %}
+						<span class="desc">Precio: </span>
+						<strong class="desc3">{{ habilidad.precio }}</strong>
+					{% else %}
+						<strong class="desc3">ninguno</strong>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
-<div class="row well text-center">
-	<img src="/media/{{ habilidad.foto }}" class="img-rounded img-detail">
-	<h3>{{ habilidad.nhabilidad }}</h3>
-	<p> {{ habilidad.descripcion }}</p>
-	<div class="text-top col-xs-6 col-md-4">
-		<div class="label-descp label-warning " data-toggle="tooltip" data-placement="top" title="Puntos">
-			<i class="glyphicon glyphicon-star desc3"></i> 
-			{% if habilidad.val_promedio %}
-				<span class="desc">Puntuacion: </span>
-				<strong class="desc3">{{ habilidad.val_promedio}}</strong>
+<!--
+<div class="row">
+	<div class="label-category label-description text-center">
+		<strong class="desc3">
+			{{habilidad.categoria}}
+			{% if habilidad.estado %}
+				<span class="label label-success">Activo</span>
 			{% else %}
-				<strong class="desc3">ninguno</strong>
+				<span class="label label-danger">Inactivo</span>
 			{% endif %}
-		</div>
+		</strong>
 	</div>
-	<div class="text-top col-xs-6 col-md-4">
-		<div class="label-descp label-success" data-toggle="tooltip" data-placement="top" title="Solicitudes">
-			<i class="glyphicon glyphicon-th-list desc3"></i> 
-			{% if habilidad.val_promedio %}
-				<span class="desc">Solicitudes: </span>
-				<strong class="desc3">{{ habilidad.num_solicitudes }}</strong>
-			{% else %}
-				<strong class="desc3">ninguno</strong>
-			{% endif %}
-		</div>
-	</div>
-	<div class="text-top col-xs-6 col-md-4">
-		<div class="label-descp label-danger" data-toggle="tooltip" data-placement="top" title="Precio">
-			<i class="glyphicon glyphicon-usd desc3"></i> 
-			{% if habilidad.precio %}
-				<span class="desc">Precio: </span>
-				<strong class="desc3">{{ habilidad.precio }}</strong>
-			{% else %}
-				<strong class="desc3">ninguno</strong>
-			{% endif %}
+	<div class="col-xs-12 col-sm-12 col-md-12">
+		<div class="row panel panel-default">
+			<div class="col-md-6 col-lg-4 div-align">
+				<img src="/media/{{ habilidad.foto }}" class="img-detail-2">
+			</div>
+			<div class="col-md-6 col-lg-5 div-align">
+				<h3>{{ habilidad.nhabilidad }}</h3>
+				<p> {{ habilidad.descripcion }}</p>
+			</div>
+			<div class="col-md-12 col-lg-3">
+				<div class="text-top text-center col-xs-4 col-sm-4 col-md-4 col-lg-12">
+					<div class="label-descp label-warning " data-toggle="tooltip" data-placement="top" title="Puntos">
+						<i class="glyphicon glyphicon-star desc3"></i> 
+						{% if habilidad.val_promedio %}
+							<span class="desc">Puntuacion: </span>
+							<strong class="desc3">{{ habilidad.val_promedio}}</strong>
+						{% else %}
+							<strong class="desc3">ninguno</strong>
+						{% endif %}
+					</div>
+				</div>
+				<div class="text-top text-center col-xs-4 col-sm-4 col-md-4 col-lg-12">
+					<div class="label-descp label-success" data-toggle="tooltip" data-placement="top" title="Solicitudes">
+						<i class="glyphicon glyphicon-th-list desc3"></i> 
+						{% if habilidad.val_promedio %}
+							<span class="desc">Solicitudes: </span>
+							<strong class="desc3">{{ habilidad.num_solicitudes }}</strong>
+						{% else %}
+							<strong class="desc3">ninguno</strong>
+						{% endif %}
+					</div>
+				</div>
+				<div class="text-top text-center col-xs-4 col-sm-4 col-md-4 col-lg-12">
+					<div class="label-descp label-danger" data-toggle="tooltip" data-placement="top" title="Precio">
+						<i class="glyphicon glyphicon-usd desc3"></i> 
+						{% if habilidad.precio %}
+							<span class="desc">Precio: </span>
+							<strong class="desc3">{{ habilidad.precio }}</strong>
+						{% else %}
+							<strong class="desc3">ninguno</strong>
+						{% endif %}
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
+-->
 {% if habilidad.estado %}
 	<div class="modal fade" id="desactivarHabilidadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">

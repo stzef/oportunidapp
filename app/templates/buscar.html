@@ -9,12 +9,48 @@
 		<div class="row text-center">
 		    <h4>Encuentra Personas para tu Solicitud</h4>
 	    	<form class="form-find">
-	    		<div class="col-md-8 col-md-offset-2 input-group">
-	    			<input id="search-word" type="text" class="form-control text-center" placeholder="¿Que Estas Buscando?">
-				    <span class="input-group-btn">
-				    	<button class="btn btn-block btn-lg btn-find" type="button">Buscar</button>
-				    </span>
-	    		</div>	
+	    		<div class="row space">
+		    		<div class="col-md-12">
+			    		<div class="col-md-8 col-md-offset-2 input-group">
+			    			<input id="search-word" type="text" class="form-control text-center" placeholder="¿Que Estas Buscando?">
+						    <span class="input-group-btn">
+						    	<button class="btn btn-block btn-lg btn-find" type="button">Buscar</button>
+						    </span>
+			    		</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4">
+						<div class="col-md-11">	
+							<select name="select1" id="select-filter-1" class="form-control">
+								<option>Seleccione un Elemento</option>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="col-md-11">	
+							<select name="select2" id="select-filter-2" class="form-control">
+								<option>Seleccione un Elemento</option>
+								<option value="1">4</option>
+								<option value="2">5</option>
+								<option value="3">6</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="col-md-11">	
+							<select name="select3" id="select-filter-3" class="form-control">
+								<option>Seleccione un Elemento</option>
+								<option value="1">7</option>
+								<option value="2">8</option>
+								<option value="3">9</option>
+							</select>
+						</div>
+					</div>
+				</div>
 	    	</form>
 		</div>
 	</div>
@@ -30,6 +66,12 @@
 								{% endfor %}
 							</div>
 						</div>
+					</div>
+				</div>
+				<div class="col-md-12">
+					<a href="#" class="clear-tag" id="clear">Limpiar Todo</a>
+					<div class="tag-show">
+						<span class="tag label label-success">Ole <a href="#" class="remove glyphicon glyphicon-remove"></a></span>
 					</div>
 				</div>
 				<div id = "resultados">
@@ -80,6 +122,22 @@
 	<script src="{% static 'jsapp/csrf_load.js' %}"></script>
 	<script src="{% static 'jslibraries/jquery.autocomplete.min.js' %}"></script>
 	<script>
+		$(document).ready(function() {
+			$('select').change(function(){
+				id = $(this).attr('id');
+				text = $('#'+id+' option:selected').text();
+				$('.tag-show').append('<span class="tag label label-success">'+text+' <a href="#" class="remove glyphicon glyphicon-remove"></a></span>');
+			});
+			$('#clear').on('click', function(e){
+				e.preventDefault();
+				$('.tag').remove();
+			});
+			$('.remove').click(function(e){
+				e.preventDefault();
+				alert('Ole');
+				//$(this).parents('span .tag').remove();
+			});
+		});
 		$(function () {
 			$('.categoria-item').on('click',function(e){
 				var activo = $(this).closest(".categorias-list").children(".active");
@@ -87,7 +145,6 @@
 				$(e.target).addClass("active");
 				buscarCategoria(e.target.id);
 			});
-			
 			var sourceHabilidadesSearch = $('#resultHabilidadesSearch').html();
 			var templateHabilidadesSearch = Handlebars.compile(sourceHabilidadesSearch);
 
