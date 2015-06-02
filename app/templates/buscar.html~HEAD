@@ -5,26 +5,28 @@
 {% endblock %}
 {% block content %}
 <body class="body-img">
-	<nav class="navbar navbar-blue">
-	  	<div class="container-fluid col-xs-12 col-sm-12 col-md-8 col-lg-8">
-	    	<div class="navbar-header">
-	      		<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"></button>
-	      		<a class="navbar-brand" href="/"><span class="blue-color">Oportunid</span><span class="green-color">App</span></a>
-	    	</div>
-	    	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-	      		<ul class="nav navbar-nav navbar-left">
-			        <li><a href="#">Como Funciona?</a></li>
-			        <li><a href="#">Testimonios</a></li>
-			        <li><a href="#">Nos Apoyan</a></li>
-	      		</ul>
-	    	</div>
-	  	</div>
-	  	<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-	    	<ul class="nav navbar-nav navbar-right nav-align col-xs-12 col-sm-12">
-	      		<li class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-center"><a href="{% url 'login' %}" class="blue-color-2">Entrar</a></li>
-	      		<li class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-center"><a href="{% url 'signup' %}" class="registry">Registro</a></li>
-	    	</ul>
-	  	</div>
+	<nav class="navbar navbar-default navbar-fixed-top">
+	  <div class="container-fluid col-xs-12 col-sm-12 col-md-8 col-lg-8">
+	    <div class="navbar-header">
+	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+	        
+	      </button>
+	      <a class="navbar-brand" href="/"><span class="blue-color">Oportunid</span><span class="green-color">App</span></a>
+	    </div>
+	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	      <ul class="nav navbar-nav navbar-left">
+	        <li><a href="#">Como Funciona?</a></li>
+	        <li><a href="#">Testimonios</a></li>
+	        <li><a href="#">Nos Apoyan</a></li>
+	      </ul>
+	    </div>
+	  </div>
+	  <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+	    <ul class="nav navbar-nav navi navbar-right nav-align col-xs-12 col-sm-12">
+	      <li class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-center"><a href="{% url 'login' %}" class="blue-color-2">Entrar</a></li>
+	      <li class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-center"><a href="{% url 'signup' %}" class="registry">Registro</a></li>
+	    </ul>
+	  </div>
 	</nav>
 	<div class="container div-find">
 		<div class="row text-center">
@@ -54,6 +56,7 @@
 						</div>
 					</div>
 				</div>
+				<p id="spin"></p>
 				<div id = "resultados" class="col-md-9">
 					<!--<div class="row">
 						5.012.435 Resultados para: Lo buscado
@@ -68,7 +71,7 @@
 										<img src="https://randomuser.me/api/portraits/med/men/10.jpg" class="desc-img-2 img-rounded" alt="Responsive image">
 									</div>
 									<div class="col-xs-12 col-sm-9 col-md-9">
-										<h5><a href="/Buscar-category/">{{ this.userfirstname }} {{ this.userlastname }}</a></h5>
+										<h5><a href="/Buscar/{{ this.habilidad_id }}">{{ this.userfirstname }} {{ this.userlastname }}</a></h5>
 										<p class="text">{{ this.descripcion }}</p>
 										<div class="label-descp-2 label-warning col-xs-6 col-md-6 text-center">
 											<i class="glyphicon glyphicon-star desc3"></i></a><strong class="desc3">{{ this.habilidad_val }}</strong>
@@ -98,7 +101,7 @@
 
 {% block scripts %}
 	<script src="{% static 'jsapp/csrf_load.js' %}"></script>
-	<script src="{% static 'jslibraries/jquery.autocomplete.min.js' %}"></script>
+	<script src="{% static 'jslibraries/jquery.autocomplete.js' %}"></script>
 	<script>
 		$(function () {
 			$('.categoria-item').on('click',function(e){
@@ -108,6 +111,7 @@
 				buscarCategoria(e.target.id);
 			});
 			
+			//var spinner;
 			var sourceHabilidadesSearch = $('#resultHabilidadesSearch').html();
 			var templateHabilidadesSearch = Handlebars.compile(sourceHabilidadesSearch);
 
@@ -115,53 +119,35 @@
 				$.ajax({
 					url: '{% url 'personasListar' %}',
 					type: "GET",
-					data: 
-					{ 
-						categoria: categoria_id,
-					},
+					data: { categoria: categoria_id,},
 					beforeSend: function(){
-						//var target = document.getElementById('foo');
+						//var target = document.getElementById('spin');
 						//spinner = new Spinner().spin(target);
 					},
 					success:function(json){
 						buildHabilidadesSearch = templateHabilidadesSearch (json);
-						$('#resultados').html(buildHabilidadesSearch);
+						setTimeout(function(){
+							//spinner.stop();
+							$('#resultados').html(buildHabilidadesSearch);
+						},1500);
 					},
 				});
 			}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-			/*var jobs = [
+			
+			var jobs = [
 				{ value: 'Software Developer', data: '1'},
 				{ value: 'Designer', data: '2'},
 				{ value: 'Backend Developer', data: '3'},
 				{ value: 'Front end Developer', data: '4'},
 			];
-			console.log(jobs);
 			var data2;
 			$.ajax({
-				url: '{% url 'listarHabilidades' %}',
-				type: 'GET',
+				url: '{% url 'habilidadesActivas' %}',
+				type: "GET",
 				success: function(json){
+					console.log(json);
 					data2 = [
 						{ value: json[0].fields.nhabilidad,data: '1'},
-						{ value: json[1].fields.nhabilidad,data: '2'},
 					];
 					console.log(data2);
 					$("#search-word").autocomplete({
@@ -169,7 +155,7 @@
 					});
 				},
 			});
-			*/
+			
 		});
 	</script>
 {% endblock %}

@@ -1,0 +1,11 @@
+<h4>Busquedas</h4>
+<ul>
+{% for hab in object_list %}
+	<li>
+		{{hab.nhabilidad}} <span> --- {{hab.categoria}}</span> <br>
+		{{hab.descripcion}} <br><br>
+	</li>
+
+{% endfor %}
+
+</ul>

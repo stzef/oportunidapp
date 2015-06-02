@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from models import perfilUsuarioModel
 from django.views.generic import FormView
 from forms import loginForm,registroForm
+from django.views.decorators.csrf import csrf_exempt
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
@@ -109,3 +110,20 @@ def UpdatePass(request):
 		json_response['message'] = 'Error al Actualizar'
 		json_response['type'] = 'danger'
 	return HttpResponse(json.dumps(json_response), content_type = 'application/json')
+
+@csrf_exempt
+@login_required
+def cambiarFotoPerfil(request):
+	user = perfilUsuarioModel.objects.get(usuario_id = request.POST['usuario_id'])
+	foto = request.FILES['foto']
+	if user.usuario_id == request.user.id:
+		user.foto = foto
+		user.save(update_fields=["foto"])
+
+	response_data = {}
+	response_data['message'] = 'OK !!!!'
+	
+	return HttpResponse(
+		json.dumps(response_data),
+		content_type="application/json"
+	)

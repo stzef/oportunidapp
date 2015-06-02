@@ -98,7 +98,11 @@ def editarHabilidad(request):
 			else:
 				return render(request,'no_permitido.html')
 		else:
-			return HttpResponse('NO')
+			response_data['message'] = 'error formulario'
+			return HttpResponse(
+				json.dumps(response_data),
+				content_type="application/json"
+			)
 
 
 #[desactivarHabilidad] View encargada desactivar una habilidad

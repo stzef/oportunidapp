@@ -1,14 +1,16 @@
 from django.shortcuts import render
 from django.core import serializers
 from django.contrib.auth.models import User
+from django.shortcuts import get_object_or_404
+from django.http import HttpResponse, JsonResponse
+from django.views.generic import ListView
+
+
 
 from habilidades.models import habilidadesModel, habCategoriasModel
 from usuarios.models import perfilUsuarioModel
 
-from django.shortcuts import get_object_or_404
 
-
-from django.http import HttpResponse
 import json
 
 # Create your views here.
@@ -19,6 +21,8 @@ def inicio(request):
 def busquedasViewTemplate(request):
 	TodasLasCategorias = habCategoriasModel.objects.all().order_by('categoria')
 	return render(request,'buscar.html',{'categorias':TodasLasCategorias})
+	#return HttpResponse(request.GET.get('estado'))
+
 
 
 def personasListar(request):
@@ -46,6 +50,7 @@ def personasListar(request):
 				'habilidad_id': habilidad.id,
 				'habilidad_val':habilidad.val_promedio,
 				'habilidad_nsol':habilidad.num_solicitudes,
+				'foto':perfilusuario.foto.name,
 			}
 			data.append(item)
 
@@ -67,3 +72,49 @@ def cleanJsonModel(data):
 	for d in data:
 		del d['model']
 	return data
+
+
+class busquedasListView(ListView):
+
+	model = habilidadesModel
+	template_name = "busquedas_sprike.html"
+	paginate_by = 1
+
+	def get(self, request, *args, **kwargs):
+		self.object_list = self.get_queryset()
+
+		formato = self.request.GET.get('format', None)
+
+		if formato == 'json':
+			return self.json_to_response()
+
+		context = self.get_context_data()
+		return self.render_to_response(context)
+	#def get(self,*args, **kwargs):
+	#	categoria = self.request.GET.get('categoria')
+	#	if categoria:
+	#		print self.kwargs
+	#	else:
+	#		super(busquedasListView, self).get(*args,**kwargs)
+
+	def json_to_response(self):
+		data = []
+		for habilidad in self.object_list:
+			data.append({
+				'nhab': habilidad.nhabilidad,
+				'desc': habilidad.descripcion,
+				#'cat': habilidad.categoria,
+			})
+		return JsonResponse(data, safe=False)
+
+	def get_queryset(self):
+		queryset = self.model.objects.filter(
+			descripcion__contains=self.request.GET.get('palabra','')
+		).filter(
+			nhabilidad__contains=self.request.GET.get('palabra','')
+		).filter(
+			categoria=self.request.GET.get('categoria')
+		)
+		return queryset
+
+

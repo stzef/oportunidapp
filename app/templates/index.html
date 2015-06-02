@@ -15,8 +15,36 @@
     <script src="{% static 'jslibraries/handlebars.js' %}"></script>
     <script src="{% static 'jslibraries/spin.js' %}"></script>
   </head>
-    {% block content  %}
-    {% endblock %} 
+    <body>
+      <nav class="navbar navbar-blue">
+        <div class="container-fluid col-xs-12 col-sm-12 col-md-8 col-lg-8">
+          <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"></button>
+              <a class="navbar-brand" href="/"><span class="blue-color">Oportunid</span><span class="green-color">App</span></a>
+          </div>
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav navbar-left">
+                <li><a href="#">Como Funciona?</a></li>
+                <li><a href="#">Testimonios</a></li>
+                <li><a href="#">Nos Apoyan</a></li>
+              </ul>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+          <ul class="nav navbar-nav navbar-right nav-align col-xs-12 col-sm-12">
+            <li class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-center"><a href="{% url 'login' %}" class="blue-color-2">Entrar</a></li>
+            <li class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-center"><a href="{% url 'signup' %}" class="registry">Registro</a></li>
+          </ul>
+        </div>
+      </nav>
+      {% block content  %}
+      {% endblock %}
+      <div class="content-info-2 text-center">
+        <div class="container">
+          <p class="sub-footer">Desarrollado por SistematizarEF</p>
+        </div>
+      </div>
+    </body> 
   <script src="{% static 'jslibraries/jquery.min.js' %}"></script>
   <script src="{% static 'jslibraries/video.js' %}"></script>
   <script src="{% static 'jslibraries/flat-ui.min.js' %}"></script>
