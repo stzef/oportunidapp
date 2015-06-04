@@ -4,12 +4,10 @@ from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponse, JsonResponse
 from django.views.generic import ListView
-
-
+from django.db.models import Q
 
 from habilidades.models import habilidadesModel, habCategoriasModel
 from usuarios.models import perfilUsuarioModel
-
 
 import json
 
@@ -20,10 +18,8 @@ def inicio(request):
 # [busquedasViewTemplate] View encargada de retornar el template de busquedas
 def busquedasViewTemplate(request):
 	TodasLasCategorias = habCategoriasModel.objects.all().order_by('categoria')
-	return render(request,'buscar.html',{'categorias':TodasLasCategorias})
+	return render(request,'buscar.html',{'categoria':TodasLasCategorias})
 	#return HttpResponse(request.GET.get('estado'))
-
-
 
 def personasListar(request):
 	if request.is_ajax():
@@ -81,23 +77,59 @@ class busquedasListView(ListView):
 	paginate_by = 1
 
 	def get(self, request, *args, **kwargs):
+
 		self.object_list = self.get_queryset()
-
 		formato = self.request.GET.get('format', None)
-
 		if formato == 'json':
 			return self.json_to_response()
-
 		context = self.get_context_data()
+
 		return self.render_to_response(context)
-	#def get(self,*args, **kwargs):
-	#	categoria = self.request.GET.get('categoria')
-	#	if categoria:
-	#		print self.kwargs
-	#	else:
-	#		super(busquedasListView, self).get(*args,**kwargs)
+
+	def get_queryset(self):
+
+		#Parametros Recibidos
+		categoriaBuscada = self.request.GET.get('categoria', None)
+		fraseBuscada = self.request.GET.get('busqueda', None)
+		orden = self.request.GET.get('orden', None)
+
+		#orden = self.obtenerOrdenDeConsulta(self.request.GET.get('sort', None))
+
+		#Consulta por defecto
+		q = self.querysetPorDefecto()
+
+		#Proceso de Consulta
+		if categoriaBuscada is not None:
+			q = self.model.objects.filter(categoria=categoriaBuscada)
+		if fraseBuscada is not None:
+			q = self.filtrarPorPalabras(q, fraseBuscada)
+		if orden is not None:
+			q = q.order_by('-'+orden)
+
+		return q
+
+#	def obtenerOrdenDeConsuta(self, criterioDeOrden):
+#		if criterioDeOrden is not None:
+#			#Proceso
+#		else:
+#			return None
+
+	def querysetPorDefecto(self):
+		#Consulta por defecto
+		q = self.model.objects.all()
+		return q
+
+	def filtrarPorPalabras(self, q, fraseBuscada):
+		#Recorre la frase a buscar palabra a palabra y filtra
+		dicFraseBuscada = fraseBuscada.split()
+		for palabra in dicFraseBuscada:
+			q = q.filter(
+				Q(nhabilidad__contains=palabra) | Q(descripcion__contains=palabra)
+			)
+		return q
 
 	def json_to_response(self):
+		#Respuesta en Json Format
 		data = []
 		for habilidad in self.object_list:
 			data.append({
@@ -106,15 +138,4 @@ class busquedasListView(ListView):
 				#'cat': habilidad.categoria,
 			})
 		return JsonResponse(data, safe=False)
-
-	def get_queryset(self):
-		queryset = self.model.objects.filter(
-			descripcion__contains=self.request.GET.get('palabra','')
-		).filter(
-			nhabilidad__contains=self.request.GET.get('palabra','')
-		).filter(
-			categoria=self.request.GET.get('categoria')
-		)
-		return queryset
-
 
