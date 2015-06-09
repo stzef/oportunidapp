@@ -14,7 +14,7 @@
 			    		<div class="col-md-8 col-md-offset-2 input-group">
 			    			<input id="search-word" type="text" class="form-control text-center" placeholder="¿Que Estas Buscando?">
 						    <span class="input-group-btn">
-						    	<button class="btn btn-block btn-lg btn-find" type="button">Buscar</button>
+						    	<button class="btn btn-block btn-lg btn-find" id="show" type="button">Buscar</button>
 						    </span>
 			    		</div>
 					</div>
@@ -22,21 +22,20 @@
 				<div class="row">
 					<div class="col-md-4">
 						<div class="col-md-11">	
-							<select name="select1" id="select-filter-1" class="form-control">
-								<option>Seleccione un Elemento</option>
-								<option value="1">1</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
+							<select name="categoria" id="select-filter-1" class="form-control">
+								<option>Seleccione una Categoría</option>
+								{% for category in categorias %}                         
+									<option value="{{ category.id }}">{{ category.categoria }}</option>
+								{% endfor %}
 							</select>
 						</div>
 					</div>
 					<div class="col-md-4">
 						<div class="col-md-11">	
-							<select name="select2" id="select-filter-2" class="form-control">
-								<option>Seleccione un Elemento</option>
-								<option value="1">4</option>
-								<option value="2">5</option>
-								<option value="3">6</option>
+							<select name="orden" id="select-filter-2" class="form-control">
+								<option>Seleccione un Ordenamiento</option>
+								<option value="1">Ordenar por Solicitudes</option>
+								<option value="2">Ordenar por Valor Promedio</option>
 							</select>
 						</div>
 					</div>
@@ -71,7 +70,7 @@
 				<div class="col-md-12">
 					<a href="#" class="clear-tag" id="clear">Limpiar Todo</a>
 					<div class="tag-show">
-						<span class="tag label label-success">Ole <a href="#" class="remove glyphicon glyphicon-remove"></a></span>
+						<span class="tag label label-success">Ole <a href="#" class="remove glyphicon glyphicon-remove" onclick="RemoveElement(event)"></a></span>
 					</div>
 				</div>
 				<div id = "resultados">
@@ -122,91 +121,72 @@
 	<script src="{% static 'jsapp/csrf_load.js' %}"></script>
 	<script src="{% static 'jslibraries/jquery.autocomplete.min.js' %}"></script>
 	<script>
-		$(document).ready(function() {
-			$('select').change(function(){
-				id = $(this).attr('id');
-				text = $('#'+id+' option:selected').text();
-				$('.tag-show').append('<span class="tag label label-success">'+text+' <a href="#" class="remove glyphicon glyphicon-remove"></a></span>');
-			});
-			$('#clear').on('click', function(e){
-				e.preventDefault();
-				$('.tag').remove();
-			});
-			$('.remove').click(function(e){
-				e.preventDefault();
-				alert('Ole');
-				//$(this).parents('span .tag').remove();
-			});
-		});
-		$(function () {
-			$('.categoria-item').on('click',function(e){
-				var activo = $(this).closest(".categorias-list").children(".active");
-				activo.removeClass("active");
-				$(e.target).addClass("active");
-				buscarCategoria(e.target.id);
-			});
-			var sourceHabilidadesSearch = $('#resultHabilidadesSearch').html();
-			var templateHabilidadesSearch = Handlebars.compile(sourceHabilidadesSearch);
-
-			function buscarCategoria(categoria_id){
-				$.ajax({
-					url: '{% url 'personasListar' %}',
-					type: "GET",
-					data: 
-					{ 
-						categoria: categoria_id,
-					},
-					beforeSend: function(){
-						//var target = document.getElementById('foo');
-						//spinner = new Spinner().spin(target);
-					},
-					success:function(json){
-						buildHabilidadesSearch = templateHabilidadesSearch (json);
-						$('#resultados').html(buildHabilidadesSearch);
-					},
-				});
+		var busqueda = new Array();
+		function RemoveElement(event){
+			event.preventDefault();
+			$(this).parents().remove();
+		}
+		function show_tag(text, type){
+			$('.tag-show').append('<span class="tag label label-success" id="'+type+'">'+text+' <a href="#" class="remove glyphicon glyphicon-remove" onclick="RemoveElement(event)"></a></span>');
+		}
+		$('select').change(function(){
+			id = $(this).attr('id');
+			text = $('#'+id+' option:selected').text();
+			value = $('#'+id+' option:selected').val();
+			if(id == 'select-filter-2'){
+				type = 'orden';
+				busqueda['orden'] = value;
+			}else{
+				type = value;
+				busqueda['categoria'] = text;
 			}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-			/*var jobs = [
-				{ value: 'Software Developer', data: '1'},
-				{ value: 'Designer', data: '2'},
-				{ value: 'Backend Developer', data: '3'},
-				{ value: 'Front end Developer', data: '4'},
-			];
-			console.log(jobs);
-			var data2;
+			$('#'+type).remove();
+			show_tag(text, type);
+			buscar();
+		});
+		$('#clear').click(function(e){
+			e.preventDefault();
+			$('.tag').remove();
+		});
+		$('#show').click(function(e){
+			text = $('#search-word').val();
+			if(text != ""){
+				show_tag(text);
+				busqueda['busqueda'] = text;
+				buscar();
+			}else{
+				alert("Escriba una Palabra a Buscar");
+				$('#search-word').focus();
+			}
+		});
+		$('.categoria-item').on('click',function(e){
+			var activo = $(this).closest(".categorias-list").children(".active");
+			activo.removeClass("active");
+			$(e.target).addClass("active");
+			buscarCategoria(e.target.id);
+		});
+		var sourceHabilidadesSearch = $('#resultHabilidadesSearch').html();
+		var templateHabilidadesSearch = Handlebars.compile(sourceHabilidadesSearch);
+		function buscar(){
+			console.log(busqueda['categoria']);
+		}
+		function buscarCategoria(categoria_id){
 			$.ajax({
-				url: '{% url 'habilidadesActivas' %}',
-				type: 'GET',
-				success: function(json){
-					data2 = [
-						{ value: json[0].fields.nhabilidad,data: '1'},
-						{ value: json[1].fields.nhabilidad,data: '2'},
-					];
-					console.log(data2);
-					$("#search-word").autocomplete({
-						lookup : data2,
-					});
+				url: '{% url 'personasListar' %}',
+				type: "GET",
+				data: 
+				{ 
+					categoria: categoria_id,
+				},
+				beforeSend: function(){
+					//var target = document.getElementById('foo');
+					//spinner = new Spinner().spin(target);
+				},
+				success:function(json){
+					buildHabilidadesSearch = templateHabilidadesSearch (json);
+					$('#resultados').html(buildHabilidadesSearch);
 				},
 			});
-			*/
-		});
+		}
 	</script>
 {% endblock %}
