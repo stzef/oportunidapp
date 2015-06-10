@@ -37,65 +37,71 @@
 	<div id="results"></div>
 </div>
 <script id="habilidadesTempl" type="text/x-handlebars-template">
-{{#each this }}
-<div class="col-md-12">
-	<div class="label-category label-description text-center">
-		<strong class="desc3">{{ fields.categoria }}</strong>
+{{#if this}}
+	{{#each this }}
+	<div class="col-md-12">
+		<div class="label-category label-description text-center">
+			<strong class="desc3">{{ fields.categoria }}</strong>
+		</div>
 	</div>
-</div>	
-<div class="habilidad-item">
-	<div className="col-sm-12">
-		<div class="row panel panel-default">	
-			<div class="col-sm-12 col-md-5 col-lg-4 div-align">
-				<img src="/media/{{ fields.foto }}" class="desc-img" alt="{{ fields.nhabilidad }}">
-			</div>
-			<div class="col-sm-12 col-md-5 col-lg-5 div-align">
-				<h3>
-					<a href="/habilidades/{{ pk }}">
-						{{ fields.nhabilidad }}
-					</a>
-				</h3>
 
-				<p>{{ fields.descripcion }}</p>
-			</div>
-			<div class="col-sm-12 col-md-2 col-lg-3">
-				<div class="text-top text-center col-xs-6 col-sm-4 col-md-12 col-lg-12">
-					<div class="label-descp label-warning">
-						<i class="glyphicon glyphicon-star desc3"></i>
-						{{#if fields.val_promedio}}
-							<span class="desc">Puntuacion: </span>
-							<strong class="desc3">{{ fields.val_promedio }}</strong>
-						{{else}}
-							<strong class="desc3">ninguno</strong>
-						{{/if}}
-					</div>
+	<div class="habilidad-item">
+		<div className="col-sm-12">
+			<div class="row panel panel-default">	
+				<div class="col-sm-12 col-md-4 div-align">
+					<img src="/media/{{ fields.foto }}" class="desc-img" alt="{{ fields.nhabilidad }}">
 				</div>
-				<div class="text-top text-center col-xs-6 col-sm-4 col-md-12 col-lg-12">
-					<div class="label-descp label-success">
-						<i class="glyphicon glyphicon-th-list desc3"></i> 
-						{{#if fields.num_solicitudes}}
-							<span class="desc">Solicitudes: </span>
-							<strong class="desc3">{{ fields.num_solicitudes }}</strong>
-						{{else}}
-							<strong class="desc3">ninguno</strong>
-						{{/if}}
-					</div>
+				<div class="col-sm-12 col-md-5 div-align">
+					<h3>
+						<a href="/habilidades/{{ pk }}">
+							{{ fields.nhabilidad }}
+						</a>
+					</h3>
+
+					<p>{{ fields.descripcion }}</p>
+
 				</div>
-				<div class="text-top text-center col-xs-6 col-sm-4 col-md-12 col-lg-12">
-					<div class="label-descp label-danger">
-						{{#if fields.precio}}
-						<i class="glyphicon glyphicon-usd desc3"></i> 
-						<span class="desc">Precio: </span></a><strong class="desc3">{{ fields.precio }}</strong>
-						{{else}}
-							<span><b>ninguno</b></span>
-						{{/if}}
+				<div class="col-sm-12 col-md-3">
+					<div class="text-top text-center col-xs-6 col-sm-4 col-md-12 col-lg-12">
+						<div class="label-descp label-warning">
+							<i class="glyphicon glyphicon-star desc3"></i>
+							{{#if fields.val_promedio}}
+								<span class="desc">Puntuacion: </span>
+								<strong class="desc3">{{ fields.val_promedio }}</strong>
+							{{else}}
+								<strong class="desc3">ninguno</strong>
+							{{/if}}
+						</div>
+					</div>
+					<div class="text-top text-center col-xs-6 col-sm-4 col-md-12 col-lg-12">
+						<div class="label-descp label-success">
+							<i class="glyphicon glyphicon-th-list desc3"></i> 
+							{{#if fields.num_solicitudes}}
+								<span class="desc">Solicitudes: </span>
+								<strong class="desc3">{{ fields.num_solicitudes }}</strong>
+							{{else}}
+								<strong class="desc3">ninguno</strong>
+							{{/if}}
+						</div>
+					</div>
+					<div class="text-top text-center col-xs-6 col-sm-4 col-md-12 col-lg-12">
+						<div class="label-descp label-danger">
+							{{#if fields.precio}}
+							<i class="glyphicon glyphicon-usd desc3"></i> 
+							<span class="desc">Precio: </span></a><strong class="desc3">{{ fields.precio }}</strong>
+							{{else}}
+								<span><b>ninguno</b></span>
+							{{/if}}
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
-{{/each}}
+	{{/each}}
+{{else}}
+	<p>No tienes ninguna habilidad.</p>
+{{/if}}
 </script>
 {%endverbatim%}
 {% endblock %}
@@ -115,6 +121,7 @@
 						spinner = new Spinner().spin(target);
 					},
 					success: function(json){
+						console.log(json);
 						var source   = $("#habilidadesTempl").html();
 						var template = Handlebars.compile(source);
 						t = template(json);

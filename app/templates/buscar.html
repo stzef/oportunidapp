@@ -23,8 +23,8 @@
 					<div class="col-md-4">
 						<div class="col-md-11">	
 							<select name="categoria" id="select-filter-1" class="form-control">
-								<option>Seleccione una Categoría</option>
-								{% for category in categorias %}                         
+								<option value="">Seleccione una Categoría</option>
+								{% for category in categoria %}                         
 									<option value="{{ category.id }}">{{ category.categoria }}</option>
 								{% endfor %}
 							</select>
@@ -33,7 +33,7 @@
 					<div class="col-md-4">
 						<div class="col-md-11">	
 							<select name="orden" id="select-filter-2" class="form-control">
-								<option>Seleccione un Ordenamiento</option>
+								<option value="">Seleccione un Ordenamiento</option>
 								<option value="1">Ordenar por Solicitudes</option>
 								<option value="2">Ordenar por Valor Promedio</option>
 							</select>
@@ -85,7 +85,7 @@
 									<div class="col-xs-12 col-sm-8 col-md-10">
 										<div class="col-md-8">
 											<p><strong><a href="/Buscar-category/">{{ this.userfirstname }} {{ this.userlastname }}</a></strong></p>
-											<p class="hab">habilidad</p>
+											<p class="hab">{{ this.nhabilidad }}</p>
 											<p class="text">{{ this.descripcion }}</p>
 										</div>
 										<div class="col-md-4">
@@ -137,8 +137,8 @@
 				type = 'orden';
 				busqueda['orden'] = value;
 			}else{
-				type = value;
-				busqueda['categoria'] = text;
+				type = 'category';
+				busqueda['categoria'] = value;
 			}
 			$('#'+type).remove();
 			show_tag(text, type);
@@ -147,6 +147,13 @@
 		$('#clear').click(function(e){
 			e.preventDefault();
 			$('.tag').remove();
+			busqueda['categoria'] = '';
+			busqueda['orden'] = '';
+			busqueda['busqueda'] = '';
+			$('#search-word').val('');
+			$('#select-filter-1').val('');
+			$('#select-filter-2').val('');
+			buscar();
 		});
 		$('#show').click(function(e){
 			text = $('#search-word').val();
@@ -159,6 +166,49 @@
 				$('#search-word').focus();
 			}
 		});
+		$('.categoria-item').on('click',function(e){
+			var activo = $(this).closest(".categorias-list").children(".active");
+			activo.removeClass("active");
+			$(e.target).addClass("active");
+			buscarCategoria(e.target.id);
+		});
+		var sourceHabilidadesSearch = $('#resultHabilidadesSearch').html();
+		var templateHabilidadesSearch = Handlebars.compile(sourceHabilidadesSearch);
+		function buscar(){
+			console.log(busqueda['orden']);
+			$.ajax({
+				url: '{% url 'resultados' %}',
+				type: 'GET',
+				data: {
+					format: 'json',
+					categoria: busqueda['categoria'],
+					palabra: busqueda['busqueda']
+				},
+				success:function(json){
+					buildHabilidadesSearch = templateHabilidadesSearch (json);
+					$('#resultados').html(buildHabilidadesSearch);
+				}
+			});
+		}
+		function buscarCategoria(categoria_id){
+			$.ajax({
+				url: '{% url 'personasListar' %}',
+				type: "GET",
+				data: 
+				{ 
+					categoria: categoria_id,
+					id : 233,
+				},
+				beforeSend: function(){
+					//var target = document.getElementById('foo');
+					//spinner = new Spinner().spin(target);
+				},
+				success:function(json){
+					buildHabilidadesSearch = templateHabilidadesSearch (json);
+					$('#resultados').html(buildHabilidadesSearch);
+				},
+			});
+		}/*
 		$('.categoria-item').on('click',function(e){
 			var activo = $(this).closest(".categorias-list").children(".active");
 			activo.removeClass("active");
@@ -187,6 +237,6 @@
 					$('#resultados').html(buildHabilidadesSearch);
 				},
 			});
-		}
+		}*/
 	</script>
 {% endblock %}

@@ -3,7 +3,7 @@
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.core import serializers
 from django.shortcuts import get_object_or_404
@@ -15,11 +15,11 @@ from models import habilidadesModel, habCategoriasModel
 from forms import nuevaHabilidadForm
 from usuarios.models import perfilUsuarioModel
 from app.views import cleanJsonModel
-
+from oportunidapp.settings import BASE_DIR
 
 #Importaciones desde Python
 import json
-
+import os
 
 #[habilidadesViewTemplate] View enacargada de retornar el template de habilidades
 @login_required()
@@ -98,7 +98,11 @@ def editarHabilidad(request):
 			else:
 				return render(request,'no_permitido.html')
 		else:
-			return HttpResponse('NO')
+			response_data['message'] = 'error formulario'
+			return HttpResponse(
+				json.dumps(response_data),
+				content_type="application/json"
+			)
 
 
 #[desactivarHabilidad] View encargada desactivar una habilidad
@@ -107,22 +111,24 @@ def desactivarHabilidad(request):
 	if request.is_ajax() and request.method == "POST":
 		habilidad_id = request.POST['habilidad_id']
 		habilidadPorDesactivar = get_object_or_404 (habilidadesModel,id = habilidad_id)
+		response_data = {}
+
 		if habilidadPorDesactivar.usuario_id == request.user.id:
-			response_data = {}
 			habilidadPorDesactivar.estado = False
 			habilidadPorDesactivar.save(update_fields=["estado"])
 
 			response_data['message'] = 'Habilidad activada'
+
 			return HttpResponse(
 				json.dumps(response_data),
 				content_type="application/json"
 			)
-
-
 		else:
 			return render(request,'no_permitido.html')
 	else:
 		return render(request,'no_permitido.html')
+
+
 
 @login_required()
 def activarHabilidad(request):
@@ -182,36 +188,32 @@ def listarHabilidadesNoActivas(request):
 @csrf_exempt
 @login_required
 def cambiarFotoHabilidad(request):
-	habilidad = habilidadesModel.objects.get(id=request.POST['habilidad'])
-	foto = request.FILES['foto']
 
-	foto.name = habilidad.nhabilidad.replace(' ','_')+str(habilidad.id)
-	#Metodo borrar imagen anterior
-
-	if habilidad.usuario_id == request.user.id:
-		habilidad.foto = foto
-		habilidad.save(update_fields=["foto"])
-
+	#Obtener Parametros
+	habilidadCambioImagen = habilidadesModel.objects.get(id=request.POST['habilidad'])
+	imagenRecibida = request.FILES['foto']
+	imagenRecibida.name = habilidadCambioImagen.nhabilidad.replace(' ','_')+str(habilidadCambioImagen.id)
 	response_data = {}
-	response_data['message'] = 'OK !!!!'
-	
+
+	if habilidadCambioImagen.usuario_id == request.user.id:
+		#Metodo borrar imagen anterior
+		borrarFotoActual(habilidadCambioImagen)
+		habilidadCambioImagen.foto = imagenRecibida
+		habilidadCambioImagen.save(update_fields=["foto"])
+	else:
+		response_data['error'] = "No tiene permitido cambiar imagen de otros."
+
 	return HttpResponse(
 		json.dumps(response_data),
 		content_type="application/json"
 	)
 
-
-
-
-
-
-
-
-
-
-
-
-
+#Borra la foto actual en Disco
+def borrarFotoActual(habilidad):
+	archivoPath = BASE_DIR+habilidad.foto.url
+	imgPorDefecto = '/media/habilidades/img/no_image.png'
+	if habilidad.foto.url != imgPorDefecto and os.path.isfile(archivoPath):
+		os.remove(archivoPath)
 
 
 #Listar Categorias
@@ -229,6 +231,10 @@ def categoriasListar(request):
 			json.dumps(data_response),
 			content_type = "application/json"
 		)
+
+
+
+
 
 #from rest_framework.permissions import IsAuthenticated
 #from rest_framework import viewsets
