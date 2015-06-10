@@ -32,8 +32,12 @@
         </div>
         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
           <ul class="nav navbar-nav navbar-right nav-align col-xs-12 col-sm-12">
-            <li class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-center"><a href="{% url 'login' %}" class="blue-color-2">Entrar</a></li>
-            <li class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-center"><a href="{% url 'signup' %}" class="registry">Registro</a></li>
+            {% if user.is_authenticated %}
+             <li><a href="{% url 'profile' %}">Perfil</a></li>
+            {% else %}
+              <li class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-center"><a href="{% url 'login' %}" class="blue-color-2">Entrar</a></li>
+              <li class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-center"><a href="{% url 'signup' %}" class="registry">Registro</a></li>
+            {% endif %}
           </ul>
         </div>
       </nav>

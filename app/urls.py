@@ -10,5 +10,5 @@ urlpatterns = patterns('',
     url(r'^buscar/(?P<pk>[\w\-]+)/$', 'app.views.findDetail',name='findDetail'),
 
 
-	#url(r'^buscar-sprike/$', busquedasListView.as_view(),name='buscar'),
+	url(r'^buscar-sprike/$', busquedasListView.as_view(),name='buscar'),
 )

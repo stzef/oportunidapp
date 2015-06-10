@@ -31,7 +31,6 @@ def habilidadesViewTemplate(request):
 	}
 	return render(request,'habilidades.html',contexto)
 
-
 #[crearNuevaHabilidad] View (funcion) encargada de recibir datos para crear nueva habilidad de un usuario
 """ Pendiente datos de respuesta al frontend con estado y mensage de aceptacion o negacion"""
 @login_required()
@@ -40,25 +39,17 @@ def crearNuevaHabilidad(request):
 		form = nuevaHabilidadForm(request.POST)
 		if form.is_valid():
 			response_data = {}
-
 			habilidadNueva = form.save(commit=False)
 			usuario = perfilUsuarioModel.objects.get(pk=request.user.id)
 			habilidadNueva.usuario = usuario
 			habilidadNueva.save()
+			response_data['message'] = 'habilidad Creada!'
 
-			response_data['pk'] = habilidadNueva.pk
-
-			return HttpResponse(
-				json.dumps(response_data),
-				content_type="application/json"
-			)
+			return JsonResponse(response_data)
 
 		else:
 			data_error = json.loads(form.errors.as_json())
-			return HttpResponse(
-				json.dumps(data_error),
-				content_type="application/json"
-			)
+			return JsonResponse(data_error)
 
 #[detalleHabilidadView] View encargada de retornar template del detalle de una habilidad
 @login_required()
@@ -80,7 +71,7 @@ def detalle(request,pk):
 @login_required()
 def editarHabilidad(request):
 	if request.method == "POST":
-		form = nuevaHabilidadForm(request.POST or None)
+		form = nuevaHabilidadForm(request.POST)
 		if form.is_valid():
 			habilidadParaEditar = habilidadesModel.objects.get(id=request.POST['id'])
 			response_data = {}
@@ -104,7 +95,6 @@ def editarHabilidad(request):
 				content_type="application/json"
 			)
 
-
 #[desactivarHabilidad] View encargada desactivar una habilidad
 @login_required()
 def desactivarHabilidad(request):
@@ -127,8 +117,6 @@ def desactivarHabilidad(request):
 			return render(request,'no_permitido.html')
 	else:
 		return render(request,'no_permitido.html')
-
-
 
 @login_required()
 def activarHabilidad(request):
@@ -207,6 +195,7 @@ def cambiarFotoHabilidad(request):
 		json.dumps(response_data),
 		content_type="application/json"
 	)
+
 
 #Borra la foto actual en Disco
 def borrarFotoActual(habilidad):

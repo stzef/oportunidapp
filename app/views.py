@@ -99,7 +99,7 @@ class busquedasListView(ListView):
 		q = self.querysetPorDefecto()
 
 		#Proceso de Consulta
-		if categoriaBuscada is not None:
+		if categoriaBuscada is not None and categoriaBuscada != '':
 			q = self.model.objects.filter(categoria=categoriaBuscada)
 		if fraseBuscada is not None:
 			q = self.filtrarPorPalabras(q, fraseBuscada)
@@ -132,10 +132,20 @@ class busquedasListView(ListView):
 		#Respuesta en Json Format
 		data = []
 		for habilidad in self.object_list:
+			usuario = User.objects.get(id= habilidad.usuario_id)
+			perfilusuario = perfilUsuarioModel.objects.get(usuario=usuario)
 			data.append({
-				'nhab': habilidad.nhabilidad,
-				'desc': habilidad.descripcion,
-				#'cat': habilidad.categoria,
+				'user_id': usuario.id,
+				'username': usuario.username,
+				'userfirstname': usuario.first_name,
+				'userlastname': usuario.last_name,
+				'userphone': perfilusuario.celular1,
+				'nhabilidad': habilidad.nhabilidad,
+				'descripcion': habilidad.descripcion,
+				'habilidad_id': habilidad.id,
+				'habilidad_val':habilidad.val_promedio,
+				'habilidad_nsol':habilidad.num_solicitudes,
+				'foto':perfilusuario.foto.name,
 			})
 		return JsonResponse(data, safe=False)
 
