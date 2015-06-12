@@ -7,46 +7,45 @@
 <body class="body-img">
 	<div class="container div-find">
 		<div class="row text-center">
-		    <h4>Encuentra Personas para tu Solicitud</h4>
+		    <h2>Encuentra Personas para tu Solicitud</h2>
 	    	<form class="form-find">
 	    		<div class="row space">
-		    		<div class="col-md-12">
-			    		<div class="col-md-8 col-md-offset-2 input-group">
-			    			<input id="search-word" type="text" class="form-control text-center" placeholder="¿Que Estas Buscando?">
-						    <span class="input-group-btn">
-						    	<button class="btn btn-block btn-lg btn-find" id="show" type="button">Buscar</button>
-						    </span>
+		    		<div class="col-md-4">
+			    		<div class="col-md-11">
+			    			<div class="form-group">
+								<label for="search-word">Busca</label>
+				    			<div class="input-group">
+					    			<input id="search-word" type="text" class="form-control" placeholder="¿Que Estas Buscando?">
+								    <span class="input-group-btn">
+								    	<button class="btn btn-block btn-find" id="show" type="button">Buscar</button>
+								    </span>
+								</div>
+							</div>
 			    		</div>
 					</div>
-				</div>
-				<div class="row">
 					<div class="col-md-4">
 						<div class="col-md-11">	
-							<select name="categoria" id="select-filter-1" class="form-control">
-								<option value="">Seleccione una Categoría</option>
-								{% for category in categoria %}                         
-									<option value="{{ category.id }}">{{ category.categoria }}</option>
-								{% endfor %}
-							</select>
+							<div class="form-group">
+								<label for="select-filter-1">Categoría</label>
+								<select name="categoria" id="select-filter-1" class="form-control">
+									<option value="">Seleccione una Categoría</option>
+									{% for category in categoria %}                         
+										<option value="{{ category.id }}">{{ category.categoria }}</option>
+									{% endfor %}
+								</select>
+							</div>
 						</div>
 					</div>
 					<div class="col-md-4">
 						<div class="col-md-11">	
-							<select name="orden" id="select-filter-2" class="form-control">
-								<option value="">Seleccione un Ordenamiento</option>
-								<option value="1">Ordenar por Solicitudes</option>
-								<option value="2">Ordenar por Valor Promedio</option>
-							</select>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="col-md-11">	
-							<select name="select3" id="select-filter-3" class="form-control">
-								<option>Seleccione un Elemento</option>
-								<option value="1">7</option>
-								<option value="2">8</option>
-								<option value="3">9</option>
-							</select>
+							<div class="form-group">
+								<label for="select-filter-2">Orden</label>
+								<select name="orden" id="select-filter-2" class="form-control">
+									<option value="">Seleccione un Ordenamiento</option>
+									<option value="1">Ordenar por Solicitudes</option>
+									<option value="2">Ordenar por Valor Promedio</option>
+								</select>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -56,17 +55,6 @@
 	<div class="content-info">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-12">
-					<div class="left">
-						<div class="col-xs-6 col-md-12">
-							<div class="list-group categorias-list text-center">
-								{% for categoria in categorias %}
-									<a id="{{ categoria.pk }}" class="categoria-item ">{{ categoria.categoria }}</a>
-								{% endfor %}
-							</div>
-						</div>
-					</div>
-				</div>
 				<div class="col-md-12">
 					<a href="#" class="clear-tag" id="clear">Limpiar Todo</a>
 					<div class="tag-show">
@@ -84,8 +72,8 @@
 									</div>
 									<div class="col-xs-12 col-sm-8 col-md-10">
 										<div class="col-md-8">
-											<p><strong><a href="/Buscar-category/">{{ this.userfirstname }} {{ this.userlastname }}</a></strong></p>
-											<p class="hab">{{ this.nhabilidad }}</p>
+											<h3><strong><a href="/Buscar-category/">{{ this.nhabilidad }}</a></strong></h3>
+											<p class="username">{{ this.userfirstname }} {{ this.userlastname }}</p>
 											<p class="text">{{ this.descripcion }}</p>
 										</div>
 										<div class="col-md-4">
