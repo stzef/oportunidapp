@@ -5,11 +5,8 @@ urlpatterns = patterns('',
 
 	url(r'^habilidades/$','habilidades.views.habilidadesViewTemplate',name='habilidades'),
 	url(r'^habilidades/(?P<pk>[\w\-]+)/$','habilidades.views.detalle',name='detalle'),
-
 	url(r'^fotohabilidad/$','habilidades.views.cambiarFotoHabilidad',name='fotoHabilidad'),
-
 	url(r'^desactivarhabilidad/$','habilidades.views.desactivarHabilidad',name='desactivarHabilidad'),
-
 	url(r'^activarhabilidad/$','habilidades.views.activarHabilidad',name='activarHabilidad'),
 
 	#Crear Habilidad
@@ -23,10 +20,7 @@ urlpatterns = patterns('',
 
 	#Listar Habilidades No Activas
 	url(r'^habilidades-no-activas/$','habilidades.views.listarHabilidadesNoActivas',name='habilidadesNoActivas'),
-
-
 	url(r'^categoriaslistar/$','habilidades.views.categoriasListar',name='categoriasListar'),
-	url(r'^personaslistar$','app.views.personasListar',name='personasListar'),
 
 )
 

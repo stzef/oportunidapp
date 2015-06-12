@@ -40,6 +40,7 @@ class registroForm(forms.Form):
 	username = forms.CharField(max_length=20,required=True,widget=forms.TextInput(attrs={'required': 'required', 'placeholder':'Usuario', 'class':'form-control col-md-11'}),)
 	email = forms.EmailField(max_length=30,required=True,widget=forms.TextInput(attrs={'type': 'email', 'required': 'required', 'placeholder':'Email', 'class':'form-control col-md-11'}),)
 	password = forms.CharField(max_length=20,required=True,widget=forms.PasswordInput(attrs={'required': 'required', 'placeholder':'Contraseña', 'class':'form-control col-md-11'}),)
+	password_confirm = forms.CharField(max_length=20,required=True,widget=forms.PasswordInput(attrs={'required': 'required', 'placeholder':'Confirma tu contraseña', 'class':'form-control col-md-11'}),)
 	fnacimiento = forms.DateField(required=False,widget=forms.TextInput(attrs={'type': 'date', 'required': 'required', 'placeholder':'Fecha de nacimiento', 'class':'form-control col-md-11'}),)
 	genero  = forms.ChoiceField(choices=(('M','Masculino'),('F', 'Femenino'),('O','Otro'),),required=True,widget=forms.Select(attrs={'class':'form-control col-md-11'}),)
 	celular = forms.IntegerField(required=False,widget=forms.TextInput(attrs={'required': 'required', 'placeholder':'Numero Celular', 'class':'form-control col-md-11'}),)

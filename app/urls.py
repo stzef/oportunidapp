@@ -6,9 +6,7 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^blog/', include('blog.urls')),
     url(r'^$', 'app.views.inicio',name='inicio'),
-    url(r'^buscar/$', 'app.views.busquedasViewTemplate',name='buscar'),
-    url(r'^buscar/(?P<pk>[\w\-]+)/$', 'app.views.findDetail',name='findDetail'),
+    url(r'^buscar/$', 'app.views.buscarTemplate',name='buscar'),
+	url(r'^resultados/$', busquedasListView.as_view(),name='resultados'),
 
-
-	url(r'^buscar-sprike/$', busquedasListView.as_view(),name='buscar'),
 )

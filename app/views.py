@@ -15,79 +15,29 @@ import json
 def inicio(request):
 	return render(request,'home.html')
 
-# [busquedasViewTemplate] View encargada de retornar el template de busquedas
-def busquedasViewTemplate(request):
+# [buscarTemplate] View encargada de retornar el template de busquedas
+def buscarTemplate(request):
 	TodasLasCategorias = habCategoriasModel.objects.all().order_by('categoria')
 	return render(request,'buscar.html',{'categoria':TodasLasCategorias})
-	#return HttpResponse(request.GET.get('estado'))
 
-def personasListar(request):
-	if request.is_ajax():
-		categoria = request.GET.get('categoria',None)
-		habilidades = habilidadesModel.objects.all().filter(categoria_id=categoria,estado='1')[:10]
-		#data = serializers.serialize(
-		#	"json",
-		#	habilidadesModel.objects.all().filter(categoria_id=categoria,estado='1')[:10],
-		#	fields = ('pk','nhabilidad','descripcion','val_promedio'),
-		#	use_natural_foreign_keys = True,
-		#)
-		data = []
-		for habilidad in habilidades:
-			usuario = User.objects.get(id= habilidad.usuario_id)
-			perfilusuario = perfilUsuarioModel.objects.get(usuario=usuario)
-			item = {
-				'user_id': usuario.id,
-				'username': usuario.username,
-				'userfirstname': usuario.first_name,
-				'userlastname': usuario.last_name,
-				'userphone': perfilusuario.celular1,
-				'nhabilidad': habilidad.nhabilidad,
-				'descripcion': habilidad.descripcion,
-				'habilidad_id': habilidad.id,
-				'habilidad_val':habilidad.val_promedio,
-				'habilidad_nsol':habilidad.num_solicitudes,
-				'foto':perfilusuario.foto.name,
-			}
-			data.append(item)
-
-		return HttpResponse(
-			json.dumps(data),
-			content_type = "application/json"
-		)
-
-def findDetail(request,pk):
-	habilidad = get_object_or_404(habilidadesModel,id=pk)
-	usuario = User.objects.get(id=habilidad.usuario_id)
-	perfil_usuario = perfilUsuarioModel.objects.get(usuario=usuario)
-	return render(request,'FindDetail.html',{'habilidad':habilidad, 'usuario':usuario, 'perfil':perfil_usuario})
-
-
-
-#Limpia el key 'Model' retornado por el serializador de Modelos
-def cleanJsonModel(data):
-	for d in data:
-		del d['model']
-	return data
-
-
+#[BusquedasListView] recibe parametros de busqueda de habilidades y retorna json con resultados
 class busquedasListView(ListView):
-
 	model = habilidadesModel
-	template_name = "busquedas_sprike.html"
-	paginate_by = 1
+	#template_name = "busquedas_sprike.html"
 
+	#Se ejecuta al momento de realizar una peticion tipo GET a la url
 	def get(self, request, *args, **kwargs):
 
 		self.object_list = self.get_queryset()
 		formato = self.request.GET.get('format', None)
 		if formato == 'json':
 			return self.json_to_response()
-		context = self.get_context_data()
 
+		context = self.get_context_data()
 		return self.render_to_response(context)
 
+	#Funcion de busqueda de elemento en la DB
 	def get_queryset(self):
-
 		#Parametros Recibidos
 		categoriaBuscada = self.request.GET.get('categoria', None)
 		fraseBuscada = self.request.GET.get('busqueda', None)
@@ -95,17 +45,15 @@ class busquedasListView(ListView):
 
 		#orden = self.obtenerOrdenDeConsulta(self.request.GET.get('sort', None))
 
-		#Consulta por defecto
 		q = self.querysetPorDefecto()
 
 		#Proceso de Consulta
 		if categoriaBuscada is not None and categoriaBuscada != '':
 			q = self.model.objects.filter(categoria=categoriaBuscada)
-		if fraseBuscada is not None:
+		if fraseBuscada is not None and fraseBuscada != '':
 			q = self.filtrarPorPalabras(q, fraseBuscada)
-		if orden is not None:
+		if orden is not None and orden != '':
 			q = q.order_by('-'+orden)
-
 		return q
 
 #	def obtenerOrdenDeConsuta(self, criterioDeOrden):

@@ -14,7 +14,7 @@ from serializers import habilidadesSerializer
 from models import habilidadesModel, habCategoriasModel
 from forms import nuevaHabilidadForm
 from usuarios.models import perfilUsuarioModel
-from app.views import cleanJsonModel
+from app.utilidades import cleanJsonModel
 from oportunidapp.settings import BASE_DIR
 
 #Importaciones desde Python
@@ -220,32 +220,3 @@ def categoriasListar(request):
 			json.dumps(data_response),
 			content_type = "application/json"
 		)
-
-
-
-
-
-#from rest_framework.permissions import IsAuthenticated
-#from rest_framework import viewsets
-#from permissions import IsOwnerOrReadOnly
-
-"""class habilidadesViewSet(viewsets.ViewSet):
-	permission_classes = (IsAuthenticated,) 
-	def create(self, request):
-		queryset = habilidades.objects.all()
-		#return Response(request.data['nombre_habilidad'])
-class habilidadesViewSet(viewsets.ModelViewSet):
-	permission_classes = ( IsAuthenticated, IsOwnerOrReadOnly,)
-	queryset = habilidadesModel.objects.all()
-	serializer_class = habilidadesSerializer
-
-	def perform_create(self, serializer):
-		usuario = perfilUsuarioModel.objects.get(usuario_id=self.request.user)
-		serializer.save(id_usuario=usuario)
-
-	def list(self,request):
-		queryset = habilidadesModel.objects.get(id=17)
-		serializer = habilidadesSerializer
-		return HttpResponse(serializer.data)
-
-"""
