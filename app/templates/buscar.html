@@ -7,28 +7,28 @@
 <body class="body-img">
 	<div class="container div-find">
 		<div class="row text-center">
-		    <h2>Encuentra Personas para tu Solicitud</h2>
-	    	<form class="form-find">
+		    <h2>Encuentra la persona correcta para tu trabajo</h2>
+	    	<!--<form class="form-find">-->
 	    		<div class="row space">
-		    		<div class="col-md-4">
+		    		<div class="col-md-6">
 			    		<div class="col-md-11">
 			    			<div class="form-group">
-								<label for="search-word">Busca</label>
+								<label for="busqueda">Busca</label>
 				    			<div class="input-group">
-					    			<input id="search-word" type="text" class="form-control" placeholder="¿Que Estas Buscando?">
-								    <span class="input-group-btn">
-								    	<button class="btn btn-block btn-find" id="show" type="button">Buscar</button>
-								    </span>
+					    			<input id="busqueda" name="busqueda" type="text" class="form-control" placeholder="¿Que Estas Buscando?" autocomplete="off">
+									<span class="input-group-btn">
+										<button class="btn btn-block btn-find" id="buscar" type="button">Buscar</button>
+									</span>
 								</div>
 							</div>
-			    		</div>
+						</div>
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-3">
 						<div class="col-md-11">	
 							<div class="form-group">
-								<label for="select-filter-1">Categoría</label>
-								<select name="categoria" id="select-filter-1" class="form-control">
-									<option value="">Seleccione una Categoría</option>
+								<label for="categoria">Categoría</label>
+								<select name="categoria" id="categoria" class="form-control">
+									<option disabled selected>Categorías</option>
 									{% for category in categoria %}                         
 										<option value="{{ category.id }}">{{ category.categoria }}</option>
 									{% endfor %}
@@ -36,20 +36,20 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-3">
 						<div class="col-md-11">	
 							<div class="form-group">
-								<label for="select-filter-2">Orden</label>
-								<select name="orden" id="select-filter-2" class="form-control">
-									<option value="">Seleccione un Ordenamiento</option>
-									<option value="1">Ordenar por Solicitudes</option>
-									<option value="2">Ordenar por Valor Promedio</option>
+								<label for="orden">Orden</label>
+								<select name="orden" id="orden" class="form-control">
+									<option >Seleccione un Ordenamiento</option>
+									<option value="1">Mas solicitudes</option>
+									<option value="2">Mas valorados</option>
 								</select>
 							</div>
 						</div>
 					</div>
 				</div>
-	    	</form>
+			<!--</form>-->
 		</div>
 	</div>
 	<div class="content-info">
@@ -58,7 +58,6 @@
 				<div class="col-md-12">
 					<a href="#" class="clear-tag" id="clear">Limpiar Todo</a>
 					<div class="tag-show">
-						<span class="tag label label-success">Ole <a href="#" class="remove glyphicon glyphicon-remove" onclick="RemoveElement(event)"></a></span>
 					</div>
 				</div>
 				<div id = "resultados">
@@ -93,6 +92,25 @@
 						  			</div>
 					  			</div>
 				  			{{/each}}
+				  			<nav class="text-center">
+							  	<ul class="pagination">
+							    	<li>
+							      		<a href="#" aria-label="Previous">
+							        		<span aria-hidden="true">&laquo;</span>
+							      		</a>
+							    	</li>
+							    	<li class="active"><a href="#">1</a></li>
+							    	<li><a href="#">2</a></li>
+							    	<li><a href="#">3</a></li>
+							    	<li><a href="#">4</a></li>
+							    	<li><a href="#">5</a></li>
+							    	<li>
+							      		<a href="#" aria-label="Next">
+							        		<span aria-hidden="true">&raquo;</span>
+							      		</a>
+							    	</li>
+							  	</ul>
+							</nav>
 				  		{{else}}
 				  			<span>No hay resultados</span>
 				  		{{/if}}
@@ -109,122 +127,70 @@
 	<script src="{% static 'jsapp/csrf_load.js' %}"></script>
 	<script src="{% static 'jslibraries/jquery.autocomplete.min.js' %}"></script>
 	<script>
-		var busqueda = new Array();
-		function RemoveElement(event){
-			event.preventDefault();
-			$(this).parents().remove();
-		}
-		function show_tag(text, type){
-			$('.tag-show').append('<span class="tag label label-success" id="'+type+'">'+text+' <a href="#" class="remove glyphicon glyphicon-remove" onclick="RemoveElement(event)"></a></span>');
-		}
-		$('select').change(function(){
-			id = $(this).attr('id');
-			text = $('#'+id+' option:selected').text();
-			value = $('#'+id+' option:selected').val();
-			if(id == 'select-filter-2'){
-				type = 'orden';
-				busqueda['orden'] = value;
-			}else{
-				type = 'category';
-				busqueda['categoria'] = value;
-			}
-			$('#'+type).remove();
-			show_tag(text, type);
-			buscar();
-		});
-		$('#clear').click(function(e){
-			e.preventDefault();
-			$('.tag').remove();
-			busqueda['categoria'] = '';
-			busqueda['orden'] = '';
-			busqueda['busqueda'] = '';
-			$('#search-word').val('');
-			$('#select-filter-1').val('');
-			$('#select-filter-2').val('');
-			buscar();
-		});
-		$('#show').click(function(e){
-			text = $('#search-word').val();
-			if(text != ""){
-				show_tag(text);
-				busqueda['busqueda'] = text;
-				buscar();
-			}else{
-				alert("Escriba una Palabra a Buscar");
-				$('#search-word').focus();
-			}
-		});
-		$('.categoria-item').on('click',function(e){
-			var activo = $(this).closest(".categorias-list").children(".active");
-			activo.removeClass("active");
-			$(e.target).addClass("active");
-			buscarCategoria(e.target.id);
-		});
-		var sourceHabilidadesSearch = $('#resultHabilidadesSearch').html();
-		var templateHabilidadesSearch = Handlebars.compile(sourceHabilidadesSearch);
-		function buscar(){
-			console.log(busqueda['orden']);
-			$.ajax({
-				url: '{% url 'resultados' %}',
-				type: 'GET',
-				data: {
-					format: 'json',
-					categoria: busqueda['categoria'],
-					palabra: busqueda['busqueda']
-				},
-				success:function(json){
-					buildHabilidadesSearch = templateHabilidadesSearch (json);
-					$('#resultados').html(buildHabilidadesSearch);
+
+		$(function() {
+			var PARAMETROS = new Array();
+
+			var sourceHabilidadesSearch = $('#resultHabilidadesSearch').html();
+			var templateHabilidadesSearch = Handlebars.compile(sourceHabilidadesSearch);
+			buscar(PARAMETROS);
+
+			$('#busqueda').focus();
+			$('#categoria').change(function(){
+				crearTag(this.options[this.selectedIndex].text,'categoriaTag');
+				agregarParametros(this);
+			})
+			$('#buscar').click(function() {
+				busquedaInput = $('#busqueda').get(0);
+				crearTag(busquedaInput.value,'palabraTag');
+				agregarParametros(busquedaInput);
+				busquedaInput.value = '';
+			})
+			$('#busqueda').keyup(function(e){
+				if (e.keyCode == 13){
+					busquedaInput = $('#busqueda').get(0);
+					crearTag(busquedaInput.value,'palabraTag');
+					agregarParametros(busquedaInput);
+					busquedaInput.value = '';
 				}
 			});
-		}
-		function buscarCategoria(categoria_id){
-			$.ajax({
-				url: '{% url 'personasListar' %}',
-				type: "GET",
-				data: 
-				{ 
-					categoria: categoria_id,
-					id : 233,
-				},
-				beforeSend: function(){
-					//var target = document.getElementById('foo');
-					//spinner = new Spinner().spin(target);
-				},
-				success:function(json){
-					buildHabilidadesSearch = templateHabilidadesSearch (json);
-					$('#resultados').html(buildHabilidadesSearch);
-				},
-			});
-		}/*
-		$('.categoria-item').on('click',function(e){
-			var activo = $(this).closest(".categorias-list").children(".active");
-			activo.removeClass("active");
-			$(e.target).addClass("active");
-			buscarCategoria(e.target.id);
-		});
-		var sourceHabilidadesSearch = $('#resultHabilidadesSearch').html();
-		var templateHabilidadesSearch = Handlebars.compile(sourceHabilidadesSearch);
-		function buscar(){
-			console.log(busqueda['categoria']);
-		}
-		function buscarCategoria(categoria_id){
-			$.ajax({
-				url: '{% url 'personasListar' %}',
-				type: "GET",
-				data: 
-				{ 
-					categoria: categoria_id,
-				},
-				beforeSend: function(){
-					//var target = document.getElementById('foo');
-					//spinner = new Spinner().spin(target);
-				},
-				success:function(json){
-					buildHabilidadesSearch = templateHabilidadesSearch (json);
-					$('#resultados').html(buildHabilidadesSearch);
-				},
-			});
-		}*/
+
+
+			function agregarParametros(elemento){
+				PARAMETROS[elemento.name] = elemento.value;
+				buscar(PARAMETROS);
+			}
+
+			function crearTag(texto, tipo){
+				if($('#'+tipo).attr('id')){
+					$('#'+tipo).get(0).remove();
+					crearTag(texto, tipo);
+				}
+				else
+				{
+					if(texto != ''){
+						$('.tag-show').append('<span class="tag label label-success" id="'+tipo+'">'+texto+'<a href="#" class="remove glyphicon glyphicon-remove"></a></span>');
+					}
+				}
+			}
+
+			function buscar(parametros){
+				parametros['format'] = 'json';
+				$.ajax({
+					url: '{% url 'resultados' %}',
+					type: 'GET',
+					data: {
+						format: parametros['format'],
+						categoria: parametros['categoria'],
+						busqueda: parametros['busqueda'],
+						orden: parametros['orden']
+					},
+					success:function(json){
+						buildHabilidadesSearch = templateHabilidadesSearch (json);
+						$('#resultados').html(buildHabilidadesSearch);
+					}
+				});
+			}
+		})
 	</script>
 {% endblock %}
