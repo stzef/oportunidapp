@@ -20,6 +20,9 @@ def buscarTemplate(request):
 	TodasLasCategorias = habCategoriasModel.objects.all().order_by('categoria')
 	return render(request,'buscar.html',{'categoria':TodasLasCategorias})
 
+def resultadosDetalle(request):
+	return render(request,'result_detail.html')
+
 #[BusquedasListView] recibe parametros de busqueda de habilidades y retorna json con resultados
 class busquedasListView(ListView):
 	model = habilidadesModel
@@ -96,4 +99,3 @@ class busquedasListView(ListView):
 				'foto':perfilusuario.foto.name,
 			})
 		return JsonResponse(data, safe=False)
-

@@ -52,7 +52,7 @@
 			<!--</form>-->
 		</div>
 	</div>
-	<div class="content-info">
+	<div class="container">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
@@ -71,7 +71,7 @@
 									</div>
 									<div class="col-xs-12 col-sm-8 col-md-10">
 										<div class="col-md-8">
-											<h3><strong><a href="/Buscar-category/">{{ this.nhabilidad }}</a></strong></h3>
+											<h3><strong><a href="/resultados/detalle/">{{ this.nhabilidad }}</a></strong></h3>
 											<p class="username">{{ this.userfirstname }} {{ this.userlastname }}</p>
 											<p class="text">{{ this.descripcion }}</p>
 										</div>
@@ -130,7 +130,7 @@
 
 		$(function() {
 			var PARAMETROS = new Array();
-
+			$('#clear').hide();
 			var sourceHabilidadesSearch = $('#resultHabilidadesSearch').html();
 			var templateHabilidadesSearch = Handlebars.compile(sourceHabilidadesSearch);
 			buscar(PARAMETROS);
@@ -172,6 +172,7 @@
 						$('.tag-show').append('<span class="tag label label-success" id="'+tipo+'">'+texto+'<a href="#" class="remove glyphicon glyphicon-remove"></a></span>');
 					}
 				}
+				$('#clear').show();
 			}
 
 			function buscar(parametros){
