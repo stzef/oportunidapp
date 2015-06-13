@@ -109,69 +109,81 @@
 	<script src="{% static 'jslibraries/jquery.autocomplete.min.js' %}"></script>
 	<script>
 
-		$(function() {
-			var PARAMETROS = new Array();
 
-			var sourceHabilidadesSearch = $('#resultHabilidadesSearch').html();
-			var templateHabilidadesSearch = Handlebars.compile(sourceHabilidadesSearch);
-			buscar(PARAMETROS);
+		function removerTag (elemento) {
+			var tag = $(elemento).parent();
+			tag.remove();
+			quitarParametros(tag);
+		}
 
-			$('#busqueda').focus();
-			$('#categoria').change(function(){
-				crearTag(this.options[this.selectedIndex].text,'categoriaTag');
-				agregarParametros(this);
-			})
-			$('#buscar').click(function() {
+	//$(function() {
+		var PARAMETROS = new Array();
+
+		var sourceHabilidadesSearch = $('#resultHabilidadesSearch').html();
+		var templateHabilidadesSearch = Handlebars.compile(sourceHabilidadesSearch);
+		buscar(PARAMETROS);
+
+		$('#busqueda').focus();
+		$('#categoria').change(function(){
+			crearTag(this.options[this.selectedIndex].text,'categoria-tag');
+			agregarParametros(this);
+		})
+		$('#buscar').click(function() {
+			busquedaInput = $('#busqueda').get(0);
+			crearTag(busquedaInput.value,'busqueda-tag');
+			agregarParametros(busquedaInput);
+			busquedaInput.value = '';
+		})
+		$('#busqueda').keyup(function(e){
+			if (e.keyCode == 13){
 				busquedaInput = $('#busqueda').get(0);
-				crearTag(busquedaInput.value,'palabraTag');
+				crearTag(busquedaInput.value,'busqueda-tag');
 				agregarParametros(busquedaInput);
 				busquedaInput.value = '';
-			})
-			$('#busqueda').keyup(function(e){
-				if (e.keyCode == 13){
-					busquedaInput = $('#busqueda').get(0);
-					crearTag(busquedaInput.value,'palabraTag');
-					agregarParametros(busquedaInput);
-					busquedaInput.value = '';
+			}
+		});
+
+		function agregarParametros(elemento){
+			PARAMETROS[elemento.name] = elemento.value;
+			buscar(PARAMETROS);
+		}
+		function quitarParametros(elemento){
+			name = elemento.attr('data-value');
+			name1 = name.split('-');
+			PARAMETROS[name1[0]] = '';
+			buscar(PARAMETROS);
+		}
+
+		function crearTag(texto, tipo){
+			if($('#'+tipo).attr('id')){
+				$('#'+tipo).get(0).remove();
+				crearTag(texto, tipo);
+			}
+			else
+			{
+				if(texto != ''){
+					$('.tag-show').append('<span class="tag label label-success" id="'+tipo+'" data-value="'+tipo+'">'+texto+'<a class="remove remove-tag glyphicon glyphicon-remove" onclick=removerTag(this)></a></span>');
+				}
+			}
+		}
+
+		function buscar(parametros){
+			parametros['format'] = 'json';
+			$.ajax({
+				url: '{% url 'resultados' %}',
+				type: 'GET',
+				data: {
+					format: parametros['format'],
+					categoria: parametros['categoria'],
+					busqueda: parametros['busqueda'],
+					orden: parametros['orden']
+				},
+				success:function(json){
+					buildHabilidadesSearch = templateHabilidadesSearch (json);
+					$('#resultados').html(buildHabilidadesSearch);
 				}
 			});
-
-
-			function agregarParametros(elemento){
-				PARAMETROS[elemento.name] = elemento.value;
-				buscar(PARAMETROS);
-			}
-
-			function crearTag(texto, tipo){
-				if($('#'+tipo).attr('id')){
-					$('#'+tipo).get(0).remove();
-					crearTag(texto, tipo);
-				}
-				else
-				{
-					if(texto != ''){
-						$('.tag-show').append('<span class="tag label label-success" id="'+tipo+'">'+texto+'<a href="#" class="remove glyphicon glyphicon-remove"></a></span>');
-					}
-				}
-			}
-
-			function buscar(parametros){
-				parametros['format'] = 'json';
-				$.ajax({
-					url: '{% url 'resultados' %}',
-					type: 'GET',
-					data: {
-						format: parametros['format'],
-						categoria: parametros['categoria'],
-						busqueda: parametros['busqueda'],
-						orden: parametros['orden']
-					},
-					success:function(json){
-						buildHabilidadesSearch = templateHabilidadesSearch (json);
-						$('#resultados').html(buildHabilidadesSearch);
-					}
-				});
-			}
-		})
+		}
+		//})
 	</script>
 {% endblock %}
