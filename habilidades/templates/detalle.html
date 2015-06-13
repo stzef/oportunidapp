@@ -29,46 +29,65 @@
 	</div>	
 </div>
 <div class="row second">
-	<div class="notice text-center col-xs-12 col-md-12">
+	<div class="habilidad-item">
 		<div class="col-md-12">
-			<img src="/media/{{ habilidad.foto }}" class="img-detail-2" alt="">
-		</div>
-		<div class="col-md-12">
-			<h3>{{ habilidad.nhabilidad }}</h3>
-			<p>{{ habilidad.descripcion }}</p>
-		</div>
-		<div class="col-md-12">
-			<div class="text-top text-center col-xs-4 col-md-4">
-				<div class="label-descp label-warning " data-toggle="tooltip" data-placement="top" title="Puntos">
-					<i class="glyphicon glyphicon-star desc3"></i> 
-					{% if habilidad.val_promedio %}
-						<span class="desc">Puntuacion: </span>
-						<strong class="desc3">{{ habilidad.val_promedio}}</strong>
+			<div class="label-category label-description text-center">
+				<strong class="desc3">
+					{{ habilidad.categoria }} -
+					{% if habilidad.estado %}
+						Activo
 					{% else %}
-						<strong class="desc3">ninguno</strong>
+						Inactivo
 					{% endif %}
-				</div>
+				</strong>
 			</div>
-			<div class="text-top text-center col-xs-4 col-md-4">
-				<div class="label-descp label-success" data-toggle="tooltip" data-placement="top" title="Solicitudes">
-					<i class="glyphicon glyphicon-th-list desc3"></i> 
-					{% if habilidad.val_promedio %}
-						<span class="desc">Solicitudes: </span>
-						<strong class="desc3">{{ habilidad.num_solicitudes }}</strong>
-					{% else %}
-						<strong class="desc3">ninguno</strong>
-					{% endif %}
+		</div>
+		<div class="col-xs-12 col-sm-12">
+			<div class="row panel panel-default">	
+				<div class="col-sm-12 col-md-4 div-align">
+					<img src="/media/{{ habilidad.foto }}" class="desc-img-4" alt="{{ habilidad.nhabilidad }}">
 				</div>
-			</div>
-			<div class="text-top text-center col-xs-4 col-md-4">
-				<div class="label-descp label-danger" data-toggle="tooltip" data-placement="top" title="Precio">
-					<i class="glyphicon glyphicon-usd desc3"></i> 
-					{% if habilidad.precio %}
-						<span class="desc">Precio: </span>
-						<strong class="desc3">{{ habilidad.precio }}</strong>
-					{% else %}
-						<strong class="desc3">ninguno</strong>
-					{% endif %}
+				<div class="col-sm-12 col-md-5 div-align">
+					<h3>
+							{{ habilidad.nhabilidad }}
+					</h3>
+
+					<p>{{ habilidad.descripcion }}</p>
+
+				</div>
+				<div class="col-sm-12 col-md-3" style="margin-bottom: 10px;">
+					<div class="text-top text-center col-xs-6 col-sm-4 col-md-12 col-lg-12">
+						<div class="label-descp label-warning">
+							<i class="glyphicon glyphicon-star desc3"></i>
+							{% if habilidad.val_promedio %}
+								<span class="desc">Puntuacion: </span>
+								<strong class="desc3">{{ habilidad.val_promedio }}</strong>
+							{% else %}
+								<strong class="desc3">ninguno</strong>
+							{% endif %}
+						</div>
+					</div>
+					<div class="text-top text-center col-xs-6 col-sm-4 col-md-12 col-lg-12">
+						<div class="label-descp label-success">
+							<i class="glyphicon glyphicon-th-list desc3"></i> 
+							{% if habilidad.num_solicitudes %}
+								<span class="desc">Solicitudes: </span>
+								<strong class="desc3">{{ habilidad.num_solicitudes }}</strong>
+							{% else %}
+								<strong class="desc3">ninguno</strong>
+							{% endif %}
+						</div>
+					</div>
+					<div class="text-top text-center col-xs-6 col-sm-4 col-md-12 col-lg-12">
+						<div class="label-descp label-danger">
+							{% if habilidad.precio %}
+							<i class="glyphicon glyphicon-usd desc3"></i> 
+							<span class="desc">Precio: </span></a><strong class="desc3">{{ habilidad.precio }}</strong>
+							{% else %}
+								<span><b>ninguno</b></span>
+							{% endif %}
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -92,7 +111,7 @@
 						</p>
 						<div class="accept">
 							<button id="btn-desactivar-habilidad" class="btn btn-success">Si, seguro</button>
-							<button class="btn btn-link" data-dismiss="modal">No, Salir</button>
+							<button class="btn btn-danger" data-dismiss="modal">No, Salir</button>
 						</div>
 					</div>
 	      		</div>
@@ -116,7 +135,7 @@
 						</p>
 						<div class="accept">
 							<button id="btn-activar-habilidad" class="btn btn-success">Si, seguro</button>
-							<button href="#" class="btn btn-link" data-dismiss="modal">No, Salir</button>
+							<button href="#" class="btn btn-danger" data-dismiss="modal">No, Salir</button>
 						</div>
 					</div>
 	      		</div>
@@ -155,7 +174,7 @@
 							</p>
 							<p>
 								<input type="submit" value="Guardar" class="btn btn-success">
-								<button class="btn btn-link" data-dismiss="modal">Cancelar</button>
+								<button class="btn btn-danger" data-dismiss="modal">Cancelar</button>
 							</p>
 						</div>
 					</form>
@@ -194,7 +213,7 @@
 							</div>
 							<p>
 								<input type="submit" value="guardar" class="btn btn-success">
-								<button href="#" class="btn btn-link" data-dismiss="modal">Cancelar</button>
+								<button href="#" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
 							</p>
 						</form>
 					</div>

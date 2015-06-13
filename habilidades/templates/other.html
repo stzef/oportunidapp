@@ -1,0 +1,58 @@
+
+<div class="row second">
+	<div class="col-md-12 {{ habilidad.estado }}-state">
+		<p>
+			<strong>
+			{% if habilidad.estado %}
+				Activo
+			{% else %}
+				Inactivo
+			{% endif %}
+			</strong>
+		</p>
+	</div>
+	<div class="notice text-center col-xs-12 col-md-12">
+		<div class="col-md-12">
+			<img src="/media/{{ habilidad.foto }}" class="img-detail-2" alt="">
+		</div>
+		<div class="col-md-12">
+			<h3>{{ habilidad.nhabilidad }}</h3>
+			<p>{{ habilidad.descripcion }}</p>
+		</div>
+		<div class="col-md-12">
+			<div class="text-top text-center col-xs-4 col-md-4">
+				<div class="label-descp label-warning " data-toggle="tooltip" data-placement="top" title="Puntos">
+					<i class="glyphicon glyphicon-star desc3"></i> 
+					{% if habilidad.val_promedio %}
+						<span class="desc">Puntuacion: </span>
+						<strong class="desc3">{{ habilidad.val_promedio}}</strong>
+					{% else %}
+						<strong class="desc3">ninguno</strong>
+					{% endif %}
+				</div>
+			</div>
+			<div class="text-top text-center col-xs-4 col-md-4">
+				<div class="label-descp label-success" data-toggle="tooltip" data-placement="top" title="Solicitudes">
+					<i class="glyphicon glyphicon-th-list desc3"></i> 
+					{% if habilidad.val_promedio %}
+						<span class="desc">Solicitudes: </span>
+						<strong class="desc3">{{ habilidad.num_solicitudes }}</strong>
+					{% else %}
+						<strong class="desc3">ninguno</strong>
+					{% endif %}
+				</div>
+			</div>
+			<div class="text-top text-center col-xs-4 col-md-4">
+				<div class="label-descp label-danger" data-toggle="tooltip" data-placement="top" title="Precio">
+					<i class="glyphicon glyphicon-usd desc3"></i> 
+					{% if habilidad.precio %}
+						<span class="desc">Precio: </span>
+						<strong class="desc3">{{ habilidad.precio }}</strong>
+					{% else %}
+						<strong class="desc3">ninguno</strong>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

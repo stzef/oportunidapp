@@ -1,15 +1,20 @@
-	{% extends "template.html" %}
+{% extends "template.html" %}
 {% load staticfiles %}
 {% block head %}
 	<title>Habilidades | OportunidApp </title>
 {% endblock %}
 {% block content %}
-<div class="row">
-	<div class="full col-sm-12">
-		<a href="#" class="btn btn-primary pull" id="hbl">Nueva</a>
-		<a class="btn btn-success pull" id="btn-habilidades-activas">Activas</a>
-		<a class="btn btn-danger pull" id="btn-habilidades-noActivas">Desactivadas</a>
+<div class="row text-center">
+	<div class="full">
+		<h1>Habilidades</h1>
 	</div>
+</div>
+<div class="row text-center">
+	<ul class="nav nav-tabs">
+		<li role="presentation"><a href="#" class="btn-primary pull" id="hbl">Nueva</a></li>
+		<li role="presentation"><a class="btn-success pull active" href="#" id="btn-habilidades-activas">Activas</a></li>
+		<li role="presentation"><a class="btn-danger pull" id="btn-habilidades-noActivas">Desactivadas</a></li>
+	</ul>
 </div>
 <div class="row">
 	<div class="col-sm-12">
@@ -44,7 +49,6 @@
 			<strong class="desc3">{{ fields.categoria }}</strong>
 		</div>
 	</div>
-
 	<div class="habilidad-item">
 		<div className="col-sm-12">
 			<div class="row panel panel-default">	
@@ -100,6 +104,9 @@
 	</div>
 	{{/each}}
 {{else}}
+	<div class="row text-center">
+	<h1>f</h1>
+	</div>
 	<p>No tienes ninguna habilidad.</p>
 {{/if}}
 </script>
@@ -177,7 +184,7 @@
 
 			$('.well').hide();
 			$('#hbl').click(function(event){
-				$('.well').show();	
+				$('.well').show();
 				$('#hbl').hide();
 				event.preventDefault();
 			});
@@ -187,13 +194,11 @@
 				$('#hbl').show();
 				event.preventDefault();
 			});
-
 			$('#btn-habilidades-activas').click(function(){
-				$('#btn-habilidades-noActivas').removeClass("active").addClass("");
+				$('#btn-habilidades-noActivas').removeClass("active");
 				$('#btn-habilidades-activas').addClass("active");
 				listarHabilidadesActivas();
 			});
-
 			$('#btn-habilidades-noActivas').click(function(){
 				$('#btn-habilidades-activas').removeClass("active");
 				$('#btn-habilidades-noActivas').addClass("active");
