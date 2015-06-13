@@ -27,14 +27,13 @@
             <div class="navbar navbar-blue navbar-static-top">
               <ul class="nav navbar-nav">
                 <li><a class="text-center logo-app"><strong><span class="blue-color">Oportunid</span><span class="green-color">App</span></strong></a></li>
-                <li class="min-nav text-center"><a href="#"><span class="glyphicon glyphicon-home desc3"></span>  <span class="desc">Inicio</span></a></li>
-                <li class="min-nav text-center"><a href="{% url 'necesito' %}"><span class="glyphicon glyphicon-user desc3"></span> <span class="desc">Te necesito</span></a></li>
-                <li class="min-nav text-center"><a href="{% url 'habilidades' %}"><span class="glyphicon glyphicon-thumbs-up desc3"></span> <span class="desc">Habilidades</span></a></li>
-                <li class="min-nav text-center"><a href="#"><span class="glyphicon glyphicon-list-alt desc3"></span> <span class="desc">Trabajos</span></a></li>
-                <li class="min-nav text-center"><a href="#"><span class="glyphicon glyphicon-pushpin desc3"></span> <span class="desc">Solicitudes</span></a></li>
-                <li class="dropdown text-center min-nav">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                  <span class="glyphicon glyphicon-cog desc3"></span> <span class="desc">{{ user.username }}</span></a>
+                <li class="min-nav text-center"><a href="{% url 'buscar' %}"><strong><span class="glyphicon glyphicon-search desc3"></span>  <span class="desc">Busqueda</span></strong></a></li>
+                <li class="min-nav text-center"><a href="{% url 'necesito' %}"><strong><span class="glyphicon glyphicon-user desc3"></span> <span class="desc">Te necesito</span></strong></a></li>
+                <li class="min-nav text-center"><a href="{% url 'habilidades' %}"><strong><span class="glyphicon glyphicon-thumbs-up desc3"></span> <span class="desc">Habilidades</span></strong></a></li>
+                <li class="min-nav text-center"><a href="#"><strong><span class="glyphicon glyphicon-list-alt desc3"></span> <span class="desc">Trabajos</span></strong></a></li>
+                <li class="min-nav text-center"><a href="#"><strong><span class="glyphicon glyphicon-pushpin desc3"></span> <span class="desc">Solicitudes</span></strong></a></li>
+                <li class="dropdow min-nav">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><strong><span class="glyphicon glyphicon-cog desc3"></span> <span class="desc">{{ user.username }}</span></strong></a>
                   <ul class="dropdown-menu" role="menu">
                     <li><a class="link-user" href="{% url 'profile' %}">Perfil</a></li>
                     <li><a class="link-user" href="{% url 'logout' %}">Salir</a></li>
