@@ -26,13 +26,18 @@ def resultadosDetalle(request):
 #[BusquedasListView] recibe parametros de busqueda de habilidades y retorna json con resultados
 class busquedasListView(ListView):
 	model = habilidadesModel
+
+	#numeroHabilidadesRespuesta = 10
 	#template_name = "busquedas_sprike.html"
 
 	#Se ejecuta al momento de realizar una peticion tipo GET a la url
 	def get(self, request, *args, **kwargs):
 
 		self.object_list = self.get_queryset()
+
 		formato = self.request.GET.get('format', None)
+	#	cantidad = self.request.GET.get('c', None)
+
 		if formato == 'json':
 			return self.json_to_response()
 
@@ -48,6 +53,11 @@ class busquedasListView(ListView):
 
 		#orden = self.obtenerOrdenDeConsulta(self.request.GET.get('sort', None))
 
+		ordenOpciones = {
+			'1': 'num_solicitudes',
+			'2': 'val_promedio',
+		}
+
 		q = self.querysetPorDefecto()
 
 		#Proceso de Consulta
@@ -56,7 +66,7 @@ class busquedasListView(ListView):
 		if fraseBuscada is not None and fraseBuscada != '':
 			q = self.filtrarPorPalabras(q, fraseBuscada)
 		if orden is not None and orden != '':
-			q = q.order_by('-'+orden)
+			q = q.order_by('-'+ordenOpciones[orden])
 		return q
 
 #	def obtenerOrdenDeConsuta(self, criterioDeOrden):

@@ -1,5 +1,7 @@
 from django.db import models
 from usuarios.models import perfilUsuarioModel
+from django.template import defaultfilters
+
 
 HABILIDADES_FOTO_DEFAULT = 'habilidades/img/no_image.png'
 
@@ -19,7 +21,8 @@ class habCategoriasModel(models.Model):
 class habilidadesModel(models.Model):
 	usuario = models.ForeignKey(perfilUsuarioModel)
 	categoria = models.ForeignKey(habCategoriasModel)
-	nhabilidad = models.CharField(max_length=30,blank=False,null=False)
+	nhabilidad = models.CharField(max_length=50,blank=False,null=False)
+	slug = models.SlugField(max_length=50)
 	descripcion = models.CharField(max_length=250,blank=False,null=False)
 	foto = models.ImageField(upload_to= 'habilidades/img',blank=True,null=True, default=HABILIDADES_FOTO_DEFAULT)
 	val_promedio = models.IntegerField(blank=True,null=True)
@@ -31,7 +34,9 @@ class habilidadesModel(models.Model):
 	def __str__(self):
 		return u'%s' % (self.nhabilidad)
 
-
+	def save(self, *args, **kwargs):
+		self.slug = defaultfilters.slugify(self.nhabilidad)
+		super(habilidadesModel, self).save( *args, **kwargs)
 
 
 """
