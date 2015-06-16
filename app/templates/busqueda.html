@@ -8,33 +8,33 @@
 		<div class="container div-detail content-info">
 			<div class="row">
 				<div class="col-xs-12 col-md-4 text-center">
-					<img src="http://localhost:8000/media/habilidades/img/no_image.png" class="photo-detail" alt="">
+					<img src="{{ habilidad.foto.url }}" class="photo-detail" alt="{{ habilidad.slug }}">
 				</div>
 				<div class="col-xs-12 col-md-8">
 					<div class="col-xs-12 col-md-8">
-						<h2>Programmer CakePhp</h2>
-						<p class="username"><strong>Patric Lethz Sankclerk Prok</strong></p>
-						<p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse non accumsan justo, sit amet viverra sapien. Nullam a libero vitae orci imperdiet blandit quis vel ante. Proin non egestas dolor, a sollicitudin quam. Etiam mattis ipsum luctus leo iaculis, vel rhoncus mauris dictum. Mauris porta felis tellus, sed tincidunt velit gravida in.</p>
+						<h2>{{ habilidad.nhabilidad }}</h2>
+						<p class="username"><strong>{{ usuario.first_name }} {{ usuario.last_name }}</strong></p>
+						<p class="text">{{ habilidad.descripcion }}</p>
 					</div>
 					<div class="col-xs-12 col-md-4">
 						<div class="text-top text-center col-xs-12 col-md-12" data-toggle="tooltip" data-placement="top" title="Calificación">
 							<div class="label-descp label-warning">
-								<i class="glyphicon glyphicon-star desc3"></i></a> <strong class="desc3">4</strong>
+								<i class="glyphicon glyphicon-star desc3"></i></a> <strong class="desc3">{{ habilidad.val_promedio }}</strong>
 							</div>
 						</div>
 						<div class="text-top text-center col-xs-12 col-md-12" data-toggle="tooltip" data-placement="top" title="Número Telefónico">
 							<div class="label-descp label-telephone">
-								<i class="glyphicon glyphicon-phone-alt desc3"></i> <strong class="desc3">3124761243</strong>
+								<i class="glyphicon glyphicon-phone-alt desc3"></i> <strong class="desc3">{{ perfil.celular1 }}</strong>
 							</div>
 						</div>
 						<div class="text-top text-center col-xs-12 col-md-12" data-toggle="tooltip" data-placement="top" title="Solicitudes">
 							<div class="label-descp label-success">
-								<i class="glyphicon glyphicon-th-list desc3"></i> <strong class="desc3">0</strong>
+								<i class="glyphicon glyphicon-th-list desc3"></i> <strong class="desc3">{{ habilidad.num_solicitudes }}</strong>
 							</div>
 						</div>
 						<div class="text-top text-center col-xs-12 col-md-12" data-toggle="tooltip" data-placement="top" title="Precio">
 							<div class="label-descp label-danger">
-								<i class="glyphicon glyphicon-usd desc3"></i> <strong class="desc3">0</strong>
+								<i class="glyphicon glyphicon-usd desc3"></i> <strong class="desc3">{{ habilidad.precio }}</strong>
 							</div>
 						</div>
 					</div>

@@ -20,24 +20,33 @@ def buscarTemplate(request):
 	TodasLasCategorias = habCategoriasModel.objects.all().order_by('categoria')
 	return render(request,'buscar.html',{'categoria':TodasLasCategorias})
 
-def resultadosDetalle(request):
-	return render(request,'result_detail.html')
+def detalleHabilidadBuscada(request,slug,pk):
+	try:
+		habilidadBuscada = habilidadesModel.objects.get(slug=slug, pk=pk)
+	except ObjectDoesNotExist:
+		habilidadBuscada = get_object_or_404(habilidadesModel,pk=pk)
+
+	usuario = User.objects.get(id= habilidadBuscada.usuario_id)
+	perfilusuario = perfilUsuarioModel.objects.get(usuario=usuario)
+
+	contexto = {
+		'habilidad' : habilidadBuscada,
+		'perfil': perfilusuario,
+		'usuario': usuario,
+	}
+
+	return render(request,'busqueda.html', contexto)
 
 #[BusquedasListView] recibe parametros de busqueda de habilidades y retorna json con resultados
 class busquedasListView(ListView):
 	model = habilidadesModel
 
-	#numeroHabilidadesRespuesta = 10
-	#template_name = "busquedas_sprike.html"
-
-	#Se ejecuta al momento de realizar una peticion tipo GET a la url
+	'''Se ejecuta al momento de realizar una peticion tipo GET a la url'''
 	def get(self, request, *args, **kwargs):
 
 		self.object_list = self.get_queryset()
 
 		formato = self.request.GET.get('format', None)
-	#	cantidad = self.request.GET.get('c', None)
-
 		if formato == 'json':
 			return self.json_to_response()
 
@@ -101,7 +110,9 @@ class busquedasListView(ListView):
 				'userfirstname': usuario.first_name,
 				'userlastname': usuario.last_name,
 				'userphone': perfilusuario.celular1,
+				'habilidad_id': habilidad.id,
 				'nhabilidad': habilidad.nhabilidad,
+				'slug': habilidad.slug,
 				'descripcion': habilidad.descripcion,
 				'habilidad_id': habilidad.id,
 				'habilidad_val':habilidad.val_promedio,
