@@ -28,7 +28,7 @@
 							<div class="form-group">
 								<label for="categoria">Categoría</label>
 								<select name="categoria" id="categoria" class="form-control">
-									<option disabled selected>Categorías</option>
+									<option disabled selected value="0">Categorías</option>
 									{% for category in categoria %}                         
 										<option value="{{ category.id }}">{{ category.categoria }}</option>
 									{% endfor %}
@@ -52,7 +52,7 @@
 			<!--</form>-->
 		</div>
 	</div>
-	<div class="content-info">
+	<div class="container">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
@@ -71,7 +71,7 @@
 									</div>
 									<div class="col-xs-12 col-sm-8 col-md-10">
 										<div class="col-md-8">
-											<h3><strong><a href="/Buscar-category/">{{ this.nhabilidad }}</a></strong></h3>
+											<h3><strong><a href="/resultados/detalle/">{{ this.nhabilidad }}</a></strong></h3>
 											<p class="username">{{ this.userfirstname }} {{ this.userlastname }}</p>
 											<p class="text">{{ this.descripcion }}</p>
 										</div>
@@ -92,7 +92,7 @@
 						  			</div>
 					  			</div>
 				  			{{/each}}
-				  			<nav class="text-center">
+				  			<!--<nav class="text-center">
 							  	<ul class="pagination">
 							    	<li>
 							      		<a href="#" aria-label="Previous">
@@ -110,12 +110,15 @@
 							      		</a>
 							    	</li>
 							  	</ul>
-							</nav>
+							</nav>-->
 				  		{{else}}
 				  			<span>No hay resultados</span>
 				  		{{/if}}
 					</script>
 					{%endverbatim%}
+				</div>
+				<div class="row">
+					<button class="btn">Ver más</button>
 				</div>
 			</div>
 		</div>
@@ -128,13 +131,11 @@
 	<script src="{% static 'jslibraries/jquery.autocomplete.min.js' %}"></script>
 	<script>
 
-
 		function removerTag (elemento) {
 			var tag = $(elemento).parent();
 			tag.remove();
 			quitarParametros(tag);
 		}
-
 	//$(function() {
 		var PARAMETROS = new Array();
 
@@ -146,6 +147,7 @@
 		$('#categoria').change(function(){
 			crearTag(this.options[this.selectedIndex].text,'categoria-tag');
 			agregarParametros(this);
+			this.value=0;
 		})
 		$('#buscar').click(function() {
 			busquedaInput = $('#busqueda').get(0);
@@ -161,6 +163,9 @@
 				busquedaInput.value = '';
 			}
 		});
+		$('#orden').change(function(){
+			agregarParametros(this);
+		})
 
 		function agregarParametros(elemento){
 			PARAMETROS[elemento.name] = elemento.value;
@@ -183,6 +188,7 @@
 				if(texto != ''){
 					$('.tag-show').append('<span class="tag label label-success" id="'+tipo+'" data-value="'+tipo+'">'+texto+'<a class="remove remove-tag glyphicon glyphicon-remove" onclick=removerTag(this)></a></span>');
 				}
+				$('#clear').show();
 			}
 		}
 

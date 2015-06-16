@@ -8,5 +8,5 @@ urlpatterns = patterns('',
     url(r'^$', 'app.views.inicio',name='inicio'),
     url(r'^buscar/$', 'app.views.buscarTemplate',name='buscar'),
 	url(r'^resultados/$', busquedasListView.as_view(),name='resultados'),
-
+	url(r'^resultados/detalle/$', 'app.views.resultadosDetalle',name='resultados-detalle'),
 )

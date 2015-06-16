@@ -1,9 +1,16 @@
 /* custom template */
 html,
 body
-  height 100%
   font-family verdana,arial,sans-serif
   color #555555
+  
+html
+  position relative
+  min-height 100%
+
+body
+  margin-bottom 60px
+  font-size 17px
 
 .nav
   font-family Arial,sans-serif
@@ -56,9 +63,9 @@ hr
   top 0
   background-color #444444
   /*
-    background-image:url('/assets/example/bg_suburb.jpg');
-    background-size:cover;
-    background-attachment:fixed;
+    background-image:url('/assets/example/bg_suburb.jpg')
+    background-size:cover
+    background-attachment:fixed
   */
 
 .divider
@@ -356,10 +363,10 @@ small.text-muted
   
 .n-red
   padding 3px
-  border-radius: 5px 5px 5px 5px;
-  -moz-border-radius: 5px 5px 5px 5px;
-  -webkit-border-radius: 5px 5px 5px 5px;
-  border: 0px solid #000000;
+  border-radius 5px 5px 5px 5px
+  -moz-border-radius 5px 5px 5px 5px
+  -webkit-border-radius 5px 5px 5px 5px
+  border 0px solid #000000
   
 .date-need
   float right
@@ -383,7 +390,7 @@ small.text-muted
 
 @media screen and (max-width 991px)
   .desc-sign
-    display: none
+    display none
   
   .div-align
     text-align center

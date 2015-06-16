@@ -45,16 +45,27 @@ def crearNuevaHabilidad(request):
 			habilidadNueva.save()
 			response_data['message'] = 'habilidad Creada!'
 
-			return JsonResponse(response_data)
+			return HttpResponse(
+				json.dumps(response_data),
+				content_type="application/json"
+			)
 
 		else:
 			data_error = json.loads(form.errors.as_json())
-			return JsonResponse(data_error)
+			return HttpResponse(
+				json.dumps(data_error),
+				content_type="application/json"
+			)
 
 #[detalleHabilidadView] View encargada de retornar template del detalle de una habilidad
 @login_required()
-def detalle(request,pk):
-	habilidadBuscada = get_object_or_404(habilidadesModel,id=pk)
+def detalle(request, slug, pk):
+
+	try:
+		habilidadBuscada = habilidadesModel.objects.get(slug=slug, pk=pk)
+	except ObjectDoesNotExist:
+		habilidadBuscada = get_object_or_404(habilidadesModel,pk=pk)
+
 	templateRespuesta = 'no_permitido.html'
 	form = nuevaHabilidadForm(instance=habilidadBuscada)
 
@@ -146,7 +157,7 @@ def listarHabilidadesActivas(request):
 		data = serializers.serialize(
 			"json",
 			habilidadesModel.objects.all().filter(usuario_id=request.user.id,estado=True).order_by('-fecha_creacion'),
-			fields = ('pk','categoria','nhabilidad','foto','descripcion','val_promedio','num_solicitudes','precio'),
+			fields = ('pk','categoria','slug','nhabilidad','foto','descripcion','val_promedio','num_solicitudes','precio'),
 			use_natural_foreign_keys=True,
 		)
 
