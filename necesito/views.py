@@ -1,13 +1,14 @@
 # -*- encoding: utf-8 -*-
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.models import User
 
 
 from habilidades.models import habilidadesModel
 from usuarios.models import perfilUsuarioModel
 from necesito.models import teNecesitoModel
+from necesito.forms import teNecesitoForm
 
 # Create your views here.
 def necesito(request):
@@ -22,12 +23,26 @@ def teNecesito(request, usuarioSolicitado, habilidadSlug):
 	context = {
 		'usuario' : usuario,
 		'habilidad' : habilidadSolicitada,
+		'perfil': perfil,
 	}
 
 	return render(request,'te_necesito.html', context)
 
 def crearMensajeSolicitud(request):
 	if request.method == "POST":
+		form = teNecesitoForm(request.POST, usuarioSolicitante=request.user.id)
+		#form.usuarioSolicitante = request.user.id
+		respuesta = {}
+		if form.is_valid():
+			form.save()
+			respuesta['mensaje'] = 'El mensaje ha sido enviado'
+		else:
+			print form.errors
+			respuesta['mensaje'] = 'No fue enviado el mensaje'
+
+		return JsonResponse(respuesta, safe=False)
+
+		"""
 		usuarioSolicitante = perfilUsuarioModel.objects.get(usuario=request.user.id)
 		usuarioRequerido = perfilUsuarioModel.objects.get(usuario=request.POST['usuarioRequerido'])
 		habilidadSolicitada = habilidadesModel.objects.get(id=request.POST['habilidadSolicitada'])
@@ -42,5 +57,5 @@ def crearMensajeSolicitud(request):
 
 		necesitoSolicitud.save()
 
-		return HttpResponse(necesitoSolicitud)
-
+		return JsonResponse(necesitoSolicitud, data=safe)
+"""

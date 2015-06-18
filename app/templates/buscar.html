@@ -52,11 +52,11 @@
 			<!--</form>-->
 		</div>
 	</div>
-	<div class="container">
+	<div class="container div-result">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-12">
-					<a href="#" class="clear-tag" id="clear">Limpiar Todo</a>
+				<div class="col-md-12"><!--
+					<a href="#" class="clear-tag" id="clear">Limpiar Todo</a>-->
 					<div class="tag-show">
 					</div>
 				</div>
@@ -118,7 +118,7 @@
 					{%endverbatim%}
 				</div>
 				<div class="row">
-					<button class="btn">Ver más</button>
+					<button class="btn col-xs-12 col-sm-12 col-md-12 col-lg-12">Ver más</button>
 				</div>
 			</div>
 		</div>
@@ -186,7 +186,7 @@
 			else
 			{
 				if(texto != ''){
-					$('.tag-show').append('<span class="tag label label-success" id="'+tipo+'" data-value="'+tipo+'">'+texto+'<a class="remove remove-tag glyphicon glyphicon-remove" onclick=removerTag(this)></a></span>');
+					$('.tag-show').append('<span class="tag label label-success" id="'+tipo+'" data-value="'+tipo+'">'+texto+' <strong>|</strong><a class="remove remove-tag glyphicon glyphicon-remove" onclick=removerTag(this)></a></span>');
 				}
 				$('#clear').show();
 			}
