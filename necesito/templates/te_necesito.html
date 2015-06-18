@@ -1,0 +1,60 @@
+{% extends "index.html" %}
+{% load staticfiles %}
+{% block content %}
+<div class="container div-detail content-info">
+	<div class="row text-center">
+		<div class="col-md-12">
+			<h2><img src="{{ perfil.foto.url }}" class="img-circle img-user-desc" alt=""> {{usuario.first_name }} {{usuario.last_name}}</h2>
+		</div>
+		<div class="col-md-12">
+			<div class="col-md-6">
+				<div class="col-md-12">
+					<img src="{{ habilidad.foto.url }}" class="img-rounded img-hbl" alt="">
+				</div>
+				<div class="col-md-12 text-left spacing-p">
+					<h3>{{habilidad.nhabilidad}}</h3>
+					<p>{{habilidad.descripcion}}</p>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<form method="post" id="solicitud">
+					{% csrf_token %}
+					<div class="form-group">
+						<label for="mensaje">Mensaje:</label>
+						<textarea name="mensaje" id="mensaje" class="form-control" cols="200" rows="4" required></textarea>
+						<input id="usuarioRequerido" name="usuarioRequerido" type="hidden" value="{{user.id}}">
+						<input id="habilidadSolicitada" name="habilidadSolicitada" type="hidden" value="{{habilidad.id}}">
+					</div>
+					<div class="form-group">
+						<input type="submit" value="Enviar" class="btn btn-primary">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div> 
+{% endblock %}
+{% block scripts %}
+	<script src="{% static 'jsapp/csrf_load.js' %}"></script>
+	<script>
+		$(function(){
+			$('#solicitud').on('submit',function(event){
+				event.preventDefault();
+				$.ajax({
+					url: '{% url 'solicitud' %}',
+					type: "POST",
+					dataType: 'json',
+					data: {
+						mensaje: $('#mensaje').val(),
+						usuarioRequerido: $('#usuarioRequerido').val(),
+						habilidadSolicitada: $('#habilidadSolicitada').val(),
+					},
+					success: function(json){
+						console.log('ok');
+					},
+				});
+			})
+
+		});
+	</script>
+{% endblock %}
