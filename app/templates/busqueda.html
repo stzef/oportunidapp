@@ -16,23 +16,31 @@
 						<p class="username"><strong>{{ usuario.first_name }} {{ usuario.last_name }}</strong></p>
 						<p class="text">{{ habilidad.descripcion }}</p>
 					</div>
-					<div class="col-xs-12 col-md-4 text-center">
-						<div class="label-descp-2 label-warning col-xs-6 col-md-6 text-center" data-toggle="tooltip" data-placement="top" title="Calificación">
-							<i class="glyphicon glyphicon-star desc3"></i></a> <strong class="desc3">{{ habilidad.val_promedio }}</strong>
+					<div class="col-xs-12 col-md-4">
+						<div class="text-top text-center col-xs-12 col-md-12" data-toggle="tooltip" data-placement="top" title="Calificación">
+							<div class="label-descp label-warning">
+								<i class="glyphicon glyphicon-star desc3"></i></a> <strong class="desc3">{{ habilidad.val_promedio }}</strong>
+							</div>
 						</div>
-						<div class="label-descp-2 label-telephone col-xs-6 col-md-6 text-center" data-toggle="tooltip" data-placement="top" title="Número Telefónico">
-							<i class="glyphicon glyphicon-phone-alt desc3"></i> <strong class="desc3">{{ perfil.celular1 }}</strong>
+						<div class="text-top text-center col-xs-12 col-md-12" data-toggle="tooltip" data-placement="top" title="Número Telefónico">
+							<div class="label-descp label-telephone">
+								<i class="glyphicon glyphicon-phone-alt desc3"></i> <strong class="desc3">{{ perfil.celular1 }}</strong>
+							</div>
 						</div>
-						<div class="label-descp-2 label-success col-xs-6 col-md-6 text-center" data-toggle="tooltip" data-placement="top" title="Solicitudes">
-							<i class="glyphicon glyphicon-th-list desc3"></i> <strong class="desc3">{{ habilidad.num_solicitudes }}</strong>
+						<div class="text-top text-center col-xs-12 col-md-12" data-toggle="tooltip" data-placement="top" title="Solicitudes">
+							<div class="label-descp label-success">
+								<i class="glyphicon glyphicon-th-list desc3"></i> <strong class="desc3">{{ habilidad.num_solicitudes }}</strong>
+							</div>
 						</div>
-						<div class="label-descp-2 label-danger col-xs-6 col-md-6 text-center" data-toggle="tooltip" data-placement="top" title="Precio">
-							<i class="glyphicon glyphicon-usd desc3"></i> <strong class="desc3">{{ habilidad.precio }}</strong>
+						<div class="text-top text-center col-xs-12 col-md-12" data-toggle="tooltip" data-placement="top" title="Precio">
+							<div class="label-descp label-danger">
+								<i class="glyphicon glyphicon-usd desc3"></i> <strong class="desc3">{{ habilidad.precio }}</strong>
+							</div>
 						</div>
 					</div>
 				</div>
 				<div class="col-md-12 text-center">
-					<a href="#" class="btn btn-primary">Te Necesito</a>
+					<a href="{% url 'tenecesito' usuario.username habilidad.slug %}" class="btn btn-primary">Te Necesito</a>
 				</div>
 		    </div>
 		</div>

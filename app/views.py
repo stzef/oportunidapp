@@ -86,7 +86,7 @@ class busquedasListView(ListView):
 
 	def querysetPorDefecto(self):
 		#Consulta por defecto
-		q = self.model.objects.all()
+		q = self.model.objects.all().filter(estado=True)
 		return q
 
 	def filtrarPorPalabras(self, q, fraseBuscada):

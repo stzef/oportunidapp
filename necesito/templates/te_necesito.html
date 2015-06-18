@@ -1,0 +1,43 @@
+{% extends "index.html" %}
+{% load staticfiles %}
+{% block content %}
+<div class="container div-detail content-info">
+	<h2>{{usuario.first_name }} {{usuario.last_name}}</h2>
+	<h4>{{habilidad.nhabilidad}}</h4>
+	<p>{{habilidad.descripcion}}</p>
+	<form method="post" id="solicitud">
+		{% csrf_token %}
+		<p>
+			<label for="mensaje">Mensaje:</label> 
+			<input id="mensaje" maxlength="200" name="mensaje" type="text" required>
+			<input id="usuarioRequerido" name="usuarioRequerido" type="hidden" value="{{user.id}}">
+			<input id="habilidadSolicitada" name="habilidadSolicitada" type="hidden" value="{{habilidad.id}}">
+		</p>
+		<input type="submit" value="Enviar">
+	</form>
+</div> 
+{% endblock %}
+{% block scripts %}
+	<script src="{% static 'jsapp/csrf_load.js' %}"></script>
+	<script>
+		$(function(){
+			$('#solicitud').on('submit',function(event){
+				event.preventDefault();
+				$.ajax({
+					url: '{% url 'solicitud' %}',
+					type: "POST",
+					dataType: 'json',
+					data: {
+						mensaje: $('#mensaje').val(),
+						usuarioRequerido: $('#usuarioRequerido').val(),
+						habilidadSolicitada: $('#habilidadSolicitada').val(),
+					},
+					success: function(json){
+						console.log('ok');
+					},
+				});
+			})
+
+		});
+	</script>
+{% endblock %}

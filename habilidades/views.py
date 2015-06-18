@@ -10,7 +10,6 @@ from django.shortcuts import get_object_or_404
 
 
 #Importaciones desde Aplicacion [Oportunidad]
-from serializers import habilidadesSerializer
 from models import habilidadesModel, habCategoriasModel
 from forms import nuevaHabilidadForm
 from usuarios.models import perfilUsuarioModel
@@ -175,7 +174,7 @@ def listarHabilidadesNoActivas(request):
 		data = serializers.serialize(
 			"json",
 			habilidadesModel.objects.all().filter(usuario_id=request.user.id,estado=False).order_by('-fecha_creacion'),
-			fields = ('pk','categoria','nhabilidad','foto','descripcion','val_promedio','num_solicitudes','precio'),
+			fields = ('pk','categoria','slug','nhabilidad','foto','descripcion','val_promedio','num_solicitudes','precio'),
 			use_natural_foreign_keys = True,
 		)
 		data_response = cleanJsonModel(json.loads(data))

@@ -1,27 +1,18 @@
 from django.shortcuts import render, redirect, render_to_response 
 from django.contrib.auth import login, logout, update_session_auth_hash
 from django.contrib.auth.models import User
-from models import perfilUsuarioModel
 from django.views.generic import FormView
-from forms import loginForm,registroForm
 from django.views.decorators.csrf import csrf_exempt
-from rest_framework import viewsets
-from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
-from forms import *
-import json
 from django.views.generic.edit import UpdateView
 from django.template import RequestContext
 
-# Create your views here.
-#def inicio(request):
-#	return render(request,'home.html')
 
-#@login_required(login_url='/ingresar')
-#def perfilView(request):
-#	return redirect('/')
+import json
+from forms import *
+from forms import loginForm,registroForm
+from models import perfilUsuarioModel
 
 
 def logoutView(request):
