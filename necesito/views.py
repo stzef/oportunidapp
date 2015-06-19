@@ -30,15 +30,16 @@ def teNecesito(request, usuarioSolicitado, habilidadSlug):
 
 def crearMensajeSolicitud(request):
 	if request.method == "POST":
-		form = teNecesitoForm(request.POST, usuarioSolicitante=request.user.id)
+		form = teNecesitoForm(request.POST or None)
 		#form.usuarioSolicitante = request.user.id
 		respuesta = {}
 		if form.is_valid():
 			form.save()
+			respuesta['estado'] = 1
 			respuesta['mensaje'] = 'El mensaje ha sido enviado'
 		else:
-			print form.errors
-			respuesta['mensaje'] = 'No fue enviado el mensaje'
+			respuesta['estado'] = 0
+			respuesta['mensaje'] = 'Lo sentimos en este momento no se puede enviar el mensaje'
 
 		return JsonResponse(respuesta, safe=False)
 

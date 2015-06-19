@@ -1,6 +1,7 @@
 # -*- encoding: utf-8 -*-
 from django import forms
 from necesito.models import teNecesitoModel
+from usuarios.models import perfilUsuarioModel
 
 class teNecesitoForm(forms.ModelForm):
 
@@ -13,7 +14,4 @@ class teNecesitoForm(forms.ModelForm):
 		#	'habilidadSolicitada' : forms.HiddenInput(),
 		#	'mensaje' : forms.TextInput(attrs={'required':''})
 		#}
-	def __init__(self, *args, **kwargs):
-		print kwargs.get('usuarioSolicitante')
-		self.usuarioSolicitante = kwargs.get('usuarioSolicitante')
-		super(teNecesitoForm, self).__init__(*args, **kwargs)
+
