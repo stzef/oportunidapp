@@ -42,14 +42,27 @@ class registroView(FormView):
 		#return HttpResponse(self.get_context_data(form=form))
 		return self.render_to_response(self.get_context_data(form=form))
 
+
 class loginView(FormView):
 	form_class = loginForm
 	template_name = 'login.html'
 	success_url = '/habilidades/'
+	#url = 'aa'
+
+	def get(self, request, *args,**kwargs):
+		if (self.request.GET.get('next')):
+			self.url = self.request.GET.get('next')
+		return super(loginView, self).get(request, *args, **kwargs)
 
 	def form_valid(self, form):
 		login(self.request, form.user_cache)
 		return super(loginView, self).form_valid(form)
+
+	#def get_success_url(self):
+	#	print self.url
+		#print self.success_url
+		#return super(loginView, self).get_success_url()
+
 
 def EditProfile(request):
 	pk = request.user.id

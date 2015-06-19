@@ -17,18 +17,22 @@
 				</div>
 			</div>
 			<div class="col-md-6">
-				<form method="post" id="solicitud">
-					{% csrf_token %}
-					<div class="form-group">
-						<label for="mensaje">Mensaje:</label>
-						<textarea name="mensaje" id="mensaje" class="form-control" cols="200" rows="4" required></textarea>
-						<input id="usuarioRequerido" name="usuarioRequerido" type="hidden" value="{{user.id}}">
-						<input id="habilidadSolicitada" name="habilidadSolicitada" type="hidden" value="{{habilidad.id}}">
-					</div>
-					<div class="form-group">
-						<input type="submit" value="Enviar" class="btn btn-primary">
-					</div>
-				</form>
+				<div class="msg"></div>
+				<div class="form">
+					<form method="post" id="solicitud">
+						{% csrf_token %}
+						<div class="form-group">
+							<label for="mensaje">Mensaje:</label>
+							<textarea name="mensaje" id="mensaje" class="form-control" cols="200" rows="4" required></textarea>
+							<input id="usuarioRequerido" name="usuarioRequerido" type="hidden" value="{{user.id}}">
+							<input id="usuarioSolicitante" name="usuarioSolicitante" type="hidden" value="{{ user.id}}">
+							<input id="habilidadSolicitada" name="habilidadSolicitada" type="hidden" value="{{habilidad.id}}">
+						</div>
+						<div class="form-group">
+							<input type="submit" value="Enviar" class="btn btn-primary">
+						</div>
+					</form>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -47,10 +51,17 @@
 					data: {
 						mensaje: $('#mensaje').val(),
 						usuarioRequerido: $('#usuarioRequerido').val(),
+						usuarioSolicitante: $('#usuarioSolicitante').val(),
 						habilidadSolicitada: $('#habilidadSolicitada').val(),
 					},
 					success: function(json){
-						console.log('ok');
+						if(json['estado']==1){
+							$('.form').hide();
+							$('.msg').html('<div class="alert alert-success" role="alert"><strong>Enviado exitosamente!</strong> Pronto se pondrá en contácto contigo.</div>');
+						}
+						else{
+							$('.msg').html('<div class="alert alert-success" role="alert"><strong>Error!</strong> '+json['mensaje']+'</div>');
+						}
 					},
 				});
 			})
