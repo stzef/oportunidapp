@@ -3,8 +3,10 @@
 {% block content %}
 <div class="container div-detail content-info">
 	<div class="row text-center">
-		<div class="col-md-12">
-			<h2><img src="{{ perfil.foto.url }}" class="img-circle img-user-desc" alt=""> {{usuario.first_name }} {{usuario.last_name}}</h2>
+		<div class="col-md-12 text-left">
+			<div class="page-header">
+				<h2><img src="{{ perfil.foto.url }}" class="img-circle img-user-desc" alt=""> {{usuario.first_name }} {{usuario.last_name}}</h2>
+			</div>
 		</div>
 		<div class="col-md-12">
 			<div class="col-md-6">
