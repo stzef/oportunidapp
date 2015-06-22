@@ -121,15 +121,16 @@ def UpdatePass(request):
 def cambiarFotoPerfil(request):
 	user = perfilUsuarioModel.objects.get(usuario_id = request.POST['usuario_id'])
 	photo = request.FILES['foto']
-	if user.usuario_id == request.user.id:
-		image_path = settings.MEDIA_ROOT +'/'+ user.foto.name
-		os.remove(image_path)
+
+	if (user.usuario_id == request.user.id):
+		if user.foto.name != 'usuarios/avatar/user.jpg':
+			image_path = settings.MEDIA_ROOT +'/'+ user.foto.name
+			os.remove(image_path)
 		user.foto = photo
 		user.save(update_fields=["foto"])
 
 	response_data = {}
 	response_data['message'] = 'OK !!!!'
-	
 	return HttpResponse(
 		json.dumps(response_data),
 		content_type="application/json"
