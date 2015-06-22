@@ -40,29 +40,33 @@ class registroView(FormView):
 		return HttpResponseRedirect(self.get_success_url())
 
 	def form_invalid(self, form):
-		#return HttpResponse(self.get_context_data(form=form))
 		return self.render_to_response(self.get_context_data(form=form))
 
+	def get_success_url(self):
+		if self.request.GET.get('next'):
+			return self.request.GET.get('next')
+		else:
+			return super(registroView, self).get_success_url()
 
 class loginView(FormView):
 	form_class = loginForm
 	template_name = 'login.html'
 	success_url = '/habilidades/'
-	#url = 'aa'
-
-	def get(self, request, *args,**kwargs):
-		if (self.request.GET.get('next')):
-			self.url = self.request.GET.get('next')
-		return super(loginView, self).get(request, *args, **kwargs)
 
 	def form_valid(self, form):
 		login(self.request, form.user_cache)
 		return super(loginView, self).form_valid(form)
 
-	#def get_success_url(self):
-	#	print self.url
-		#print self.success_url
-		#return super(loginView, self).get_success_url()
+	def get_success_url(self):
+		if self.request.GET.get('next'):
+			return self.request.GET.get('next')
+		else:
+			return super(loginView, self).get_success_url()
+
+	def get_context_data(self, **kwargs):
+		context = super(loginView, self).get_context_data(**kwargs)
+		context['next'] = self.request.GET.get('next')
+		return context
 
 
 def EditProfile(request):
@@ -119,7 +123,7 @@ def UpdatePass(request):
 @csrf_exempt
 @login_required
 def cambiarFotoPerfil(request):
-	user = perfilUsuarioModel.objects.get(usuario_id = request.POST['usuario_id'])
+	user = perfilUsuarioModel.objects.get(usuario = request.POST['usuario_id'])
 	photo = request.FILES['foto']
 
 	if (user.usuario_id == request.user.id):

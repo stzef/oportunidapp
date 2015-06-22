@@ -22,7 +22,7 @@
 			                {{ form.password.errors.as_ul|cut:"*" }}
 							<input class="btn btn-success btn-lg btn-block" type="submit" value="Ingresar">
 							<div class="text-center">
-								<a href="{% url 'signup' %}" class="need-help">No tienes cuenta? <span class="blue-color">Registrate aqui!</span></a><br>
+								<a href="{% url 'signup' %}{% if next %}?next={{next}}{%endif%}" class="need-help">No tienes cuenta? <span class="blue-color">Registrate aqui!</span></a><br>
 								<a href="#" class="need-help">olvido su contraseña?</a>
 							</div>
 						</form>

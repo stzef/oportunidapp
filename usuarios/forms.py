@@ -9,7 +9,8 @@ from django.core.exceptions import ValidationError
 class loginForm(AuthenticationForm):
 	username = forms.CharField(error_messages={'required': 'Ingresa tu Usuario, '},widget=forms.TextInput(attrs={'class':'form-control ','placeholder':'nombre de usuario','autofocus':''}))
 	password = forms.CharField(error_messages={'required': 'Ingresa tu Contraseña'},widget=forms.PasswordInput(attrs={'class':'form-control','placeholder':'Contraseña'}))
-	
+
+
 class emailLoginForm(forms.Form):
 	email = forms.EmailField(error_messages={'required': 'Ingresa tu email'})
 	password = forms.CharField(error_messages={'required': 'Ingresa tu Contraseña'},widget=forms.PasswordInput(attrs={'class':'form-control','placeholder':'Contraseña'}))
@@ -44,7 +45,7 @@ class registroForm(forms.Form):
 	fnacimiento = forms.DateField(required=False,widget=forms.TextInput(attrs={'type': 'date', 'required': 'required', 'placeholder':'Fecha de nacimiento', 'class':'form-control col-md-11'}),)
 	genero  = forms.ChoiceField(choices=(('M','Masculino'),('F', 'Femenino'),('O','Otro'),),required=True,widget=forms.Select(attrs={'class':'form-control col-md-11'}),)
 	celular = forms.IntegerField(required=False,widget=forms.TextInput(attrs={'required': 'required', 'placeholder':'Numero Celular', 'class':'form-control col-md-11'}),)
-	#Validaciones
+
 	def clean_username(self):
 		username = self.cleaned_data.get('username')
 		if User.objects.filter(username=username).exists():

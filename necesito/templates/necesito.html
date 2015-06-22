@@ -1,22 +1,37 @@
-{% extends "template.html" %}
+  {% extends "template.html" %}
 {% block head %}
 	<title>Habilidades | OportunidApp </title>
 {% endblock %}
 {% block content %}
 <div class="row">
 	<div class="full">
-		<div class="col-md-12 desc-profile spacing">
-			<h2><a href="#" data-toggle="modal" data-target="#myModal">Thomas Jackson <small>te necesita para la habilidad <strong>Carpinteria</strong></small></a></h2>
-			<p>Sed nulla risus, ultrices in rutrum nec, condimentum vel tortor. In faucibus mattis metus a vulputate. Phasellus gravida vestibulum ornare. Donec rhoncus finibus pulvinar. Donec pellentesque ipsum ac ipsum elementum, porttitor mollis ex placerat. Vivamus diam tellus, venenatis euismod egestas quis, consequat eget risus.</p>
-			<span class="label label-telephone"><i class="glyphicon glyphicon-phone-alt"></i> <strong>3045691239</strong></span>
-			<span class="date-need">Miércoles, 15 Agosto 2015</span>
-		</div>
-		<div class="col-md-12 desc-profile spacing">
-			<h2><a href="#" data-toggle="modal" data-target="#myModal">Thania Gil <small>te necesita para la habilidad <strong>Cocina</strong></small></a></h2>
-			<p>Sed nulla risus, ultrices in rutrum nec, condimentum vel tortor. In faucibus mattis metus a vulputate. Phasellus gravida vestibulum ornare. Donec rhoncus finibus pulvinar. Donec pellentesque ipsum ac ipsum elementum, porttitor mollis ex placerat. Vivamus diam tellus, venenatis euismod egestas quis, consequat eget risus.</p>
-			<span class="label label-telephone"><i class="glyphicon glyphicon-phone-alt"></i> <strong>3128764523</strong></span>
-			<span class="date-need">Jueves, 01 Mayo 2015</span>
-		</div>
+    {%if  necesito %}
+      {% for mensaje in necesito %}
+  		<div class="col-md-12 desc-profile spacing">
+  			<h2>
+          <a href="#" data-toggle="modal" data-target="#myModal">
+            {{ mensaje.usuarioSolicitante.usuario.first_name}} {{ mensaje.usuarioSolicitante.usuario.last_name}} 
+            <small>
+              te necesita para la habilidad 
+              <strong>
+                {{ mensaje.habilidadSolicitada.categoria}}
+              </strong>
+            </small>
+          </a>
+        </h2>
+        <p>
+          {{mensaje.mensaje}}
+        </p>
+  			<span class="label label-telephone"><i class="glyphicon glyphicon-phone-alt"></i> <strong>{{mensaje.usuarioSolicitante.celular1}}</strong></span>
+  			<span class="date-need">{{ mensaje.fecha }}</span>
+  		</div>
+      {% endfor %}
+    {% else %}
+      <div class="row text-center">
+        <img src="/static/img/not-found.png" class="desc-img">
+        <p>Aún no has recibido mensajes.</p>
+      </div>
+    {% endif %}
 	</div>
 </div>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

@@ -11,10 +11,16 @@ from necesito.models import teNecesitoModel
 from necesito.forms import teNecesitoForm
 
 # Create your views here.
+@login_required()
 def necesito(request):
-	return render(request,'necesito.html')
+	necesitos = teNecesitoModel.objects.filter(usuarioRequerido=request.user.id)
 
-#@login_required()	
+	contexto = {
+		'necesito' : necesitos,
+	}
+	return render(request,'necesito.html', contexto)
+
+@login_required()	
 def teNecesito(request, usuarioSolicitado, habilidadSlug):
 	usuario = get_object_or_404(User, username=usuarioSolicitado)
 	perfil = perfilUsuarioModel.objects.get(usuario = usuario)
