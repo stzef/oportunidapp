@@ -71,7 +71,7 @@ class busquedasListView(ListView):
 
 		#Proceso de Consulta
 		if categoriaBuscada is not None and categoriaBuscada != '':
-			q = self.model.objects.filter(categoria=categoriaBuscada)
+			q = q.filter(categoria=categoriaBuscada)
 		if fraseBuscada is not None and fraseBuscada != '':
 			q = self.filtrarPorPalabras(q, fraseBuscada)
 		if orden is not None and orden != '':
@@ -86,7 +86,7 @@ class busquedasListView(ListView):
 
 	def querysetPorDefecto(self):
 		#Consulta por defecto
-		q = self.model.objects.all().filter(estado=True)
+		q = self.model.objects.filter(estado=True)
 		return q
 
 	def filtrarPorPalabras(self, q, fraseBuscada):

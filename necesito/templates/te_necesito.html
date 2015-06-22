@@ -3,8 +3,10 @@
 {% block content %}
 <div class="container div-detail content-info">
 	<div class="row text-center">
-		<div class="col-md-12">
-			<h2><img src="{{ perfil.foto.url }}" class="img-circle img-user-desc" alt=""> {{usuario.first_name }} {{usuario.last_name}}</h2>
+		<div class="col-md-12 text-left">
+			<div class="page-header">
+				<h2><img src="{{ perfil.foto.url }}" class="img-circle img-user-desc" alt=""> {{usuario.first_name }} {{usuario.last_name}}</h2>
+			</div>
 		</div>
 		<div class="col-md-12">
 			<div class="col-md-6">
@@ -17,19 +19,22 @@
 				</div>
 			</div>
 			<div class="col-md-6">
-				<form method="post" id="solicitud">
-					{% csrf_token %}
-					<div class="form-group">
-						<label for="mensaje">Mensaje:</label>
-						<textarea name="mensaje" id="mensaje" class="form-control" cols="200" rows="4" required></textarea>
-						<input id="usuarioRequerido" name="usuarioRequerido" type="hidden" value="{{user.id}}">
-						<input id="usuarioSolicitante" name="usuarioSolicitante" type="hidden" value="{{ user.id}}">
-						<input id="habilidadSolicitada" name="habilidadSolicitada" type="hidden" value="{{habilidad.id}}">
-					</div>
-					<div class="form-group">
-						<input type="submit" value="Enviar" class="btn btn-primary">
-					</div>
-				</form>
+				<div class="msg"></div>
+				<div class="form">
+					<form method="post" id="solicitud">
+						{% csrf_token %}
+						<div class="form-group">
+							<label for="mensaje">Mensaje:</label>
+							<textarea name="mensaje" id="mensaje" class="form-control" cols="200" rows="4" required></textarea>
+							<input id="usuarioRequerido" name="usuarioRequerido" type="hidden" value="{{usuario.id}}">
+							<input id="usuarioSolicitante" name="usuarioSolicitante" type="hidden" value="{{ user.id}}">
+							<input id="habilidadSolicitada" name="habilidadSolicitada" type="hidden" value="{{habilidad.id}}">
+						</div>
+						<div class="form-group">
+							<input type="submit" value="Enviar" class="btn btn-primary">
+						</div>
+					</form>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -53,10 +58,11 @@
 					},
 					success: function(json){
 						if(json['estado']==1){
-							alert('cambiar el formulario por un mensaje');
+							$('.form').hide();
+							$('.msg').html('<div class="alert alert-success" role="alert"><strong>Enviado exitosamente!</strong> Pronto se pondrá en contácto contigo.</div>');
 						}
 						else{
-							alert(json['mensaje']);
+							$('.msg').html('<div class="alert alert-success" role="alert"><strong>Error!</strong> '+json['mensaje']+'</div>');
 						}
 					},
 				});

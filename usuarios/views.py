@@ -7,7 +7,8 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import UpdateView
 from django.template import RequestContext
-
+import os
+from django.conf import settings
 
 import json
 from forms import *
@@ -122,10 +123,12 @@ def UpdatePass(request):
 @csrf_exempt
 @login_required
 def cambiarFotoPerfil(request):
-	user = perfilUsuarioModel.objects.get(usuario_id = request.POST['usuario_id'])
-	foto = request.FILES['foto']
+	user = perfilUsuarioModel.objects.get(usuario = request.POST['usuario_id'])
+	photo = request.FILES['foto']
 	if user.usuario_id == request.user.id:
-		user.foto = foto
+		image_path = settings.MEDIA_ROOT +'/'+ user.foto.name
+		os.remove(image_path)
+		user.foto = photo
 		user.save(update_fields=["foto"])
 
 	response_data = {}

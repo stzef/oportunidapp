@@ -30,8 +30,8 @@
                 <li class="min-nav text-center"><a href="{% url 'buscar' %}"><strong><span class="glyphicon glyphicon-search desc3"></span>  <span class="desc">Busqueda</span></strong></a></li>
                 <li class="min-nav text-center"><a href="{% url 'necesito' %}"><strong><span class="glyphicon glyphicon-user desc3"></span> <span class="desc">Te necesito</span></strong></a></li>
                 <li class="min-nav text-center"><a href="{% url 'habilidades' %}"><strong><span class="glyphicon glyphicon-thumbs-up desc3"></span> <span class="desc">Habilidades</span> <span class="n-red label-danger">5</span></strong></a></li>
-                <li class="min-nav text-center"><a href="#"><strong><span class="glyphicon glyphicon-list-alt desc3"></span> <span class="desc">Trabajos</span></strong></a></li>
-                <li class="min-nav text-center"><a href="#"><strong><span class="glyphicon glyphicon-pushpin desc3"></span> <span class="desc">Solicitudes</span></strong></a></li>
+                <!--<li class="min-nav text-center"><a href="#"><strong><span class="glyphicon glyphicon-list-alt desc3"></span> <span class="desc">Trabajos</span></strong></a></li>
+                <li class="min-nav text-center"><a href="#"><strong><span class="glyphicon glyphicon-pushpin desc3"></span> <span class="desc">Solicitudes</span></strong></a></li>-->
                 <li class="dropdow min-nav">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><strong><span class="glyphicon glyphicon-cog desc3"></span> <span class="desc">{{ user.first_name }}</span></strong></a>
                   <ul class="dropdown-menu" role="menu">
@@ -50,26 +50,9 @@
           </div>
           <div class="column col-md-3 right-noticie sidebar-offcanvas" id="sidebar">
             <div class="space"></div>
-            <div class="notice">
-              <p>Vestibulum non porta dui. Nunc eu enim congue sem gravida lacinia at at ligula. Proin pulvinar sapien id elementum auctor. Nullam malesuada eu purus in ornare.</p>
-            </div>
-            <div class="notice">
-              <p>Pellentesque mattis quam in ex imperdiet faucibus. Donec tincidunt mi a odio aliquet egestas. In fermentum, dolor mollis pharetra condimentum.</p>
-            </div>
-            <div class="notice">
-              <p>Pellentesque mattis quam in ex imperdiet faucibus. Donec tincidunt mi a odio aliquet egestas. In fermentum, dolor mollis pharetra condimentum.</p>
-            </div>
-            <div class="notice">
-              <p>Pellentesque mattis quam in ex imperdiet faucibus. Donec tincidunt mi a odio aliquet egestas. In fermentum, dolor mollis pharetra condimentum.</p>
-            </div>
-            <div class="notice">
-              <p>Pellentesque mattis quam in ex imperdiet faucibus. Donec tincidunt mi a odio aliquet egestas. In fermentum, dolor mollis pharetra condimentum.</p>
-            </div>
-            <div class="notice">
-              <p>Pellentesque mattis quam in ex imperdiet faucibus. Donec tincidunt mi a odio aliquet egestas. In fermentum, dolor mollis pharetra condimentum.</p>
-            </div>
-            <div class="notice">
-              <p>Pellentesque mattis quam in ex imperdiet faucibus. Donec tincidunt mi a odio aliquet egestas. In fermentum, dolor mollis pharetra condimentum.</p>
+            <div class="notice text-center">
+              <img src="{% static 'img/logo.png' %}"/>
+              <h3>Muy pronto encontrarás aquí ofertas de trabajo.</h3>
             </div>
           </div>
         </div>
