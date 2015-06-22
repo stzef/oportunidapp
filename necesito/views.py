@@ -14,7 +14,7 @@ from necesito.forms import teNecesitoForm
 def necesito(request):
 	return render(request,'necesito.html')
 
-#@login_required()	
+@login_required()	
 def teNecesito(request, usuarioSolicitado, habilidadSlug):
 	usuario = get_object_or_404(User, username=usuarioSolicitado)
 	perfil = perfilUsuarioModel.objects.get(usuario = usuario)
