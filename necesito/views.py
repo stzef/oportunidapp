@@ -14,7 +14,6 @@ from necesito.forms import teNecesitoForm
 @login_required()
 def necesito(request):
 	necesitos = teNecesitoModel.objects.filter(usuarioRequerido=request.user.id)
-
 	contexto = {
 		'necesito' : necesitos,
 	}

@@ -118,7 +118,7 @@
 					{%endverbatim%}
 				</div>
 				<div class="row">
-					<button class="btn col-xs-12 col-sm-12 col-md-12 col-lg-12">Ver más</button>
+					<button id="ver-mas" class="btn col-xs-12 col-sm-12 col-md-12 col-lg-12">Ver más</button>
 				</div>
 			</div>
 		</div>
@@ -138,6 +138,8 @@
 		}
 	//$(function() {
 		var PARAMETROS = new Array();
+		var PAGE = 1;
+		PARAMETROS['page'] = PAGE;
 
 		var sourceHabilidadesSearch = $('#resultHabilidadesSearch').html();
 		var templateHabilidadesSearch = Handlebars.compile(sourceHabilidadesSearch);
@@ -146,12 +148,14 @@
 		$('#busqueda').focus();
 		$('#categoria').change(function(){
 			crearTag(this.options[this.selectedIndex].text,'categoria-tag');
+			PARAMETROS['page'] = 1;
 			agregarParametros(this);
 			this.value=0;
 		})
 		$('#buscar').click(function() {
 			busquedaInput = $('#busqueda').get(0);
 			crearTag(busquedaInput.value,'busqueda-tag');
+			PARAMETROS['page'] = 1;
 			agregarParametros(busquedaInput);
 			busquedaInput.value = '';
 		})
@@ -159,13 +163,19 @@
 			if (e.keyCode == 13){
 				busquedaInput = $('#busqueda').get(0);
 				crearTag(busquedaInput.value,'busqueda-tag');
+				PARAMETROS['page'] = 1;
 				agregarParametros(busquedaInput);
 				busquedaInput.value = '';
 			}
 		});
 		$('#orden').change(function(){
 			agregarParametros(this);
-		})
+		});
+		$('#ver-mas').click(function(){
+			PAGE+=1;
+			PARAMETROS['page']=PAGE;
+			buscar(PARAMETROS);
+		});
 
 		function agregarParametros(elemento){
 			PARAMETROS[elemento.name] = elemento.value;
@@ -175,6 +185,7 @@
 			name = elemento.attr('data-value');
 			name1 = name.split('-');
 			PARAMETROS[name1[0]] = '';
+			PARAMETROS['page'] = 1;
 			buscar(PARAMETROS);
 		}
 
@@ -201,7 +212,8 @@
 					format: parametros['format'],
 					categoria: parametros['categoria'],
 					busqueda: parametros['busqueda'],
-					orden: parametros['orden']
+					orden: parametros['orden'],	
+					page: parametros['page'],
 				},
 				success:function(json){
 					buildHabilidadesSearch = templateHabilidadesSearch (json);

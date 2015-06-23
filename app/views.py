@@ -40,27 +40,26 @@ def detalleHabilidadBuscada(request,slug,pk):
 #[BusquedasListView] recibe parametros de busqueda de habilidades y retorna json con resultados
 class busquedasListView(ListView):
 	model = habilidadesModel
+	paginador = 10
 
-	'''Se ejecuta al momento de realizar una peticion tipo GET a la url'''
 	def get(self, request, *args, **kwargs):
 
 		self.object_list = self.get_queryset()
-
 		formato = self.request.GET.get('format', None)
 		if formato == 'json':
 			return self.json_to_response()
-
 		context = self.get_context_data()
 		return self.render_to_response(context)
 
-	#Funcion de busqueda de elemento en la DB
+
 	def get_queryset(self):
 		#Parametros Recibidos
 		categoriaBuscada = self.request.GET.get('categoria', None)
 		fraseBuscada = self.request.GET.get('busqueda', None)
 		orden = self.request.GET.get('orden', None)
-
-		#orden = self.obtenerOrdenDeConsulta(self.request.GET.get('sort', None))
+		page = self.request.GET.get('page', None)
+		limitePrimero = (int(page)-1)*self.paginador
+		limiteUltimo = int(page)*self.paginador
 
 		ordenOpciones = {
 			'1': 'num_solicitudes',
@@ -76,21 +75,13 @@ class busquedasListView(ListView):
 			q = self.filtrarPorPalabras(q, fraseBuscada)
 		if orden is not None and orden != '':
 			q = q.order_by('-'+ordenOpciones[orden])
-		return q
-
-#	def obtenerOrdenDeConsuta(self, criterioDeOrden):
-#		if criterioDeOrden is not None:
-#			#Proceso
-#		else:
-#			return None
+		return q[limitePrimero:limiteUltimo]
 
 	def querysetPorDefecto(self):
-		#Consulta por defecto
 		q = self.model.objects.filter(estado=True)
 		return q
 
 	def filtrarPorPalabras(self, q, fraseBuscada):
-		#Recorre la frase a buscar palabra a palabra y filtra
 		dicFraseBuscada = fraseBuscada.split()
 		for palabra in dicFraseBuscada:
 			q = q.filter(
@@ -99,7 +90,6 @@ class busquedasListView(ListView):
 		return q
 
 	def json_to_response(self):
-		#Respuesta en Json Format
 		data = []
 		for habilidad in self.object_list:
 			usuario = User.objects.get(id= habilidad.usuario_id)
