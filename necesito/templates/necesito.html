@@ -27,7 +27,10 @@
   		</div>
       {% endfor %}
     {% else %}
-      <span> Aun nadie te ha enviado un mensaje</span>
+      <div class="row text-center">
+        <img src="/static/img/not-found.png" class="desc-img">
+        <p>Aún no has recibido mensajes.</p>
+      </div>
     {% endif %}
 	</div>
 </div>

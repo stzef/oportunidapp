@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User, AbstractBaseUser
 from django.core.exceptions import ValidationError
 # Create your models here.
-HABILIDADES_FOTO_DEFAULT = 'habilidades/img/no_image.png'
+PERFIL_FOTO_DEFAULT = 'usuarios/avatar/user.jpg'
 
 class perfilUsuarioModel(models.Model):
 
@@ -15,7 +15,7 @@ class perfilUsuarioModel(models.Model):
 	cedula = models.IntegerField(max_length=20,blank=True,null=True)
 	genero = models.CharField(max_length=15,choices=GENERO_OPCIONES,default='Masculino')
 	fnacimiento = models.DateField(blank=True,null=True)
-	foto = models.ImageField(upload_to = "usuarios/avatar/",blank=True,null=True, default=HABILIDADES_FOTO_DEFAULT)
+	foto = models.ImageField(upload_to = "usuarios/avatar/",blank=True,null=True, default=PERFIL_FOTO_DEFAULT)
 	celular1 = models.IntegerField(max_length=15,blank=True,null=True)
 	celular2 = models.IntegerField(max_length=15,blank=True,null=True)
 	celular3 = models.IntegerField(max_length=15,blank=True,null=True)

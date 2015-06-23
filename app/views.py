@@ -107,6 +107,6 @@ class busquedasListView(ListView):
 				'habilidad_id': habilidad.id,
 				'habilidad_val':habilidad.val_promedio,
 				'habilidad_nsol':habilidad.num_solicitudes,
-				'foto':perfilusuario.foto.name,
+				'foto':habilidad.foto.name,
 			})
 		return JsonResponse(data, safe=False)

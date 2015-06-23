@@ -59,7 +59,8 @@
 					success: function(json){
 						if(json['estado']==1){
 							$('.form').hide();
-							$('.msg').html('<div class="alert alert-success" role="alert"><strong>Enviado exitosamente!</strong> Pronto se pondrá en contácto contigo.</div>');
+							$('.msg').show();
+							$('.msg').html('<div class="alert alert-success" role="alert"><strong>Enviado exitosamente!</strong> Pronto se pondrá en contácto contigo.</div><a href="{% url 'buscar' %}" class="btn btn-primary">Regresar</a>');
 						}
 						else{
 							$('.msg').html('<div class="alert alert-success" role="alert"><strong>Error!</strong> '+json['mensaje']+'</div>');
