@@ -3,7 +3,7 @@ from django.core import serializers
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponse, JsonResponse
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from django.db.models import Q
 
 from habilidades.models import habilidadesModel, habCategoriasModel
@@ -20,30 +20,26 @@ def buscarTemplate(request):
 	TodasLasCategorias = habCategoriasModel.objects.all().order_by('categoria')
 	return render(request,'buscar.html',{'categoria':TodasLasCategorias})
 
-def detalleHabilidadBuscada(request,slug,pk):
-	try:
-		habilidadBuscada = habilidadesModel.objects.get(slug=slug, pk=pk)
-	except ObjectDoesNotExist:
-		habilidadBuscada = get_object_or_404(habilidadesModel,pk=pk)
+class detalleHabilidadBuscada(DetailView):
+	model = habilidadesModel
+	context_object_name = 'habilidad'
+	template_name = 'busqueda.html'
 
-	usuario = User.objects.get(id= habilidadBuscada.usuario_id)
-	perfilusuario = perfilUsuarioModel.objects.get(usuario=usuario)
+	def getRecomendados(self, habilidad):
+		recomendados = habilidadesModel.objects.filter(categoria=habilidad.categoria).exclude(id=habilidad.id)[:5]
+		return recomendados
 
-	contexto = {
-		'habilidad' : habilidadBuscada,
-		'perfil': perfilusuario,
-		'usuario': usuario,
-	}
+	def get_context_data(self, **kwargs):
+		context = super(detalleHabilidadBuscada, self).get_context_data(**kwargs)
+		recomendados = self.getRecomendados(context['object'])
+		context['recomendados'] = recomendados
+		return context
 
-	return render(request,'busqueda.html', contexto)
-
-#[BusquedasListView] recibe parametros de busqueda de habilidades y retorna json con resultados
 class busquedasListView(ListView):
 	model = habilidadesModel
 	paginador = 10
 
 	def get(self, request, *args, **kwargs):
-
 		self.object_list = self.get_queryset()
 		formato = self.request.GET.get('format', None)
 		if formato == 'json':
@@ -53,7 +49,6 @@ class busquedasListView(ListView):
 
 
 	def get_queryset(self):
-		#Parametros Recibidos
 		categoriaBuscada = self.request.GET.get('categoria', None)
 		fraseBuscada = self.request.GET.get('busqueda', None)
 		orden = self.request.GET.get('orden', None)
@@ -68,7 +63,6 @@ class busquedasListView(ListView):
 
 		q = self.querysetPorDefecto()
 
-		#Proceso de Consulta
 		if categoriaBuscada is not None and categoriaBuscada != '':
 			q = q.filter(categoria=categoriaBuscada)
 		if fraseBuscada is not None and fraseBuscada != '':
