@@ -192,9 +192,7 @@ def cambiarFotoHabilidad(request):
 	imagenRecibida = request.FILES['foto']
 	imagenRecibida.name = habilidadCambioImagen.nhabilidad.replace(' ','_')+str(habilidadCambioImagen.id)
 	response_data = {}
-
 	if habilidadCambioImagen.usuario_id == request.user.id:
-		#Metodo borrar imagen anterior
 		borrarFotoActual(habilidadCambioImagen)
 		habilidadCambioImagen.foto = imagenRecibida
 		habilidadCambioImagen.save(update_fields=["foto"])
