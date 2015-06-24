@@ -3,6 +3,7 @@
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
+from django.views.generic import DetailView, ListView
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.core import serializers
@@ -20,7 +21,60 @@ from oportunidapp.settings import BASE_DIR
 import json
 import os
 
-#[habilidadesViewTemplate] View enacargada de retornar el template de habilidades
+#Importaciones de otras librerias
+from braces.views import LoginRequiredMixin
+
+class habilidadesListView(LoginRequiredMixin, ListView):
+	login_required = True
+	model = habilidadesModel
+	template_name = 'habilidades.html'
+	context_object_name = 'habilidades'
+	form = nuevaHabilidadForm
+
+	def get_queryset(self):
+		queryset = habilidadesModel.objects.filter(usuario=self.request.user, estado=True).order_by('-fecha_creacion')
+		return queryset
+
+	def get(self, request, *args, **kwargs):
+		return super(habilidadesListView, self).get(request, *args, **kwargs)
+
+	def get_context_data(self, **kwargs):
+		context = super(habilidadesListView, self).get_context_data(**kwargs)
+		context['form'] = self.form
+		return context
+
+@login_required()
+def crearNuevaHabilidad(request):	
+	if request.is_ajax():
+		form = nuevaHabilidadForm(request.POST)
+		response_data = {}
+		if form.is_valid():
+			habilidadNueva = form.save(commit=False)
+			usuario = perfilUsuarioModel.objects.get(pk=request.user.id)
+			habilidadNueva.usuario = usuario
+			habilidadNueva.save()
+
+			response_data['id'] = habilidadNueva.pk
+			response_data['nhabilidad'] = habilidadNueva.nhabilidad
+			response_data['descripcion'] = habilidadNueva.descripcion
+			response_data['categoria'] = habilidadNueva.categoria.categoria
+			response_data['val_promedio'] = habilidadNueva.val_promedio
+			response_data['num_solicitudes'] = habilidadNueva.num_solicitudes
+			response_data['precio'] = habilidadNueva.precio
+			response_data['foto'] = habilidadNueva.foto.url
+			return JsonResponse(response_data, safe=False)
+
+		else:
+			return JsonResponse(form.errors.as_json(), safe=False)
+
+
+
+
+
+
+
+
+
 @login_required()
 def habilidadesViewTemplate(request):
 	user = request.user
@@ -30,31 +84,9 @@ def habilidadesViewTemplate(request):
 	}
 	return render(request,'habilidades.html',contexto)
 
-#[crearNuevaHabilidad] View (funcion) encargada de recibir datos para crear nueva habilidad de un usuario
-""" Pendiente datos de respuesta al frontend con estado y mensage de aceptacion o negacion"""
-@login_required()
-def crearNuevaHabilidad(request):	
-	if request.method == "POST":
-		form = nuevaHabilidadForm(request.POST)
-		if form.is_valid():
-			response_data = {}
-			habilidadNueva = form.save(commit=False)
-			usuario = perfilUsuarioModel.objects.get(pk=request.user.id)
-			habilidadNueva.usuario = usuario
-			habilidadNueva.save()
-			response_data['message'] = 'habilidad Creada!'
 
-			return HttpResponse(
-				json.dumps(response_data),
-				content_type="application/json"
-			)
 
-		else:
-			data_error = json.loads(form.errors.as_json())
-			return HttpResponse(
-				json.dumps(data_error),
-				content_type="application/json"
-			)
+
 
 #[detalleHabilidadView] View encargada de retornar template del detalle de una habilidad
 @login_required()
@@ -76,6 +108,7 @@ def detalle(request, slug, pk):
 		}
 		return render(request,templateRespuesta, contexto)
 	return render(request,templateRespuesta)
+
 
 #[editarHabilidad] View encargada editar una habilidad
 @login_required()

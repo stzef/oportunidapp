@@ -22,7 +22,7 @@ class habilidadesModel(models.Model):
 	usuario = models.ForeignKey(perfilUsuarioModel)
 	categoria = models.ForeignKey(habCategoriasModel)
 	nhabilidad = models.CharField(max_length=50,blank=False,null=False)
-	slug = models.SlugField(max_length=50)
+	slug = models.SlugField(max_length=50, editable=False)
 	descripcion = models.CharField(max_length=250,blank=False,null=False)
 	foto = models.ImageField(upload_to= 'habilidades/img',blank=True,null=True, default=HABILIDADES_FOTO_DEFAULT)
 	val_promedio = models.IntegerField(blank=True,null=True)

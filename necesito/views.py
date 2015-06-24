@@ -13,8 +13,7 @@ from necesito.forms import teNecesitoForm
 # Create your views here.
 @login_required()
 def necesito(request):
-	necesitos = teNecesitoModel.objects.filter(usuarioRequerido=request.user.id)
-
+	necesitos = teNecesitoModel.objects.filter(usuarioRequerido=request.user.id).order_by('-fecha')
 	contexto = {
 		'necesito' : necesitos,
 	}

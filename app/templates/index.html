@@ -38,12 +38,12 @@
                   <li><a class="link-user" href="{% url 'necesito' %}">Te necesito</a></li>
                   <li><a class="link-user" href="{% url 'habilidades' %}">Habilidades</a></li>
                   <li><a class="link-user" href="{% url 'profile' %}">Perfil</a></li>
-                  <li><a class="link-user" href="{% url 'logout' %}">Salir</a></li>
+                  <li><a class="link-user" href="{% url 'salir' %}">Salir</a></li>
                 </ul>
               </li> 
             {% else %}
-              <li class="col-xs-6 col-sm-6 col-md-6 text-center"><a href="{% url 'login' %}" class="blue-color-2"><strong>Entrar</strong></a></li>
-              <li class="col-xs-6 col-sm-6 col-md-6 text-center"><a href="{% url 'signup' %}" class="registry"><strong>Registro</strong></a></li>
+              <li class="col-xs-6 col-sm-6 col-md-6 text-center"><a href="{% url 'ingresar' %}" class="blue-color-2"><strong>Entrar</strong></a></li>
+              <li class="col-xs-6 col-sm-6 col-md-6 text-center"><a href="{% url 'registro' %}" class="registry"><strong>Registro</strong></a></li>
             {% endif %}
           </ul>
         </div>
