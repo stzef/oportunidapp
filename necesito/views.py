@@ -36,7 +36,6 @@ def teNecesito(request, usuarioSolicitado, habilidadSlug):
 def crearMensajeSolicitud(request):
 	if request.method == "POST":
 		form = teNecesitoForm(request.POST or None)
-		#form.usuarioSolicitante = request.user.id
 		respuesta = {}
 		if form.is_valid():
 			form.save()
@@ -47,21 +46,3 @@ def crearMensajeSolicitud(request):
 			respuesta['mensaje'] = 'Lo sentimos en este momento no se puede enviar el mensaje'
 
 		return JsonResponse(respuesta, safe=False)
-
-		"""
-		usuarioSolicitante = perfilUsuarioModel.objects.get(usuario=request.user.id)
-		usuarioRequerido = perfilUsuarioModel.objects.get(usuario=request.POST['usuarioRequerido'])
-		habilidadSolicitada = habilidadesModel.objects.get(id=request.POST['habilidadSolicitada'])
-		mensaje = request.POST['mensaje']
-
-		necesitoSolicitud = teNecesitoModel(
-			usuarioSolicitante = usuarioSolicitante,
-			usuarioRequerido = usuarioRequerido,
-			habilidadSolicitada = habilidadSolicitada,
-			mensaje = mensaje,
-		)
-
-		necesitoSolicitud.save()
-
-		return JsonResponse(necesitoSolicitud, data=safe)
-"""

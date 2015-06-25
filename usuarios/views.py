@@ -42,12 +42,6 @@ class registroView(FormView):
 	def form_invalid(self, form):
 		return self.render_to_response(self.get_context_data(form=form))
 
-	#def get_success_url(self):
-	#	if self.request.GET.get('next'):
-	#		return self.request.GET.get('next')
-	#	else:
-	#		return super(registroView, self).get_success_url()
-
 class loginView(FormView):
 	form_class = loginForm
 	template_name = 'login.html'
