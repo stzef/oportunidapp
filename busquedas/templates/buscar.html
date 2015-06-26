@@ -28,8 +28,8 @@
 								<label for="categoria">Categoría</label>
 								<select name="categoria" id="categoria" class="form-control">
 									<option disabled selected value="0">Categorías</option>
-									{% for category in categoria %}                         
-										<option value="{{ category.id }}">{{ category.categoria }}</option>
+									{% for categoria in categorias %}                         
+										<option value="{{ categoria.id }}">{{ categoria.categoria }}</option>
 									{% endfor %}
 								</select>
 							</div>
@@ -58,166 +58,107 @@
 					</div>
 				</div>
 				<div id = "resultados">
-					{%verbatim%}
-					<script id="resultHabilidadesSearch" type="text/x-handlebars-template">
-						{{#if this}}
-							{{#each this }}
-								<div class="col-xs-12 col-md-12 result-find notice">
-									<div class="col-xs-12 col-sm-4 col-md-2 text-center">
-										<img src="/media/{{ this.foto }}" class="desc-img-2" alt="Responsive image">
+					{% for habilidad in habilidades %}
+						<div class="col-xs-12 col-md-12 result-find notice">
+							<div class="col-xs-12 col-sm-4 col-md-2 text-center">
+								<img src="{{ habilidad.foto.url }}" class="desc-img-2" alt="Responsive image">
+							</div>
+							<div class="col-xs-12 col-sm-8 col-md-10">
+								<div class="col-md-8">
+									<h3>
+										<strong>
+											<a href="/buscar/{{ habilidad.slug }}/">
+												{{ habilidad.nhabilidad }}
+											</a>
+										</strong>
+									</h3>
+									<p class="username">
+										{{ habilidad.userfirstname }} {{ habilidad.userlastname }}
+									</p>
+									<p class="text">
+										{{ habilidad.descripcion }}
+									</p>
+								</div>
+								<div class="col-md-4">
+									<div class="label-descp-2 label-warning col-xs-6 col-md-6 text-center" data-toggle="tooltip" data-placement="top" title="Calificación">
+										<i class="glyphicon glyphicon-star desc3"></i>
+										<strong class="desc3">
+											{% if habilidad.val_promedio %}
+												{{ habilidad.val_promedio }}
+											{% else %}
+												<span>ninguno</span>
+											{% endif %}
+										</strong>
 									</div>
-									<div class="col-xs-12 col-sm-8 col-md-10">
-										<div class="col-md-8">
-											<h3><strong><a href="/buscar/{{ this.slug }}/">{{ this.nhabilidad }}</a></strong></h3>
-											<p class="username">{{ this.userfirstname }} {{ this.userlastname }}</p>
-											<p class="text">{{ this.descripcion }}</p>
-										</div>
-										<div class="col-md-4">
-											<div class="label-descp-2 label-warning col-xs-6 col-md-6 text-center" data-toggle="tooltip" data-placement="top" title="Calificación">
-												<i class="glyphicon glyphicon-star desc3"></i></a> <strong class="desc3">{{ this.habilidad_val }}</strong>
-											</div>
-											<div class="label-descp-2 label-telephone col-xs-6 col-md-6 text-center" data-toggle="tooltip" data-placement="top" title="Número Telefónico">
-												<i class="glyphicon glyphicon-phone-alt desc3"></i> <strong class="desc3">{{ this.userphone }}</strong>
-											</div>
-											<div class="label-descp-2 label-success col-xs-6 col-md-6 text-center" data-toggle="tooltip" data-placement="top" title="Solicitudes">
-												<i class="glyphicon glyphicon-th-list desc3"></i> <strong class="desc3">0</strong>
-											</div>
-											<div class="label-descp-2 label-danger col-xs-6 col-md-6 text-center" data-toggle="tooltip" data-placement="top" title="Precio">
-												<i class="glyphicon glyphicon-usd desc3"></i> <strong class="desc3">0</strong>
-											</div>
-										</div>
-						  			</div>
-					  			</div>
-				  			{{/each}}
-				  			<!--<nav class="text-center">
-							  	<ul class="pagination">
-							    	<li>
-							      		<a href="#" aria-label="Previous">
-							        		<span aria-hidden="true">&laquo;</span>
-							      		</a>
-							    	</li>
-							    	<li class="active"><a href="#">1</a></li>
-							    	<li><a href="#">2</a></li>
-							    	<li><a href="#">3</a></li>
-							    	<li><a href="#">4</a></li>
-							    	<li><a href="#">5</a></li>
-							    	<li>
-							      		<a href="#" aria-label="Next">
-							        		<span aria-hidden="true">&raquo;</span>
-							      		</a>
-							    	</li>
-							  	</ul>
-							</nav>-->
-				  		{{else}}
-				  			<span>No hay resultados</span>
-				  		{{/if}}
-					</script>
-					{%endverbatim%}
+									<div class="label-descp-2 label-telephone col-xs-6 col-md-6 text-center" data-toggle="tooltip" data-placement="top" title="Número Telefónico">
+										<i class="glyphicon glyphicon-phone-alt desc3"></i> 
+										<strong class="desc3">
+										{{ habilidad.usuario.celular1 }}
+										</strong>
+									</div>
+									<div class="label-descp-2 label-success col-xs-6 col-md-6 text-center" data-toggle="tooltip" data-placement="top" title="Solicitudes">
+										<i class="glyphicon glyphicon-th-list desc3"></i> 
+										<strong class="desc3">
+											{% if habilidad.num_solicitudes %}
+												{{ habilidad.num_solicitudes }}
+											{% else %}
+												<span>ninguno</span>
+											{% endif %}
+										</strong>
+									</div>
+									<div class="label-descp-2 label-danger col-xs-6 col-md-6 text-center" data-toggle="tooltip" data-placement="top" title="Precio">
+										<i class="glyphicon glyphicon-usd desc3"></i> 
+										<strong class="desc3">
+											{% if habilidad.precio %}
+												{{ habilidad.precio }}
+											{% else %}
+												<span>por acordar</span>
+											{% endif %}
+										</strong>
+									</div>
+								</div>
+				  			</div>
+			  			</div>
+					{% endfor %}
 				</div>
-				<div class="row">
-					<button id="ver-mas" class="btn col-xs-12 col-sm-12 col-md-12 col-lg-12">Ver más</button>
-				</div>
+				{% if is_paginated %}
+					<div class="pagination">
+						<span class="page-links">
+							{% if page_obj.has_previous %}
+								<a href="{% url 'buscar' %}?page={{ page_obj.previous_page_number }}">atrás</a>
+							{% endif %}
+							<span class="page-current">
+								Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
+							</span>
+							{% if page_obj.has_next %}
+								<a href="{% url 'buscar' %}?page={{ page_obj.next_page_number }}">siguiente</a>
+							{% endif %}
+						</span>
+					</div>
+				{% else %}
+					<span>Todos los resultados</span>
+				{% endif %}
 			</div>
 		</div>
 	</div>   
 </body>
 {% endblock %}
-
 {% block scripts %}
-	<script src="{% static 'jsapp/csrf_load.js' %}"></script>
-	<script src="{% static 'jslibraries/jquery.autocomplete.min.js' %}"></script>
 	<script>
-
-		function removerTag (elemento) {
-			var tag = $(elemento).parent();
-			tag.remove();
-			quitarParametros(tag);
-		}
-	//$(function() {
-		var PARAMETROS = new Array();
-		var PAGE = 1;
-		PARAMETROS['page'] = PAGE;
-
-		var sourceHabilidadesSearch = $('#resultHabilidadesSearch').html();
-		var templateHabilidadesSearch = Handlebars.compile(sourceHabilidadesSearch);
-		buscar(PARAMETROS);
-
-		$('#busqueda').focus();
-		$('#categoria').change(function(){
-			crearTag(this.options[this.selectedIndex].text,'categoria-tag');
-			PARAMETROS['page'] = 1;
-			agregarParametros(this);
-			this.value=0;
-		})
-		$('#buscar').click(function() {
-			busquedaInput = $('#busqueda').get(0);
-			crearTag(busquedaInput.value,'busqueda-tag');
-			PARAMETROS['page'] = 1;
-			agregarParametros(busquedaInput);
-			busquedaInput.value = '';
-		})
-		$('#busqueda').keyup(function(e){
-			if (e.keyCode == 13){
+		$(function(){
+			$('#buscar').click(function() {
 				busquedaInput = $('#busqueda').get(0);
-				crearTag(busquedaInput.value,'busqueda-tag');
-				PARAMETROS['page'] = 1;
-				agregarParametros(busquedaInput);
-				busquedaInput.value = '';
-			}
-		});
-		$('#orden').change(function(){
-			agregarParametros(this);
-		});
-		$('#ver-mas').click(function(){
-			PAGE+=1;
-			PARAMETROS['page']=PAGE;
-			buscar(PARAMETROS);
-		});
+				var url = "{% url 'buscar' %}?{% if queryString%}{{queryString}}{% endif %}"+'&busqueda='+busquedaInput.value;
+				console.log(busquedaInput.value);
+				window.location.href = url;
+			});
 
-		function agregarParametros(elemento){
-			PARAMETROS[elemento.name] = elemento.value;
-			buscar(PARAMETROS);
-		}
-		function quitarParametros(elemento){
-			name = elemento.attr('data-value');
-			name1 = name.split('-');
-			PARAMETROS[name1[0]] = '';
-			PARAMETROS['page'] = 1;	
-			buscar(PARAMETROS);
-		}
-
-		function crearTag(texto, tipo){
-			if($('#'+tipo).attr('id')){
-				$('#'+tipo).get(0).remove();
-				crearTag(texto, tipo);
-			}
-			else
-			{
-				if(texto != ''){
-					$('.tag-show').append('<span class="tag label label-success" id="'+tipo+'" data-value="'+tipo+'">'+texto+' <strong>|</strong><a class="remove remove-tag glyphicon glyphicon-remove" onclick=removerTag(this)></a></span>');
-				}
-				$('#clear').show();
-			}
-		}
-
-		function buscar(parametros){
-			parametros['format'] = 'json';
-			$.ajax({
-				url: '{% url 'resultados' %}',
-				type: 'GET',
-				data: {
-					format: parametros['format'],
-					categoria: parametros['categoria'],
-					busqueda: parametros['busqueda'],
-					orden: parametros['orden'],	
-					page: parametros['page'],
-				},
-				success:function(json){
-					buildHabilidadesSearch = templateHabilidadesSearch (json);
-					$('#resultados').html(buildHabilidadesSearch);
+			$('#busqueda').keyup(function(e){
+				if (e.keyCode == 13){
+					busquedaInput = $('#busqueda').get(0);
+					console.log(busquedaInput.value);
 				}
 			});
-		}
-		//})
+		})
 	</script>
 {% endblock %}

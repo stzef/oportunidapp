@@ -11,9 +11,9 @@ from usuarios.models import perfilUsuarioModel
 
 import json
 
-def buscarTemplate(request):
-	TodasLasCategorias = habCategoriasModel.objects.all().order_by('categoria')
-	return render(request,'buscar.html',{'categoria':TodasLasCategorias})
+#def buscarTemplate(request):
+#	TodasLasCategorias = habCategoriasModel.objects.all().order_by('categoria')
+#	return render(request,'buscar.html',{'categoria':TodasLasCategorias})
 
 class detalleHabilidadBuscada(DetailView):
 	model = habilidadesModel
@@ -32,69 +32,23 @@ class detalleHabilidadBuscada(DetailView):
 
 class busquedasListView(ListView):
 	model = habilidadesModel
-	paginador = 10
+	paginate_by = 2
+	template_name = 'buscar.html'
+	context_object_name = 'habilidades'
 
-	def get(self, request, *args, **kwargs):
-		self.object_list = self.get_queryset()
-		formato = self.request.GET.get('format', None)
-		if formato == 'json':
-			return self.json_to_response()
-		context = self.get_context_data()
-		return self.render_to_response(context)
+	def get_template_names(self):
+		inicio = self.request.GET.get('inicio')
+		if inicio == 'true':
+			return 'buscares.html'
+		else:
+			return self.template_name
 
 	def get_queryset(self):
-		categoriaBuscada = self.request.GET.get('categoria', None)
-		fraseBuscada = self.request.GET.get('busqueda', None)
-		orden = self.request.GET.get('orden', None)
-		page = self.request.GET.get('page', None)
-		limitePrimero = (int(page)-1)*self.paginador
-		limiteUltimo = int(page)*self.paginador
+		return self.model.objects.filter(estado=True)
 
-		ordenOpciones = {
-			'1': 'num_solicitudes',
-			'2': 'val_promedio',
-		}
+	def get_context_data(self, **kwargs):
+		context = super(busquedasListView, self).get_context_data(**kwargs)
+		context['categorias'] = habCategoriasModel.objects.all()
+		context['queryString'] = self.request.META['QUERY_STRING'] 
+		return context
 
-		q = self.querysetPorDefecto()
-
-		if categoriaBuscada is not None and categoriaBuscada != '':
-			q = q.filter(categoria=categoriaBuscada)
-		if fraseBuscada is not None and fraseBuscada != '':
-			q = self.filtrarPorPalabras(q, fraseBuscada)
-		if orden is not None and orden != '':
-			q = q.order_by('-'+ordenOpciones[orden])
-		return q[limitePrimero:limiteUltimo]
-
-	def querysetPorDefecto(self):
-		q = self.model.objects.filter(estado=True)
-		return q
-
-	def filtrarPorPalabras(self, q, fraseBuscada):
-		dicFraseBuscada = fraseBuscada.split()
-		for palabra in dicFraseBuscada:
-			q = q.filter(
-				Q(nhabilidad__contains=palabra) | Q(descripcion__contains=palabra)
-			)
-		return q
-
-	def json_to_response(self):
-		data = []
-		for habilidad in self.object_list:
-			usuario = User.objects.get(id= habilidad.usuario_id)
-			perfilusuario = perfilUsuarioModel.objects.get(usuario=usuario)
-			data.append({
-				'user_id': usuario.id,
-				'username': usuario.username,
-				'userfirstname': usuario.first_name,
-				'userlastname': usuario.last_name,
-				'userphone': perfilusuario.celular1,
-				'habilidad_id': habilidad.id,
-				'nhabilidad': habilidad.nhabilidad,
-				'slug': habilidad.slug,
-				'descripcion': habilidad.descripcion,
-				'habilidad_id': habilidad.id,
-				'habilidad_val':habilidad.val_promedio,
-				'habilidad_nsol':habilidad.num_solicitudes,
-				'foto':habilidad.foto.name,
-			})
-		return JsonResponse(data, safe=False)
