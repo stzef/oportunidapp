@@ -1,28 +1,17 @@
 {% extends "index.html" %}
 {% load staticfiles %}
 {% block head %}
-<title>Inicio | OportunidApp</title>
+<title>Buscar | OportunidApp</title>
 {% endblock %}
 {% block content %}
-	<div class="content-info">
-		<div class="container">
-		  <h3 class="text-left">Como Funciona</h3>
-		  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
-		    <div class="row">
-		      <p class="text col-xs-12 col-sm-11 col-md-11 col-lg-11">Crea tus Habilidades.</p>
-		    </div>
-		    <div class="row">
-		      <p class="text col-xs-12 col-sm-11 col-md-11 col-lg-11">Cras ut urna magna. Proin vel blandit quam, ac efficitur justo. Aliquam id euismod ante. Aenean imperdiet porta mi at egestas. Nunc ultricies mauris placerat neque ornare molestie ac sit amet lorem. Quisque eu risus quis neque ultrices porta.</p>
-		    </div>
-		    <div class="row">
-		      <p class="text col-xs-12 col-sm-11 col-md-11 col-lg-11">Praesent vulputate nunc et arcu imperdiet, eu venenatis urna luctus. Nam leo tortor, blandit tincidunt congue eget, vulputate placerat tellus. Curabitur purus lectus, suscipit ac pulvinar non, rutrum et augue.</p>
-		    </div>
-		  </div>
-		  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
-		    <div class="row text-center">
-		      <img src="{% static 'img/computer.png' %}" class="img-responsive"/>
-		    </div>
-		  </div>
+<body class="body-img">
+	<div class="container div-error">
+		<div class="row text-center">
+            <img src="{% static 'img/logo.png' %}"/>
+			<h1 class="error">Error 404</h1>
+			<small>Página no Encontrada</small>
+			<p>Lo sentimos, pero la página que busca no existe o no se puede encontrar.</p>
 		</div>
 	</div>
+</body>
 {% endblock %}

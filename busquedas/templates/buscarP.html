@@ -20,6 +20,13 @@
 						</div>
 					</div>
 				</div>
+				<div class="row text-left category-show">
+					<ul class="list-unstyled list-inline">
+						{% for categorias in categoria %}    
+							<li class="spacing"><a href="#" class="label label-default">{{ categorias.categoria }}</a></li>                   
+						{% endfor %}
+					</ul>
+				</div>
 			</form>
 		</div>
 	</div>

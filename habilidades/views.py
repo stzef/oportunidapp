@@ -31,6 +31,14 @@ class habilidadesListView(LoginRequiredMixin, ListView):
 	context_object_name = 'habilidades'
 	form = nuevaHabilidadForm
 
+	def getCantidadActivas(self):
+		cantidadActivas = habilidadesModel.objects.filter(usuario=self.request.user, estado=True).count()
+		return cantidadActivas
+
+	def getHabilidadesInactivas(self):
+		inactivas = habilidadesModel.objects.filter(usuario=self.request.user,estado=False).order_by('-fecha_creacion')
+		return inactivas
+
 	def get_queryset(self):
 		queryset = habilidadesModel.objects.filter(usuario=self.request.user, estado=True).order_by('-fecha_creacion')
 		return queryset
@@ -41,6 +49,9 @@ class habilidadesListView(LoginRequiredMixin, ListView):
 	def get_context_data(self, **kwargs):
 		context = super(habilidadesListView, self).get_context_data(**kwargs)
 		context['form'] = self.form
+		context['inactivas'] = self.getHabilidadesInactivas()
+		context['cantidadInactivas'] = context['inactivas'].count()
+		context['cantidadActivas'] = self.getCantidadActivas()
 		return context
 
 @login_required()
@@ -56,6 +67,7 @@ def crearNuevaHabilidad(request):
 
 			response_data['id'] = habilidadNueva.pk
 			response_data['nhabilidad'] = habilidadNueva.nhabilidad
+			response_data['slug'] = habilidadNueva.slug
 			response_data['descripcion'] = habilidadNueva.descripcion
 			response_data['categoria'] = habilidadNueva.categoria.categoria
 			response_data['val_promedio'] = habilidadNueva.val_promedio
@@ -66,26 +78,6 @@ def crearNuevaHabilidad(request):
 
 		else:
 			return JsonResponse(form.errors.as_json(), safe=False)
-
-
-
-
-
-
-
-
-
-@login_required()
-def habilidadesViewTemplate(request):
-	user = request.user
-	contexto = {
-		'user':user,
-		'form': nuevaHabilidadForm,
-	}
-	return render(request,'habilidades.html',contexto)
-
-
-
 
 
 #[detalleHabilidadView] View encargada de retornar template del detalle de una habilidad
@@ -182,39 +174,6 @@ def activarHabilidad(request):
 	else:
 		return render(request,'no_permitido.html')
 
-#Listar Habilidades activas del usuario request POST return JSON
-@login_required()
-def listarHabilidadesActivas(request):
-	if request.method == 'GET':
-		data = serializers.serialize(
-			"json",
-			habilidadesModel.objects.all().filter(usuario_id=request.user.id,estado=True).order_by('-fecha_creacion'),
-			fields = ('pk','categoria','slug','nhabilidad','foto','descripcion','val_promedio','num_solicitudes','precio'),
-			use_natural_foreign_keys=True,
-		)
-
-		data_response = cleanJsonModel(json.loads(data))
-
-		return HttpResponse(
-			json.dumps(data_response),
-			content_type = "application/json"
-		)
-
-#Listar Habilidades No Activas del usuario request POST return JSON
-@login_required()
-def listarHabilidadesNoActivas(request):
-	if request.method == 'GET':
-		data = serializers.serialize(
-			"json",
-			habilidadesModel.objects.all().filter(usuario_id=request.user.id,estado=False).order_by('-fecha_creacion'),
-			fields = ('pk','categoria','slug','nhabilidad','foto','descripcion','val_promedio','num_solicitudes','precio'),
-			use_natural_foreign_keys = True,
-		)
-		data_response = cleanJsonModel(json.loads(data))
-		return HttpResponse(
-			json.dumps(data_response),
-			content_type = "application/json"
-		)
 
 @csrf_exempt
 @login_required
@@ -245,19 +204,3 @@ def borrarFotoActual(habilidad):
 	if habilidad.foto.url != imgPorDefecto and os.path.isfile(archivoPath):
 		os.remove(archivoPath)
 
-
-#Listar Categorias
-def categoriasListar(request):
-	if request.method == "GET":
-		data = serializers.serialize(
-			"json",
-			habCategoriasModel.objects.all().order_by('categoria'),
-			fields = ('pk','categoria'),
-		)
-
-		data_response = cleanJsonModel(json.loads(data))
-
-		return HttpResponse(
-			json.dumps(data_response),
-			content_type = "application/json"
-		)
