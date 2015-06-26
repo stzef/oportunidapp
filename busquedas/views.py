@@ -51,4 +51,7 @@ class busquedasListView(ListView):
 		context['categorias'] = habCategoriasModel.objects.all()
 		context['queryString'] = self.request.META['QUERY_STRING'] 
 		return context
-
+		
+def buscarPrincipal(request):
+	TodasLasCategorias = habCategoriasModel.objects.all().order_by('categoria')
+	return render(request,'buscarP.html',{'categoria':TodasLasCategorias})
