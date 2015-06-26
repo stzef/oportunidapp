@@ -15,10 +15,20 @@ import json
 def inicio(request):
 	return render(request,'home.html')
 
+def view_404(request):
+	return render(request,'404.html')
+
+def view_500(request):
+	return render(request,'500.html')
+
 # [buscarTemplate] View encargada de retornar el template de busquedas
 def buscarTemplate(request):
 	TodasLasCategorias = habCategoriasModel.objects.all().order_by('categoria')
 	return render(request,'buscar.html',{'categoria':TodasLasCategorias})
+
+def buscarPrincipal(request):
+	TodasLasCategorias = habCategoriasModel.objects.all().order_by('categoria')
+	return render(request,'buscarP.html',{'categoria':TodasLasCategorias})
 
 class detalleHabilidadBuscada(DetailView):
 	model = habilidadesModel
