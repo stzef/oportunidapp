@@ -11,12 +11,18 @@ class habCategoriasModelManager(models.Manager):
 
 class habCategoriasModel(models.Model):
 	categoria = models.CharField(max_length=30,blank=False,null=False)
+	slug = models.CharField(max_length=30,blank=False,null=False)
 	objects = habCategoriasModelManager()
+
 	def __str__(self):
 		return u'%s' % (self.categoria)
 
 	def natural_key(self):
 		return (self.categoria)
+
+	def save(self, *args, **kwargs):
+		self.slug = defaultfilters.slugify(self.categoria)
+		super(habCategoriasModel, self).save( *args, **kwargs)
 
 class habilidadesModel(models.Model):
 	usuario = models.ForeignKey(perfilUsuarioModel)

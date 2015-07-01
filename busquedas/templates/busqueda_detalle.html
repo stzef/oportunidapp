@@ -1,0 +1,106 @@
+{% extends "index.html" %}
+{% load staticfiles %}
+{% block head %}
+<title>Buscar | OportunidApp</title>
+{% endblock %}
+{% block content %}
+	<body class="body-img">
+		<div class="container div-detail content-info">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-4 text-center">
+					<img src="{{ habilidad.foto.url }}" class="photo-detail" alt="{{ habilidad.slug }}">
+				</div>
+				<div class="col-xs-12 col-sm-12 col-md-8">
+					<div class="col-xs-12 col-md-8">
+						<h2>{{ habilidad.nhabilidad }}</h2>
+						<p class="username"><strong>{{ habilidad.usuario.usuario.first_name }} {{ habilidad.usuario.usuario.last_name }}</strong></p>
+						<p class="text">{{ habilidad.descripcion }}</p>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-4">
+						<div class="text-top text-center col-xs-4 col-sm-4 col-md-12" data-toggle="tooltip" data-placement="top" title="Calificación">
+							<div class="label-descp label-warning">
+								<i class="glyphicon glyphicon-star desc3"></i></a> 
+
+								<strong class="desc3">
+									{% if habilidad.val_promedio %}
+										{{ habilidad.val_promedio }}
+									{% else %}
+										ninguno
+									{% endif %}
+								</strong>
+							</div>
+						</div>
+						<div class="text-top text-center col-xs-4 col-sm-4 col-md-12" data-toggle="tooltip" data-placement="top" title="Número Telefónico">
+							<div class="label-descp label-telephone">
+								<i class="glyphicon glyphicon-phone-alt desc3"></i> <strong class="desc3">
+									{{ habilidad.usuario.celular1 }}
+								</strong>
+							</div>
+						</div>
+						<div class="text-top text-center col-xs-4 col-sm-4 col-md-12" data-toggle="tooltip" data-placement="top" title="Solicitudes">
+							<div class="label-descp label-success">
+								<i class="glyphicon glyphicon-th-list desc3"></i> 
+								<strong class="desc3">
+									{% if habilidad.num_solicitudes %}
+										{{ habilidad.num_solicitudes }}
+									{% else %}
+										ninguno
+									{% endif %}
+								</strong>
+							</div>
+						</div>
+						<div class="text-top text-center col-xs-4 col-sm-4 col-md-12" data-toggle="tooltip" data-placement="top" title="Precio">
+							<div class="label-descp label-danger">
+								<i class="glyphicon glyphicon-usd desc3"></i> 
+								<strong class="desc3">
+									{% if habilidad.precio %}
+										{{ habilidad.precio }}
+									{% else %}
+										por acordar
+									{% endif %}
+								</strong>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-12 text-center">
+					<a href="{% url 'tenecesito' habilidad.usuario habilidad.slug %}" class="btn btn-primary">Te Necesito</a>
+				</div>
+		    </div>
+		    <div class="row">
+		    	<div class="col-xs-12 col-md-12">
+			    	<div class="page-header">
+						<h3>Sugerencias de Búsqueda</h3>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-12 col-md-12">
+					<!-- Comienzo de cuadro sigerencia -->
+					{% if recomendados %}
+						{% for  recomendado in recomendados %}
+							<div class="col-xs-12 col-sm-6 col-md-4">
+								<div class="col-xs-6 col-sm-7 col-md-8">
+									<img src="{{ recomendado.foto.url}}" class="sgr" alt="{{ recomendado.nhabilidad}}">
+								</div>
+								<div class="col-xs-6 col-sm-5 col-md-4">
+									<div class="label-descp-2 label-warning col-xs-6 col-md-6 text-center" data-toggle="tooltip" data-placement="top" title="Calificación">
+										<i class="glyphicon glyphicon-star desc3"></i></a> <strong class="desc3">{{ recomendado.val_promedio }}</strong>
+									</div>
+								</div>
+								<div class="col-xs-12 col-sm-12 col-md-12">
+									<h3>
+										{{ recomendado.usuario.usuario.first_name }} 
+										{{ recomendado.usuario.usuario.last_name }}
+									</h3>
+									<p class="text"><strong>{{ recomendado.descripcion }}</strong></p>
+								</div>
+							</div>
+						{% endfor %}
+					{% else %}
+						<p>No hay sugerencias para esta búsqueda</p>
+					{% endif %}
+					<!-- Termina cuadro de sugerencia -->
+				</div>
+		    </div>
+		</div>
+	</body>
+{% endblock %}

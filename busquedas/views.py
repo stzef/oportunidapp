@@ -18,7 +18,7 @@ import json
 class detalleHabilidadBuscada(DetailView):
 	model = habilidadesModel
 	context_object_name = 'habilidad'
-	template_name = 'busqueda.html'
+	template_name = 'busqueda_detalle.html'
 
 	def getRecomendados(self, habilidad):
 		recomendados = habilidadesModel.objects.filter(categoria=habilidad.categoria).exclude(id=habilidad.id).order_by('-val_promedio')[:3]
@@ -32,10 +32,16 @@ class detalleHabilidadBuscada(DetailView):
 
 class busquedasListView(ListView):
 	model = habilidadesModel
-	paginate_by = 2
-	template_name = 'buscar.html'
+	paginate_by = 4
+	template_name = 'busqueda.html'
 	context_object_name = 'habilidades'
+	ordering = '-val_promedio'
 
+	ordenList = [
+		('','-val_promedio','Mas valoradas'),
+		('PRECIO_DESC','-precio','Mayor precio'),
+		('PRECIO','precio','Menor precio'),
+	]               
 	def get_template_names(self):
 		inicio = self.request.GET.get('inicio')
 		if inicio == 'true':
@@ -43,15 +49,49 @@ class busquedasListView(ListView):
 		else:
 			return self.template_name
 
+	def get_elemento_busqueda(self, indice):
+		i = 0
+		for a,b,c in self.ordenList:
+			if a == indice:	
+				return self.ordenList[i]
+			i += 1
+
+	def get_ordering(self):
+		orden = self.request.GET.get('orden')
+		if orden is not None:
+			item = self.get_elemento_busqueda(orden)
+			return item [1]
+		else:
+			return self.ordering
+
+	def get_orden_actual(self):
+		orden = self.request.GET.get('orden')
+		if orden is not None:
+			item = self.get_elemento_busqueda(orden)
+			return item
+		else:
+			return self.ordenList[0]
+
 	def get_queryset(self):
-		return self.model.objects.filter(estado=True)
+		categoria = habCategoriasModel.objects.get(slug=self.kwargs['slug'])
+		queryset = self.model.objects.filter(estado=True,categoria=categoria)
+		ordering = self.get_ordering()
+		if ordering:
+			queryset = queryset.order_by(ordering)
+		return queryset
 
 	def get_context_data(self, **kwargs):
 		context = super(busquedasListView, self).get_context_data(**kwargs)
-		context['categorias'] = habCategoriasModel.objects.all()
-		context['queryString'] = self.request.META['QUERY_STRING'] 
+		categoria = habCategoriasModel.objects.get(slug=self.kwargs['slug'])
+		ordenItem = self.get_orden_actual()
+		context['categoria'] = categoria
+		context['ordenList'] = self.ordenList
+		context['ordenActual'] = ordenItem[2]
+		context['orden'] = ordenItem[0]
+		context['page'] = self.request.GET.get('page')
 		return context
-		
-def buscarPrincipal(request):
+
+
+def buscarView(request):
 	TodasLasCategorias = habCategoriasModel.objects.all().order_by('categoria')
-	return render(request,'buscarP.html',{'categoria':TodasLasCategorias})
+	return render(request,'buscar.html',{'categorias':TodasLasCategorias})
