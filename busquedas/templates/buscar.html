@@ -4,35 +4,33 @@
 <title>Buscar | OportunidApp</title>
 {% endblock %}
 {% block content %}
-<body class="body-img">
-	<div class="container div-find">
-		<div class="row text-center">
-			<h2>Encuentra la persona correcta para tu trabajo</h2>
-			<form class="form-inline">
-				<div class="row space">
-					<div class="col-md-12 form-group">
-						<label for="busqueda">Busca</label>
-						<div class="col-md-8 input-group">
-							<input id="busqueda" name="busqueda" type="text" class="form-control" placeholder="¿Que Estas Buscando?" autocomplete="off">
-							<span class="input-group-btn">
-								<button class="btn btn-block btn-find" id="buscar" type="button">Buscar</button>
-							</span>
-						</div>
+<div class="container div-find">
+	<div class="row text-center">
+		<h2>Encuentra la persona correcta para tu trabajo</h2>
+		<form class="form-inline">
+			<div class="row space">
+				<div class="col-md-12 form-group">
+					<label for="busqueda">Busca</label>
+					<div class="col-md-8 input-group">
+						<input id="busqueda" name="busqueda" type="text" class="form-control" placeholder="¿Que Estas Buscando?" autocomplete="off">
+						<span class="input-group-btn">
+							<button class="btn btn-block btn-find" id="buscar" type="button">Buscar</button>
+						</span>
 					</div>
 				</div>
-				<div class="row text-left category-show">
-					<ul class="list-unstyled list-inline">
-						{% for categoria in categorias %}    
-							<li class="spacing">
-								<a href="{% url 'busqueda' categoria.slug %}" class="label label-default">
-								{{ categoria.categoria }}
-								</a>
-							</li>
-						{% endfor %}
-					</ul>
-				</div>
-			</form>
-		</div>
+			</div>
+			<div class="row text-left category-show">
+				<ul class="list-unstyled list-inline">
+					{% for categoria in categorias %}    
+						<li class="spacing">
+							<a href="{% url 'busqueda' categoria.slug %}" class="label label-default">
+							{{ categoria.categoria }}
+							</a>
+						</li>
+					{% endfor %}
+				</ul>
+			</div>
+		</form>
 	</div>
-</body>
+</div>
 {% endblock %}
