@@ -11,7 +11,7 @@ class habCategoriasModelManager(models.Manager):
 
 class habCategoriasModel(models.Model):
 	categoria = models.CharField(max_length=30,blank=False,null=False)
-	slug = models.CharField(max_length=30,blank=False,null=False)
+	slug = models.CharField(unique=True,max_length=30,blank=False,null=False)
 	objects = habCategoriasModelManager()
 
 	def __str__(self):
@@ -28,7 +28,7 @@ class habilidadesModel(models.Model):
 	usuario = models.ForeignKey(perfilUsuarioModel)
 	categoria = models.ForeignKey(habCategoriasModel)
 	nhabilidad = models.CharField(max_length=50,blank=False,null=False)
-	slug = models.SlugField(max_length=50, editable=False)
+	slug = models.SlugField(unique=True,max_length=50,editable=False)
 	descripcion = models.CharField(max_length=250,blank=False,null=False)
 	foto = models.ImageField(upload_to= 'habilidades/img',blank=True,null=True, default=HABILIDADES_FOTO_DEFAULT)
 	val_promedio = models.IntegerField(blank=True,null=True)

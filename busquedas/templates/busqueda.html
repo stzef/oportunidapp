@@ -3,6 +3,7 @@
 {% block head %}
 <title>Buscar | OportunidApp</title>
 {% endblock %}
+
 {% block content %}
 <div class="container div-find">
 	<div class="row header-titulo">
@@ -20,19 +21,29 @@
 	</div>
 	<div class="row controles">
 		<div class="col-md-8">
-			<span>breadcrums > breadcrums > breadcrums </span>
+			<ul class="breadcrumbs">
+				<li>
+					<a href="{% url 'buscar' %}">Categorias > </a></li>
+				<li>
+					<a href="/{{categoria.slug}}/">{{categoria.categoria}} </a></li>
+				{% if  busqueda %}
+					<li>
+						<a href="/{{categoria.slug}}/?q={{busqueda}}"> > {{busqueda}}</a>
+					</li>
+				{% endif %}
+			</ul>
 		</div>
 		<div class="col-md-4 controles-paginador">
 			<span class="page-links">
 				{% if is_paginated %}
 					{% if page_obj.has_previous %}
-						<a href="/{{categoria.slug}}/?{%if orden%}orden={{orden}}&{%endif%}page={{ page_obj.previous_page_number }}">atrás</a>
+						<a href="/{{categoria.slug}}/?{% if busqueda%}q={{busqueda}}&{%endif%}{%if orden%}orden={{orden}}&{%endif%}page={{ page_obj.previous_page_number }}">atrás</a>
 					{% endif %}
 					<span class="page-current">
 						Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
 					</span>
 					{% if page_obj.has_next %}
-						<a href="/{{categoria.slug}}/?{%if orden%}orden={{orden}}&{%endif%}page={{ page_obj.next_page_number }}">siguiente</a>
+						<a href="/{{categoria.slug}}/?{% if busqueda%}q={{busqueda}}&{%endif%}{%if orden%}orden={{orden}}&{%endif%}page={{ page_obj.next_page_number }}">siguiente</a>
 					{% endif %}
 				{% endif %}
 			</span>
@@ -61,7 +72,7 @@
 							{% for a,b,c in ordenList %}
 								{% if c != ordenActual %}
 									<li>
-										<a href="/{{categoria.slug}}/?orden={{a}}{{ruta}}">
+										<a href="/{{categoria.slug}}/?{% if busqueda %}q={{busqueda}}&{% endif %}orden={{a}}{{ruta}}">
 											{{c}}
 										</a>
 									</li>
@@ -146,13 +157,13 @@
 					<div class="pagination">
 						<span class="page-links">
 							{% if page_obj.has_previous %}
-								<a href="/{{categoria.slug}}/?{%if orden%}orden={{orden}}&{%endif%}page={{ page_obj.previous_page_number }}">atrás</a>
+								<a href="/{{categoria.slug}}/?{% if busqueda %}q={{busqueda}}&{% endif %}{%if orden%}orden={{orden}}&{%endif%}page={{ page_obj.previous_page_number }}">atrás</a>
 							{% endif %}
 							<span class="page-current">
 								Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
 							</span>
 							{% if page_obj.has_next %}
-								<a href="/{{categoria.slug}}/?{%if orden%}orden={{orden}}&{%endif%}page={{ page_obj.next_page_number }}">siguiente</a>
+								<a href="/{{categoria.slug}}/?{% if busqueda %}q={{busqueda}}&{% endif %}{%if orden%}orden={{orden}}&{%endif%}page={{ page_obj.next_page_number }}">siguiente</a>
 							{% endif %}
 						</span>
 					</div>
@@ -165,17 +176,42 @@
 {% block scripts %}
 	<script>
 		$(function(){
+			//Funcion para evento click 
 			$('#buscar').click(function() {
-				busquedaInput = $('#busqueda').get(0);
-				var url = "{% url 'buscar' %}?{% if queryString%}{{queryString}}{% endif %}"+'&busqueda='+busquedaInput.value;
-				console.log(busquedaInput.value);
-				window.location.href = url;
+				palabraBuscada = $('#busqueda').get(0);
+
+				//remplazando caracteres en blanco por '+'
+				palabraBuscada = palabraBuscada.value.split(' ').join('+');
+				urlActual = window.location.href;
+
+				if (urlActual.indexOf("?") > 0 ){
+					parametro = '&q=';
+				}
+				else{
+					parametro = '?q=';
+				}
+
+				//Peticion URL
+				window.location.href = urlActual+parametro+palabraBuscada;
 			});
 
+			//Funcion para evento tecla ENTER
 			$('#busqueda').keyup(function(e){
 				if (e.keyCode == 13){
-					busquedaInput = $('#busqueda').get(0);
-					console.log(busquedaInput.value);
+					palabraBuscada = $('#busqueda').get(0);
+
+					//remplazando caracteres en blanco por '+'
+					palabraBuscada = palabraBuscada.value.split(' ').join('+');
+					urlActual = window.location.href;
+
+					if (urlActual.indexOf("?") > 0 ){
+						parametro = '&q=';
+					}
+					else{
+						parametro = '?q=';
+					}
+					//Peticion URL
+					window.location.href = urlActual+parametro+palabraBuscada;
 				}
 			});
 		})

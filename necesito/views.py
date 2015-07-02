@@ -1,10 +1,11 @@
 # -*- encoding: utf-8 -*-
+# Importaciones desde Django
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.models import User
 
-
+#Importaciones desde Aplicacion [Oportunidad]
 from habilidades.models import habilidadesModel
 from usuarios.models import perfilUsuarioModel
 from necesito.models import teNecesitoModel
