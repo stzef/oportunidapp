@@ -95,7 +95,7 @@
 									<div class="col-md-8">
 										<h3>
 											<strong>
-												<a href="/buscar/{{ habilidad.slug }}/">
+												<a href="/{{categoria.slug}}/{{ habilidad.slug }}/">
 													{{ habilidad.nhabilidad }}
 												</a>
 											</strong>
@@ -176,7 +176,10 @@
 {% block scripts %}
 	<script>
 		$(function(){
-			//Funcion para evento click 
+			//input de busqueda en focus
+			$('#busqueda').focus();
+
+			//Funcion para evento click en boton 'buscar'
 			$('#buscar').click(function() {
 				palabraBuscada = $('#busqueda').get(0);
 

@@ -21,26 +21,29 @@ class detalleHabilidadBuscada(DetailView):
 	context_object_name = 'habilidad'
 	template_name = 'busqueda_detalle.html'
 
-
+	#retorna elementos recomendados del modelo 'habilidades'
 	def getRecomendados(self, habilidad):
 		recomendados = habilidadesModel.objects.filter(categoria=habilidad.categoria).exclude(id=habilidad.id).order_by('-val_promedio')[:3]
 		return recomendados
 
-
+	#incluye elementos dentro del contexto y los retorna
 	def get_context_data(self, **kwargs):
 		context = super(detalleHabilidadBuscada, self).get_context_data(**kwargs)
 		recomendados = self.getRecomendados(context['object'])
 		context['recomendados'] = recomendados
 		return context
 
+
 class busquedasListView(ListView):
 
+	#atributos de la clase
 	model = habilidadesModel
 	paginate_by = 4
 	template_name = 'busqueda.html'
 	context_object_name = 'habilidades'
 	ordering = '-val_promedio'
 
+	#lista guarda los tipos de ordenamiento que se implementan para las busquedas
 	ordenList = [
 		('','-val_promedio','Mas valoradas'),
 		('PRECIO_DESC','-precio','Mayor precio'),
@@ -48,14 +51,8 @@ class busquedasListView(ListView):
 	]
 
 
-	def get_template_names(self):
-		inicio = self.request.GET.get('inicio')
-		if inicio == 'true':
-			return 'buscares.html'
-		else:
-			return self.template_name
-
-
+	#recibe un indice y lo compara con el primer elemento de los elementos de ordenList
+	#si exite retorna el elemento
 	def get_elemento_busqueda(self, indice):
 		i = 0
 		for a,b,c in self.ordenList:
@@ -63,7 +60,9 @@ class busquedasListView(ListView):
 				return self.ordenList[i]
 			i += 1
 
-
+	#configura el orden para aplicarlo a los elementos del listView
+	#varifica si recibe el parametro 'orden' en la url y retorna el nombre del campo
+	#a ordenar si no retorna el atributo 'ordering' de la clase
 	def get_ordering(self):
 		orden = self.request.GET.get('orden')
 		if orden is not None:
@@ -73,6 +72,7 @@ class busquedasListView(ListView):
 			return self.ordering
 
 
+	#retorna el orden actual de los elementos del listView
 	def get_orden_actual(self):
 		orden = self.request.GET.get('orden')
 		if orden is not None:
@@ -81,11 +81,15 @@ class busquedasListView(ListView):
 		else:
 			return self.ordenList[0]
 
+	#recibe un queryset y una frase
+	#filtra los elementos del queryset segun las palabras de la frase
 	def query_por_palabra(self, queryset, busqueda):
 
 		#proceso
 		return queryset
 
+
+	#retorna los elementos  del modelo 'habilidades' segun la consulta
 	def get_queryset(self):
 		categoria = habCategoriasModel.objects.get(slug=self.kwargs['slug'])
 		queryset = self.model.objects.filter(estado=True,categoria=categoria)
@@ -102,6 +106,7 @@ class busquedasListView(ListView):
 		return queryset
 
 
+	#incluye elementos dentro del contexto y lo retorna
 	def get_context_data(self, **kwargs):
 
 		context = super(busquedasListView, self).get_context_data(**kwargs)
@@ -122,6 +127,10 @@ class busquedasListView(ListView):
 		return context
 
 
+#[View]
+#retorna el template
 def buscarView(request):
 	TodasLasCategorias = habCategoriasModel.objects.all().order_by('categoria')
 	return render(request,'buscar.html',{'categorias':TodasLasCategorias})
+
+

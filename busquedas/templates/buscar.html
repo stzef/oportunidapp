@@ -10,7 +10,7 @@
 		<form class="form-inline">
 			<div class="row space">
 				<div class="col-md-12 form-group">
-					<label for="busqueda">Busca</label>
+					<label for="busqueda"></label>
 					<div class="col-md-8 input-group">
 						<input id="busqueda" name="busqueda" type="text" class="form-control" placeholder="¿Que Estas Buscando?" autocomplete="off">
 						<span class="input-group-btn">
@@ -33,4 +33,11 @@
 		</form>
 	</div>
 </div>
+{% endblock %}
+{% block scripts %}
+	<script>
+		$(function(){
+			$('#busqueda').focus();
+		});
+	</script>
 {% endblock %}
