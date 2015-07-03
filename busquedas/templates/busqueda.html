@@ -25,10 +25,10 @@
 				<li>
 					<a href="{% url 'buscar' %}">Categorias > </a></li>
 				<li>
-					<a href="/{{categoria.slug}}/">{{categoria.categoria}} </a></li>
+					<a href="{% url 'busqueda' categoria.slug %}">{{categoria.categoria}} </a></li>
 				{% if  busqueda %}
 					<li>
-						<a href="/{{categoria.slug}}/?q={{busqueda}}"> > {{busqueda}}</a>
+						<a href="/buscar/{{categoria.slug}}/?q={{busqueda}}"> > {{busqueda}}</a>
 					</li>
 				{% endif %}
 			</ul>
@@ -37,13 +37,13 @@
 			<span class="page-links">
 				{% if is_paginated %}
 					{% if page_obj.has_previous %}
-						<a href="/{{categoria.slug}}/?{% if busqueda%}q={{busqueda}}&{%endif%}{%if orden%}orden={{orden}}&{%endif%}page={{ page_obj.previous_page_number }}">atrás</a>
+						<a href="/buscar/{{categoria.slug}}/?{% if busqueda%}q={{busqueda}}&{%endif%}{%if orden%}orden={{orden}}&{%endif%}page={{ page_obj.previous_page_number }}">atrás</a>
 					{% endif %}
 					<span class="page-current">
 						Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
 					</span>
 					{% if page_obj.has_next %}
-						<a href="/{{categoria.slug}}/?{% if busqueda%}q={{busqueda}}&{%endif%}{%if orden%}orden={{orden}}&{%endif%}page={{ page_obj.next_page_number }}">siguiente</a>
+						<a href="/buscar/{{categoria.slug}}/?{% if busqueda%}q={{busqueda}}&{%endif%}{%if orden%}orden={{orden}}&{%endif%}page={{ page_obj.next_page_number }}">siguiente</a>
 					{% endif %}
 				{% endif %}
 			</span>
@@ -72,7 +72,7 @@
 							{% for a,b,c in ordenList %}
 								{% if c != ordenActual %}
 									<li>
-										<a href="/{{categoria.slug}}/?{% if busqueda %}q={{busqueda}}&{% endif %}orden={{a}}{{ruta}}">
+										<a href="/buscar/{{categoria.slug}}/?{% if busqueda %}q={{busqueda}}&{% endif %}orden={{a}}{{ruta}}">
 											{{c}}
 										</a>
 									</li>
@@ -95,7 +95,7 @@
 									<div class="col-md-8">
 										<h3>
 											<strong>
-												<a href="/{{categoria.slug}}/{{ habilidad.slug }}/">
+												<a href="/buscar/{{categoria.slug}}/{{ habilidad.slug }}/">
 													{{ habilidad.nhabilidad }}
 												</a>
 											</strong>
@@ -108,7 +108,7 @@
 										</p>
 									</div>
 									<div class="col-md-4">
-										<div class="label-descp-2 label-warning col-xs-6 col-md-6 text-center" data-toggle="tooltip" data-placement="top" title="Calificación">
+										<div class="label-descp-2 label-warning col-xs-6 col-md-6 text-center separador-label" data-toggle="tooltip" data-placement="top" title="Calificación">
 											<i class="glyphicon glyphicon-star desc3"></i>
 											<strong class="desc3">
 												{% if habilidad.val_promedio %}
@@ -118,13 +118,13 @@
 												{% endif %}
 											</strong>
 										</div>
-										<div class="label-descp-2 label-telephone col-xs-6 col-md-6 text-center" data-toggle="tooltip" data-placement="top" title="Número Telefónico">
+										<!--<div class="label-descp-2 label-telephone col-xs-6 col-md-6 text-center separador-label" data-toggle="tooltip" data-placement="top" title="Número Telefónico">
 											<i class="glyphicon glyphicon-phone-alt desc3"></i> 
 											<strong class="desc3">
 											{{ habilidad.usuario.celular1 }}
 											</strong>
 										</div>
-										<div class="label-descp-2 label-success col-xs-6 col-md-6 text-center" data-toggle="tooltip" data-placement="top" title="Solicitudes">
+										<div class="label-descp-2 label-success col-xs-6 col-md-6 text-center separador-label" data-toggle="tooltip" data-placement="top" title="Solicitudes">
 											<i class="glyphicon glyphicon-th-list desc3"></i> 
 											<strong class="desc3">
 												{% if habilidad.num_solicitudes %}
@@ -134,7 +134,8 @@
 												{% endif %}
 											</strong>
 										</div>
-										<div class="label-descp-2 label-danger col-xs-6 col-md-6 text-center" data-toggle="tooltip" data-placement="top" title="Precio">
+										-->
+										<div class="label-descp-2 label-danger col-xs-6 col-md-6 text-center separador-label" data-toggle="tooltip" data-placement="top" title="Precio">
 											<i class="glyphicon glyphicon-usd desc3"></i>
 											<strong class="desc3">
 												{% if habilidad.precio %}
@@ -153,17 +154,19 @@
 						<p>Quieres sugerir una habilidad</p>
 					{% endif %}
 				</div>
+			</div>
+			<div class="row paginador">
 				{% if is_paginated %}
 					<div class="pagination">
 						<span class="page-links">
 							{% if page_obj.has_previous %}
-								<a href="/{{categoria.slug}}/?{% if busqueda %}q={{busqueda}}&{% endif %}{%if orden%}orden={{orden}}&{%endif%}page={{ page_obj.previous_page_number }}">atrás</a>
+								<a href="/buscar/{{categoria.slug}}/?{% if busqueda %}q={{busqueda}}&{% endif %}{%if orden%}orden={{orden}}&{%endif%}page={{ page_obj.previous_page_number }}">atrás</a>
 							{% endif %}
 							<span class="page-current">
 								Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
 							</span>
 							{% if page_obj.has_next %}
-								<a href="/{{categoria.slug}}/?{% if busqueda %}q={{busqueda}}&{% endif %}{%if orden%}orden={{orden}}&{%endif%}page={{ page_obj.next_page_number }}">siguiente</a>
+								<a href="/buscar/{{categoria.slug}}/?{% if busqueda %}q={{busqueda}}&{% endif %}{%if orden%}orden={{orden}}&{%endif%}page={{ page_obj.next_page_number }}">siguiente</a>
 							{% endif %}
 						</span>
 					</div>

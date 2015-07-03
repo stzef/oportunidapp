@@ -38,7 +38,7 @@ class busquedasListView(ListView):
 
 	#atributos de la clase
 	model = habilidadesModel
-	paginate_by = 4
+	paginate_by = 10
 	template_name = 'busqueda.html'
 	context_object_name = 'habilidades'
 	ordering = '-val_promedio'
@@ -84,10 +84,12 @@ class busquedasListView(ListView):
 	#recibe un queryset y una frase
 	#filtra los elementos del queryset segun las palabras de la frase
 	def query_por_palabra(self, queryset, busqueda):
-
-		#proceso
+		dicbusqueda = busqueda.split()
+		for palabra in dicbusqueda:
+			queryset = queryset.filter(
+				Q(nhabilidad__contains=palabra) | Q(descripcion__contains=palabra)
+			)
 		return queryset
-
 
 	#retorna los elementos  del modelo 'habilidades' segun la consulta
 	def get_queryset(self):
