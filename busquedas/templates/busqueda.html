@@ -5,88 +5,94 @@
 {% endblock %}
 
 {% block content %}
-<div class="container div-find">
-	<div class="row header-titulo">
-		<div class=" col-md-3">
-			<h3>Resultados</h3>
-		</div>
-		<div class="col-md-9 header-busqueda">
-			<div class="input-group">
-			<input id="busqueda" name="busqueda" type="text" class="form-control" placeholder="¿Que Estas Buscando?" autocomplete="off">
-			<span class="input-group-btn">
-				<button class="btn btn-block btn-find" id="buscar" type="button">Buscar</button>
-			</span>
-		</div>
-		</div>
-	</div>
-	<div class="row controles">
-		<div class="col-md-8">
-			<ul class="breadcrumbs">
-				<li>
-					<a href="{% url 'buscar' %}">Categorias > </a></li>
-				<li>
-					<a href="{% url 'busqueda' categoria.slug %}">{{categoria.categoria}} </a></li>
-				{% if  busqueda %}
-					<li>
-						<a href="/buscar/{{categoria.slug}}/?q={{busqueda}}"> > {{busqueda}}</a>
-					</li>
-				{% endif %}
-			</ul>
-		</div>
-		<div class="col-md-4 controles-paginador">
-			<span class="page-links">
-				{% if is_paginated %}
-					{% if page_obj.has_previous %}
-						<a href="/buscar/{{categoria.slug}}/?{% if busqueda%}q={{busqueda}}&{%endif%}{%if orden%}orden={{orden}}&{%endif%}page={{ page_obj.previous_page_number }}">atrás</a>
-					{% endif %}
-					<span class="page-current">
-						Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
-					</span>
-					{% if page_obj.has_next %}
-						<a href="/buscar/{{categoria.slug}}/?{% if busqueda%}q={{busqueda}}&{%endif%}{%if orden%}orden={{orden}}&{%endif%}page={{ page_obj.next_page_number }}">siguiente</a>
-					{% endif %}
-				{% endif %}
-			</span>
-		</div>
-	</div>
-</div>
-<div class="container div-result">
-	<div>
-		<div class="col-md-3">
-			<div class="filtros">
-				<h3>Filtros</h3>
-				<label for="orden">Categoria</label><br>
-				<dd class="item">
-					<h5 class="item-titulo">{{categoria.categoria}}</h5>
-					<a href="{% url 'buscar' %}">x</a><br>
-				</dd>
-				<a href="#">otras categorias</a>
-				<br><br>
-				<label for="orden">Orden</label><br>
-				<li>
-					<a id="drop2" href="#"  data-toggle="dropdown">
-						{{ordenActual}}
-						<span class="caret"></span>
-					</a>
-					<ul class="dropdown-menu" style="width:100%;">
-							{% for a,b,c in ordenList %}
-								{% if c != ordenActual %}
-									<li>
-										<a href="/buscar/{{categoria.slug}}/?{% if busqueda %}q={{busqueda}}&{% endif %}orden={{a}}{{ruta}}">
-											{{c}}
-										</a>
-									</li>
-								{% endif %}
-							{% endfor %}
+<div class="contentWidth">
+	<div class="marginTop">
+
+		<div >
+			<div class="row header-titulo">
+				<div class=" col-md-3">
+					<h3>Resultados</h3>
+				</div>
+				<div class="col-md-9 header-busqueda">
+					<div class="input-group">
+						<input id="busqueda" name="busqueda" type="text" class="form-control" placeholder="¿Que Estas Buscando?" autocomplete="off">
+						<span class="input-group-btn">
+							<button class="btn btn-block btn-find" id="buscar" type="button">Buscar</button>
+						</span>
+					</div>
+				</div>
+			</div>
+			<div class="row controles">
+				<div class="col-md-8">
+					<ul class="breadcrumbs">
+						<li>
+							<a href="{% url 'buscar' %}">Categorias > </a>
+						</li>
+						<li>
+							<a href="{% url 'busqueda' categoria.slug %}">{{categoria.categoria}} </a>
+						</li>
+						{% if  busqueda %}
+						<li>
+							<a href="/buscar/{{categoria.slug}}/?q={{busqueda}}"> > {{busqueda}}</a>
+						</li>
+						{% endif %}
 					</ul>
-				</li>
+				</div>
+				<div class="col-md-4 controles-paginador">
+					<span class="page-links">
+						{% if is_paginated %}
+						{% if page_obj.has_previous %}
+						<a href="/buscar/{{categoria.slug}}/?{% if busqueda%}q={{busqueda}}&{%endif%}{%if orden%}orden={{orden}}&{%endif%}page={{ page_obj.previous_page_number }}">atrás</a>
+						{% endif %}
+						<span class="page-current">
+							Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
+						</span>
+						{% if page_obj.has_next %}
+						<a href="/buscar/{{categoria.slug}}/?{% if busqueda%}q={{busqueda}}&{%endif%}{%if orden%}orden={{orden}}&{%endif%}page={{ page_obj.next_page_number }}">siguiente</a>
+						{% endif %}
+						{% endif %}
+					</span>
+				</div>
 			</div>
 		</div>
-		<div class="col-md-9">
-			<div class="row">
-				<div id = "resultados">
-					{% if habilidades %}
-						{% for habilidad in habilidades %}
+
+		<div class="container div-result">
+			<div>
+				<div class="col-md-3">
+					<div class="filtros">
+						<h3>Filtros</h3>
+						<label for="orden">Categoria</label><br>
+						<dd class="item">
+							<h5 class="item-titulo">{{categoria.categoria}}</h5>
+							<a href="{% url 'buscar' %}">x</a><br>
+						</dd>
+						<a href="#">otras categorias</a>
+						<br><br>
+						<label for="orden">Orden</label><br>
+						<li>
+							<a id="drop2" href="#"  data-toggle="dropdown">
+								{{ordenActual}}
+								<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu" style="width:100%;">
+								{% for a,b,c in ordenList %}
+								{% if c != ordenActual %}
+								<li>
+									<a href="/buscar/{{categoria.slug}}/?{% if busqueda %}q={{busqueda}}&{% endif %}orden={{a}}{{ruta}}">
+										{{c}}
+									</a>
+								</li>
+								{% endif %}
+								{% endfor %}
+							</ul>
+						</li>
+					</div>
+				</div>
+				<div class="col-md-9">
+					<div class="row">
+						<div id = "resultados">
+							{% if habilidades %}
+							{% for habilidad in habilidades %}
 							<div class="col-xs-12 col-md-12 result-find notice">
 								<div class="col-xs-12 col-sm-4 col-md-2 text-center">
 									<img src="{{ habilidad.foto.url }}" class="desc-img-2" alt="Responsive image">
@@ -107,78 +113,64 @@
 											{{ habilidad.descripcion }}
 										</p>
 									</div>
-									<div class="col-md-4">
-										<div class="label-descp-2 label-warning col-xs-6 col-md-6 text-center separador-label" data-toggle="tooltip" data-placement="top" title="Calificación">
+									<ul class="col-md-4">
+										<li class="label-descp-2 label-warning col-xs-6 col-md-6 text-center separador-label" data-toggle="tooltip" data-placement="top" title="Calificación">
+
 											<i class="glyphicon glyphicon-star desc3"></i>
 											<strong class="desc3">
 												{% if habilidad.val_promedio %}
-													{{ habilidad.val_promedio }}
+												{{ habilidad.val_promedio }}
 												{% else %}
-													<span>ninguno</span>
+												<span>ninguno</span>
 												{% endif %}
 											</strong>
-										</div>
-										<!--<div class="label-descp-2 label-telephone col-xs-6 col-md-6 text-center separador-label" data-toggle="tooltip" data-placement="top" title="Número Telefónico">
-											<i class="glyphicon glyphicon-phone-alt desc3"></i> 
-											<strong class="desc3">
-											{{ habilidad.usuario.celular1 }}
-											</strong>
-										</div>
-										<div class="label-descp-2 label-success col-xs-6 col-md-6 text-center separador-label" data-toggle="tooltip" data-placement="top" title="Solicitudes">
-											<i class="glyphicon glyphicon-th-list desc3"></i> 
-											<strong class="desc3">
-												{% if habilidad.num_solicitudes %}
-													{{ habilidad.num_solicitudes }}
-												{% else %}
-													<span>ninguno</span>
-												{% endif %}
-											</strong>
-										</div>
-										-->
-										<div class="label-descp-2 label-danger col-xs-6 col-md-6 text-center separador-label" data-toggle="tooltip" data-placement="top" title="Precio">
+										</li>
+										<li class="label-descp-2 label-danger col-xs-6 col-md-6 text-center separador-label" data-toggle="tooltip" data-placement="top" title="Precio">
 											<i class="glyphicon glyphicon-usd desc3"></i>
 											<strong class="desc3">
 												{% if habilidad.precio %}
-													{{ habilidad.precio }}
+												{{ habilidad.precio }}
 												{% else %}
-													<span>por acordar</span>
+												<span>por acordar</span>
 												{% endif %}
 											</strong>
-										</div>
-									</div>
-					  			</div>
-				  			</div>
-						{% endfor %}
-					{% else %}
-						<p>No hay resultados</p>
-						<p>Quieres sugerir una habilidad</p>
-					{% endif %}
-				</div>
-			</div>
-			<div class="row paginador">
-				{% if is_paginated %}
-					<div class="pagination">
-						<span class="page-links">
-							{% if page_obj.has_previous %}
-								<a href="/buscar/{{categoria.slug}}/?{% if busqueda %}q={{busqueda}}&{% endif %}{%if orden%}orden={{orden}}&{%endif%}page={{ page_obj.previous_page_number }}">atrás</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+							{% endfor %}
+							{% else %}
+							<p>No hay resultados</p>
+							<p>Quieres sugerir una habilidad</p>
 							{% endif %}
-							<span class="page-current">
-								Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
-							</span>
-							{% if page_obj.has_next %}
-								<a href="/buscar/{{categoria.slug}}/?{% if busqueda %}q={{busqueda}}&{% endif %}{%if orden%}orden={{orden}}&{%endif%}page={{ page_obj.next_page_number }}">siguiente</a>
-							{% endif %}
-						</span>
+						</div>
 					</div>
-				{% endif %}
+					<div class="row paginador">
+						{% if is_paginated %}
+						<div class="pagination">
+							<span class="page-links">
+								{% if page_obj.has_previous %}
+								<a href="/buscar/{{categoria.slug}}/?{% if busqueda %}q={{busqueda}}&{% endif %}{%if orden%}orden={{orden}}&{%endif%}page={{ page_obj.previous_page_number }}">atrás</a>
+								{% endif %}
+								<span class="page-current">
+									Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
+								</span>
+								{% if page_obj.has_next %}
+								<a href="/buscar/{{categoria.slug}}/?{% if busqueda %}q={{busqueda}}&{% endif %}{%if orden%}orden={{orden}}&{%endif%}page={{ page_obj.next_page_number }}">siguiente</a>
+								{% endif %}
+							</span>
+						</div>
+						{% endif %}
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
 {% endblock %}
 {% block scripts %}
-	<script>
-		$(function(){
+<script>
+	$(function(){
 			//input de busqueda en focus
 			$('#busqueda').focus();
 
@@ -222,4 +214,4 @@
 			});
 		})
 	</script>
-{% endblock %}
+	{% endblock %}
