@@ -33,7 +33,7 @@ class habilidadesModel(models.Model):
 	foto = models.ImageField(upload_to= 'habilidades/img',blank=True,null=True, default=HABILIDADES_FOTO_DEFAULT)
 	val_promedio = models.IntegerField(blank=True,null=True)
 	num_solicitudes = models.IntegerField(blank=True,null=True,default=0)
-	estado = models.BooleanField(default=True)
+	estado = models.BooleanField()
 	precio = models.DecimalField(max_digits=12,decimal_places=2,blank=True,null=True)
 	fecha_creacion =  models.DateTimeField(auto_now=True,null=False,blank=True)
 
