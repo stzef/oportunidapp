@@ -56,7 +56,7 @@ class busquedasListView(ListView):
 	def get_elemento_busqueda(self, indice):
 		i = 0
 		for a,b,c in self.ordenList:
-			if a == indice:	
+			if a == indice:
 				return self.ordenList[i]
 			i += 1
 
@@ -86,9 +86,11 @@ class busquedasListView(ListView):
 	def query_por_palabra(self, queryset, busqueda):
 		dicbusqueda = busqueda.split()
 		for palabra in dicbusqueda:
-			queryset = queryset.filter(
-				Q(nhabilidad__contains=palabra) | Q(descripcion__contains=palabra)
-			)
+			if queryset.filter(Q(nhabilidad__contains=palabra) | Q(descripcion__contains=palabra)).exists():
+				queryset = queryset.filter(Q(nhabilidad__contains=palabra) | Q(descripcion__contains=palabra))
+			else:
+				pass
+				#queryset = habCategoriasModel.objects.none()
 		return queryset
 
 	#retorna los elementos  del modelo 'habilidades' segun la consulta

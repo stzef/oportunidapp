@@ -15,7 +15,7 @@
 				</div>
 				<div class="col-md-9 header-busqueda">
 					<div class="input-group">
-						<input id="busqueda" name="busqueda" type="text" class="form-control" placeholder="¿Que Estas Buscando?" autocomplete="off">
+						<input id="busqueda" name="busqueda" type="text" class="form-control" placeholder="¿Buscas algo mas?" autocomplete="off">
 						<span class="input-group-btn">
 							<button class="btn btn-block btn-find" id="buscar" type="button">Buscar</button>
 						</span>
@@ -93,51 +93,51 @@
 						<div id = "resultados">
 							{% if habilidades %}
 							{% for habilidad in habilidades %}
-							<div class="col-xs-12 col-md-12 result-find notice">
-								<div class="col-xs-12 col-sm-4 col-md-2 text-center">
-									<img src="{{ habilidad.foto.url }}" class="desc-img-2" alt="Responsive image">
-								</div>
-								<div class="col-xs-12 col-sm-8 col-md-10">
-									<div class="col-md-8">
-										<h3>
-											<strong>
-												<a href="/buscar/{{categoria.slug}}/{{ habilidad.slug }}/">
-													{{ habilidad.nhabilidad }}
-												</a>
-											</strong>
-										</h3>
-										<p class="username">
-											{{ habilidad.userfirstname }} {{ habilidad.userlastname }}
-										</p>
-										<p class="text">
-											{{ habilidad.descripcion }}
-										</p>
-									</div>
-									<ul class="col-md-4">
-										<li class="label-descp-2 label-warning col-xs-6 col-md-6 text-center separador-label" data-toggle="tooltip" data-placement="top" title="Calificación">
 
-											<i class="glyphicon glyphicon-star desc3"></i>
-											<strong class="desc3">
-												{% if habilidad.val_promedio %}
-												{{ habilidad.val_promedio }}
-												{% else %}
-												<span>ninguno</span>
-												{% endif %}
-											</strong>
-										</li>
-										<li class="label-descp-2 label-danger col-xs-6 col-md-6 text-center separador-label" data-toggle="tooltip" data-placement="top" title="Precio">
-											<i class="glyphicon glyphicon-usd desc3"></i>
-											<strong class="desc3">
-												{% if habilidad.precio %}
-												{{ habilidad.precio }}
-												{% else %}
-												<span>por acordar</span>
-												{% endif %}
-											</strong>
-										</li>
-									</ul>
+							<a class="habilidad__hover" href="/buscar/{{categoria.slug}}/{{ habilidad.slug }}/">
+								<div class="col-xs-12 col-md-12 result-find notice">
+									<div class="col-xs-12 col-sm-4 col-md-4 text-center">
+										<img src="{{ habilidad.foto.url }}" class="desc-img-2 img-thumbnail" alt="Responsive image">
+									</div>
+									<div class="col-xs-12 col-sm-8 col-md-8">
+										<div class="col-md-8">
+											<h3>
+												<strong>{{ habilidad.nhabilidad }}</strong>
+											</h3>
+											<p class="username">
+												{{ habilidad.userfirstname }} {{ habilidad.userlastname }}
+											</p>
+											<p class="text">
+												{{ habilidad.descripcion }}
+											</p>
+										</div>
+										<ul class="col-md-4">
+											<li class="label-descp-2 label-warning col-xs-6 col-md-6 text-center separador-label" data-toggle="tooltip" data-placement="top" title="Calificación">
+
+												<i class="glyphicon glyphicon-star desc3"></i>
+												<strong class="desc3">
+													{% if habilidad.val_promedio %}
+													{{ habilidad.val_promedio }}
+													{% else %}
+													<span>ninguno</span>
+													{% endif %}
+												</strong>
+											</li>
+											<li class="label-descp-2 label-danger col-xs-6 col-md-6 text-center separador-label" data-toggle="tooltip" data-placement="top" title="Precio">
+												<i class="glyphicon glyphicon-usd desc3"></i>
+												<strong class="desc3">
+													{% if habilidad.precio %}
+													{{ habilidad.precio }}
+													{% else %}
+													<span>por acordar</span>
+													{% endif %}
+												</strong>
+											</li>
+										</ul>
+									</div>
 								</div>
-							</div>
+
+							</a>
 							{% endfor %}
 							{% else %}
 							<p>No hay resultados</p>

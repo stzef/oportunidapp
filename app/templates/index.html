@@ -1,11 +1,10 @@
 {% load staticfiles %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
 	<meta charset="utf-8">
-	{% block head %}
-
-	{% endblock %}
+	{% block head %}{% endblock %}
 	<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
 	<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
 	<link href="{% static 'css/style.css' %}" rel="stylesheet">
@@ -14,7 +13,8 @@
 	<script src="{% static 'jslibraries/spin.js' %}"></script>
 	<script src="{% static 'jslibraries/jquery-1.11.3.min.js' %}"></script>
 </head>
-<body class="body-img">
+
+<body class="body__gray">
 	<div class="navbar navbar-blue navbar-static-top">
 		<div class="col-xs-12 col-sm-3 col-md-2 text-center">
 			<ul class="nav navbar-nav">

@@ -5,9 +5,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 SECRET_KEY = "ia=1dinj8#(uo!_hdzf6jh3_==w99!3r98m=6$8z=7n7%%h79^"
 
-DEBUG = False
+DEBUG = True
 
-TEMPLATE_DEBUG = False
+TEMPLATE_DEBUG = DEBUG
+
+ALLOWED_HOSTS = []
 
 DJANGO_APPS = (
     'django.contrib.admin',
@@ -56,12 +58,8 @@ USE_TZ = True
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd1m1lbvs466ukf',
-        'USER': 'zgendaedffqlop',
-        'PASSWORD': 'gcgWej-RhJRU4ziDRJHA6Vn87w',
-        'HOST':'ec2-54-227-247-161.compute-1.amazonaws.com',
-        'PORT':'5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 #DATABASES['default'] =  dj_database_url.config()

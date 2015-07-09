@@ -5,6 +5,13 @@ body
   color #555555
   font-size 17px
   height 100%
+body
+   /*background url(../img/fondo.jpg) no-repeat fixed*/
+    -webkit-background-size cover
+    -moz-background-size cover
+    -o-background-size cover
+    background-size cover
+    position relative
 
 html
   position relative
@@ -417,6 +424,10 @@ small.text-muted
 @media (max-width 991px)
   .right-noticie
     display none
+  .label-descp
+      width: 30% !important;
+      display: inline-block;
+      margin: 10px 1% !important;
 /*
  * off canvas sidebar
  * --------------------------------------------------
@@ -428,6 +439,7 @@ small.text-muted
   .desc3
     font-size 16px
     text-align center
+
 
 @media screen and (max-width 768px)
   .img-detail-2
@@ -449,8 +461,7 @@ small.text-muted
     font-size 30px
     text-align center
 
-  .label-descp
-    width 100px !important
+
 
   .row-offcanvas-left.active
     left 33%

@@ -1,7 +1,7 @@
 {% extends "template.html" %}
 {% load staticfiles %}
 {% block head %}
-	<title>Habilidades | OportunidApp </title>
+<title>Habilidades | OportunidApp </title>
 {% endblock %}
 {% block content %}
 <div class="row first">
@@ -15,14 +15,14 @@
 			<ul class="dropdown-menu" role="menu">
 				<li>
 					<a class="link-user" data-toggle="modal" data-target="#editarHabilidadModal">Editar</a>
-					</li>
+				</li>
 				<li>
 					<a class="link-user" data-toggle="modal" data-target="#editarFotoModal">Cambiar foto</a>
 				</li>
 				{% if habilidad.estado %}
-					<li><a class="link-user" data-toggle="modal" data-target="#desactivarHabilidadModal">Inactivar</a></li>
+				<li><a class="link-user" data-toggle="modal" data-target="#desactivarHabilidadModal">Inactivar</a></li>
 				{% else %}
-					<li><a class="link-user" data-toggle="modal" data-target="#activarHabilidadModal">Activar</a></li>
+				<li><a class="link-user" data-toggle="modal" data-target="#activarHabilidadModal">Activar</a></li>
 				{% endif %}
 			</ul>
 		</div>
@@ -32,115 +32,111 @@
 	<div class="col-md-4 label-category label-description text-center">
 		<p>
 			<strong>
-			{{ habilidad.categoria }} -
-			{% if habilidad.estado %}
+				{{ habilidad.categoria }} -
+				{% if habilidad.estado %}
 				<span class="text-success">Activo</span>
-			{% else %}
+				{% else %}
 				<span class="text-danger">Inactivo</span>
-			{% endif %}
+				{% endif %}
 			</strong>
 		</p>
 	</div>
 	<div class="notice text-center col-xs-12 col-md-12">
 		<div class="col-md-12">
-			<img src="/media/{{ habilidad.foto }}" class="img-detail-2" alt="">
+			<img src="/media/{{ habilidad.foto }}" class="img-detail-2 img-thumbnail" alt="">
 		</div>
 		<div class="col-md-12">
 			<h3>{{ habilidad.nhabilidad }}</h3>
 			<p>{{ habilidad.descripcion }}</p>
 		</div>
 		<ul class="col-md-12">
-			<li class="text-top text-center col-xs-4 col-md-4">
-				<div class="label-descp label-warning " data-toggle="tooltip" data-placement="top" title="Puntos">
-					<i class="glyphicon glyphicon-star desc3"></i>
-					{% if habilidad.val_promedio %}
-						<span class="desc">Puntuacion: </span>
-						<strong class="desc3">{{ habilidad.val_promedio}}</strong>
-					{% else %}
-						<strong class="desc3">ninguno</strong>
-					{% endif %}
-				</div>
+			<li class="text-top text-center col-xs-4 col-md-4 label-descp-detalle label-warning" data-toggle="tooltip" data-placement="top" title="Puntos">
+				<i class="glyphicon glyphicon-star desc3"></i>
+				{% if habilidad.val_promedio %}
+				<span class="desc">Puntuacion: </span>
+				<strong class="desc3">{{ habilidad.val_promedio}}</strong>
+				{% else %}
+				<strong class="desc3">ninguno</strong>
+				{% endif %}
 			</li>
-			<li class="text-top text-center col-xs-4 col-md-4">
-				<div class="label-descp label-success" data-toggle="tooltip" data-placement="top" title="Solicitudes">
-					<i class="glyphicon glyphicon-th-list desc3"></i>
-					{% if habilidad.val_promedio %}
-						<span class="desc">Solicitudes: </span>
-						<strong class="desc3">{{ habilidad.num_solicitudes }}</strong>
-					{% else %}
-						<strong class="desc3">ninguno</strong>
-					{% endif %}
-				</div>
+			<li class="text-top text-center col-xs-4 col-md-4 label-descp-detalle label-success" data-toggle="tooltip" data-placement="top" title="Solicitudes">
+
+				<i class="glyphicon glyphicon-th-list desc3"></i>
+				{% if habilidad.val_promedio %}
+				<span class="desc">Solicitudes: </span>
+				<strong class="desc3">{{ habilidad.num_solicitudes }}</strong>
+				{% else %}
+				<strong class="desc3">ninguno</strong>
+				{% endif %}
 			</li>
-			<li class="text-top text-center col-xs-4 col-md-4">
-				<div class="label-descp label-danger" data-toggle="tooltip" data-placement="top" title="Precio">
-					<i class="glyphicon glyphicon-usd desc3"></i>
-					{% if habilidad.precio %}
-						<span class="desc">Precio: </span>
-						<strong class="desc3">{{ habilidad.precio }}</strong>
-					{% else %}
-						<strong class="desc3">ninguno</strong>
-					{% endif %}
-				</div>
+			<li class="text-top text-center col-xs-4 col-md-4 label-descp-detalle label-danger" data-toggle="tooltip" data-placement="top" title="Precio">
+
+				<i class="glyphicon glyphicon-usd desc3"></i>
+				{% if habilidad.precio %}
+				<span class="desc">Precio: </span>
+				<strong class="desc3">{{ habilidad.precio }}</strong>
+				{% else %}
+				<strong class="desc3">ninguno</strong>
+				{% endif %}
 			</li>
 		</ul>
 	</div>
 </div>
 {% if habilidad.estado %}
-	<div class="modal fade" id="desactivarHabilidadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-	    	<div class="modal-content">
-	      		<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="myModalLabel">
-						<b>Desactivar Habilidad</b>
-					</h4>
-				</div>
-				<div class="modal-body">
-					<div class="content-modal">
-						<p>
-							Seguro quieres desactivar la habilidad: <b><h4>"{{ habilidad.nhabilidad }}" ?</h4></b>
-							Esto significa que las personas no podrán encontrarte si buscan un servicio como este o similar.
-						</p>
-						<div class="accept">
-							<button id="btn-desactivar-habilidad" class="btn btn-success">Si, seguro</button>
-							<button class="btn btn-danger" data-dismiss="modal">No, Salir</button>
-						</div>
+<div class="modal fade" id="desactivarHabilidadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">
+					<b>Desactivar Habilidad</b>
+				</h4>
+			</div>
+			<div class="modal-body">
+				<div class="content-modal">
+					<p>
+						Seguro quieres desactivar la habilidad: <b><h4>"{{ habilidad.nhabilidad }}" ?</h4></b>
+						Esto significa que las personas no podrán encontrarte si buscan un servicio como este o similar.
+					</p>
+					<div class="accept">
+						<button id="btn-desactivar-habilidad" class="btn btn-success">Si, seguro</button>
+						<button class="btn btn-danger" data-dismiss="modal">No, Salir</button>
 					</div>
-	      		</div>
-	    	</div>
-	  	</div>
+				</div>
+			</div>
+		</div>
 	</div>
+</div>
 {% else %}
-	<div class="modal fade" id="activarHabilidadModal" tabindex="-1" role="dialog" aria-hidden="true">
-		<div class="modal-dialog">
-	    	<div class="modal-content">
-	      		<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="myModalLabel">
-						<b>Activar Habilidad</b>
-					</h4>
-				</div>
-				<div class="modal-body">
-					<div class="content-modal">
-						<p>
-							Al activar la habilidad: <b><h4>"{{ habilidad.nhabilidad }}"</h4></b> permitiras que otras personas te encuentren si buscan un servicio como este o similar.
-						</p>
-						<div class="accept">
-							<button id="btn-activar-habilidad" class="btn btn-success">Si, seguro</button>
-							<button href="#" class="btn btn-danger" data-dismiss="modal">No, Salir</button>
-						</div>
+<div class="modal fade" id="activarHabilidadModal" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">
+					<b>Activar Habilidad</b>
+				</h4>
+			</div>
+			<div class="modal-body">
+				<div class="content-modal">
+					<p>
+						Al activar la habilidad: <b><h4>"{{ habilidad.nhabilidad }}"</h4></b> permitiras que otras personas te encuentren si buscan un servicio como este o similar.
+					</p>
+					<div class="accept">
+						<button id="btn-activar-habilidad" class="btn btn-success">Si, seguro</button>
+						<button href="#" class="btn btn-danger" data-dismiss="modal">No, Salir</button>
 					</div>
-	      		</div>
+				</div>
+			</div>
 
-	    	</div>
-	  	</div>
+		</div>
 	</div>
+</div>
 {% endif %}
 <div class="modal fade" id="editarHabilidadModal" tabindex="-1" role="dialog" aria-hidden="true">
 	<div class="modal-dialog">
-    	<div class="modal-content">
-      		<div class="modal-header">
+		<div class="modal-content">
+			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				<h4 class="modal-title" >
 					<b>Editar Habilidad</b>
@@ -172,15 +168,15 @@
 						</div>
 					</form>
 				</div>
-      		</div>
+			</div>
 
-    	</div>
-  	</div>
+		</div>
+	</div>
 </div>
 <div class="modal fade" id="editarFotoModal" tabindex="-1" role="dialog" aria-hidden="true">
 	<div class="modal-dialog">
-    	<div class="modal-content">
-      		<div class="modal-header">
+		<div class="modal-content">
+			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				<h4 class="modal-title" >
 					<b>Editar Foto</b>
@@ -218,8 +214,8 @@
 
 {% endblock %}
 {% block scripts %}
-	<script src="{% static 'jsapp/csrf_load.js' %}"></script>
-	<script>
+<script src="{% static 'jsapp/csrf_load.js' %}"></script>
+<script>
 	var mostrarFoto = function(event) {
 		var preview = document.getElementById('preview-img-habilidad');
 		preview.src = URL.createObjectURL(event.target.files[0]);
@@ -309,5 +305,5 @@
 			}
 		});
 	});
-	</script>
+</script>
 {% endblock %}
