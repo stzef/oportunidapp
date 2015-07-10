@@ -58,8 +58,12 @@ USE_TZ = True
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'oportunidapp',
+        'USER': 'postgres',
+        'PASSWORD': '1234',
+        'HOST':'127.0.0.1',
+        'PORT':'5432',
     }
 }
 #DATABASES['default'] =  dj_database_url.config()
@@ -75,13 +79,9 @@ LOGIN_URL = '/ingresar'
 
 LOGOUT_URL = '/salir'
 
-STATIC_ROOT = 'staticfiles'
-
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
+STATIC_ROOT = 'static'
 
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
