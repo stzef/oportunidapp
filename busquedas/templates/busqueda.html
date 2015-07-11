@@ -7,7 +7,6 @@
 {% block content %}
 <div class="contentWidth">
 	<div class="marginTop">
-
 		<div >
 			<div class="row header-titulo">
 				<div class=" col-md-3">
@@ -90,60 +89,80 @@
 				</div>
 				<div class="col-md-9">
 					<div class="row">
+
+
+
+
+
 						<div id = "resultados">
 							{% if habilidades %}
 							{% for habilidad in habilidades %}
+							<div class="habilidad-item">
 
-							<a class="habilidad__hover" href="/buscar/{{categoria.slug}}/{{ habilidad.slug }}/">
-								<div class="col-xs-12 col-md-12 result-find notice">
-									<div class="col-xs-12 col-sm-4 col-md-4 text-center">
-										<img src="{{ habilidad.foto.url }}" class="desc-img-2 img-thumbnail" alt="Responsive image">
-									</div>
-									<div class="col-xs-12 col-sm-8 col-md-8">
-										<div class="col-md-8">
+								<a class="habilidad__hover" href="/buscar/{{categoria.slug}}/{{ habilidad.slug }}/">
+
+									<div class="textJustify row panel panel-default">
+
+										<div class="col-sm-12 col-md-4 div-align">
+											<img src="{{ habilidad.foto.url }}" class="desc-img img-thumbnail" alt="Responsive image">
+										</div>
+
+										<div class="col-sm-12 col-md-5 div-align">
 											<h3>
 												<strong>{{ habilidad.nhabilidad }}</strong>
 											</h3>
-											<p class="username">
-												{{ habilidad.userfirstname }} {{ habilidad.userlastname }}
-											</p>
-											<p class="text">
+											<p>
 												{{ habilidad.descripcion }}
 											</p>
 										</div>
-										<ul class="col-md-4">
-											<li class="label-descp-2 label-warning col-xs-6 col-md-6 text-center separador-label" data-toggle="tooltip" data-placement="top" title="Calificación">
 
-												<i class="glyphicon glyphicon-star desc3"></i>
-												<strong class="desc3">
-													{% if habilidad.val_promedio %}
-													{{ habilidad.val_promedio }}
-													{% else %}
-													<span>ninguno</span>
-													{% endif %}
-												</strong>
-											</li>
-											<li class="label-descp-2 label-danger col-xs-6 col-md-6 text-center separador-label" data-toggle="tooltip" data-placement="top" title="Precio">
-												<i class="glyphicon glyphicon-usd desc3"></i>
-												<strong class="desc3">
-													{% if habilidad.precio %}
-													{{ habilidad.precio }}
-													{% else %}
-													<span>por acordar</span>
-													{% endif %}
-												</strong>
-											</li>
-										</ul>
+
+
+										<div class="col-sm-12 col-md-3">
+											<ul>
+												<li class="label-descp label-warning" data-toggle="tooltip" data-placement="top" title="Calificación">
+
+													<i class="glyphicon glyphicon-star desc3"></i>
+													<strong class="desc3">
+														{% if habilidad.val_promedio %}
+														{{ habilidad.val_promedio }}
+														{% else %}
+														<span>ninguno</span>
+														{% endif %}
+													</strong>
+												</li>
+
+												<li class="label-descp label-danger" data-toggle="tooltip" data-placement="top" title="Precio">
+													<i class="glyphicon glyphicon-usd desc3"></i>
+													<strong class="desc3">
+														{% if habilidad.precio %}
+														{{ habilidad.precio }}
+														{% else %}
+														<span>por acordar</span>
+														{% endif %}
+													</strong>
+												</li>
+											</ul>
+										</div>
 									</div>
-								</div>
 
-							</a>
+								</a>
+							</div>
+
 							{% endfor %}
 							{% else %}
 							<p>No hay resultados</p>
 							<p>Quieres sugerir una habilidad</p>
 							{% endif %}
 						</div>
+
+
+
+
+
+
+
+
 					</div>
 					<div class="row paginador">
 						{% if is_paginated %}
@@ -213,5 +232,5 @@
 				}
 			});
 		})
-	</script>
-	{% endblock %}
+</script>
+{% endblock %}
