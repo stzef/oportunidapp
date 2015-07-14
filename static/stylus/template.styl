@@ -4,7 +4,6 @@ body
   font-family verdana,arial,sans-serif
   color #555555
   font-size 17px
-  height 100%
 body
    /*background url(../img/fondo.jpg) no-repeat fixed*/
 	-webkit-background-size cover
@@ -281,7 +280,8 @@ small.text-muted
 
 .icon-menu
   padding-right 7px
-
+.nav>li
+  display inline-block
 .nav>li>a
   transition all 0.2s
 
@@ -361,36 +361,38 @@ small.text-muted
   margin-bottom 50px
 
 .n-red
-  padding 3px
-  border-radius 5px 5px 5px 5px
-  -moz-border-radius 5px 5px 5px 5px
-  -webkit-border-radius 5px 5px 5px 5px
-  border 0px solid #000000
-  color #fff
+	padding 3px
+	border-radius 5px 5px 5px 5px
+	-moz-border-radius 5px 5px 5px 5px
+	-webkit-border-radius 5px 5px 5px 5px
+	border 0px solid #000000
+	color #fff
 
-.date-need
+	.date-need
   float right
-  font-style italic
+	font-style italic
 
 .spacing
-  margin-bottom 10px
+	margin-bottom 10px
 
 .category-show
-  width auto
-  max-height 300px
+	width auto
+	max-height 300px
 
 .content-modal
-  padding 10px
+	padding 10px
 
 .accept
-  text-align center
-  margin-top 20px
-  margin-bottom  20px
+	text-align center
+	margin-top 20px
+	margin-bottom  20px
 
 .red-color
-  color #fff
-  background-color #e74c3c
-  padding 15px
+	color #fff
+	background-color #e74c3c
+	padding 15px
+
+
 
 @media screen and (max-width 991px)
 	.desc-sign
@@ -407,6 +409,18 @@ small.text-muted
 		margin-bottom 40px
 
 @media (max-width 768px)
+
+  .formularioLogin
+    width 70%
+    margin 0 15% !important
+
+	.habilidad-foto
+	.habilidad-descripcion
+		width: 100%;
+	.ofertante
+		width: 50%;
+		margin: 0 auto;
+		text-align: center;
 	.column .padding
 		padding 7px
 
