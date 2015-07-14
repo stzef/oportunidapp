@@ -1,16 +1,19 @@
 from django.shortcuts import render, redirect, render_to_response 
-from django.contrib.auth import login, logout, update_session_auth_hash
+from django.contrib.auth import login, logout, update_session_auth_hash, authenticate
 from django.contrib.auth.models import User
 from django.views.generic import FormView
 from django.views.decorators.csrf import csrf_exempt
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import UpdateView
 from django.template import RequestContext
-import os
 from django.conf import settings
+from django.core.mail import EmailMessage
 
+import os
 import json
+
+
 from forms import *
 from forms import loginForm,registroForm
 from models import perfilUsuarioModel
@@ -37,12 +40,30 @@ class registroView(FormView):
 	
 	def form_valid(self,form):
 		form.save()
+		self.enviar_email_registro(form.cleaned_data.get("email"))
 		return HttpResponseRedirect(self.get_success_url())
 
 	def form_invalid(self, form):
 		return self.render_to_response(self.get_context_data(form=form))
 
+	def enviar_email_registro(self, usuario_email):
+		msg = EmailMessage(
+			subject='Bienvenido',
+			from_email='sistematizaref <sistematizaref@gmail.com>',
+			to = [usuario_email],
+		)
+		msg.template_name = 'Bienvenida'
+		msg.template_content = {
+			'std_content00' : '<h2>Bienvenido a oportunidapp %s </h2>' % usuario_email,
+		}
+		msg.send()
+
+
+# Vista generica para loggear a un usuario 
+# Esta vista es por defecto el login principal de la aplicacion
+
 class loginView(FormView):
+	# parametros de clase 
 	form_class = loginForm
 	template_name = 'login.html'
 	success_url = '/habilidades/'
@@ -51,6 +72,7 @@ class loginView(FormView):
 		login(self.request, form.user_cache)
 		return super(loginView, self).form_valid(form)
 
+	# Verifica si la url tiene un querystring con parametro next
 	def get_success_url(self):
 		if self.request.GET.get('next'):
 			return self.request.GET.get('next')
@@ -133,3 +155,39 @@ def cambiarFotoPerfil(request):
 		json.dumps(response_data),
 		content_type="application/json"
 	)
+
+
+# Responde si la solicitud es ajax: '1' si usuario esta loggeado '0' si no
+def is_auth_ajax(request):
+
+	if request.is_ajax():
+		# verificar si usuario esta autenticado
+		if request.user.is_authenticated():
+			auth = 1
+		else:
+			auth = 0
+		# retorna json
+		return JsonResponse({'auth':auth},safe=False)
+
+
+# Loggea al usuario a traves de una solicitud ajax
+def login_ajax(request):
+
+	if request.is_ajax():
+		username = request.POST['username']
+		password = request.POST['password']
+		user = authenticate(
+			username = username,
+			password = password,
+		)
+		if user is not None:
+			if user.is_active:
+				login(request, user)
+			#else:
+				#responder cuenta desactivada
+		#else:
+			#responder el usuario no exite
+
+				return JsonResponse({'msg':'OK'}, safe=False)
+	else:
+		return JsonResponse({'msg':'NO'}, safe=False)

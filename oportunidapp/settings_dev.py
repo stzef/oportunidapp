@@ -7,7 +7,7 @@ SECRET_KEY = "ia=1dinj8#(uo!_hdzf6jh3_==w99!3r98m=6$8z=7n7%%h79^"
 
 DEBUG = True
 
-TEMPLATE_DEBUG = DEBUG
+TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -28,7 +28,9 @@ PROJECT_APPS = (
     'usuarios',
 )
 
-THIRTY_PARTY_APPS = ()
+THIRTY_PARTY_APPS = (
+    'djrill',
+)
 
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRTY_PARTY_APPS
 
@@ -41,6 +43,11 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
+
+EMAIL_BACKEND = 'djrill.mail.backends.djrill.DjrillBackend'
+
+MANDRILL_API_KEY = 'Fj_DwFYGpE5IXMS4lua_Hg'
+
 
 ROOT_URLCONF = 'oportunidapp.urls'
 
@@ -63,6 +70,7 @@ DATABASES = {
         'USER': 'postgres',
         'PASSWORD': '1234',
         'HOST':'127.0.0.1',
+        #'HOST':'192.168.20.107',
         'PORT':'5432',
     }
 }
@@ -81,8 +89,15 @@ LOGOUT_URL = '/salir'
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = 'static'
+STATIC_ROOT = 'staticfiles'
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
 
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
 MEDIA_URL = '/media/'
+
+
+

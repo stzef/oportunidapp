@@ -12,7 +12,12 @@ urlpatterns = patterns('',
 	url(r'^perfil/password-update/$','usuarios.views.UpdatePass',name='update-password'),
 	url(r'^perfil/foto-usuario/$','usuarios.views.cambiarFotoPerfil',name='fotoPerfil'),
 
+
+	url(r'^isauthajax/','usuarios.views.is_auth_ajax',name='is_auth_ajax'),
+
+
 	url(r'^registro/',registroView.as_view(),name='registro'),
 	url(r'^ingresar/',loginView.as_view(),name='ingresar'),
 	url(r'^salir/','usuarios.views.logoutView',name='salir'),
+
 )

@@ -41,7 +41,6 @@ class habilidadesListView(LoginRequiredMixin, ListView):
 
 	def get_queryset(self):
 		queryset = habilidadesModel.objects.filter(usuario=self.request.user, estado=True).order_by('-fecha_creacion')
-		print self.request
 		return queryset
 
 	def get(self, request, *args, **kwargs):
