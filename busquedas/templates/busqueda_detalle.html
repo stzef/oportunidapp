@@ -69,72 +69,116 @@
 			</div>
 		</div>
 	</div>
+
+
+
+	<!-- Modal -->
+	<div class="modal fade" id="modalPregunta" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">Ingresa o registrate para poder preguntar</h4>
+				</div>
+				<div class="modal-body">
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus id perspiciatis, corporis ipsam. Aut numquam itaque ab tenetur consectetur sit ea consequatur assumenda ratione blanditiis. Ratione voluptatem distinctio iusto doloribus.</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+					<button type="button" class="btn btn-primary">Ingresar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
 	<div class="row preguntas">
-		<h3 class="preguntas-titulo">Preguntas</h3>
-		<div class="row preguntas-content">
-			<div class="row preguntas-nueva">
-				<form action="" method="">
+
+		<h3>Preguntas</h3>
+
+		<div class="row moduloPreguntas">
+
+			<div class="row preguntas-nueva preguntar">
+				<form action="" method="" class="formularioPregunta">
 					<input type="hidden" value="{{habilidad.pk}}" id="habilidad" name="habilidad">
-					<textarea class="preguntas-texto" name="pregunta" id="pregunta" rows="1">
-					</textarea>
-					<input id="preguntar-btn" type="submit" value="Preguntar">
+					<span class="glyphicon glyphicon-question-sign"></span>
+					<input type="search" id="pregunta" rows="1" name="pregunta" placeholder="Escribe tu pregunta.">
+
+					<input id="preguntar-btn" type="submit" value="Preguntar" class="btn btn-success">
 				</form>
 			</div>
-			<div class="preguntas-otras">
-				<li>
-					<p>
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus repudiandae fuga rem enim minus, recusandae, volitatis.
-					</p>
-				</li>
-				<li>
-					<p>
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus repudiandae fuga rem enim minus, recusandae, volitatis.
-					</p>
-				</li>
-				<li>
-					<p>
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus repudiandae fuga rem enim minus, recusandae, volitatis.
-					</p>
-				</li>
-				<li>
-					<p>
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus repudiandae fuga rem enim minus, recusandae, volitatis.
-					</p>
-				</li>
-			</div>
+
+			<section class="row preguntas">
+
+				<article class="pregunta">
+					<div class="contenedorPregunta">
+						<span class="glyphicon glyphicon-question-sign"></span>
+						<p class="preguntaEspecifica">En cuanto tiempo puede desarrollar x proyecto sobre C.</p>
+					</div>
+					<div class="contenedorPespuesta">
+						<span class="respuesta glyphicon glyphicon-check"></span>
+						<p class="repuestaEspecifica">Esto y ocupado actualmente, pero pudria empezar en una sema, me demoraria 3 meses en el desarrollo</p>
+					</div>
+				</article>
+				<article class="pregunta">
+					<div class="contenedorPregunta">
+						<span class="glyphicon glyphicon-question-sign"></span>
+						<p class="preguntaEspecifica">En cuanto tiempo puede desarrollar x proyecto sobre C.</p>
+					</div>
+					<div class="contenedorPespuesta">
+						<span class="respuesta glyphicon glyphicon-check"></span>
+						<p class="repuestaEspecifica">Esto y ocupado actualmente, pero pudria empezar en una sema, me demoraria 3 meses en el desarrollo</p>
+
+					</div>
+				</article>
+				<article class="pregunta">
+					<div class="contenedorPregunta">
+						<span class="glyphicon glyphicon-question-sign"></span>
+						<p class="preguntaEspecifica">En cuanto tiempo puede desarrollar x proyecto sobre C.</p>
+					</div>
+					<div class="contenedorPespuesta">
+						<span class="respuesta glyphicon glyphicon-check"></span>
+						<p class="repuestaEspecifica">Estoy ocupado actualmente, pero pudria empezar en una sema, me demoraria 3 meses en el desarrollo</p>
+
+					</div>
+				</article>
+
+			</section>
+
 		</div>
 	</div>
 	<div class="row sugerencias">
 		<h3 class="sugerencias-titulo">Sugerencias de Búsqueda</h3>
 		<div class="row">
 			{% if recomendados %}
-				{% for  recomendado in recomendados %}
-				<div class="col-xs-12 col-sm-6 col-md-4">
-					<div class="sugerencia">
-						<div class="row sugerencia-foto">
-							<figure>
-								<img src="{{ recomendado.foto.url}}" class="sgr" alt="{{ recomendado.nhabilidad}}">
-							</figure>
-						</div>
-						<div class="row sugerencia-descripcion">
-							<h4 class="sugerencia-titulo">
-								<a href="#">
-									{{ recomendado.nhabilidad}}
-								</a>
-							</h4>
-						</div>
+			{% for  recomendado in recomendados %}
+			<div class="col-xs-12 col-sm-6 col-md-4">
+				<div class="sugerencia">
+					<div class="row sugerencia-foto">
+						<figure>
+							<img src="{{ recomendado.foto.url}}" class="sgr" alt="{{ recomendado.nhabilidad}}">
+						</figure>
+					</div>
+					<div class="row sugerencia-descripcion">
+						<h4 class="sugerencia-titulo">
+							<a href="#">
+								{{ recomendado.nhabilidad}}
+							</a>
+						</h4>
 					</div>
 				</div>
-				{% endfor %}
+			</div>
+			{% endfor %}
 			{% else %}
-				<p>No hay sugerencias para esta búsqueda</p>
+			<p>No hay sugerencias para esta búsqueda</p>
 			{% endif %}
 		</div>
 	</div>
 </div>
 {% endblock content %}
 {% block scripts %}
-	<script>
+<script>
 	$(function() {
 
 		$('#preguntar-btn').click(function(event){
@@ -161,7 +205,10 @@
 		}
 
 		function abrirModal(){
-			alert('Abriendo Modal ...');
+			var btn = document.getElementById("preguntar-btn")
+			btn.addEventListener("click", function () {
+				$('#modalPregunta').modal('show')
+			})
 		}
 
 		function enviarPregunta(){
@@ -195,4 +242,4 @@
 
 		*/
 	</script>
-{% endblock scripts %}
+	{% endblock scripts %}

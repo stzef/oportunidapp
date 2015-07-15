@@ -4,6 +4,53 @@
 rojo = #d9534f
 verde = #5cb85c
 azul = #3498DB
+
+@keyframes anchoLargo
+	0%
+		width 83%
+		height 35px
+	100%
+		width 88%
+		height 40px
+.moduloPreguntas
+	border 1px solid gray
+	border-radius 10px
+	padding 10px
+.preguntar
+	padding 20px 0
+	background-color gray
+	margin-bottom 10px
+	border-radius 10px
+	.formularioPregunta
+		width 90%
+		margin 0 auto
+		input[type="search"]
+			width 80%
+			margin 0
+			padding 0
+			padding-left 10px
+		input[type="submit"]
+			width 9%
+			margin 0
+			padding 0
+		input[type="search"]:focus
+			outline none
+			animation .3s anchoLargo 1 linear forwards
+.pregunta:first-child
+	margin-top 10px
+.pregunta
+	border-bottom 1px solid gray
+	margin-bottom: 30px;
+	.contenedorPregunta
+		.preguntaEspecifica
+			vertical-align: middle;
+			display inline-block
+	.contenedorPespuesta
+		margin-left 20px
+		.repuestaEspecifica
+			vertical-align: middle;
+			display inline-block
+
 .heightPersonalizado
 	height initial
 .box
@@ -521,12 +568,15 @@ li
 	border-bottom 3px solid gainsboro
 
 .habilidad-foto
+	height: 300px;
 	padding 10px
 	text-align center
 
 .habilidad-foto-content
-	width 90%
-	margin 0 auto
+	width: 100%;
+	margin: 0;
+	height: 100%;
+	padding: 0;
 
 .habilidad-info
 	padding 10px
