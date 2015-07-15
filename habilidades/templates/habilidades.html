@@ -59,56 +59,76 @@
 					<strong class="desc3">{{ habilidad.categoria }}</strong>
 				</div>
 			</div>
+
+
+
+
+
+
+
 			<div class="habilidad-item">
 				<div className="col-sm-12">
-					<div class="row panel panel-default">
-						<div class="col-sm-12 col-md-4 div-align">
-							<img src="{{ habilidad.foto.url }}" class="desc-img img-thumbnail" alt="{{ habilidad.nhabilidad }}">
+					<a href="/habilidades/{{ habilidad.slug }}/{{ habilidad.pk }}">
+
+						<div class="textJustify row panel panel-default">
+
+							<div class="col-sm-12 col-md-4 div-align">
+								<img src="{{ habilidad.foto.url }}" class="desc-img img-thumbnail" alt="{{ habilidad.nhabilidad }}">
+							</div>
+
+							<div class="col-sm-12 col-md-5 div-align">
+								<h3>
+									<strong>{{ habilidad.nhabilidad }}</strong>
+								</h3>
+								<p>{{ habilidad.descripcion }}</p>
+							</div>
+							<div class="col-sm-12 col-md-3">
+
+
+								<ul>
+									<li class="label-descp label-warning">
+										<i class="glyphicon glyphicon-star desc3"></i>
+										{% if habilidad.val_promedio %}
+										<span class="desc">Puntuacion: </span>
+										<strong class="desc3">{{ habilidad.val_promedio }}</strong>
+										{% else %}
+										<strong class="desc3">ninguno</strong>
+										{% endif %}
+
+									</li>
+
+									<li class="label-descp label-success">
+										<i class="glyphicon glyphicon-th-list desc3"></i>
+										{% if  habilidad.num_solicitudes%}
+										<span class="desc">Solicitudes: </span>
+										<strong class="desc3">{{ habilidad.num_solicitudes }}</strong>
+										{% else %}
+										<strong class="desc3">ninguno</strong>
+										{% endif %}
+
+									</li>
+
+									<li class="label-descp label-danger">
+										{% if habilidad.precio %}
+										<i class="glyphicon glyphicon-usd desc3"></i>
+										<span class="desc">Precio: </span>
+										<strong class="desc3">{{ habilidad.precio }}</strong>
+										{% else %}
+										<span><b>ninguno</b></span>
+										{% endif %}
+									</li>
+								</ul>
+							</div>
 						</div>
-						<div class="col-sm-12 col-md-5 div-align">
-							<h3>
-								<a href="/habilidades/{{ habilidad.slug }}/{{ habilidad.pk }}">
-									{{ habilidad.nhabilidad }}
-								</a>
-							</h3>
-							<p>{{ habilidad.descripcion }}</p>
-						</div>
-						<div class="col-sm-12 col-md-3">
-
-							<p class="label-descp label-warning">
-								<i class="glyphicon glyphicon-star desc3"></i>
-								{% if habilidad.val_promedio %}
-								<span class="desc">Puntuacion: </span>
-								<strong class="desc3">{{ habilidad.val_promedio }}</strong>
-								{% else %}
-								<strong class="desc3">ninguno</strong>
-								{% endif %}
-
-							</p>
-
-							<p class="label-descp label-success">
-								<i class="glyphicon glyphicon-th-list desc3"></i>
-								{% if  habilidad.num_solicitudes%}
-								<span class="desc">Solicitudes: </span>
-								<strong class="desc3">{{ habilidad.num_solicitudes }}</strong>
-								{% else %}
-								<strong class="desc3">ninguno</strong>
-								{% endif %}
-
-							</p>
-
-							<p class="label-descp label-danger">
-								{% if habilidad.precio %}
-								<i class="glyphicon glyphicon-usd desc3"></i>
-								<span class="desc">Precio: </span></a><strong class="desc3">{{ habilidad.precio }}</strong>
-								{% else %}
-								<span><b>ninguno</b></span>
-								{% endif %}
-							</p>
-						</div>
-					</div>
+					</a>
 				</div>
 			</div>
+
+
+
+
+
+
 			{% endfor %}
 			{% else %}
 			<div class="row text-center">
@@ -127,52 +147,53 @@
 			</div>
 			<div class="habilidad-item">
 				<div className="col-sm-12">
-					<div class="row panel panel-default">
-						<div class="col-sm-12 col-md-4 div-align">
-							<img src="{{ inactiva.foto.url }}" class="desc-img img-thumbnail" alt="{{ inactiva.nhabilidad }}">
-						</div>
-						<div class="col-sm-12 col-md-5 div-align">
-							<h3>
-								<a href="/habilidades/{{ inactiva.slug }}/{{ inactiva.pk }}">
+					<a href="/habilidades/{{ inactiva.slug }}/{{ inactiva.pk }}">
+						<div class="row panel panel-default">
+							<div class="col-sm-12 col-md-4 div-align">
+								<img src="{{ inactiva.foto.url }}" class="desc-img img-thumbnail" alt="{{ inactiva.nhabilidad }}">
+							</div>
+							<div class="col-sm-12 col-md-5 div-align">
+								<h3>
 									{{ inactiva.nhabilidad }}
-								</a>
-							</h3>
-							<p>{{ inactiva.descripcion }}</p>
+
+								</h3>
+								<p>{{ inactiva.descripcion }}</p>
+							</div>
+							<div class="col-sm-12 col-md-3">
+
+								<p class="label-descp label-warning">
+									<i class="glyphicon glyphicon-star desc3"></i>
+									{% if inactiva.val_promedio %}
+									<span class="desc">Puntuacion: </span>
+									<strong class="desc3">{{ inactiva.val_promedio }}</strong>
+									{% else %}
+									<strong class="desc3">ninguno</strong>
+									{% endif %}
+
+								</p>
+
+								<p class="label-descp label-success">
+									<i class="glyphicon glyphicon-th-list desc3"></i>
+									{% if  inactiva.num_solicitudes%}
+									<span class="desc">Solicitudes: </span>
+									<strong class="desc3">{{ inactiva.num_solicitudes }}</strong>
+									{% else %}
+									<strong class="desc3">ninguno</strong>
+									{% endif %}
+
+								</p>
+
+								<p class="label-descp label-danger">
+									{% if inactiva.precio %}
+									<i class="glyphicon glyphicon-usd desc3"></i>
+									<span class="desc">Precio: </span></a><strong class="desc3">{{ inactiva.precio }}</strong>
+									{% else %}
+									<span><b>ninguno</b></span>
+									{% endif %}
+								</p>
+							</div>
 						</div>
-						<div class="col-sm-12 col-md-3">
-
-							<p class="label-descp label-warning">
-								<i class="glyphicon glyphicon-star desc3"></i>
-								{% if inactiva.val_promedio %}
-								<span class="desc">Puntuacion: </span>
-								<strong class="desc3">{{ inactiva.val_promedio }}</strong>
-								{% else %}
-								<strong class="desc3">ninguno</strong>
-								{% endif %}
-
-							</p>
-
-							<p class="label-descp label-success">
-								<i class="glyphicon glyphicon-th-list desc3"></i>
-								{% if  inactiva.num_solicitudes%}
-								<span class="desc">Solicitudes: </span>
-								<strong class="desc3">{{ inactiva.num_solicitudes }}</strong>
-								{% else %}
-								<strong class="desc3">ninguno</strong>
-								{% endif %}
-
-							</p>
-
-							<p class="label-descp label-danger">
-								{% if inactiva.precio %}
-								<i class="glyphicon glyphicon-usd desc3"></i>
-								<span class="desc">Precio: </span></a><strong class="desc3">{{ inactiva.precio }}</strong>
-								{% else %}
-								<span><b>ninguno</b></span>
-								{% endif %}
-							</p>
-						</div>
-					</div>
+					</a>
 				</div>
 			</div>
 			{% endfor %}
@@ -193,54 +214,55 @@
 		</div>
 		<div class="habilidad-item">
 			<div className="col-sm-12">
-				<div class="row panel panel-default">
-					<div class="col-sm-12 col-md-4 div-align">
-						<img src="{{ this.foto }}" class="desc-img" alt="{{ this.nhabilidad }}">
-					</div>
-					<div class="col-sm-12 col-md-5 div-align">
-						<h3>
-							<a href="/habilidades/{{ this.slug }}/{{ this.id }}">
+				<a href="/habilidades/{{ this.slug }}/{{ this.id }}">
+					<div class="row panel panel-default">
+						<div class="col-sm-12 col-md-4 div-align">
+							<img src="{{ this.foto }}" class="desc-img" alt="{{ this.nhabilidad }}">
+						</div>
+						<div class="col-sm-12 col-md-5 div-align">
+							<h3>
 								{{ this.nhabilidad }}
-							</a>
-						</h3>
 
-						<p>{{ this.descripcion }}</p>
+							</h3>
 
-					</div>
-					<div class="col-sm-12 col-md-3">
-						<div class="text-top text-center col-xs-6 col-sm-4 col-md-12 col-lg-12">
-							<div class="label-descp label-warning">
-								<i class="glyphicon glyphicon-star desc3"></i>
-								{{#if this.val_promedio}}
-								<span class="desc">Puntuacion: </span>
-								<strong class="desc3">{{ this.val_promedio }}</strong>
-								{{else}}
-								<strong class="desc3">ninguno</strong>
-								{{/if}}
+							<p>{{ this.descripcion }}</p>
+
+						</div>
+						<div class="col-sm-12 col-md-3">
+							<div class="text-top text-center col-xs-6 col-sm-4 col-md-12 col-lg-12">
+								<div class="label-descp label-warning">
+									<i class="glyphicon glyphicon-star desc3"></i>
+									{{#if this.val_promedio}}
+									<span class="desc">Puntuacion: </span>
+									<strong class="desc3">{{ this.val_promedio }}</strong>
+									{{else}}
+									<strong class="desc3">ninguno</strong>
+									{{/if}}
+								</div>
+							</div>
+							<div class="text-top text-center col-xs-6 col-sm-4 col-md-12 col-lg-12">
+								<div class="label-descp label-success">
+									<i class="glyphicon glyphicon-th-list desc3"></i>
+									{{#if this.num_solicitudes}}
+									<span class="desc">Solicitudes: </span>
+									<strong class="desc3">{{ this.num_solicitudes }}</strong>
+									{{else}}
+									<strong class="desc3">ninguno</strong>
+									{{/if}}
+								</div>
+							</div>
+							<div class="text-top text-center col-xs-6 col-sm-4 col-md-12 col-lg-12">
+								<div class="label-descp label-danger">
+									{{#if this.precio}}
+									<i class="glyphicon glyphicon-usd desc3"></i>
+									<span class="desc">Precio: </span></a><strong class="desc3">{{ this.precio }}</strong>
+									{{else}}
+									<span><b>ninguno</b></span>
+									{{/if}}
+								</div>
 							</div>
 						</div>
-						<div class="text-top text-center col-xs-6 col-sm-4 col-md-12 col-lg-12">
-							<div class="label-descp label-success">
-								<i class="glyphicon glyphicon-th-list desc3"></i>
-								{{#if this.num_solicitudes}}
-								<span class="desc">Solicitudes: </span>
-								<strong class="desc3">{{ this.num_solicitudes }}</strong>
-								{{else}}
-								<strong class="desc3">ninguno</strong>
-								{{/if}}
-							</div>
-						</div>
-						<div class="text-top text-center col-xs-6 col-sm-4 col-md-12 col-lg-12">
-							<div class="label-descp label-danger">
-								{{#if this.precio}}
-								<i class="glyphicon glyphicon-usd desc3"></i>
-								<span class="desc">Precio: </span></a><strong class="desc3">{{ this.precio }}</strong>
-								{{else}}
-								<span><b>ninguno</b></span>
-								{{/if}}
-							</div>
-						</div>
-					</div>
+					</a>
 				</div>
 			</div>
 		</div>
