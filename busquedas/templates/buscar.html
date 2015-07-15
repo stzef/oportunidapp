@@ -1,24 +1,26 @@
 {% extends "index.html" %}
-{% load staticfiles %}
+
 {% block head %}
 <title>Buscar | OportunidApp</title>
 {% endblock %}
+
 {% block content %}
-<div class="contentWidth">
-	<div class="row text-center marginTop">
+<div class="contentWidth box">
+	<div class="row text-center box">
 		<h2>Encuentra la persona correcta para tu trabajo</h2>
 		<form class="form-inline">
 			<div class="row space">
 				<div class="col-md-12 form-group">
 					<label for="busqueda"></label>
 					<div class="col-md-8 input-group">
-						<input id="busqueda" name="busqueda" type="text" class="form-control" placeholder="¿Que Estas Buscando?" autocomplete="off">
+						<input id="busqueda" name="busqueda" type="search" class="form-control" placeholder="¿Que Estas Buscando?" autocomplete="off">
 						<span class="input-group-btn">
 							<button class="btn btn-block btn-find" id="buscar" type="button">Buscar</button>
 						</span>
 					</div>
 				</div>
 			</div>
+
 			<div class="row text-left category-show">
 				<p class="text-center"><b>Categorias</b></p>
 				<ul class="list-unstyled list-inline">
@@ -31,14 +33,11 @@
 					{% endfor %}
 				</ul>
 			</div>
+
 		</form>
 	</div>
 </div>
 {% endblock %}
-{% block scripts %}
-<script>
-	$(function(){
-		$('#busqueda').focus();
-	});
-</script>
-{% endblock %}
+
+
+

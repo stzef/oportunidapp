@@ -14,13 +14,21 @@
 	<script src="{% static 'jslibraries/jquery-1.11.3.min.js' %}"></script>
 </head>
 
-<body class="body__gray">
+<body class="body__gray ">
 	<div class="navbar navbar-blue navbar-static-top">
 		<div class="col-xs-12 col-sm-3 col-md-2 text-center">
 			<ul class="nav navbar-nav">
-				<li><a class="text-center logo-app" href="/"><strong><span class="blue-color">Oportunid</span><span class="green-color">App</span></strong></a></li>
+				<li>
+					<a class="text-center logo-app" href="/">
+						<strong>
+							<span class="blue-color">Oportunid</span>
+							<span class="green-color">App</span>
+						</strong>
+					</a>
+				</li>
 			</ul>
 		</div>
+
 		<div class="col-xs-6 col-sm-6 col-md-6">
 			<div id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-left">
@@ -45,6 +53,7 @@
 				</ul>
 			</div>
 		</div>
+
 		<div class="col-xs-6 col-sm-3 col-md-4">
 			<ul class="nav navbar-nav navbar-right col-xs-12 col-sm-12 col-md-12">
 				{% if user.is_authenticated %}
@@ -64,17 +73,23 @@
 			</ul>
 		</div>
 	</div>
-	{% block content  %}
+
+	{% block content %}
+
 	{% endblock %}
+
 	<footer class="footer">
 		<div class="container">
 			<p>Desarrollado por <a href="http://sistematizar.co/" target="_blank" class="link">SistematizarEF</a></p>
 		</div>
 	</footer>
+
+	<script src="{% static 'jslibraries/jquery.min.js' %}"></script>
+	<script src="{% static 'jslibraries/video.js' %}"></script>
+	<script src="{% static 'jslibraries/flat-ui.min.js' %}"></script>
+
+	{% block scripts %}
+
+	{% endblock %}
 </body>
-<script src="{% static 'jslibraries/jquery.min.js' %}"></script>
-<script src="{% static 'jslibraries/video.js' %}"></script>
-<script src="{% static 'jslibraries/flat-ui.min.js' %}"></script>
-{% block scripts %}
-{% endblock %}
 </html>
