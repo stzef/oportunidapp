@@ -24,7 +24,8 @@ PROJECT_APPS = (
     'app',
     'busquedas',
     'habilidades',
-    'necesito',
+    'preguntas',
+    'respuestas',
     'usuarios',
 )
 

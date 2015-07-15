@@ -74,7 +74,8 @@
 		<div class="row preguntas-content">
 			<div class="row preguntas-nueva">
 				<form action="" method="">
-					<textarea class="preguntas-texto" name="" id="" rows="1">
+					<input type="hidden" value="{{habilidad.pk}}" id="habilidad" name="habilidad">
+					<textarea class="preguntas-texto" name="pregunta" id="pregunta" rows="1">
 					</textarea>
 					<input id="preguntar-btn" type="submit" value="Preguntar">
 				</form>
@@ -149,7 +150,6 @@
 				dataType: 'json',
 				success : function(json)
 				{
-					console.log(json);
 					if(json.auth == 0){
 						abrirModal();
 					}

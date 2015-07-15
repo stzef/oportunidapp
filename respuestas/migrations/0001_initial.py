@@ -7,17 +7,15 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('habilidades', '0001_initial'),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='teNecesitoModel',
+            name='respuestasModel',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('mensaje', models.CharField(max_length=200)),
-                ('fecha', models.DateTimeField(auto_now=True)),
-                ('habilidadSolicitada', models.ForeignKey(to='habilidades.habilidadesModel')),
+                ('respuesta', models.CharField(max_length=1000)),
+                ('fechas', models.DateTimeField(auto_now=True)),
             ],
             options={
             },

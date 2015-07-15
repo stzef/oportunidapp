@@ -1,3 +1,4 @@
 from django.contrib import admin
+from preguntas.models import preguntasModel
 
-# Register your models here.
+admin.site.register(preguntasModel)

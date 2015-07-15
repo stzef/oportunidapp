@@ -1,3 +1,4 @@
 from django.contrib import admin
+from respuestas.models import respuestasModel
 
-# Register your models here.
+admin.site.register(respuestasModel)
