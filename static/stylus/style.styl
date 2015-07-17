@@ -7,10 +7,8 @@ azul = #3498DB
 
 @keyframes anchoLargo
 	0%
-		width 83%
 		height 35px
 	100%
-		width 88%
 		height 40px
 .moduloPreguntas
 	border 1px solid gray
@@ -24,20 +22,22 @@ azul = #3498DB
 	.formularioPregunta
 		width 90%
 		margin 0 auto
-		input[type="search"]
+		.campoPregunta
 			width 80%
 			margin 0
 			padding 0
-			padding-left 10px
-		input[type="submit"]
-			width 9%
+			padding-left 1%
+		.btn-preguntar
+			width 15%
 			margin 0
-			padding 0
+			padding 5px
 		input[type="search"]:focus
 			outline none
 			animation .3s anchoLargo 1 linear forwards
 .pregunta:first-child
 	margin-top 10px
+.pregunta:last-child
+	border 0
 .pregunta
 	border-bottom 1px solid gray
 	margin-bottom: 30px;
@@ -50,7 +50,11 @@ azul = #3498DB
 		.repuestaEspecifica
 			vertical-align: middle;
 			display inline-block
-
+	.fechaPregunta
+		position relative
+		text-align right
+		font-size 15px
+		color black
 .heightPersonalizado
 	height initial
 .box
@@ -62,8 +66,6 @@ azul = #3498DB
 
 .textJustify
 	text-align: justify;
-.formularioLogin
-	margin 0 25%
 
 .habilidad__hover
 	overflow hidden
@@ -135,7 +137,11 @@ li
 
 .desc-img
 	width 240px
-	height auto
+	height 240px
+
+.desc-img-1
+	width 340px
+	height 340px
 
 .desc-img-2
 	width 300px
