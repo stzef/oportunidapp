@@ -16,7 +16,7 @@
 		<div class="row">
 			<div class="col-xs-6 habilidad-foto">
 				<figure class="habilidad-foto-content">
-					<img src="{{habilidad.foto.url}}" alt="{{habilidad.nhabilidad}}" class="desc-img img-thumbnail">
+					<img src="{{habilidad.foto.url}}" alt="{{habilidad.nhabilidad}}" class="desc-img-1 img-thumbnail">
 				</figure>
 			</div>
 			<div class="col-xs-6 habilidad-descripcion">
@@ -99,13 +99,13 @@
 
 		<div class="row moduloPreguntas">
 
-			<div class="row preguntas-nueva preguntar">
+			<div class="row preguntar">
 				<form action="" method="" class="formularioPregunta">
 					<input type="hidden" value="{{habilidad.pk}}" id="habilidad" name="habilidad">
-					<span class="glyphicon glyphicon-question-sign"></span>
-					<input type="search" id="pregunta" rows="1" name="pregunta" placeholder="Escribe tu pregunta.">
+					<span class="glyphicon glyphicon-question-sign iconoPregunta"></span>
+					<input class="campoPregunta" type="search" id="pregunta" rows="1" name="pregunta" placeholder="Escribe tu pregunta.">
 
-					<input id="preguntar-btn" type="submit" value="Preguntar" class="btn btn-success">
+					<input id="preguntar-btn" type="submit" value="Preguntar" class="btn btn-success btn-preguntar">
 				</form>
 			</div>
 
@@ -120,6 +120,7 @@
 						<span class="respuesta glyphicon glyphicon-check"></span>
 						<p class="repuestaEspecifica">Esto y ocupado actualmente, pero pudria empezar en una sema, me demoraria 3 meses en el desarrollo</p>
 					</div>
+					<p class="fechaPregunta">17 de Feb de 2015, a las 6:00 am</p>
 				</article>
 				<article class="pregunta">
 					<div class="contenedorPregunta">
@@ -129,7 +130,7 @@
 					<div class="contenedorPespuesta">
 						<span class="respuesta glyphicon glyphicon-check"></span>
 						<p class="repuestaEspecifica">Esto y ocupado actualmente, pero pudria empezar en una sema, me demoraria 3 meses en el desarrollo</p>
-
+						<p class="fechaPregunta">17 de Feb de 2015, a las 6:00 am</p>
 					</div>
 				</article>
 				<article class="pregunta">
@@ -140,7 +141,7 @@
 					<div class="contenedorPespuesta">
 						<span class="respuesta glyphicon glyphicon-check"></span>
 						<p class="repuestaEspecifica">Estoy ocupado actualmente, pero pudria empezar en una sema, me demoraria 3 meses en el desarrollo</p>
-
+						<p class="fechaPregunta">17 de Feb de 2015, a las 6:00 am</p>
 					</div>
 				</article>
 
@@ -205,10 +206,10 @@
 		}
 
 		function abrirModal(){
-			var btn = document.getElementById("preguntar-btn")
-			btn.addEventListener("click", function () {
+			$("#preguntar-btn").click(function() {
+				console.log("sii")
 				$('#modalPregunta').modal('show')
-			})
+			});
 		}
 
 		function enviarPregunta(){
