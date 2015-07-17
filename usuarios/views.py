@@ -183,11 +183,17 @@ def login_ajax(request):
 		if user is not None:
 			if user.is_active:
 				login(request, user)
-			#else:
-				#responder cuenta desactivada
-		#else:
-			#responder el usuario no exite
-
-				return JsonResponse({'msg':'OK'}, safe=False)
-	else:
-		return JsonResponse({'msg':'NO'}, safe=False)
+			else:
+				return JsonResponse(
+					{'estado': 0, 'msg':'Este usuario no esta activo'}, 
+					safe=False,
+				)
+			return JsonResponse(
+						{'estado': 2, 'msg':''}, 
+						safe=False,
+					)
+		else:
+			return JsonResponse(
+						{'estado': 1, 'msg':'Este usuario no esta registrado'}, 
+						safe=False,
+					)

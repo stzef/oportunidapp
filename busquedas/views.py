@@ -11,6 +11,7 @@ from django.db.models import Q
 #Importaciones desde Aplicacion [Oportunidad]
 from habilidades.models import habilidadesModel, habCategoriasModel
 from usuarios.models import perfilUsuarioModel
+from preguntas.models import preguntasModel
 
 #Importaciones desde Python
 import json
@@ -26,11 +27,18 @@ class detalleHabilidadBuscada(DetailView):
 		recomendados = habilidadesModel.objects.filter(categoria=habilidad.categoria).exclude(id=habilidad.id).order_by('-val_promedio')[:3]
 		return recomendados
 
+	#retorna las preguntas de la habilidad
+	def getPreguntas(self, habilidad):
+		preguntas = preguntasModel.objects.filter(habilidad=habilidad)
+		return preguntas
+
 	#incluye elementos dentro del contexto y los retorna
 	def get_context_data(self, **kwargs):
 		context = super(detalleHabilidadBuscada, self).get_context_data(**kwargs)
 		recomendados = self.getRecomendados(context['object'])
+		preguntas = self.getPreguntas(context['object'])
 		context['recomendados'] = recomendados
+		context['preguntas'] = preguntas
 		return context
 
 

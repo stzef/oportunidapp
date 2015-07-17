@@ -14,7 +14,7 @@ urlpatterns = patterns('',
 
 
 	url(r'^isauthajax/','usuarios.views.is_auth_ajax',name='is_auth_ajax'),
-
+	url(r'^ingresarajax/','usuarios.views.login_ajax',name='login_ajax'),
 
 	url(r'^registro/',registroView.as_view(),name='registro'),
 	url(r'^ingresar/',loginView.as_view(),name='ingresar'),
