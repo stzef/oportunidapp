@@ -1,7 +1,14 @@
 {% extends "index.html" %}
 {% load staticfiles %}
+{% load humanize %}
 {% block head %}
 <title>Buscar | OportunidApp</title>
+
+<style>
+	.menuItemBusqueda{
+		background-color: rgb(12, 32, 50);;
+	}
+</style>
 {% endblock %}
 
 {% block content %}
@@ -136,7 +143,7 @@
 													<i class="glyphicon glyphicon-usd desc3"></i>
 													<strong class="desc3">
 														{% if habilidad.precio %}
-														{{ habilidad.precio }}
+														{{ habilidad.precio | intcomma}}
 														{% else %}
 														<span>por acordar</span>
 														{% endif %}

@@ -5,6 +5,10 @@ rojo = #d9534f
 verde = #5cb85c
 azul = #3498DB
 
+.relative
+	position relative
+.absolute
+	position absolute
 @keyframes anchoLargo
 	0%
 		height 35px
@@ -356,7 +360,9 @@ li
 .img-profile
 	width 180px !important
 	height 180px !important
-
+.imgDetalleEdit
+	margin-top -100px
+	display inline-block
 .desc-profile
 	background #fff
 	padding 20px
@@ -370,14 +376,23 @@ li
 .black
 	color #000 !important
 
-.link-user
-	color #000 !important
-	background #fff !important
-	padding-left 30px !important
+.linkCambiarFoto
+	cursor pointer
+	display: block;
 
-.link-user:hover
-	background #000 !important
-	color #fff !important
+.linkCambiarFoto:hover:after
+	content "Cambiar Foto"
+	line-height: 200px;
+	text-align center
+	font-size 30px
+	color white
+	font-weight bold
+	display block
+	position absolute
+	top 0
+	width 100%
+	height 100%
+	background rgba(0,0,0,.4) !important
 
 .row.panel.panel-default
 	transition 0.5s
@@ -394,7 +409,6 @@ li
 //Begin
 
 .img-detail-2
-	margin-top -100px
 	width 240px !important
 	height 200px !important
 

@@ -1,8 +1,15 @@
 {% extends "template.html" %}
 {% load staticfiles %}
+{% load humanize %}
+
 
 {% block head %}
 <title>Habilidades | OportunidApp </title>
+<style>
+	.menuItemHabilidad{
+		background-color: rgb(12, 32, 50);;
+	}
+</style>
 {% endblock %}
 {% block content %}
 <div class="page-header">
@@ -146,9 +153,9 @@
 								</h3>
 								<p>{{ inactiva.descripcion }}</p>
 							</div>
-							<div class="col-sm-12 col-md-3">
+							<ul class="col-sm-12 col-md-3">
 
-								<p class="label-descp label-warning">
+								<li class="label-descp label-warning">
 									<i class="glyphicon glyphicon-star desc3"></i>
 									{% if inactiva.val_promedio %}
 									<span class="desc">Puntuacion: </span>
@@ -157,9 +164,9 @@
 									<strong class="desc3">ninguno</strong>
 									{% endif %}
 
-								</p>
+								</li>
 
-								<p class="label-descp label-success">
+								<li class="label-descp label-success">
 									<i class="glyphicon glyphicon-th-list desc3"></i>
 									{% if  inactiva.num_solicitudes%}
 									<span class="desc">Solicitudes: </span>
@@ -168,17 +175,18 @@
 									<strong class="desc3">ninguno</strong>
 									{% endif %}
 
-								</p>
+								</li>
 
-								<p class="label-descp label-danger">
+								<li class="label-descp label-danger">
 									{% if inactiva.precio %}
 									<i class="glyphicon glyphicon-usd desc3"></i>
-									<span class="desc">Precio: </span></a><strong class="desc3">{{ inactiva.precio }}</strong>
+									<span class="desc">Precio: </span>
+									<strong class="desc3">{{ inactiva.precio | intcomma}}</strong>
 									{% else %}
 									<span><b>ninguno</b></span>
 									{% endif %}
-								</p>
-							</div>
+								</li>
+							</ul>
 						</div>
 					</a>
 				</div>

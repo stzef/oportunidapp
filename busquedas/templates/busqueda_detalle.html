@@ -1,7 +1,13 @@
 {% extends "index.html" %}
 {% load staticfiles %}
+{% load humanize %}
 {% block head %}
 <title>Buscar | OportunidApp</title>
+<style>
+	.menuItemBusqueda{
+		background-color: rgb(12, 32, 50);;
+	}
+</style>
 {% endblock %}
 {% block content %}
 <div class="container div-detail content-info">
@@ -16,7 +22,7 @@
 		<div class="row">
 			<div class="col-xs-6 habilidad-foto">
 				<figure class="habilidad-foto-content">
-					<img src="{{habilidad.foto.url}}" alt="{{habilidad.nhabilidad}}" class="desc-img img-thumbnail">
+					<img src="{{habilidad.foto.url}}" alt="{{habilidad.nhabilidad}}" class="desc-img img-thumbnail" >
 				</figure>
 			</div>
 			<div class="col-xs-6 habilidad-descripcion">
@@ -41,7 +47,7 @@
 							<i class="glyphicon glyphicon-usd desc3"></i>
 							<strong class="desc3">
 								{% if habilidad.precio %}
-								{{ habilidad.precio }}
+								{{ habilidad.precio | intcomma }}
 								{% else %}
 								<span>por acordar</span>
 								{% endif %}
@@ -103,27 +109,27 @@
 			</div>
 			<section class="row preguntas" id="preguntas-content">
 				{% if preguntas %}
-					{% for pregunta in preguntas %}
-						<article class="pregunta">
-							<div class="contenedorPregunta">
-								<span class="glyphicon glyphicon-question-sign"></span>
-								<p class="preguntaEspecifica">
-									{{pregunta.pregunta}}
-								</p>
-							</div>
-							<div class="contenedorPespuesta">
-								{% if pregunta.respuesta %}
-									<span class="respuesta glyphicon glyphicon-check"></span>
-									<p class="repuestaEspecifica">
-										{{pregunta.respuesta.respuesta}}
-									</p>
-								{% endif %}
-							</div>
-							<p class="fechaPregunta">
-								{{pregunta.fecha}}
-							</p>
-						</article>
-					{% endfor %}
+				{% for pregunta in preguntas %}
+				<article class="pregunta">
+					<div class="contenedorPregunta">
+						<span class="glyphicon glyphicon-question-sign"></span>
+						<p class="preguntaEspecifica">
+							{{pregunta.pregunta}}
+						</p>
+					</div>
+					<div class="contenedorPespuesta">
+						{% if pregunta.respuesta %}
+						<span class="respuesta glyphicon glyphicon-check"></span>
+						<p class="repuestaEspecifica">
+							{{pregunta.respuesta.respuesta}}
+						</p>
+						{% endif %}
+					</div>
+					<p class="fechaPregunta">
+						{{pregunta.fecha}}
+					</p>
+				</article>
+				{% endfor %}
 				{% endif %}
 			</section>
 		</div>
@@ -157,21 +163,21 @@
 	</div>
 </div>
 {% verbatim %}
-	<script id="pregunta-template" type="text/x-handlebars-template">
-		<article class="pregunta">
-			<div class="contenedorPregunta">
-				<span class="glyphicon glyphicon-question-sign"></span>
-				<p class="preguntaEspecifica">
-					{{this.pregunta}}
-				</p>
-			</div>
-		</article>
-	</script>
+<script id="pregunta-template" type="text/x-handlebars-template">
+	<article class="pregunta">
+		<div class="contenedorPregunta">
+			<span class="glyphicon glyphicon-question-sign"></span>
+			<p class="preguntaEspecifica">
+				{{this.pregunta}}
+			</p>
+		</div>
+	</article>
+</script>
 {% endverbatim %}
 {% endblock content %}
 {% block scripts %}
-	<script src="{% static 'jsapp/csrf_load.js' %}"></script>
-	<script>
+<script src="{% static 'jsapp/csrf_load.js' %}"></script>
+<script>
 	$(function() {
 
 		// Captura el evento de envio de formulario de preguntas
@@ -193,7 +199,7 @@
 					if(json.auth == 0){
 						abrirModal();
 					}
-					//envia la pregunta 
+					//envia la pregunta
 					else{
 						enviarPregunta();
 					}
@@ -215,10 +221,10 @@
 				success: function(json){
 					if(json.estado == 0)
 						// hace algo si usuario no esta activo
-						alert('Este usuario no esta activo!')
+					alert('Este usuario no esta activo!')
 					else if(json.estado == 1)
 						// hace algo si usuario no esta registrado
-						alert('Este usuario no esta registrado')
+					alert('Este usuario no esta registrado')
 					else if(json.estado == 2){
 						//envia la pregunta
 						$('#modalPregunta').modal('hide')
@@ -253,5 +259,5 @@
 			})
 		}
 	})
-	</script>
+</script>
 {% endblock scripts %}
