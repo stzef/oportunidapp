@@ -94,7 +94,7 @@
 		<h3 class="preguntas-titulo">Preguntas</h3>
 		<div class="row moduloPreguntas">
 			<div class="row preguntas-nueva preguntar">
-				<form action="" method="" class="formularioPregunta">
+				<form class="formularioPregunta">
 					<input type="hidden" value="{{habilidad.pk}}" id="habilidad" name="habilidad">
 					<span class="glyphicon glyphicon-question-sign"></span>
 					<input type="search" id="pregunta" rows="1" name="pregunta" placeholder="Escribe tu pregunta.">
@@ -119,6 +119,9 @@
 									</p>
 								{% endif %}
 							</div>
+							<p class="fechaPregunta">
+								{{pregunta.fecha}}
+							</p>
 						</article>
 					{% endfor %}
 				{% endif %}
