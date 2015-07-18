@@ -13,22 +13,7 @@
 <div class="row first">
 	<div class="full col-md-12">
 		<a href="{% url 'habilidades' %}" class="btn btn-primary left">Atrás</a>
-		<div class="left content-options-habilidad">
-			<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-				Opciones
-				<span class="caret"></span>
-			</button>
-			<ul class="dropdown-menu" role="menu">
-				<li>
-					<a class="link-user" data-toggle="modal" data-target="#editarHabilidadModal">Editar</a>
-				</li>
-				{% if habilidad.estado %}
-				<li><a class="link-user" data-toggle="modal" data-target="#desactivarHabilidadModal">Inactivar</a></li>
-				{% else %}
-				<li><a class="link-user" data-toggle="modal" data-target="#activarHabilidadModal">Activar</a></li>
-				{% endif %}
-			</ul>
-		</div>
+
 	</div>
 </div>
 <div class="row second">
@@ -53,6 +38,27 @@
 				</li>
 			</a>
 		</div>
+		<ul class="contenedorOpcionesHabilidad">
+			{% if habilidad.estado %}
+			<li >
+				<a class="inactivarHabilidad link-user" data-toggle="modal" data-target="#desactivarHabilidadModal">
+					<span class=" iconoOpcionesHabilidad glyphicon glyphicon-stop"></span><span>Inactivar</span>
+				</a>
+			</li>
+			{% else %}
+			<li >
+				<a class="activarHabilidad link-user" data-toggle="modal" data-target="#activarHabilidadModal">
+					<span class=" iconoOpcionesHabilidad glyphicon glyphicon-play"></span><span>Activar</span>
+				</a>
+			</li>
+			{% endif %}
+			<li>
+				<a class="link-user" data-toggle="modal" data-target="#editarHabilidadModal">
+					<span class="iconoOpcionesHabilidad glyphicon glyphicon-pencil"></span><span>Editar</span>
+				</a>
+			</li>
+		</ul>
+
 		<div class="col-md-12">
 			<h3>{{ habilidad.nhabilidad }}</h3>
 			<p>{{ habilidad.descripcion }}</p>

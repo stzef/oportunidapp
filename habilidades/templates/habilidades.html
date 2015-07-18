@@ -70,7 +70,7 @@
 				<div className="col-sm-12">
 					<a href="/habilidades/{{ habilidad.slug }}/{{ habilidad.pk }}">
 
-						<div class="textJustify row panel panel-default">
+						<div class=" row panel panel-default">
 
 							<div class="col-sm-12 col-md-4 div-align">
 								<img src="{{ habilidad.foto.url }}" class="desc-img img-thumbnail" alt="{{ habilidad.nhabilidad }}">
@@ -80,7 +80,7 @@
 								<h3>
 									<strong>{{ habilidad.nhabilidad }}</strong>
 								</h3>
-								<p>{{ habilidad.descripcion }}</p>
+								<p class="textJustify">{{ habilidad.descripcion }}</p>
 							</div>
 							<div class="col-sm-12 col-md-3">
 
@@ -151,7 +151,7 @@
 									{{ inactiva.nhabilidad }}
 
 								</h3>
-								<p>{{ inactiva.descripcion }}</p>
+								<p class="textJustify">{{ inactiva.descripcion }}</p>
 							</div>
 							<ul class="col-sm-12 col-md-3">
 

@@ -133,8 +133,8 @@
 			<div class="row preguntas-nueva preguntar">
 				<form class="formularioPregunta">
 					<input type="hidden" value="{{habilidad.pk}}" id="habilidad" name="habilidad">
-					<input type="text" id="pregunta" rows="1" name="pregunta" placeholder="Escribe tu pregunta." required>
-					<input id="preguntar-btn" class="btn btn-success" type="submit">
+					<input class="pregunta" type="text" id="pregunta" rows="1" name="pregunta" placeholder="Escribe tu pregunta." required>
+					<input class="preguntar-btn" id="preguntar-btn" class="btn btn-success" type="submit">
 				</form>
 			</div>
 			<section class="row preguntas" id="preguntas-content">
@@ -173,7 +173,7 @@
 				<div class="sugerencia">
 					<div class="row sugerencia-foto">
 						<figure>
-							<img src="{{ recomendado.foto.url}}" class="sgr" alt="{{ recomendado.nhabilidad}}">
+							<img src="{{ recomendado.foto.url}}" class="desc-img img-thumbnail" alt="{{ recomendado.nhabilidad}}">
 						</figure>
 					</div>
 					<div class="row sugerencia-descripcion">
@@ -210,8 +210,8 @@
 <script>
 	$(function() {
 		//disabled si el input esta vacio
-
-		$("#pregunta").blur(function () {
+		$("#preguntar-btn").attr("disabled","disabled")
+		$("#pregunta").keypress(function () {
 			if ($("#pregunta").val() == "") {
 				$("#preguntar-btn").attr("disabled","disabled")
 				console.log('vacio');

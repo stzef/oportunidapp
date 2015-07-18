@@ -42,6 +42,10 @@ azul = #3498DB
 .numeroTelefonico:first-child:after
 	content ": "
 
+
+//Seccion de preguntas
+
+
 .moduloPreguntas
 	border 1px solid gray
 	border-radius 10px
@@ -52,20 +56,10 @@ azul = #3498DB
 	margin-bottom 10px
 	border-radius 10px
 	.formularioPregunta
+		position relative
 		width 90%
 		margin 0 auto
-		.campoPregunta
-			width 80%
-			margin 0
-			padding 0
-			padding-left 1%
-		.btn-preguntar
-			width 15%
-			margin 0
-			padding 5px
-		input[type="search"]:focus
-			outline none
-			animation .3s anchoLargo 1 linear forwards
+
 .pregunta:first-child
 	margin-top 10px
 .pregunta:last-child
@@ -91,6 +85,59 @@ azul = #3498DB
 	height initial
 .box
 	height: 100%;
+
+
+//formulario de preguntas
+.pregunta
+	padding-left 10px
+	width 70%
+	margin 0
+	display inline-block
+	border none
+
+.preguntar-btn
+	border-top-right-radius 10px
+	border-bottom-right-radius 10px
+	position absolute
+	cursor pointer
+	background-color #5cb85c
+	color black
+	width 25%
+	margin 0
+	display inline-block
+	color white
+	font-wieght bold
+	border none
+.preguntar-btn:disabled
+	cursor no-drop
+	background-color gray
+.preguntar-btn:after:disabled
+	content "Escriba la pregunta"
+
+//iconos de opciones para las halidades
+.iconoOpcionesHabilidad
+	margin-right 10px
+
+.inactivarHabilidad:hover
+	color #a94442 !important
+.activarHabilidad:hover
+	color #3c763d !important
+
+.contenedorOpcionesHabilidad
+	text-align start
+	display table
+	margin 0 auto
+	font-size 20px
+.contenedorOpcionesHabilidad a
+	cursor pointer
+.contenedorOpcionesHabilidad li
+	display inline
+.contenedorOpcionesHabilidad li:last-child
+	margin-left 10px
+.contenedorOpcionesHabilidad li:first-child:after
+	content "|"
+/////////////////////////////
+
 
 .contentWidth
 	max-width 1200px
@@ -635,6 +682,7 @@ li
 	padding 10px
 
 .ofertante-info
+	color black
 	padding 10px
 	border-radius 10px
 	border 5px dotted rgba(156, 156, 156,1)
