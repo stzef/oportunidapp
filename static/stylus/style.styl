@@ -1,6 +1,11 @@
 @import "landingpage.styl"
 @import "template.styl"
 
+//prefixes nib
+@import "nib"
+vendor-prefixes = webkit o ms moz official
+//fin prefixes nib
+
 rojo = #d9534f
 verde = #5cb85c
 azul = #3498DB
@@ -9,11 +14,34 @@ azul = #3498DB
 	position relative
 .absolute
 	position absolute
-@keyframes anchoLargo
-	0%
-		height 35px
-	100%
-		height 40px
+.strong
+	font-weight bold
+.displayBlock
+	display block
+.displayNone
+	display none
+.marginCeroAuto
+	margin 0 auto
+
+.btnVerMas
+	border 2px dotted rgb(27, 124, 27)
+
+
+.ofertante-datos ul
+	margin 10px 0
+
+
+.numeroTelefonico
+	display inline-block
+.numeroTelefonico:after
+	content " | "
+	margin 0 2px
+.numeroTelefonico:last-child:after
+	content ""
+	margin 0
+.numeroTelefonico:first-child:after
+	content ": "
+
 .moduloPreguntas
 	border 1px solid gray
 	border-radius 10px
@@ -313,6 +341,7 @@ li
 
 .label-telephone
 	background #8e44ad
+	display: inline-block;
 
 .img-back
 	background-image url('../img/fondo.jpg')
@@ -456,6 +485,10 @@ li
 @media(min-width 768px)
 	.navbar-nav
 		float none
+
+@media (max-width 900px)
+	.imgDetalleEdit
+		margin-top: 0
 
 .full
 	margin-bottom 10px
@@ -601,8 +634,11 @@ li
 .habilidad-info
 	padding 10px
 
-.ofertante
+.ofertante-info
 	padding 10px
+	border-radius 10px
+	border 5px dotted rgba(156, 156, 156,1)
+	background-color rgba(156, 156, 156,.5)
 
 
 .ofertante-nombre

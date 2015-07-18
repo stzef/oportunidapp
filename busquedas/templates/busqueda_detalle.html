@@ -55,21 +55,52 @@
 						</li>
 					</ul>
 				</div>
-				<div class="row ofertante">
-					<div class="col-xs-12 ofertante-info">
+				<div class="row">
+					<div class="col-xs-12 ofertante-info text-center ">
+
 						<h4><b>Información del ofertante:</b></h4>
+
 						<div class="ofertante-nombre">
-							<img class="fotoOfertante" src="{{habilidad.usuario.foto.url}}" alt="{{habilidad.usuario.}}" width="40">
+							<img class="fotoOfertante" src="{{habilidad.usuario.foto.url}}" alt="{{habilidad.usuario.}}" width="40" />
 							{{habilidad.usuario.usuario.first_name}} {{habilidad.usuario.usuario.last_name}}
 						</div>
-						<ul class="ofertante-datos">
-							<li class="label-descp-2 label-telephone col-xs-6 col-md-6 text-center separador-label" data-toggle="tooltip" data-placement="top" title="Número Telefónico">
-								<i class="glyphicon glyphicon-phone-alt desc3"></i>
-								<strong class="desc3">
-									{{ habilidad.usuario.celular1 }}
-								</strong>
-							</li>
-						</ul>
+
+						<button class="marginCeroAuto displayBlock label-descp-2 label-success btnVerMas" id="js_btnVermasDatos">Ver Datos</button>
+
+						<section class="verMasDatos displayNone" id="js_verMasDatos">
+
+							<ul class="ofertante-datos ">
+
+								<ul>
+
+									<li class="numeroTelefonico">
+										<i class="glyphicon glyphicon-phone-alt desc3"></i>
+										<span>Telefonos</span>
+									</li>
+
+									<li class="numeroTelefonico">
+										<span class="strong" >{{ habilidad.usuario.celular1 }}</span>
+									</li>
+
+									<li class="numeroTelefonico">
+										<span class="strong" >{{ habilidad.usuario.celular2 }}</span>
+									</li>
+
+									<li class="numeroTelefonico">
+										<span class="strong" >{{ habilidad.usuario.celular3 }}</span>
+									</li>
+								</ul>
+
+								<ul>
+									<li>
+										<i class="glyphicon glyphicon-envelope desc3"></i>
+										<span>Email:</span>
+										<span class="strong">{{ habilidad.usuario.usuario.email }}</span>
+									</li>
+								</ul>
+
+							</ul>
+						</section>
 					</div>
 				</div>
 			</div>
@@ -102,9 +133,8 @@
 			<div class="row preguntas-nueva preguntar">
 				<form class="formularioPregunta">
 					<input type="hidden" value="{{habilidad.pk}}" id="habilidad" name="habilidad">
-					<span class="glyphicon glyphicon-question-sign"></span>
-					<input type="search" id="pregunta" rows="1" name="pregunta" placeholder="Escribe tu pregunta.">
-					<input id="preguntar-btn" type="submit" value="Preguntar" class="btn btn-success">
+					<input type="text" id="pregunta" rows="1" name="pregunta" placeholder="Escribe tu pregunta." required>
+					<input id="preguntar-btn" class="btn btn-success" type="submit">
 				</form>
 			</div>
 			<section class="row preguntas" id="preguntas-content">
@@ -179,6 +209,30 @@
 <script src="{% static 'jsapp/csrf_load.js' %}"></script>
 <script>
 	$(function() {
+		//disabled si el input esta vacio
+
+		$("#pregunta").blur(function () {
+			if ($("#pregunta").val() == "") {
+				$("#preguntar-btn").attr("disabled","disabled")
+				console.log('vacio');
+
+			}else{
+				console.log('algo');
+				$("#preguntar-btn").removeAttr("disabled")
+			}
+		})
+
+		//capturar boton y añadir el evento click
+		$("#js_btnVermasDatos").click(show_Information)
+		function show_Information() {
+			$("#js_verMasDatos").toggle()
+			$("#js_btnVermasDatos").toggle()
+			watch_information()
+		}
+
+		function watch_information(){
+			console.log("Enviando Metrica")
+		}
 
 		// Captura el evento de envio de formulario de preguntas
 		$('#preguntar-btn').click(function(event){

@@ -112,7 +112,7 @@
 										{% if habilidad.precio %}
 										<i class="glyphicon glyphicon-usd desc3"></i>
 										<span class="desc">Precio: </span>
-										<strong class="desc3">{{ habilidad.precio }}</strong>
+										<strong class="desc3">{{ habilidad.precio | intcomma}}</strong>
 										{% else %}
 										<span><b>ninguno</b></span>
 										{% endif %}
