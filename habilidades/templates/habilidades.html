@@ -78,9 +78,9 @@
 
 							<div class="col-sm-12 col-md-5 div-align">
 								<h3>
-									<strong>{{ habilidad.nhabilidad }}</strong>
+									<strong>{{ habilidad.nhabilidad | capfirst}}</strong>
 								</h3>
-								<p class="textJustify">{{ habilidad.descripcion }}</p>
+								<p class="textJustify">{{ habilidad.descripcion | capfirst}}</p>
 							</div>
 							<div class="col-sm-12 col-md-3">
 
@@ -148,10 +148,10 @@
 							</div>
 							<div class="col-sm-12 col-md-5 div-align">
 								<h3>
-									{{ inactiva.nhabilidad }}
+									{{ inactiva.nhabilidad | capfirst}}
 
 								</h3>
-								<p class="textJustify">{{ inactiva.descripcion }}</p>
+								<p class="textJustify">{{ inactiva.descripcion | capfirst}}</p>
 							</div>
 							<ul class="col-sm-12 col-md-3">
 

@@ -106,7 +106,7 @@
 							{% for habilidad in habilidades %}
 							<div>
 
-								<a class="habilidad__hover" href="/buscar/{{categoria.slug}}/{{ habilidad.slug }}/">
+								<a class="habilidad__hover" href="{% url 'detallebusqueda' categoria=categoria.slug slug=habilidad.slug %}">
 
 									<div class="textJustify row panel panel-default">
 

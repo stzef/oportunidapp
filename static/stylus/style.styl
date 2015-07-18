@@ -45,7 +45,6 @@ azul = #3498DB
 
 //Seccion de preguntas
 
-
 .moduloPreguntas
 	border 1px solid gray
 	border-radius 10px
@@ -89,6 +88,8 @@ azul = #3498DB
 
 //formulario de preguntas
 .pregunta
+	border-top-left-radius 10px
+	border-bottom-left-radius 10px
 	padding-left 10px
 	width 70%
 	margin 0
@@ -132,10 +133,16 @@ azul = #3498DB
 	cursor pointer
 .contenedorOpcionesHabilidad li
 	display inline
-.contenedorOpcionesHabilidad li:last-child
-	margin-left 10px
 .contenedorOpcionesHabilidad li:first-child:after
 	content "|"
+
+//Habilidades Sugeridad
+
+.hoverHabilidad
+	display block
+	padding 10px
+.hoverHabilidad:hover
+	background-color #f4f4f4
 /////////////////////////////
 
 
@@ -214,6 +221,9 @@ li
 .habilidad-item
 	margin-bottom 35px
 
+.imgHabilidadSugerida
+	width 150px
+	height 150px
 .desc-img
 	width 240px
 	height 240px
