@@ -42,7 +42,7 @@ class detalleHabilidadBuscada(DetailView):
 		return context
 
 
-class busquedasListView(ListView):
+class busquedasCategoriaLista(ListView):
 
 	#atributos de la clase
 	model = habilidadesModel
@@ -95,7 +95,6 @@ class busquedasListView(ListView):
 
 		dicbusqueda = busqueda.split()
 
-
 		for palabra in dicbusqueda:
 			if queryset.filter(Q(nhabilidad__contains=palabra) | Q(descripcion__contains=palabra)).exists():
 				queryset = queryset.filter(Q(nhabilidad__contains=palabra) | Q(descripcion__contains=palabra))
@@ -124,7 +123,7 @@ class busquedasListView(ListView):
 	#incluye elementos dentro del contexto y lo retorna
 	def get_context_data(self, **kwargs):
 
-		context = super(busquedasListView, self).get_context_data(**kwargs)
+		context = super(busquedasCategoriaLista, self).get_context_data(**kwargs)
 		categoria = habCategoriasModel.objects.get(slug=self.kwargs['slug'])
 		ordenItem = self.get_orden_actual()
 		busqueda = self.request.GET.get('q')
@@ -141,6 +140,22 @@ class busquedasListView(ListView):
 
 		return context
 
+
+class busquedasPorPalabraLista(ListView):
+	model = habilidadesModel
+	paginate_by = 10
+	context_object_name = 'habilidades'
+	template_name = 'busqueda_palabras.html'
+	#ordering 
+
+	def get_queryset(self):
+		palabras = self.kwargs['palabras']
+		return super(busquedasPorPalabraLista, self).get_queryset()
+
+	def get_context_data(self, **kwargs):
+		context = super(busquedasPorPalabraLista, self).get_context_data(**kwargs)
+		context['palabras'] = self.kwargs['palabras']
+		return context
 
 #[View]
 #retorna el template
