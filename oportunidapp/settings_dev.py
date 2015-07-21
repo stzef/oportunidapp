@@ -18,6 +18,7 @@ DJANGO_APPS = (
     'django.contrib.messages',
     'django.contrib.sessions',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
 )
 
 PROJECT_APPS = (

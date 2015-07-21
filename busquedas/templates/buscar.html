@@ -2,6 +2,11 @@
 
 {% block head %}
 <title>Buscar | OportunidApp</title>
+<style>
+	.menuItemBusqueda{
+		background-color: rgb(12, 32, 50);;
+	}
+</style>
 {% endblock %}
 
 {% block content %}
@@ -22,7 +27,7 @@
 			</div>
 
 			<div class="row text-left category-show">
-				<p class="text-center"><b>Categorias</b></p>
+				<h2 class="text-center"><b>Categorias</b></h2>
 				<ul class="list-unstyled list-inline">
 					{% for categoria in categorias %}
 					<li class="spacing">
@@ -33,6 +38,9 @@
 					{% endfor %}
 				</ul>
 			</div>
+			<section class="ofertasBusqueda">
+				<h2 class="text-center"><b>Ofertas</b></h2>
+			</section>
 
 		</form>
 	</div>

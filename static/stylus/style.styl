@@ -1,15 +1,50 @@
 @import "landingpage.styl"
 @import "template.styl"
 
+//prefixes nib
+@import "nib"
+vendor-prefixes = webkit o ms moz official
+//fin prefixes nib
+
 rojo = #d9534f
 verde = #5cb85c
 azul = #3498DB
 
-@keyframes anchoLargo
-	0%
-		height 35px
-	100%
-		height 40px
+.relative
+	position relative
+.absolute
+	position absolute
+.strong
+	font-weight bold
+.displayBlock
+	display block
+.displayNone
+	display none
+.marginCeroAuto
+	margin 0 auto
+
+.btnVerMas
+	border 2px dotted rgb(27, 124, 27)
+
+
+.ofertante-datos ul
+	margin 10px 0
+
+
+.numeroTelefonico
+	display inline-block
+.numeroTelefonico:after
+	content " | "
+	margin 0 2px
+.numeroTelefonico:last-child:after
+	content ""
+	margin 0
+.numeroTelefonico:first-child:after
+	content ": "
+
+
+//Seccion de preguntas
+
 .moduloPreguntas
 	border 1px solid gray
 	border-radius 10px
@@ -20,20 +55,10 @@ azul = #3498DB
 	margin-bottom 10px
 	border-radius 10px
 	.formularioPregunta
+		position relative
 		width 90%
 		margin 0 auto
-		.campoPregunta
-			width 80%
-			margin 0
-			padding 0
-			padding-left 1%
-		.btn-preguntar
-			width 15%
-			margin 0
-			padding 5px
-		input[type="search"]:focus
-			outline none
-			animation .3s anchoLargo 1 linear forwards
+
 .pregunta:first-child
 	margin-top 10px
 .pregunta:last-child
@@ -59,6 +84,67 @@ azul = #3498DB
 	height initial
 .box
 	height: 100%;
+
+
+//formulario de preguntas
+.pregunta
+	border-top-left-radius 10px
+	border-bottom-left-radius 10px
+	padding-left 10px
+	width 70%
+	margin 0
+	display inline-block
+	border none
+
+.preguntar-btn
+	border-top-right-radius 10px
+	border-bottom-right-radius 10px
+	position absolute
+	cursor pointer
+	background-color #5cb85c
+	color black
+	width 25%
+	margin 0
+	display inline-block
+	color white
+	font-wieght bold
+	border none
+.preguntar-btn:disabled
+	cursor no-drop
+	background-color gray
+.preguntar-btn:after:disabled
+	content "Escriba la pregunta"
+
+//iconos de opciones para las halidades
+.iconoOpcionesHabilidad
+	margin-right 10px
+
+.inactivarHabilidad:hover
+	color #a94442 !important
+.activarHabilidad:hover
+	color #3c763d !important
+
+.contenedorOpcionesHabilidad
+	text-align start
+	display table
+	margin 0 auto
+	font-size 20px
+.contenedorOpcionesHabilidad a
+	cursor pointer
+.contenedorOpcionesHabilidad li
+	display inline
+.contenedorOpcionesHabilidad li:first-child:after
+	content "|"
+
+//Habilidades Sugeridad
+
+.hoverHabilidad
+	display block
+	padding 10px
+.hoverHabilidad:hover
+	background-color #f4f4f4
+/////////////////////////////
+
 
 .contentWidth
 	max-width 1200px
@@ -135,6 +221,9 @@ li
 .habilidad-item
 	margin-bottom 35px
 
+.imgHabilidadSugerida
+	width 150px
+	height 150px
 .desc-img
 	width 240px
 	height 240px
@@ -309,6 +398,7 @@ li
 
 .label-telephone
 	background #8e44ad
+	display: inline-block;
 
 .img-back
 	background-image url('../img/fondo.jpg')
@@ -356,7 +446,9 @@ li
 .img-profile
 	width 180px !important
 	height 180px !important
-
+.imgDetalleEdit
+	margin-top -100px
+	display inline-block
 .desc-profile
 	background #fff
 	padding 20px
@@ -370,14 +462,23 @@ li
 .black
 	color #000 !important
 
-.link-user
-	color #000 !important
-	background #fff !important
-	padding-left 30px !important
+.linkCambiarFoto
+	cursor pointer
+	display: block;
 
-.link-user:hover
-	background #000 !important
-	color #fff !important
+.linkCambiarFoto:hover:after
+	content "Cambiar Foto"
+	line-height: 200px;
+	text-align center
+	font-size 30px
+	color white
+	font-weight bold
+	display block
+	position absolute
+	top 0
+	width 100%
+	height 100%
+	background rgba(0,0,0,.4) !important
 
 .row.panel.panel-default
 	transition 0.5s
@@ -394,7 +495,6 @@ li
 //Begin
 
 .img-detail-2
-	margin-top -100px
 	width 240px !important
 	height 200px !important
 
@@ -442,6 +542,10 @@ li
 @media(min-width 768px)
 	.navbar-nav
 		float none
+
+@media (max-width 900px)
+	.imgDetalleEdit
+		margin-top: 0
 
 .full
 	margin-bottom 10px
@@ -587,8 +691,12 @@ li
 .habilidad-info
 	padding 10px
 
-.ofertante
+.ofertante-info
+	color black
 	padding 10px
+	border-radius 10px
+	border 5px dotted rgba(156, 156, 156,1)
+	background-color rgba(156, 156, 156,.5)
 
 
 .ofertante-nombre

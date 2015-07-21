@@ -1,31 +1,19 @@
 {% extends "template.html" %}
 {% load staticfiles %}
+{% load humanize %}
 {% block head %}
 <title>Habilidades | OportunidApp </title>
+<style>
+	.menuItemHabilidad{
+		background-color: rgb(12, 32, 50);;
+	}
+</style>
 {% endblock %}
 {% block content %}
 <div class="row first">
 	<div class="full col-md-12">
 		<a href="{% url 'habilidades' %}" class="btn btn-primary left">Atrás</a>
-		<div class="left content-options-habilidad">
-			<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-				Opciones
-				<span class="caret"></span>
-			</button>
-			<ul class="dropdown-menu" role="menu">
-				<li>
-					<a class="link-user" data-toggle="modal" data-target="#editarHabilidadModal">Editar</a>
-				</li>
-				<li>
-					<a class="link-user" data-toggle="modal" data-target="#editarFotoModal">Cambiar foto</a>
-				</li>
-				{% if habilidad.estado %}
-				<li><a class="link-user" data-toggle="modal" data-target="#desactivarHabilidadModal">Inactivar</a></li>
-				{% else %}
-				<li><a class="link-user" data-toggle="modal" data-target="#activarHabilidadModal">Activar</a></li>
-				{% endif %}
-			</ul>
-		</div>
+
 	</div>
 </div>
 <div class="row second">
@@ -41,13 +29,39 @@
 			</strong>
 		</p>
 	</div>
-	<div class="notice text-center col-xs-12 col-md-12">
-		<div class="col-md-12">
-			<img src="/media/{{ habilidad.foto }}" class="img-detail-2 img-thumbnail" alt="">
+	<div class="notice text-center col-xs-12 col-md-12 ">
+		<div class="imgDetalleEdit relative">
+
+			<a class="link-user linkCambiarFoto" data-toggle="modal" data-target="#editarFotoModal">
+				<li>
+					<img src="/media/{{ habilidad.foto }}" class="img-detail-2 img-thumbnail " alt="" width="240px" height="240px">
+				</li>
+			</a>
 		</div>
+		<ul class="contenedorOpcionesHabilidad">
+			{% if habilidad.estado %}
+			<li >
+				<a class="inactivarHabilidad link-user" data-toggle="modal" data-target="#desactivarHabilidadModal">
+					<span class=" iconoOpcionesHabilidad glyphicon glyphicon-stop"></span><span>Inactivar</span>
+				</a>
+			</li>
+			{% else %}
+			<li >
+				<a class="activarHabilidad link-user" data-toggle="modal" data-target="#activarHabilidadModal">
+					<span class=" iconoOpcionesHabilidad glyphicon glyphicon-play"></span><span>Activar</span>
+				</a>
+			</li>
+			{% endif %}
+			<li>
+				<a class="link-user" data-toggle="modal" data-target="#editarHabilidadModal">
+					<span class="iconoOpcionesHabilidad glyphicon glyphicon-pencil"></span><span>Editar</span>
+				</a>
+			</li>
+		</ul>
+
 		<div class="col-md-12">
-			<h3>{{ habilidad.nhabilidad }}</h3>
-			<p>{{ habilidad.descripcion }}</p>
+			<h3>{{ habilidad.nhabilidad | capfirst}}</h3>
+			<p>{{ habilidad.descripcion | capfirst}}</p>
 		</div>
 		<ul class="col-md-12">
 			<li class="text-top text-center col-xs-4 col-md-4 label-descp-detalle label-warning" data-toggle="tooltip" data-placement="top" title="Puntos">
@@ -74,7 +88,7 @@
 				<i class="glyphicon glyphicon-usd desc3"></i>
 				{% if habilidad.precio %}
 				<span class="desc">Precio: </span>
-				<strong class="desc3">{{ habilidad.precio }}</strong>
+				<strong class="desc3">{{ habilidad.precio | intcomma}}</strong>
 				{% else %}
 				<strong class="desc3">ninguno</strong>
 				{% endif %}
