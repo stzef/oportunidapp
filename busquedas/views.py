@@ -17,6 +17,8 @@ from preguntas.models import preguntasModel
 import json
 
 
+
+
 class detalleHabilidadBuscada(DetailView):
 	model = habilidadesModel
 	context_object_name = 'habilidad'
@@ -24,7 +26,7 @@ class detalleHabilidadBuscada(DetailView):
 
 	#retorna elementos recomendados del modelo 'habilidades'
 	def getRecomendados(self, habilidad):
-		recomendados = habilidadesModel.objects.filter(categoria=habilidad.categoria).exclude(id=habilidad.id).order_by('-val_promedio')[:3]
+		recomendados = habilidadesModel.objects.filter(categoria=habilidad.categoria,estado=True).exclude(id=habilidad.id).order_by('-val_promedio')[:3]
 		return recomendados
 
 	#retorna las preguntas de la habilidad
@@ -96,8 +98,8 @@ class busquedasCategoriaLista(ListView):
 		dicbusqueda = busqueda.split()
 
 		for palabra in dicbusqueda:
-			if queryset.filter(Q(nhabilidad__contains=palabra) | Q(descripcion__contains=palabra)).exists():
-				queryset = queryset.filter(Q(nhabilidad__contains=palabra) | Q(descripcion__contains=palabra))
+			if queryset.filter(Q(nhabilidad__icontains=palabra) | Q(descripcion__icontains=palabra)).exists():
+				queryset = queryset.filter(Q(nhabilidad__icontains=palabra) | Q(descripcion__icontains=palabra))
 			else:
 				pass
 				#queryset = habCategoriasModel.objects.none()
@@ -143,19 +145,87 @@ class busquedasCategoriaLista(ListView):
 
 class busquedasPorPalabraLista(ListView):
 	model = habilidadesModel
-	paginate_by = 10
+	paginate_by = 2
 	context_object_name = 'habilidades'
 	template_name = 'busqueda_palabras.html'
-	#ordering 
+	ordering = '-val_promedio'
+
+	ordenList = [
+		('','-val_promedio','Mas valoradas'),
+		('PRECIO_DESC','-precio','Mayor precio'),
+		('PRECIO','precio','Menor precio'),
+	]
+
+
+	def get_elemento_busqueda(self, indice):
+		i = 0
+		for a,b,c in self.ordenList:
+			if a == indice:
+				return self.ordenList[i]
+			i += 1
+
+
+	def get_ordering(self):
+			orden = self.request.GET.get('orden')
+			if orden is not None:
+				item = self.get_elemento_busqueda(orden)
+				return item [1]
+			else:
+				return self.ordering
+
+
+	def get_orden_actual(self):
+			orden = self.request.GET.get('orden')
+			if orden is not None:
+				item = self.get_elemento_busqueda(orden)
+				return item
+			else:
+				return self.ordenList[0]
+
 
 	def get_queryset(self):
-		palabras = self.kwargs['palabras']
-		return super(busquedasPorPalabraLista, self).get_queryset()
+		busqueda = self.kwargs['busqueda']
+		if busqueda is not None:
+			queryset = habilidadesModel.objects.all()
+			queryset = self.query_por_palabra(queryset, busqueda)
+
+			ordering = self.get_ordering()
+			if ordering:
+				queryset = queryset.order_by(ordering)
+
+			return queryset
+
+
+	def query_por_palabra(self, queryset, busqueda):
+
+		dicbusqueda = busqueda.split()
+
+		for palabra in dicbusqueda:
+			if queryset.filter(Q(nhabilidad__icontains=palabra) | Q(descripcion__icontains=palabra)).exists():
+				queryset = queryset.filter(Q(nhabilidad__icontains=palabra) | Q(descripcion__icontains=palabra))
+			else:
+				pass
+				#queryset = habCategoriasModel.objects.none()
+		return queryset
+
 
 	def get_context_data(self, **kwargs):
 		context = super(busquedasPorPalabraLista, self).get_context_data(**kwargs)
-		context['palabras'] = self.kwargs['palabras']
+		ordenItem = self.get_orden_actual()
+
+		context['busqueda']			 = self.kwargs['busqueda']
+		context['algunasCategorias'] = self.get_algunas_categorias()
+		context['ordenList'] 		 = self.ordenList
+		context['ordenActual']  	 = ordenItem[2]
+		context['orden'] 			 = ordenItem[0]
+		context['page'] 			 = self.request.GET.get('page')
+
 		return context
+
+
+	def get_algunas_categorias(self):
+		return habCategoriasModel.objects.all()[:10]
+
 
 #[View]
 #retorna el template

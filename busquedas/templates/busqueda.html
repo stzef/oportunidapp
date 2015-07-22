@@ -84,7 +84,7 @@
 								{% for a,b,c in ordenList %}
 								{% if c != ordenActual %}
 								<li>
-									<a href="/buscar/{{categoria.slug}}/?{% if busqueda %}q={{busqueda}}&{% endif %}orden={{a}}{{ruta}}">
+									<a href="/buscar/{{categoria.slug}}/?{% if busqueda %}q={{busqueda}}&{% endif %}orden={{a}}">
 										{{c}}
 									</a>
 								</li>
@@ -96,16 +96,10 @@
 				</div>
 				<div class="col-md-9">
 					<div class="row">
-
-
-
-
-
 						<div id = "resultados">
 							{% if habilidades %}
 							{% for habilidad in habilidades %}
 							<div>
-
 								<a class="habilidad__hover" href="{% url 'detallebusqueda' categoria=categoria.slug slug=habilidad.slug %}">
 
 									<div class="textJustify row panel panel-default">

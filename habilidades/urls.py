@@ -12,4 +12,6 @@ urlpatterns = patterns('',
 	url(r'^desactivarhabilidad/$','habilidades.views.desactivarHabilidad',name='desactivarHabilidad'),
 	url(r'^activarhabilidad/$','habilidades.views.activarHabilidad',name='activarHabilidad'),
 	url(r'^editarhabilidad/$','habilidades.views.editarHabilidad',name='editarHabilidad'),
+
+	url(r'^datosdecontacto/$','habilidades.views.obtener_datos_de_contacto',name='datosdecontacto'),
 )

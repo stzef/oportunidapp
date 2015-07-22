@@ -16,6 +16,7 @@ from forms import nuevaHabilidadForm
 from usuarios.models import perfilUsuarioModel
 from app.utilidades import cleanJsonModel
 from oportunidapp.settings import BASE_DIR
+from app.utilidades import get_or_none
 
 #Importaciones desde Python
 import json
@@ -204,3 +205,27 @@ def borrarFotoActual(habilidad):
 	if habilidad.foto.url != imgPorDefecto and os.path.isfile(archivoPath):
 		os.remove(archivoPath)
 
+
+#Responde en json los datos de contacto de la persona para una habilidad especifica
+def obtener_datos_de_contacto(request):
+	if request.is_ajax():
+		habilidad_id = request.GET.get('habilidad',None)
+		habilidad = get_or_none(habilidadesModel,id=habilidad_id)
+		if habilidad is not None:
+			response_data = {}
+			response_data['celular1'] = habilidad.usuario.celular1
+			response_data['celular2'] = habilidad.usuario.celular2
+			response_data['celular3'] = habilidad.usuario.celular3
+			response_data['email'] = habilidad.usuario.usuario.email
+
+			return JsonResponse(
+				response_data,
+				safe=False,
+			)
+
+		else:
+			response_data = {'msg':'Datos no encontrados'}
+			return JsonResponse(
+				response_data,
+				safe=False,
+			)

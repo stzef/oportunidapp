@@ -13,7 +13,6 @@
 <div class="contentWidth box">
 	<div class="row text-center box">
 		<h2>Encuentra la persona correcta para tu trabajo</h2>
-		<form class="form-inline">
 			<div class="row space">
 				<div class="col-md-12 form-group">
 					<label for="busqueda"></label>
@@ -41,10 +40,36 @@
 			<section class="ofertasBusqueda">
 				<h2 class="text-center"><b>Ofertas</b></h2>
 			</section>
-
-		</form>
 	</div>
 </div>
+{% endblock %}
+{% block scripts %}
+<script>
+	$(function(){
+			//input de busqueda en focus
+			$('#busqueda').focus();
+
+			//Funcion para evento click en boton 'buscar'
+			$('#buscar').click(function() {
+				palabraBuscada = $('#busqueda').get(0);
+
+				//remplazando caracteres en blanco por '+'
+				palabraBuscada = palabraBuscada.value;
+				window.location = '/b/pl/'+palabraBuscada;
+			});
+
+			//Funcion para evento tecla ENTER
+			$('#busqueda').keyup(function(e){
+				if (e.keyCode == 13){
+					palabraBuscada = $('#busqueda').get(0);
+
+					//remplazando caracteres en blanco por '+'
+					palabraBuscada = palabraBuscada.value;
+					window.location ='/b/pl/'+palabraBuscada;
+				}
+			});
+		})
+</script>
 {% endblock %}
 
 

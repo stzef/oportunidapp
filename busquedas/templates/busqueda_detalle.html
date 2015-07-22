@@ -10,7 +10,7 @@
 </style>
 {% endblock %}
 {% block content %}
-<div class="container div-detail content-info">
+<div class="container content-info">
 	<div class="row habilidad">
 		<div class="row">
 			<div class="col-xs-12">
@@ -57,49 +57,13 @@
 				</div>
 				<div class="row">
 					<div class="col-xs-12 ofertante-info text-center ">
-
 						<h4><b>Información del ofertante:</b></h4>
-
 						<div class="ofertante-nombre">
 							<img class="fotoOfertante" src="{{habilidad.usuario.foto.url}}" alt="{{habilidad.usuario.}}" width="40" />
 							{{habilidad.usuario.usuario.first_name}} {{habilidad.usuario.usuario.last_name}}
 						</div>
-
-						<button class="marginCeroAuto displayBlock label-descp-2 label-success btnVerMas" id="js_btnVermasDatos">Ver Datos</button>
-
+						<button class="marginCeroAuto displayBlock label-descp-2 label-success btnVerMas" id="js_btnVermasDatos">Ver datos de contacto</button>
 						<section class="verMasDatos displayNone" id="js_verMasDatos">
-
-							<ul class="ofertante-datos ">
-
-								<ul>
-
-									<li class="numeroTelefonico">
-										<i class="glyphicon glyphicon-phone-alt desc3"></i>
-										<span>Telefonos</span>
-									</li>
-
-									<li class="numeroTelefonico">
-										<span class="strong" >{{ habilidad.usuario.celular1 }}</span>
-									</li>
-
-									<li class="numeroTelefonico">
-										<span class="strong" >{{ habilidad.usuario.celular2 }}</span>
-									</li>
-
-									<li class="numeroTelefonico">
-										<span class="strong" >{{ habilidad.usuario.celular3 }}</span>
-									</li>
-								</ul>
-
-								<ul>
-									<li>
-										<i class="glyphicon glyphicon-envelope desc3"></i>
-										<span>Email:</span>
-										<span class="strong">{{ habilidad.usuario.usuario.email }}</span>
-									</li>
-								</ul>
-
-							</ul>
 						</section>
 					</div>
 				</div>
@@ -139,27 +103,27 @@
 			</div>
 			<section class="row preguntas" id="preguntas-content">
 				{% if preguntas %}
-				{% for pregunta in preguntas %}
-				<article class="pregunta">
-					<div class="contenedorPregunta">
-						<span class="glyphicon glyphicon-question-sign"></span>
-						<p class="preguntaEspecifica">
-							{{pregunta.pregunta}}
+					{% for pregunta in preguntas %}
+					<article class="pregunta">
+						<div class="contenedorPregunta">
+							<span class="glyphicon glyphicon-question-sign"></span>
+							<p class="preguntaEspecifica">
+								{{pregunta.pregunta}}
+							</p>
+						</div>
+						<div class="contenedorPespuesta">
+							{% if pregunta.respuesta %}
+							<span class="respuesta glyphicon glyphicon-check"></span>
+							<p class="repuestaEspecifica">
+								{{pregunta.respuesta.respuesta}}
+							</p>
+							{% endif %}
+						</div>
+						<p class="fechaPregunta">
+							{{pregunta.fecha}}
 						</p>
-					</div>
-					<div class="contenedorPespuesta">
-						{% if pregunta.respuesta %}
-						<span class="respuesta glyphicon glyphicon-check"></span>
-						<p class="repuestaEspecifica">
-							{{pregunta.respuesta.respuesta}}
-						</p>
-						{% endif %}
-					</div>
-					<p class="fechaPregunta">
-						{{pregunta.fecha}}
-					</p>
-				</article>
-				{% endfor %}
+					</article>
+					{% endfor %}
 				{% endif %}
 			</section>
 		</div>
@@ -192,6 +156,7 @@
 		</div>
 	</div>
 </div>
+
 {% verbatim %}
 <script id="pregunta-template" type="text/x-handlebars-template">
 	<article class="pregunta">
@@ -201,8 +166,38 @@
 				{{this.pregunta}}
 			</p>
 		</div>
+		<p class="fechaPregunta">
+		</p>
 	</article>
 </script>
+<script id="datos-contacto-template" type="text/x-handlebars-template">
+	<ul class="ofertante-datos ">
+		<ul>
+			<li class="numeroTelefonico">
+				<i class="glyphicon glyphicon-phone-alt desc3"></i>
+				<span>Telefonos</span>
+			</li>
+			<li class="numeroTelefonico">
+				<span class="strong" >{{ this.celular1 }}</span>
+			</li>
+			<li class="numeroTelefonico">
+				<span class="strong" >{{ this.celular2 }}</span>
+			</li>
+			<li class="numeroTelefonico">
+				<span class="strong" >{{ this.celular3 }}</span>
+			</li>
+		</ul>
+		<ul>
+			<li>
+				<i class="glyphicon glyphicon-envelope desc3"></i>
+				<span>Email:</span>
+				<span class="strong">{{ this.email }}</span>
+			</li>
+		</ul>
+	</ul>
+</script>
+
+
 {% endverbatim %}
 {% endblock content %}
 {% block scripts %}
@@ -224,14 +219,26 @@
 
 		//capturar boton y añadir el evento click
 		$("#js_btnVermasDatos").click(show_Information)
+
 		function show_Information() {
+			$.ajax({
+				url: '{% url 'datosdecontacto' %}' ,
+				type: 'GET' ,
+				dataType: 'json',
+				data:{
+					habilidad: {{habilidad.id}},
+				},
+				success : function(json)
+				{
+					var source   = $("#datos-contacto-template").html();
+					var template = Handlebars.compile(source);
+					t = template(json);
+					$('#js_verMasDatos').prepend(t);
+				}
+			})
+
 			$("#js_verMasDatos").toggle()
 			$("#js_btnVermasDatos").toggle()
-			watch_information()
-		}
-
-		function watch_information(){
-			console.log("Enviando Metrica")
 		}
 
 		// Captura el evento de envio de formulario de preguntas
