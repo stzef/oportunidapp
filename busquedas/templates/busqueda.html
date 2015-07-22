@@ -62,6 +62,45 @@
 			</div>
 		</div>
 
+
+
+
+
+
+
+
+
+
+		<!-- Modal -->
+		<div class="modal fade bs-example-modal-sm" id="modalCategorias" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title text-center" id="myModalLabel">Otras Categorias</h4>
+					</div>
+					<div class="modal-body">
+						<div class="panel">
+							<ul class="text-left padding">
+								<li><a href="#"><p>Constructor</p></a></li>
+								<li><a href="#"><p>Cuidador</p></a></li>
+								<li><a href="#"><p>Enfermeria</p></a></li>
+								<li><a href="#"><p>Jardineria</p></a></li>
+								<li><a href="#"><p>Mecanica</p></a></li>
+								<li><a href="#"><p>Peluqueria</p></a></li>
+								<li><a href="#"><p>Reparacion</p></a></li>
+								<li><a href="#"><p>Tecnologia</p></a></li>
+								<li><a href="#"><p>Vigilancia</p></a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<span class="btn-cancelar cursorPointer label label-danger" data-dismiss="modal">Cancelar</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Modal -->
 		<div class="container div-result">
 			<div>
 				<div class="col-md-3">
@@ -72,7 +111,8 @@
 							<h5 class="item-titulo">{{categoria.categoria}}</h5>
 							<a class="glyphicon glyphicon-remove"href="{% url 'buscar' %}"></a><br>
 						</dd>
-						<a href="#">otras categorias</a>
+
+						<a href="#" class="label label-info" data-toggle="modal" data-target="#modalCategorias">otras categorias</a>
 						<br><br>
 						<label for="orden">Orden</label><br>
 						<li>
