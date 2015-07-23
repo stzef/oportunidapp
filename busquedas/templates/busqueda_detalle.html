@@ -135,7 +135,7 @@
 			{% for  recomendado in recomendados %}
 			<div class="col-xs-12 col-sm-6 col-md-3">
 				<div class="sugerencia">
-					<a class="hoverHabilidad" href="{% url 'detallebusqueda' categoria=recomendado.slug slug=recomendado.slug %}">
+					<a class="hoverHabilidad" href="{% url 'detallebusqueda' slug=recomendado.slug %}">
 						<div class="row sugerencia-foto">
 							<figure>
 								<img src="{{ recomendado.foto.url}}" class="imgHabilidadSugerida img-thumbnail" alt="{{ recomendado.nhabilidad}}">

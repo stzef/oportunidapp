@@ -97,7 +97,7 @@
 							{% if habilidades %}
 							{% for habilidad in habilidades %}
 							<div>
-								<a class="habilidad__hover" href="">
+								<a class="habilidad__hover" href="{% url 'detallebusqueda' slug=habilidad.slug %}">
 									<div class="textJustify row panel panel-default">
 										<div class="col-sm-12 col-md-4 div-align">
 											<img src="{{ habilidad.foto.url }}" class="desc-img img-thumbnail" alt="Responsive image">

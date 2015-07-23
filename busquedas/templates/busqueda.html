@@ -100,7 +100,7 @@
 							{% if habilidades %}
 							{% for habilidad in habilidades %}
 							<div>
-								<a class="habilidad__hover" href="{% url 'detallebusqueda' categoria=categoria.slug slug=habilidad.slug %}">
+								<a class="habilidad__hover" href="{% url 'detallebusqueda' slug=habilidad.slug %}">
 
 									<div class="textJustify row panel panel-default">
 
