@@ -26,29 +26,59 @@
 					</div>
 				</div>
 			</div>
+			<!-- Modal -->
+			<div class="modal fade bs-example-modal-sm" id="modalCategorias" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title text-center" id="myModalLabel">Otras Categorias</h4>
+						</div>
+						<div class="modal-body">
+							<div class="panel">
+								<ul class="text-left padding">
+									<li><a href="#"><p>Constructor</p></a></li>
+									<li><a href="#"><p>Cuidador</p></a></li>
+									<li><a href="#"><p>Enfermeria</p></a></li>
+									<li><a href="#"><p>Jardineria</p></a></li>
+									<li><a href="#"><p>Mecanica</p></a></li>
+									<li><a href="#"><p>Peluqueria</p></a></li>
+									<li><a href="#"><p>Reparacion</p></a></li>
+									<li><a href="#"><p>Tecnologia</p></a></li>
+									<li><a href="#"><p>Vigilancia</p></a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<span class="btn-cancelar cursorPointer label label-danger" data-dismiss="modal">Cancelar</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Modal -->
 			<div class="row controles">
 				<div class="col-md-8">
 					<ul class="breadcrumbs">
 						{% if  busqueda %}
-							<li>
-								búsqueda
-								<a href="#">"{{busqueda}}"</a>
-							</li>
+						<li>
+							búsqueda
+							<a href="#">"{{busqueda}}"</a>
+						</li>
 						{% endif %}
 					</ul>
 				</div>
 				<div class="col-md-4 controles-paginador">
 					<span class="page-links">
 						{% if is_paginated %}
-							{% if page_obj.has_previous %}
-							<a href="/b/pl/{{busqueda}}/?{%if orden%}orden={{orden}}&{%endif%}page={{ page_obj.previous_page_number }}">atrás</a>
-							{% endif %}
-							<span class="page-current">
-								Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
-							</span>
-							{% if page_obj.has_next %}
-							<a href="/b/pl/{{busqueda}}/?{%if orden%}orden={{orden}}&{%endif%}page={{ page_obj.next_page_number }}">siguiente</a>
-							{% endif %}
+						{% if page_obj.has_previous %}
+						<a href="/b/pl/{{busqueda}}/?{%if orden%}orden={{orden}}&{%endif%}page={{ page_obj.previous_page_number }}">atrás</a>
+						{% endif %}
+						<span class="page-current">
+							Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
+						</span>
+						{% if page_obj.has_next %}
+						<a href="/b/pl/{{busqueda}}/?{%if orden%}orden={{orden}}&{%endif%}page={{ page_obj.next_page_number }}">siguiente</a>
+						{% endif %}
 						{% endif %}
 					</span>
 				</div>
@@ -61,15 +91,15 @@
 						<h3>Filtros</h3>
 						<label for="orden">Categoria</label><br>
 						{% if algunasCategorias %}
-							{% for categoria in  algunasCategorias %}
-								<ul>
-									<li>
-										-> {{categoria}}
-									</li>
-								</ul>
-							{% endfor %}
+						{% for categoria in  algunasCategorias %}
+						<ul>
+							<li>
+								-> {{categoria}}
+							</li>
+						</ul>
+						{% endfor %}
 						{% endif %}
-						<a href="#">otras categorias</a>
+						<a href="#" class="label label-info" data-toggle="modal" data-target="#modalCategorias">otras categorias</a>
 						<br><br>
 						<label for="orden">Orden</label><br>
 						<li>
@@ -150,19 +180,19 @@
 					</div>
 					<div class="row paginador">
 						{% if is_paginated %}
-							<div class="pagination">
-								<span class="page-links">
-									{% if page_obj.has_previous %}
-										<a href="/b/pl/{{busqueda}}/?{%if orden%}orden={{orden}}&{%endif%}page={{ page_obj.previous_page_number }}">atrás</a>
-									{% endif %}
-									<span class="page-current">
-										Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
-									</span>
-									{% if page_obj.has_next %}
-										<a href="/b/pl/{{busqueda}}/?{%if orden%}orden={{orden}}&{%endif%}page={{ page_obj.next_page_number }}">siguiente</a>
-									{% endif %}
+						<div class="pagination">
+							<span class="page-links">
+								{% if page_obj.has_previous %}
+								<a href="/b/pl/{{busqueda}}/?{%if orden%}orden={{orden}}&{%endif%}page={{ page_obj.previous_page_number }}">atrás</a>
+								{% endif %}
+								<span class="page-current">
+									Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
 								</span>
-							</div>
+								{% if page_obj.has_next %}
+								<a href="/b/pl/{{busqueda}}/?{%if orden%}orden={{orden}}&{%endif%}page={{ page_obj.next_page_number }}">siguiente</a>
+								{% endif %}
+							</span>
+						</div>
 						{% endif %}
 					</div>
 				</div>
