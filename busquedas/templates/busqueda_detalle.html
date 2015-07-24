@@ -79,13 +79,17 @@
 					<h4 class="modal-title" id="myModalLabel">Ingresa o registrate para poder preguntar</h4>
 				</div>
 				<form id="formularioLogin">
-					<div class="modal-body">
-						<input autofocus class="form-control" type="text" id="usuario" name="usuario" required>
-						<input class="form-control" type="password" id="password" name="password" required>
+					<div class="modal-body formularioLoginPregunta">
+						<input autofocus class="usuario form-control" type="text" id="usuario" name="usuario" placeholder="Usuario" required>
+						<input class="contrasena form-control" type="password" id="password" name="password" placeholder="Contraseña" required>
+						<div class="text-center">
+							<a href="/registro/" class="need-help">No tienes cuenta? <span class="blue-color">Registrate aqui!</span></a><br>
+							<a href="#" class="need-help">olvido su contraseña?</a>
+						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-						<input type="submit" value="Ingresar" class="btn btn-primary"></input>
+						<button type="button" class="btn btn-danger btn-lg" data-dismiss="modal">Cancelar</button>
+						<input type="submit" value="Ingresar" class="btn btn-success btn-lg "></input>
 					</div>
 				</form>
 			</div>
@@ -97,33 +101,33 @@
 			<div class="row preguntas-nueva preguntar">
 				<form class="formularioPregunta">
 					<input type="hidden" value="{{habilidad.pk}}" id="habilidad" name="habilidad">
-					<input class="pregunta" type="text" id="pregunta" rows="1" name="pregunta" placeholder="Escribe tu pregunta." required>
+					<input class="inputPregunta" type="text" id="pregunta" rows="1" name="pregunta" placeholder="Escribe tu pregunta." required>
 					<input class="preguntar-btn" id="preguntar-btn" class="btn btn-success" type="submit">
 				</form>
 			</div>
 			<section class="row preguntas" id="preguntas-content">
 				{% if preguntas %}
-					{% for pregunta in preguntas %}
-					<article class="pregunta">
-						<div class="contenedorPregunta">
-							<span class="glyphicon glyphicon-question-sign"></span>
-							<p class="preguntaEspecifica">
-								{{pregunta.pregunta}}
-							</p>
-						</div>
-						<div class="contenedorPespuesta">
-							{% if pregunta.respuesta %}
-							<span class="respuesta glyphicon glyphicon-check"></span>
-							<p class="repuestaEspecifica">
-								{{pregunta.respuesta.respuesta}}
-							</p>
-							{% endif %}
-						</div>
-						<p class="fechaPregunta">
-							{{pregunta.fecha}}
+				{% for pregunta in preguntas %}
+				<article class="pregunta">
+					<div class="contenedorPregunta">
+						<span class="glyphicon glyphicon-question-sign"></span>
+						<p class="preguntaEspecifica">
+							{{pregunta.pregunta}}
 						</p>
-					</article>
-					{% endfor %}
+					</div>
+					<div class="contenedorPespuesta">
+						{% if pregunta.respuesta %}
+						<span class="respuesta glyphicon glyphicon-check"></span>
+						<p class="repuestaEspecifica">
+							{{pregunta.respuesta.respuesta}}
+						</p>
+						{% endif %}
+					</div>
+					<p class="fechaPregunta">
+						{{pregunta.fecha}}
+					</p>
+				</article>
+				{% endfor %}
 				{% endif %}
 			</section>
 		</div>
