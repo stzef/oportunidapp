@@ -101,6 +101,9 @@
 					<input class="preguntar-btn" id="preguntar-btn" class="btn btn-success" type="submit">
 				</form>
 			</div>
+			<div id="pregunta-redactada">
+				
+			</div>
 			<section class="row preguntas" id="preguntas-content">
 				{% if preguntas %}
 					{% for pregunta in preguntas %}
@@ -159,16 +162,19 @@
 
 {% verbatim %}
 <script id="pregunta-template" type="text/x-handlebars-template">
-	<article class="pregunta">
+	<div id="pregunta-hecha">
 		<div class="contenedorPregunta">
 			<span class="glyphicon glyphicon-question-sign"></span>
-			<p class="preguntaEspecifica">
+			<p class="preguntaEspecifica" style="display: inline-block;">
 				{{this.pregunta}}
 			</p>
 		</div>
-		<p class="fechaPregunta">
-		</p>
-	</article>
+		<div class="pregunta-mensaje alert alert-success" role="alert">
+			<b>
+				{{this.mensaje}}
+			</b>
+		</div>
+	</div>
 </script>
 <script id="datos-contacto-template" type="text/x-handlebars-template">
 	<ul class="ofertante-datos ">
@@ -196,8 +202,6 @@
 		</ul>
 	</ul>
 </script>
-
-
 {% endverbatim %}
 {% endblock content %}
 {% block scripts %}
@@ -209,17 +213,13 @@
 		$("#pregunta").keypress(function () {
 			if ($("#pregunta").val() == "") {
 				$("#preguntar-btn").attr("disabled","disabled")
-				console.log('vacio');
-
 			}else{
-				console.log('algo');
 				$("#preguntar-btn").removeAttr("disabled")
 			}
 		})
 
 		//capturar boton y añadir el evento click
 		$("#js_btnVermasDatos").click(show_Information)
-
 		function show_Information() {
 			$.ajax({
 				url: '{% url 'datosdecontacto' %}' ,
@@ -300,12 +300,13 @@
 		}
 
 		function enviarPregunta(){
+			var pregunta = $('#pregunta');
 			$.ajax({
 				url: '{% url 'preguntanueva' %}',
 				type: 'POST',
 				dataType: 'json',
 				data:{
-					pregunta: $('#pregunta').val(),
+					pregunta: pregunta.val(),
 					habilidad: $('#habilidad').val(),
 				},
 				success: function(json){
@@ -313,7 +314,8 @@
 						var source   = $("#pregunta-template").html();
 						var template = Handlebars.compile(source);
 						t = template(json);
-						$('#preguntas-content').prepend(t);
+						$('#pregunta-redactada').prepend(t);
+						pregunta.val('');
 						//mostrar mensaje
 					}
 				}

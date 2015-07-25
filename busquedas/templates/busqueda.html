@@ -10,7 +10,6 @@
 	}
 </style>
 {% endblock %}
-
 {% block content %}
 <div class="contentWidth">
 	<div >
@@ -62,15 +61,6 @@
 			</div>
 		</div>
 
-
-
-
-
-
-
-
-
-
 		<!-- Modal -->
 		<div class="modal fade bs-example-modal-sm" id="modalCategorias" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 			<div class="modal-dialog" role="document">
@@ -82,15 +72,11 @@
 					<div class="modal-body">
 						<div class="panel">
 							<ul class="text-left padding">
-								<li><a href="#"><p>Constructor</p></a></li>
-								<li><a href="#"><p>Cuidador</p></a></li>
-								<li><a href="#"><p>Enfermeria</p></a></li>
-								<li><a href="#"><p>Jardineria</p></a></li>
-								<li><a href="#"><p>Mecanica</p></a></li>
-								<li><a href="#"><p>Peluqueria</p></a></li>
-								<li><a href="#"><p>Reparacion</p></a></li>
-								<li><a href="#"><p>Tecnologia</p></a></li>
-								<li><a href="#"><p>Vigilancia</p></a></li>
+								{% if todasCategorias %}
+									{% for categoria  in todasCategorias %}
+										<li><a href="#"><p>{{ categoria }}</p></a></li>
+									{% endfor %}
+								{% endif %}
 							</ul>
 						</div>
 					</div>
