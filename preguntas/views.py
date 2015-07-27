@@ -37,7 +37,7 @@ def preguntanueva(request):
 			{
 				'estado': 1,
 				'pregunta': pregunta.pregunta,
-				'fecha': pregunta.fecha,
+				'mensaje': 'Listo hemos enviado tu pregunta, te avisaremos con un email cuando respondan.',
 			},
 			safe= False,
 		)

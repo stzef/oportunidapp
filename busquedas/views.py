@@ -31,7 +31,7 @@ class detalleHabilidadBuscada(DetailView):
 
 	#retorna las preguntas de la habilidad
 	def getPreguntas(self, habilidad):
-		preguntas = preguntasModel.objects.filter(habilidad=habilidad)
+		preguntas = preguntasModel.objects.filter(habilidad=habilidad).order_by('-fecha')
 		return preguntas
 
 	#incluye elementos dentro del contexto y los retorna
@@ -129,23 +129,25 @@ class busquedasCategoriaLista(ListView):
 		categoria = habCategoriasModel.objects.get(slug=self.kwargs['slug'])
 		ordenItem = self.get_orden_actual()
 		busqueda = self.request.GET.get('q')
+		todasCategorias = habCategoriasModel.objects.all().order_by('categoria')
 
 		if busqueda is not None:
 			busqueda = busqueda.replace(' ','+')
 
-		context['categoria'] 	= categoria
-		context['ordenList'] 	= self.ordenList
-		context['ordenActual']  = ordenItem[2]
-		context['orden'] 		= ordenItem[0]
-		context['busqueda']		= busqueda
-		context['page'] 		= self.request.GET.get('page')
+		context['todasCategorias']	 = todasCategorias
+		context['categoria']		 = categoria
+		context['ordenList']		 = self.ordenList
+		context['ordenActual']		 = ordenItem[2]
+		context['orden']			 = ordenItem[0]
+		context['busqueda']			 = busqueda
+		context['page']				 = self.request.GET.get('page')
 
 		return context
 
 
 class busquedasPorPalabraLista(ListView):
 	model = habilidadesModel
-	paginate_by = 2
+	paginate_by = 10
 	context_object_name = 'habilidades'
 	template_name = 'busqueda_palabras.html'
 	ordering = '-val_promedio'
@@ -212,7 +214,9 @@ class busquedasPorPalabraLista(ListView):
 	def get_context_data(self, **kwargs):
 		context = super(busquedasPorPalabraLista, self).get_context_data(**kwargs)
 		ordenItem = self.get_orden_actual()
+		todasCategorias = habCategoriasModel.objects.all().order_by('categoria')
 
+		context['todasCategorias']	 = todasCategorias
 		context['busqueda']			 = self.kwargs['busqueda']
 		context['algunasCategorias'] = self.get_algunas_categorias()
 		context['ordenList'] 		 = self.ordenList
