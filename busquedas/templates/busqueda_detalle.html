@@ -238,11 +238,11 @@
 					var template = Handlebars.compile(source);
 					t = template(json);
 					$('#js_verMasDatos').prepend(t);
+					$("#js_verMasDatos").toggle()
+					$("#js_btnVermasDatos").toggle()
 				}
 			})
 
-			$("#js_verMasDatos").toggle()
-			$("#js_btnVermasDatos").toggle()
 		}
 
 		// Captura el evento de envio de formulario de preguntas

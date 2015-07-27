@@ -6,3 +6,6 @@ class respuestasModel(models.Model):
 
 	def __str__(self):
 		return u'%s' % (self.respuesta)
+
+	def __unicode__(self):
+		return u'%s' % (self.respuesta)

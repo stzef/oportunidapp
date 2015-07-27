@@ -17,6 +17,7 @@ from usuarios.models import perfilUsuarioModel
 from app.utilidades import cleanJsonModel
 from oportunidapp.settings import BASE_DIR
 from app.utilidades import get_or_none
+from estadisticas.models import habilidadesSolicitadasModel
 
 #Importaciones desde Python
 import json
@@ -217,6 +218,13 @@ def obtener_datos_de_contacto(request):
 			response_data['celular2'] = habilidad.usuario.celular2
 			response_data['celular3'] = habilidad.usuario.celular3
 			response_data['email'] = habilidad.usuario.usuario.email
+
+			hs = habilidadesSolicitadasModel(habilidad=habilidad)
+			if request.user.is_authenticated():
+				usuario = perfilUsuarioModel.objects.get(pk=request.user.id)
+				hs.usuario = usuario
+
+			hs.save()
 
 			return JsonResponse(
 				response_data,

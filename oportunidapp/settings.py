@@ -22,6 +22,7 @@ DJANGO_APPS = (
 PROJECT_APPS = (
     'app',
     'busquedas',
+    'estadisticas',
     'habilidades',
     'necesito',
     'usuarios',
