@@ -19,4 +19,6 @@ class preguntasModel(models.Model):
 
 	def __str__(self):
 		return u'%s' % (self.pregunta)
-		
+
+	def __unicode__(self):
+		return u'%s' % (self.categoria)

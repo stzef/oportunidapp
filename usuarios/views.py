@@ -66,7 +66,7 @@ class loginView(FormView):
 	# parametros de clase 
 	form_class = loginForm
 	template_name = 'login.html'
-	success_url = '/habilidades/'
+	success_url = '/micuenta/'
 
 	def form_valid(self, form):
 		login(self.request, form.user_cache)

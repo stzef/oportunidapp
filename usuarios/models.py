@@ -22,3 +22,6 @@ class perfilUsuarioModel(models.Model):
 
 	def __str__(self):
 		return u'%s' % (self.usuario)
+
+	def __unicode__(self):
+		return u'%s' % (self.usuario)

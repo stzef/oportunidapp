@@ -32,6 +32,9 @@ def preguntanueva(request):
 		# guardar pregunta
 		pregunta.save()
 
+		# Enviar email a usuario requerido en la habilidad
+			# [habilidad, habilidad.usuario, pregunta]
+
 		# respuesta
 		return JsonResponse(
 			{

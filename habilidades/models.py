@@ -17,6 +17,9 @@ class habCategoriasModel(models.Model):
 	def __str__(self):
 		return u'%s' % (self.categoria)
 
+	def __unicode__(self):
+		return u'%s' % (self.categoria)
+
 	def natural_key(self):
 		return (self.categoria)
 
@@ -40,18 +43,10 @@ class habilidadesModel(models.Model):
 	def __str__(self):
 		return u'%s' % (self.nhabilidad)
 
+	def __unicode__(self):
+		return u'%s' % (self.nhabilidad)
+
 	def save(self, *args, **kwargs):
 		self.slug = defaultfilters.slugify(self.nhabilidad)
 		super(habilidadesModel, self).save( *args, **kwargs)
 
-
-"""
-	def save(self, *args, **kwargs):
-		print ( self.foto )
-		if self.foto and self.foto != HABILIDADES_FOTO_DEFAULT:
-			#self.foto.delete()
-			print("tiene llena")
-		else:
-			print("tiene blanco")
-		super(habilidadesModel, self).save(*args, **kwargs)
-"""
