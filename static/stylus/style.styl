@@ -11,6 +11,13 @@ rojo = #d9534f
 verde = #5cb85c
 azul = #3498DB
 
+.colorRojo
+	color #a94442
+.colorVerde
+	color #3c763d
+.colorAzul
+	color rgb(79, 98, 142)
+
 .relative
 	position relative
 .absolute
@@ -26,6 +33,33 @@ azul = #3498DB
 
 .btnVerMas
 	border 2px dotted rgb(27, 124, 27)
+
+// Inicio datos de Mi Cuenta
+.datosPrincipales > p
+	border none
+	display: inline-block;
+	margin-bottom 5px
+
+.bloqueSeparador
+	border-bottom 1px dotted gray
+	margin 20px
+
+.DatosMiCuenta
+	text-align: left;
+	.datosPrincipales
+		padding-left 10px
+		font-size 20px
+		color black
+	.glyphicon
+		margin 10px 10px 10px 0
+	.datosInformativosMiCuenta
+		margin-left 30px
+	.badge
+		width 40px
+		height auto
+		border-radius 5px
+//Fin datos de Mi Cuenta
+
 
 .formBusqueda
 	width 78%
@@ -158,7 +192,8 @@ azul = #3498DB
 	content "|"
 
 //Habilidades Sugeridad
-
+.ofertasBusqueda
+	overflow hidden
 .hoverHabilidad
 	display block
 	padding 10px

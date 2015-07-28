@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="contentWidth box">
+<div class="contentWidth">
 	<div class="row text-center box">
 		<h2>Encuentra la persona correcta para tu trabajo</h2>
 		<div class=" formBusqueda input-group">
@@ -35,102 +35,76 @@
 		</div>
 		<section class="ofertasBusqueda">
 			<h2 class="text-left"><b>Ofertas</b></h2>
-			<!--Codigo para consulta
-			<div class="row">
-				{% if recomendados %}
-				{% for  recomendado in recomendados %}
-				<div class="col-xs-12 col-sm-6 col-md-3">
-					<div class="sugerencia">
-						<a class="hoverHabilidad" href="{% url 'detallebusqueda' categoria=recomendado.slug slug=recomendado.slug %}">
-							<div class="row sugerencia-foto">
-								<figure>
-									<img src="{{ recomendado.foto.url}}" class="imgHabilidadSugerida img-thumbnail" alt="{{ recomendado.nhabilidad}}">
-								</figure>
-							</div>
-							<div class="row sugerencia-descripcion">
-								<h4 class="sugerencia-titulo">
-									{{ recomendado.nhabilidad}}
-								</h4>
-							</div>
-						</a>
-					</div>
+			<div class="col-xs-12 col-sm-6 col-md-3">
+				<div class="sugerencia">
+					<a class="hoverHabilidad" href="#">
+						<div class="row sugerencia-foto">
+							<figure>
+								<img src="http://azu1.facilisimo.com/ima/i/3/7/e8/am_79225_4315508_527704.jpg" class="imgHabilidadSugerida img-thumbnail" alt="">
+							</figure>
+						</div>
+						<div class="row sugerencia-descripcion">
+							<h4 class="sugerencia-titulo">
+								Jardinero
+							</h4>
+						</div>
+					</a>
 				</div>
-				{% endfor %}
-				{% else %}
-				<p>No hay ofertas disponibles</p>
-				{% endif %}
 			</div>
-		-->
-		<div class="col-xs-12 col-sm-6 col-md-3">
-			<div class="sugerencia">
-				<a class="hoverHabilidad" href="#">
-					<div class="row sugerencia-foto">
-						<figure>
-							<img src="http://azu1.facilisimo.com/ima/i/3/7/e8/am_79225_4315508_527704.jpg" class="imgHabilidadSugerida img-thumbnail" alt="">
-						</figure>
-					</div>
-					<div class="row sugerencia-descripcion">
-						<h4 class="sugerencia-titulo">
-							Jardinero
-						</h4>
-					</div>
-				</a>
+			<div class="col-xs-12 col-sm-6 col-md-3">
+				<div class="sugerencia">
+					<a class="hoverHabilidad" href="#">
+						<div class="row sugerencia-foto">
+							<figure>
+								<img src="http://anteriores.eldiariocba.com.ar/2006/agosto/25%20de%20agosto%20de%202006/suplementos/imagen3" class="imgHabilidadSugerida img-thumbnail" alt="">
+							</figure>
+						</div>
+						<div class="row sugerencia-descripcion">
+							<h4 class="sugerencia-titulo">
+								Peluquero
+							</h4>
+						</div>
+					</a>
+				</div>
 			</div>
-		</div>
-		<div class="col-xs-12 col-sm-6 col-md-3">
-			<div class="sugerencia">
-				<a class="hoverHabilidad" href="#">
-					<div class="row sugerencia-foto">
-						<figure>
-							<img src="http://anteriores.eldiariocba.com.ar/2006/agosto/25%20de%20agosto%20de%202006/suplementos/imagen3" class="imgHabilidadSugerida img-thumbnail" alt="">
-						</figure>
-					</div>
-					<div class="row sugerencia-descripcion">
-						<h4 class="sugerencia-titulo">
-							Peluquero
-						</h4>
-					</div>
-				</a>
+			<div class="col-xs-12 col-sm-6 col-md-3">
+				<div class="sugerencia">
+					<a class="hoverHabilidad" href="#">
+						<div class="row sugerencia-foto">
+							<figure>
+								<img src="http://silvioelcarpintero.com/wp-content/uploads/2015/02/silvioelcarpintero_tips_serruchar-1024x1024.jpg" class="imgHabilidadSugerida img-thumbnail" alt="">
+							</figure>
+						</div>
+						<div class="row sugerencia-descripcion">
+							<h4 class="sugerencia-titulo">
+								Carpintero
+							</h4>
+						</div>
+					</a>
+				</div>
 			</div>
-		</div>
-		<div class="col-xs-12 col-sm-6 col-md-3">
-			<div class="sugerencia">
-				<a class="hoverHabilidad" href="#">
-					<div class="row sugerencia-foto">
-						<figure>
-							<img src="http://silvioelcarpintero.com/wp-content/uploads/2015/02/silvioelcarpintero_tips_serruchar-1024x1024.jpg" class="imgHabilidadSugerida img-thumbnail" alt="">
-						</figure>
-					</div>
-					<div class="row sugerencia-descripcion">
-						<h4 class="sugerencia-titulo">
-							Carpintero
-						</h4>
-					</div>
-				</a>
+			<div class="col-xs-12 col-sm-6 col-md-3">
+				<div class="sugerencia">
+					<a class="hoverHabilidad" href="#">
+						<div class="row sugerencia-foto">
+							<figure>
+								<img src="http://files.cerrajerosgranada.eu/200000019-b1e86b2e26/Perd%C3%AD-las-llaves-de-casa-A-qui%C3%A9n-puedo-acudir-en-Palma-de-Mallorca.jpg" class="imgHabilidadSugerida img-thumbnail" alt="">
+							</figure>
+						</div>
+						<div class="row sugerencia-descripcion">
+							<h4 class="sugerencia-titulo">
+								Cerrajero
+							</h4>
+						</div>
+					</a>
+				</div>
 			</div>
-		</div>
-		<div class="col-xs-12 col-sm-6 col-md-3">
-			<div class="sugerencia">
-				<a class="hoverHabilidad" href="#">
-					<div class="row sugerencia-foto">
-						<figure>
-							<img src="http://files.cerrajerosgranada.eu/200000019-b1e86b2e26/Perd%C3%AD-las-llaves-de-casa-A-qui%C3%A9n-puedo-acudir-en-Palma-de-Mallorca.jpg" class="imgHabilidadSugerida img-thumbnail" alt="">
-						</figure>
-					</div>
-					<div class="row sugerencia-descripcion">
-						<h4 class="sugerencia-titulo">
-							Cerrajero
-						</h4>
-					</div>
-				</a>
-			</div>
-		</div>
-	</section>
-</div>
+		</section>
+	</div>
 </div>
 {% endblock %}
 {% block scripts %}
-<script>
+<script >
 	$(function(){
 			//input de busqueda en focus
 			$('#busqueda').focus();

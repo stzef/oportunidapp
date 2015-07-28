@@ -1,18 +1,36 @@
 {% extends "template.html" %}
+{% block head %}
+<title>Mi Cuenta | OportunidApp </title>
+<style>
+	.menuItemPerfil{
+		background-color: rgb(12, 32, 50);;
+	}
+</style>
+{% endblock %}
 {% block content %}
-	<h3>Mi cuenta</h3>
-	
-	<h4>Preguntas</h4>
-	<ul>
-		<li>Te han preguntado <span class="badge">5</span></li>
-		<li>Tus preguntas <span class="badge">5</span></li>
-	</ul>
+<ul class="DatosMiCuenta">
 
-	<h4>Habilidades</h4>
-	<ul>
-		<li>Activas <span class="badge">5</span></li>
-		<li>Inactivas <span class="badge">2</span></li>
-	</ul>
+	<li class="datosPrincipales"> <p><span class="glyphicon glyphicon-user colorAzul"></span> Mi cuenta</p></li>
 
-	<h4>Ayuda</h4>
+	<p class="bloqueSeparador"></p>
+
+	<li class="datosPrincipales"><a href="#"> <p><span class="glyphicon glyphicon-comment colorAzul"></span>Preguntas</a></p></li>
+
+	<ul class="datosInformativosMiCuenta">
+		<li><span class="glyphicon glyphicon-circle-arrow-right  colorVerde"></span>Te han preguntado <span class="badge">5</span></li>
+		<li><span class="glyphicon glyphicon-circle-arrow-left colorRojo "></span> Tus preguntas <span class="badge">5</span></li>
+	</ul>
+	<p class="bloqueSeparador"></p>
+
+	<li class="datosPrincipales"> <a href="{% url 'habilidades' %}"><p><span  class="glyphicon glyphicon-heart-empty colorAzul "></span>Habilidades</a></p></li>
+
+	<ul class="datosInformativosMiCuenta">
+		<li> <span class="glyphicon glyphicon-play colorVerde "></span>Activas <span class="badge">5</span></li>
+		<li> <span class="glyphicon glyphicon-stop colorRojo" ></span>Inactivas <span class="badge">2</span></li>
+	</ul>
+	<p class="bloqueSeparador"></p>
+
+	<li class="datosPrincipales"><a href="#"><p><span class="glyphicon glyphicon-info-sign colorAzul"></span> Ayuda</a></p></li>
+
+</ul>
 {% endblock content %}

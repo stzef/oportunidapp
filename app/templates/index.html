@@ -1,5 +1,6 @@
 {% load staticfiles %}
 <!DOCTYPE html>
+<!--  WELCOME TO OPORTUNIDAPP CODE -->
 <html lang="es">
 
 <head>
@@ -8,10 +9,13 @@
 	<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
 	<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
 	<link href="{% static 'css/style.css' %}" rel="stylesheet">
-	<link href="{% static 'css/toastr.css' %}" rel="stylesheet">
 	<script src="{% static 'jslibraries/handlebars.js' %}"></script>
 	<script src="{% static 'jslibraries/spin.js' %}"></script>
 	<script src="{% static 'jslibraries/jquery-1.11.3.min.js' %}"></script>
+
+	<!--[if lt IE 9]>
+	<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
 </head>
 
 <body class="body__gray ">
@@ -56,10 +60,8 @@
 
 	{% endblock %}
 
-	<footer class="footer">
-		<div class="container">
-			<p>Desarrollado por <a href="http://sistematizar.co/" target="_blank" class="link">SistematizarEF</a></p>
-		</div>
+	<footer>
+		<p>Desarrollado por <a href="http://sistematizar.co/" target="_blank" class="link">SistematizarEF</a></p>
 	</footer>
 
 	<script src="{% static 'jslibraries/jquery.min.js' %}"></script>
