@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.mail import EmailMessage
 
 
 from usuarios.models import perfilUsuarioModel
@@ -16,6 +17,18 @@ class preguntasModel(models.Model):
 	ofertante = models.ForeignKey(perfilUsuarioModel, related_name='ofertante')
 	solicitante = models.ForeignKey(perfilUsuarioModel, related_name='solicitante')
 
+
+	def enviar_pregunta_email(self):
+		msg = EmailMessage(
+			subject = 'Oportunidapp (pregunta)',
+			from_email = 'sistematizaref <sistematizaref@gmail.com>',
+			to = [self.ofertante.usuario.email]
+		)
+		msg.template_name = 'Bienvenida'
+		msg.template_content = {
+			'std_content00' : '<h2>%s te pregunta,<br> %s </h2>' % (self.solicitante.usuario.get_full_name(),self.pregunta),
+		}
+		msg.send()
 
 	def __str__(self):
 		return u'%s' % (self.pregunta)

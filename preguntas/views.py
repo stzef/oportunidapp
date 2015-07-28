@@ -31,9 +31,8 @@ def preguntanueva(request):
 
 		# guardar pregunta
 		pregunta.save()
-
-		# Enviar email a usuario requerido en la habilidad
-			# [habilidad, habilidad.usuario, pregunta]
+		# enviar email de notificacion
+		pregunta.enviar_pregunta_email()
 
 		# respuesta
 		return JsonResponse(
