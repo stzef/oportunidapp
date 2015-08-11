@@ -113,8 +113,9 @@
 				{% for pregunta in preguntas %}
 				<article class="pregunta">
 					<div class="contenedorPregunta">
-						<span class="glyphicon glyphicon-comment"></span>
+
 						<p class="preguntaEspecifica">
+							<span class="glyphicon glyphicon-comment"></span>
 							{{pregunta.pregunta}}
 						</p>
 					</div>
@@ -168,8 +169,8 @@
 <script id="pregunta-template" type="text/x-handlebars-template">
 	<div id="pregunta-hecha">
 		<div class="contenedorPregunta">
-			<span class="glyphicon glyphicon-comment"></span>
 			<p class="preguntaEspecifica" style="display: inline-block;">
+				<span class="glyphicon glyphicon-comment"></span>
 				{{this.pregunta}}
 			</p>
 		</div>
