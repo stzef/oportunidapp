@@ -65,14 +65,37 @@
 						</strong>
 					</a>
 					<ul class="dropdown-menu" role="menu">
-						<li>
-							<a class="link-user" href="{% url 'miCuenta' %}">Mi Cuenta</a>
-						</li>
+
 						<li>
 							<a class="link-user" href="{% url 'profile' %}">Perfil</a>
 						</li>
+
+						<li>
+							<a class="link-user" href="{% url 'miCuenta' %}">Mi Cuenta</a>
+						</li>
+
+						<li class="separador"></li>
+
+						<li class="dropdown-header">Preguntas</li>
+
+						<li>
+							<a href="#">Te han preguntado</a>
+						</li>
+						<li>
+							<a href="#">Tus preguntas</a>
+						</li>
+						<li class="dropdown-header">Habilidades</li>
+						<li>
+							<a href="{% url 'habilidades' %}">Habilidades</a>
+						</li>
+
+						<li class="separador"></li>
+
 						<li>
 							<a class="link-user" href="{% url 'salir' %}">Salir</a>
+						</li>
+						<li>
+							<a href="">Ayuda</a>
 						</li>
 					</ul>
 				</li>
