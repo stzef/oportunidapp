@@ -17,7 +17,6 @@ class preguntasModel(models.Model):
 	ofertante = models.ForeignKey(perfilUsuarioModel, related_name='ofertante')
 	solicitante = models.ForeignKey(perfilUsuarioModel, related_name='solicitante')
 
-
 	def enviar_pregunta_email(self):
 		msg = EmailMessage(
 			subject = 'Oportunidapp (pregunta)',
@@ -29,6 +28,7 @@ class preguntasModel(models.Model):
 			'std_content00' : '<h2>%s te pregunta,<br> %s </h2>' % (self.solicitante.usuario.get_full_name(),self.pregunta),
 		}
 		msg.send()
+
 
 	def __str__(self):
 		return u'%s' % (self.pregunta)
