@@ -17,7 +17,7 @@ import json
 from forms import *
 from forms import loginForm,registroForm
 from models import perfilUsuarioModel
-
+from app.utilidades import get_or_none
 
 def logoutView(request):
 	logout(request)
@@ -69,7 +69,12 @@ class loginView(FormView):
 	success_url = '/micuenta/'
 
 	def form_valid(self, form):
-		login(self.request, form.user_cache)
+		perfil = get_or_none(perfilUsuarioModel, usuario=form.user_cache)
+		if perfil is not None:
+			login(self.request, form.user_cache)
+		else:
+			form.add_error(None, 'Lo sentimos este usuario no esta registrado')
+			return self.form_invalid(form)
 		return super(loginView, self).form_valid(form)
 
 	# Verifica si la url tiene un querystring con parametro next
