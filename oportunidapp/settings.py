@@ -24,11 +24,14 @@ PROJECT_APPS = (
     'busquedas',
     'estadisticas',
     'habilidades',
-    'necesito',
+    'preguntas',
+    'respuestas',
     'usuarios',
 )
 
-THIRTY_PARTY_APPS = ()
+THIRTY_PARTY_APPS = (
+    'djrill',
+)
 
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRTY_PARTY_APPS
 
@@ -41,6 +44,16 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
+
+
+# SMTP Settings Backend
+EMAIL_BACKEND = 'djrill.mail.backends.djrill.DjrillBackend'
+
+MANDRILL_API_KEY = 'Fj_DwFYGpE5IXMS4lua_Hg'
+# SMTP Settings Backend
+
+
+
 
 ROOT_URLCONF = 'oportunidapp.urls'
 
