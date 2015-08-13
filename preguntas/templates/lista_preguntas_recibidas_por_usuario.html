@@ -84,11 +84,8 @@ CONTEXTO!
 
 		<section class="row preguntas tab-pane" id="sin-respuesta">
 
-			<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-				modal respuesta
-			</button>
 			<!-- Modal -->
-			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div data-modal class="modal fade" id="" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
@@ -98,13 +95,16 @@ CONTEXTO!
 						<div class="modal-body modalResponderPregunta">
 							<p class="preguntaEspecifica modalPreguntaHaResponder">
 								<span class="glyphicon glyphicon-comment"></span>
-								Pregunta
+								<span id="preguntaModal"></span>
 							</p>
-							<textarea name="" id="respuestaPregunta" cols="5" rows="5"></textarea>
+							<form action="">
+								<textarea name="" data-RepustaPreguntaModal id="" cols="5" rows="5"></textarea>
+								<input type="hidden" value="" id="idPregunta">
+								<input class="btn btn-primary" type="submit" value="Responder">
+							</form>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-							<button type="button" class="btn btn-primary">Responder</button>
 						</div>
 					</div>
 				</div>
@@ -140,14 +140,19 @@ CONTEXTO!
 	</div>
 </div>
 
+
+
+{% endblock content %}
+
+{% block scripts %}
 <script>
-	//capturar las preguntas
+	//capturar las preguntas(el p que contiene la pregunta)
 	var preguntas = document.querySelectorAll("[data-pregunta]")
 	//convertir de HTMLCollection a array
 	var preguntasArray = [].slice.call(preguntas);
-	console.log(preguntasArray);
 
-	var modal = document.getElementById("myModal")
+	//camputara el contnedor del modal
+	var modal = document.querySelector("[data-modal]")
 
 	//capturar los btn de reponder
 	var btnsResponder = document.querySelectorAll("#btnResponderPregunta")
@@ -157,11 +162,12 @@ CONTEXTO!
 	//añadir eventos a los btn
 	btnsResponderArray.forEach(function(btnResponder, index){
 		btnsResponderArray[index].addEventListener("click", function(){
-			console.log(preguntasArray[index].innerHTML)
 			var id = preguntasArray[index].getAttribute("id")
 			modal.setAttribute("id", id)
+			document.getElementById("preguntaModal").innerHTML = preguntasArray[index].innerHTML
+			idPregunta.setAttribute("value", modal.id)
+
 		})
 	});
 </script>
-
-{% endblock content %}
+{% endblock %}
