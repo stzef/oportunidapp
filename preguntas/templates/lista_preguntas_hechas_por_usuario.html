@@ -41,6 +41,16 @@ CONTEXTO!
 						{{preguntaRespondida.pregunta}}
 					</p>
 				</div>
+				<div class="contenedorPespuesta">
+					<p class="textoIntroductorioPregunta">Le has preguntadoa a <b>{{preguntaRespondida.ofertante.usuario.get_full_name}}</b> en la habilidad <b>{{preguntaRespondida.habilidad}} </b>:</p>
+					<span class="respuesta glyphicon glyphicon-check"></span>
+					<p class="repuestaEspecifica">
+						{{preguntaRespondida.respuesta}}
+					</p>
+					<p class="fechaPregunta">
+						{{preguntaRespondida.fecha}}
+					</p>
+				</div>
 
 
 			</article>
@@ -57,10 +67,13 @@ CONTEXTO!
 			{% for preguntaNoRespondida in preguntasNoRespondidas  %}
 			<article class="pregunta">
 				<div class="contenedorPregunta">
-
+					<p class="textoIntroductorioPregunta">Le has preguntadoa a <b>{{preguntaNoRespondida.ofertante.usuario.get_full_name}}</b> en la habilidad <b>{{preguntaNoRespondida.habilidad}} </b>:</p>
 					<p class="preguntaEspecifica">
 						<span class="glyphicon glyphicon-comment"></span>
 						{{preguntaNoRespondida.pregunta}}
+					</p>
+					<p class="fechaPregunta">
+						{{preguntaNoRespondida.fecha}}
 					</p>
 				</div>
 

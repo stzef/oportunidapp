@@ -45,8 +45,15 @@ CONTEXTO!
 					<span class="respuesta glyphicon glyphicon-check"></span>
 					{{preguntaRespondida.respuesta}}
 				</p>
-				{% endfor %}
 			</ul>
+
+			<div class="contenedorPespuesta">
+				<span class="respuesta glyphicon glyphicon-check"></span>
+				<p class="repuestaEspecifica">
+					{{preguntaRespondida.respuesta}}
+				</p>
+			</div>
+			{% endfor %}
 		</div>
 
 
@@ -55,6 +62,7 @@ CONTEXTO!
 			{% for preguntaRespondida in preguntasRespondidas  %}
 			<article class="pregunta">
 				<div class="contenedorPregunta">
+					<p class="textoIntroductorioPregunta">El usuario <b>{{preguntaNoRespondida.solicitante.usuario.get_full_name}}</b> en la habilidad <b>{{preguntaNoRespondida.habilidad}}</b> te ha hecho la siguiente pregunta:</p>
 					<p class="preguntaEspecifica">
 						<span class="glyphicon glyphicon-comment"></span>
 						{{preguntaRespondida.pregunta}}
@@ -98,7 +106,7 @@ CONTEXTO!
 								<span id="preguntaModal"></span>
 							</p>
 							<form action="">
-								<textarea name="" data-RepustaPreguntaModal id="" cols="5" rows="5"></textarea>
+								<textarea name="" data-RepustaPreguntaModal id="" cols="5" rows="5" maxlength="1000"></textarea>
 								<input type="hidden" value="" id="idPregunta">
 								<input class="btn btn-primary" type="submit" value="Responder">
 							</form>
@@ -114,9 +122,13 @@ CONTEXTO!
 			{% for preguntaNoRespondida in preguntasNoRespondidas  %}
 			<article class="pregunta">
 				<div class="contenedorPregunta" >
+					<p class="textoIntroductorioPregunta">El usuario <b>{{preguntaNoRespondida.solicitante.usuario.get_full_name}}</b> en la habilidad <b>{{preguntaNoRespondida.habilidad}}</b> te ha hecho la siguiente pregunta:</p>
 					<span class="glyphicon glyphicon-comment"></span>
 					<p class="preguntaEspecifica" id="{{preguntaNoRespondida.id}}" data-pregunta="yes">
 						{{preguntaNoRespondida.pregunta}}
+					</p>
+					<p class="fechaPregunta">
+						{{preguntaNoRespondida.fecha}}
 					</p>
 					<p class="btnResponderPregunta" >
 						<span id="btnResponderPregunta" data-toggle="modal"  data-target="#{{preguntaNoRespondida.id}}" class="btn btn-primary">Responder</span>
