@@ -10,59 +10,158 @@ CONTEXTO!
 
 {% block content %}
 
-	<div class="page-header">
-		<h2>Te han preguntado</h2>
-	</div>
+<div class="page-header">
+	<h2>Te han preguntado</h2>
+</div>
 
-	<!-- TABS -->
-	<div class="row space-tab">
-		<ul class="nav nav-tabs" id="tabs" data-tabs="tabs">
-			<li role="presentation" class="active">
-				<a href="#respondidas" data-toggle="tab">
-					Respondidas
-				</a>
-			</li>
-			<li role="presentation" class="">
-				<a href="#sin-respuesta" data-toggle="tab">
-					Sin responder
-				</a>
-			</li>
-		</ul>
-	</div>
-	<!-- TABS -->
+<!-- TABS -->
+<div class="row space-tab">
+	<ul class="nav nav-tabs" id="tabs" data-tabs="tabs">
+		<li role="presentation" class="active">
+			<a href="#respondidas" data-toggle="tab">
+				Respondidas
+			</a>
+		</li>
+		<li role="presentation" class="">
+			<a href="#sin-respuesta" data-toggle="tab">
+				Sin responder
+			</a>
+		</li>
+	</ul>
+</div>
+<!-- TABS -->
 
-	<div class="row">
-		<div class="tab-content">
-			<!-- Contenedor PREGUNTAS RESPONDIDAS -->
-			<div class="tab-pane active" id="respondidas">
-				<ul>
-					{% for preguntaRespondida in preguntasRespondidas  %}
-						<p>
-							<span class="glyphicon glyphicon-comment"></span>
-							{{preguntaRespondida.pregunta}}
-						</p>
-						<p>
-							<span class="respuesta glyphicon glyphicon-check"></span>
-							{{preguntaRespondida.respuesta}}
-						</p>
-					{% endfor %}
-				</ul>
-			</div>
-			<!-- Contenedor PREGUNTAS RESPONDIDAS -->
-
-			<!-- Contenedor PREGUNTAS SIN RESPONDER -->
-			<div class="tab-pane" id="sin-respuesta">
-				<ul>
-					{% for preguntaNoRespondida in preguntasNoRespondidas  %}
-						<li>
-							{{preguntaNoRespondida.pregunta}}
-							<a href="#">Responder</a>
-						</li>
-					{% endfor %}
-				</ul>
-			</div>
-			<!-- Contenedor PREGUNTAS SIN RESPONDER -->
+<div class="row">
+	<div class="tab-content">
+		<!-- Contenedor PREGUNTAS RESPONDIDAS -->
+		<div class="tab-pane active" id="respondidas">
+			<ul>
+				{% for preguntaRespondida in preguntasRespondidas  %}
+				<p>
+					<span class="glyphicon glyphicon-comment"></span>
+					{{preguntaRespondida.pregunta}}
+				</p>
+				<p>
+					<span class="respuesta glyphicon glyphicon-check"></span>
+					{{preguntaRespondida.respuesta}}
+				</p>
+				{% endfor %}
+			</ul>
 		</div>
+
+
+		<section class="row preguntas tab-pane active" id="respondidasa">
+
+			{% for preguntaRespondida in preguntasRespondidas  %}
+			<article class="pregunta">
+				<div class="contenedorPregunta">
+					<p class="preguntaEspecifica">
+						<span class="glyphicon glyphicon-comment"></span>
+						{{preguntaRespondida.pregunta}}
+					</p>
+				</div>
+			</article>
+
+			{% empty %}
+			<p>No han respondido ninguna de tus preguntas</p>
+
+			{% endfor %}
+
+		</section>
+
+
+
+
+		<!-- Contenedor PREGUNTAS RESPONDIDAS -->
+
+		<!-- Contenedor PREGUNTAS SIN RESPONDER -->
+
+
+		<!--Modal para responder preguntas-->
+		<!-- Button trigger modal -->
+
+
+
+		<section class="row preguntas tab-pane" id="sin-respuesta">
+
+			<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+				modal respuesta
+			</button>
+			<!-- Modal -->
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title" id="myModalLabel">Responder pregunta</h4>
+						</div>
+						<div class="modal-body modalResponderPregunta">
+							<p class="preguntaEspecifica modalPreguntaHaResponder">
+								<span class="glyphicon glyphicon-comment"></span>
+								Pregunta
+							</p>
+							<textarea name="" id="respuestaPregunta" cols="5" rows="5"></textarea>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+							<button type="button" class="btn btn-primary">Responder</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--Fin Modal para responder preguntas-->
+
+			{% for preguntaNoRespondida in preguntasNoRespondidas  %}
+			<article class="pregunta">
+				<div class="contenedorPregunta" >
+					<span class="glyphicon glyphicon-comment"></span>
+					<p class="preguntaEspecifica" id="{{preguntaNoRespondida.id}}" data-pregunta="yes">
+						{{preguntaNoRespondida.pregunta}}
+					</p>
+					<p class="btnResponderPregunta" >
+						<span id="btnResponderPregunta" data-toggle="modal"  data-target="#{{preguntaNoRespondida.id}}" class="btn btn-primary">Responder</span>
+					</p>
+				</div>
+			</article>
+			{% empty %}
+			<p>Todas tus preguntas han sido respuestas</p>
+
+			{% endfor %}
+		</section>
+
+
+
+
+
+
+
+
+		<!-- Contenedor PREGUNTAS SIN RESPONDER -->
 	</div>
+</div>
+
+<script>
+	//capturar las preguntas
+	var preguntas = document.querySelectorAll("[data-pregunta]")
+	//convertir de HTMLCollection a array
+	var preguntasArray = [].slice.call(preguntas);
+	console.log(preguntasArray);
+
+	var modal = document.getElementById("myModal")
+
+	//capturar los btn de reponder
+	var btnsResponder = document.querySelectorAll("#btnResponderPregunta")
+	//convertir de HTMLCollection a array
+	var btnsResponderArray = [].slice.call(btnsResponder);
+
+	//añadir eventos a los btn
+	btnsResponderArray.forEach(function(btnResponder, index){
+		btnsResponderArray[index].addEventListener("click", function(){
+			console.log(preguntasArray[index].innerHTML)
+			var id = preguntasArray[index].getAttribute("id")
+			modal.setAttribute("id", id)
+		})
+	});
+</script>
 
 {% endblock content %}

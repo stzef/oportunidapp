@@ -9,19 +9,69 @@ CONTEXTO!
 -->
 
 {% block content %}
+<div class="page-header">
 	<h2>Preguntas que hiciste</h2>
-	<h3>Respondidas</h3> 
-	<ul>
-		{% for preguntaRespondida in preguntasRespondidas  %}
-			<li>{{preguntaRespondida.pregunta}}</li>
-		{% endfor %}
-	</ul>
+</div>
 
-	<br>
-	<h3>No respondidas</h3>
-	<ul>
-		{% for preguntaNoRespondida in preguntasNoRespondidas  %}
-			<li>{{preguntaNoRespondida.pregunta}}</li>
-		{% endfor %}
+<div class="row space-tab">
+	<ul class="nav nav-tabs" id="tabs" data-tabs="tabs">
+		<li role="presentation" class="active">
+			<a href="#respondidas" data-toggle="tab">
+				Respondidas
+			</a>
+		</li>
+		<li role="presentation" class="">
+			<a href="#sin-respuesta" data-toggle="tab">
+				No respondidas
+			</a>
+		</li>
 	</ul>
+</div>
+
+
+<div class="row">
+	<div class="tab-content">
+		<!-- Contenedor PREGUNTAS RESPONDIDAS -->
+		<section class="row preguntas tab-pane active" id="respondidas">
+			{% for preguntaRespondida in preguntasRespondidas  %}
+			<article class="pregunta">
+				<div class="contenedorPregunta">
+					<p class="preguntaEspecifica">
+						<span class="glyphicon glyphicon-comment"></span>
+						{{preguntaRespondida.pregunta}}
+					</p>
+				</div>
+
+
+			</article>
+			{% empty %}
+			<p>No han respondido ninguna de tus preguntas</p>
+
+			{% endfor %}
+		</section>
+		<!-- Contenedor PREGUNTAS RESPONDIDAS -->
+
+		<!-- Contenedor PREGUNTAS SIN RESPONDER -->
+
+		<section class="row preguntas tab-pane" id="sin-respuesta">
+			{% for preguntaNoRespondida in preguntasNoRespondidas  %}
+			<article class="pregunta">
+				<div class="contenedorPregunta">
+
+					<p class="preguntaEspecifica">
+						<span class="glyphicon glyphicon-comment"></span>
+						{{preguntaNoRespondida.pregunta}}
+					</p>
+				</div>
+
+
+			</article>
+			{% empty %}
+			<p>Todas tus preguntas han sido respuestas</p>
+
+			{% endfor %}
+		</section>
+		<!-- Contenedor PREGUNTAS SIN RESPONDER -->
+	</div>
+</div>
 {% endblock content %}
