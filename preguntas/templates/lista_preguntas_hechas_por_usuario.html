@@ -1,0 +1,27 @@
+{% extends "template.html" %}
+<!--
+
+CONTEXTO!
+
+	preguntasRespondidas -> Lista de preguntas respondidas
+	preguntasNoRespondidas -> Lista de preguntas sin respuesta
+
+-->
+
+{% block content %}
+	<h2>Preguntas que hiciste</h2>
+	<h3>Respondidas</h3> 
+	<ul>
+		{% for preguntaRespondida in preguntasRespondidas  %}
+			<li>{{preguntaRespondida.pregunta}}</li>
+		{% endfor %}
+	</ul>
+
+	<br>
+	<h3>No respondidas</h3>
+	<ul>
+		{% for preguntaNoRespondida in preguntasNoRespondidas  %}
+			<li>{{preguntaNoRespondida.pregunta}}</li>
+		{% endfor %}
+	</ul>
+{% endblock content %}

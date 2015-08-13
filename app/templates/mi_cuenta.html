@@ -10,15 +10,27 @@
 {% block content %}
 <ul class="DatosMiCuenta">
 
-	<li class="datosPrincipales"> <p><span class="glyphicon glyphicon-user colorAzul"></span> Mi cuenta</p></li>
+	<li class="datosPrincipales tituloMiCuenta"> <h3><span class="glyphicon glyphicon-user colorAzul tituloMiCuenta"></span> <span class="tituloMiCuenta"></span>Mi cuenta</h3></li>
 
 	<p class="bloqueSeparador"></p>
 
 	<li class="datosPrincipales"><a href="#"> <p><span class="glyphicon glyphicon-comment colorAzul"></span>Preguntas</a></p></li>
 
 	<ul class="datosInformativosMiCuenta">
-		<li><span class="glyphicon glyphicon-circle-arrow-right  colorVerde"></span>Te han preguntado <span class="badge">5</span></li>
-		<li><span class="glyphicon glyphicon-circle-arrow-left colorRojo "></span> Tus preguntas <span class="badge">5</span></li>
+		<li><span class="glyphicon glyphicon-circle-arrow-right  colorVerde">
+			</span>
+				<a href="{% url 'preguntasRecibidas' %}">
+					Te han preguntado 
+				</a>
+			<span class="badge">5</span>
+		</li>
+		<li>
+			<span class="glyphicon glyphicon-circle-arrow-left colorRojo "></span>
+			<a href="{% url 'preguntasHechas' %}">
+				Tus preguntas
+			</a>
+			<span class="badge">5</span>
+		</li>
 	</ul>
 	<p class="bloqueSeparador"></p>
 

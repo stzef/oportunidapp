@@ -23,7 +23,7 @@
 
 		<div class="text-left">
 			<h2 class="text-left"><b>Categorias</b></h2>
-			<ul class="list-inline">
+			<ul class="list-inline listaCategorias">
 				{% for categoria in categorias %}
 				<li class=" label label-success">
 					<a href="{% url 'busqueda' categoria.slug %}" class="labelCategoria">
