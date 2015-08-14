@@ -22,7 +22,7 @@ def crearRespuesta(request):
 			pregunta.respuesta = nuevaRespuesta
 			pregunta.save(update_fields=['respuesta'])
 
-		mensaje = 'ok'
+		mensaje = 'Listo su mensaje a sido enviado.'
 
 
 		return JsonResponse(
