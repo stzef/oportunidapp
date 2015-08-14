@@ -110,7 +110,7 @@ CONTEXTO!
 						{{preguntaNoRespondida.fecha}}
 					</p>
 
-					<p class="btnResponderPregunta" id="btnResponderPregunta">
+					<p class="btnResponderPregunta" >
 						<span id="btnResponderPregunta" data-toggle="modal" data-target="#{{preguntaNoRespondida.id}}" class="btn btn-primary">Responder</span>
 					</p>
 				</div>
@@ -134,20 +134,25 @@ CONTEXTO!
 	//convertir de HTMLCollection a array
 	var preguntasArray = [].slice.call(preguntas);
 
-	//camputara el contnedor del modal
+	//camputara el contenedor del modal
 	var modal = document.querySelector("[data-modal]")
 
-	//capturar los btn de reponder
+	//capturar los btn de responder
 	var btnsResponder = document.querySelectorAll("#btnResponderPregunta")
 	//convertir de HTMLCollection a array
 	var btnsResponderArray = [].slice.call(btnsResponder);
 
-	//añadir eventos a los btn
+	//recorrer arreglo de botones de responder
 	btnsResponderArray.forEach(function(btnResponder, index){
+		//añadir eventos a los botones
 		btnsResponderArray[index].addEventListener("click", function(){
+			//capturra el id de de la pregunta
 			var id = preguntasArray[index].getAttribute("id")
+			//añadir el id al modal. para poder abrilo al darle click
 			modal.setAttribute("id", id)
+			//añadir el el texto de la pregunta al modal que se va abrir
 			document.getElementById("preguntaModal").innerHTML = preguntasArray[index].innerHTML
+			//enviar el id al campo hidden del modal
 			idPregunta.setAttribute("value", modal.id)
 
 		})
@@ -166,8 +171,8 @@ CONTEXTO!
 				respuesta : $('#respuesta').val(),
 			},
 			success : function(json){
-				document.getElementById("contenedorMensageConfirmacionRespuesta").classList.add("displayBlock")
-				document.getElementById("mensageConfirmacionRespuesta").innerHTML = json.mensaje;
+				$('#contenedorMensageConfirmacionRespuesta').addClass('displayBlock');
+				$('#mensageConfirmacionRespuesta').html(json.mensaje);
 			},
 			error: function(){
 
@@ -175,7 +180,7 @@ CONTEXTO!
 		})
 		setTimeout(function() {
 			location.reload();
-		}, 3000)
+		}, 2000)
 	})
 
 </script>
