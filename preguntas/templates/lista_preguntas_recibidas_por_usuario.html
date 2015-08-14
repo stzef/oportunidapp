@@ -84,8 +84,11 @@ CONTEXTO!
 							<form  id="responder-form">
 								<textarea name="" data-RepustaPreguntaModal id="respuesta" cols="5" rows="5" maxlength="1000"></textarea>
 								<input type="hidden" value="" id="idPregunta">
-								<input class="btn btn-primary" type="submit" value="Responder">
+								<input class="btn btn-primary" type="submit" value="Responder" id="botonResponderPreguntaModal">
 							</form>
+							<div class="marginTopBottom pregunta-mensaje alert alert-success displayNone" id="contenedorMensageConfirmacionRespuesta" role="alert">
+								<p id="mensageConfirmacionRespuesta"></p>
+							</div>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
@@ -106,8 +109,9 @@ CONTEXTO!
 					<p class="fechaPregunta">
 						{{preguntaNoRespondida.fecha}}
 					</p>
-					<p class="btnResponderPregunta" >
-						<span id="btnResponderPregunta" data-toggle="modal"  data-target="#{{preguntaNoRespondida.id}}" class="btn btn-primary">Responder</span>
+
+					<p class="btnResponderPregunta" id="btnResponderPregunta">
+						<span id="btnResponderPregunta" data-toggle="modal" data-target="#{{preguntaNoRespondida.id}}" class="btn btn-primary">Responder</span>
 					</p>
 				</div>
 			</article>
@@ -149,7 +153,10 @@ CONTEXTO!
 		})
 	});
 
+
+
 	$('#responder-form').on('submit', function(e){
+		document.getElementById("botonResponderPreguntaModal").classList.add("displayNone")
 		e.preventDefault()
 		$.ajax({
 			type : 'POST',
@@ -158,13 +165,17 @@ CONTEXTO!
 				pregunta  : $('#idPregunta').val(),
 				respuesta : $('#respuesta').val(),
 			},
-			sucess : function(json){
-				console.log(json)
+			success : function(json){
+				document.getElementById("contenedorMensageConfirmacionRespuesta").classList.add("displayBlock")
+				document.getElementById("mensageConfirmacionRespuesta").innerHTML = json.mensaje;
 			},
 			error: function(){
 
 			}
 		})
+		setTimeout(function() {
+			location.reload();
+		}, 3000)
 	})
 
 </script>
