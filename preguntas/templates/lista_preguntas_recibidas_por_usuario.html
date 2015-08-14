@@ -1,4 +1,5 @@
 {% extends "template.html" %}
+{% load staticfiles %}
 <!--
 
 CONTEXTO!
@@ -97,8 +98,8 @@ CONTEXTO!
 								<span class="glyphicon glyphicon-comment"></span>
 								<span id="preguntaModal"></span>
 							</p>
-							<form action="">
-								<textarea name="" data-RepustaPreguntaModal id="" cols="5" rows="5"></textarea>
+							<form id="responder-form">
+								<textarea name="" data-RepustaPreguntaModal id="respuesta" cols="5" rows="5"></textarea>
 								<input type="hidden" value="" id="idPregunta">
 								<input class="btn btn-primary" type="submit" value="Responder">
 							</form>
@@ -128,14 +129,6 @@ CONTEXTO!
 
 			{% endfor %}
 		</section>
-
-
-
-
-
-
-
-
 		<!-- Contenedor PREGUNTAS SIN RESPONDER -->
 	</div>
 </div>
@@ -143,8 +136,8 @@ CONTEXTO!
 
 
 {% endblock content %}
-
 {% block scripts %}
+<script src="{% static 'jsapp/csrf_load.js' %}"></script>
 <script>
 	//capturar las preguntas(el p que contiene la pregunta)
 	var preguntas = document.querySelectorAll("[data-pregunta]")
@@ -169,5 +162,24 @@ CONTEXTO!
 
 		})
 	});
+
+	$('#responder-form').on('submit', function(e){
+		e.preventDefault()
+		$.ajax({
+			type : 'POST',
+			url  : '/crear-respuesta/',
+			data : {
+				pregunta  : $('#idPregunta').val(),
+				respuesta : $('#respuesta').val(),
+			},
+			sucess : function(json){
+				console.log(json)
+			},
+			error: function(){
+
+			}
+		})
+	})
+
 </script>
 {% endblock %}

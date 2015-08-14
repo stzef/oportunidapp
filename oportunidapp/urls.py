@@ -10,7 +10,7 @@ urlpatterns = patterns('',
     url('', include('usuarios.urls')),
     url('', include('app.urls')),
     url('', include('preguntas.urls')),
-    #url('', include('respuestas.urls')),
+    url('', include('respuestas.urls')),
     url('', include('busquedas.urls')),
     url(r'^admin/', include(admin.site.urls)),
     

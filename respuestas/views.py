@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render 
 from django.http import JsonResponse
 
 
@@ -20,8 +20,9 @@ def crearRespuesta(request):
 
 		if pregunta is not None:
 			pregunta.respuesta = nuevaRespuesta
+			pregunta.save(update_fields=['respuesta'])
 
-		mensaje = ''
+		mensaje = 'ok'
 
 
 		return JsonResponse(
