@@ -106,7 +106,7 @@ CONTEXTO!
 								<span class="glyphicon glyphicon-comment"></span>
 								<span id="preguntaModal"></span>
 							</p>
-							<form action="">
+							<form id='responder-form'>
 								<textarea name="" data-RepustaPreguntaModal id="respuesta" cols="5" rows="5" maxlength="1000"></textarea>
 								<input type="hidden" value="" id="idPregunta">
 								<input class="btn btn-primary" type="submit" value="Responder">
@@ -184,7 +184,7 @@ CONTEXTO!
 				pregunta  : $('#idPregunta').val(),
 				respuesta : $('#respuesta').val(),
 			},
-			sucess : function(json){
+			succness : function(json){
 				console.log(json)
 			},
 			error: function(){
