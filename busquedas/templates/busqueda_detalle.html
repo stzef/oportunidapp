@@ -99,10 +99,10 @@
 		<h3 class="preguntas-titulo">Preguntas</h3>
 		<div class="row moduloPreguntas">
 			<div class="row preguntas-nueva preguntar">
-				<form class="formularioPregunta">
-					<input type="hidden" value="{{habilidad.pk}}" id="habilidad" name="habilidad">
-					<input class="inputPregunta" type="text" id="pregunta" rows="1" name="pregunta" placeholder="Escribe tu pregunta." required>
-					<input class="preguntar-btn" id="preguntar-btn" class="btn btn-success" type="submit">
+				<form class="formularioPregunta" id="formularioPregunta_js" >
+					<input type="hidden" value="{{habilidad.pk}}" id="habilidad" name="habilidad" />
+					<input class="inputPregunta" type="text" id="pregunta" rows="1" name="pregunta" placeholder="Escribe tu pregunta." required />
+					<input class="preguntar-btn" id="preguntar-btn" class="btn btn-success" type="submit" value="Enviar" />
 				</form>
 			</div>
 			<div id="pregunta-redactada">
@@ -212,15 +212,10 @@
 <script src="{% static 'jsapp/csrf_load.js' %}"></script>
 <script>
 	$(function() {
-		//disabled si el input esta vacio
-		$("#preguntar-btn").attr("disabled","disabled")
-		$("#pregunta").keypress(function () {
-			if ($("#pregunta").val() == "") {
-				$("#preguntar-btn").attr("disabled","disabled")
-			}else{
-				$("#preguntar-btn").removeAttr("disabled")
-			}
-		})
+		$('#formularioPregunta_js').on('submit', function(event){
+			event.preventDefault();
+			is_authenticate();
+		});
 
 		//capturar boton y añadir el evento click
 		$("#js_btnVermasDatos").click(show_Information)
@@ -245,86 +240,84 @@
 
 		}
 
-		// Captura el evento de envio de formulario de preguntas
-		$('#preguntar-btn').click(function(event){
-			event.preventDefault();
-			is_authenticate();
-		});
+// Captura el evento de envio de formulario de preguntas
 
-		// Verifica si el usuario esta loggeado
-		function is_authenticate()
+
+// Verifica si el usuario esta loggeado
+function is_authenticate()
+{
+	$.ajax({
+		url:  '{% url 'is_auth_ajax' %}' ,
+		type: 'GET',
+		dataType: 'json',
+		success : function(json)
 		{
-			$.ajax({
-				url:  '{% url 'is_auth_ajax' %}' ,
-				type: 'GET',
-				dataType: 'json',
-				success : function(json)
-				{
-					// abre modal para inicio de sesion
-					if(json.auth == 0){
-						abrirModal();
-					}
-					//envia la pregunta
-					else{
-						enviarPregunta();
-					}
-				}
-			});
+			// abre modal para inicio de sesion
+			if(json.auth == 0){
+				abrirModal();
+			}
+			//envia la pregunta
+			else{
+				enviarPregunta();
+			}
 		}
+	});
+}
 
-		// formulario de login ajax
-		$('#formularioLogin').on('submit', function(event){
-			event.preventDefault();
-			$.ajax({
-				url: '{% url 'login_ajax' %}',
-				type: 'POST',
-				dataType: 'json',
-				data: {
-					username:  $('#usuario').val(),
-					password: $('#password').val(),
-				},
-				success: function(json){
-					if(json.estado == 0)
-						// hace algo si usuario no esta activo
-					alert('Este usuario no esta activo!')
-					else if(json.estado == 1)
-						// hace algo si usuario no esta registrado
-					alert('Este usuario no esta registrado')
-					else if(json.estado == 2){
-						//envia la pregunta
-						$('#modalPregunta').modal('hide')
-						enviarPregunta()
-					}
-				}
-			});
-		});
-
-		function abrirModal(){
-			$('#modalPregunta').modal('show')
+// formulario de login ajax
+$('#formularioLogin').on('submit', function(event){
+	event.preventDefault();
+	$.ajax({
+		url: '{% url 'login_ajax' %}',
+		type: 'POST',
+		dataType: 'json',
+		data: {
+			username:  $('#usuario').val(),
+			password: $('#password').val(),
+		},
+		success: function(json){
+			if(json.estado == 0)
+				// hace algo si usuario no esta activo
+			alert('Este usuario no esta activo!')
+			else if(json.estado == 1)
+				// hace algo si usuario no esta registrado
+			alert('Este usuario no esta registrado')
+			else if(json.estado == 2){
+				//envia la pregunta
+				$('#modalPregunta').modal('hide')
+				enviarPregunta()
+			}
 		}
+	});
+});
 
-		function enviarPregunta(){
-			var pregunta = $('#pregunta');
-			$.ajax({
-				url: '{% url 'preguntanueva' %}',
-				type: 'POST',
-				dataType: 'json',
-				data:{
-					pregunta: pregunta.val(),
-					habilidad: $('#habilidad').val(),
-				},
-				success: function(json){
-					if(json.estado == 1){
-						var source   = $("#pregunta-template").html();
-						var template = Handlebars.compile(source);
-						t = template(json);
-						$('#pregunta-redactada').prepend(t);
-						pregunta.val('');
-						//mostrar mensaje
-					}
-				}
-			})
+function abrirModal(){
+	$('#modalPregunta').modal('show')
+}
+
+function enviarPregunta(){
+	var pregunta = $('#pregunta');
+	$.ajax({
+		url: '{% url 'preguntanueva' %}',
+		type: 'POST',
+		dataType: 'json',
+		data:{
+			pregunta: pregunta.val(),
+			habilidad: $('#habilidad').val(),
+		},
+		success: function(json){
+			if(json.estado == 1){
+				var source   = $("#pregunta-template").html();
+				var template = Handlebars.compile(source);
+				t = template(json);
+				$('#pregunta-redactada').prepend(t);
+				pregunta.val('');
+				//mostrar mensaje
+			}
 		}
 	})
+	document.getElementById("formularioPregunta_js").reset()
+}
+})
 </script>
 {% endblock scripts %}
