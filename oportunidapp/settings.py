@@ -50,6 +50,8 @@ MIDDLEWARE_CLASSES = (
 EMAIL_BACKEND = 'djrill.mail.backends.djrill.DjrillBackend'
 
 MANDRILL_API_KEY = 'Fj_DwFYGpE5IXMS4lua_Hg'
+
+DEFAULT_FROM_EMAIL = "sistematizaref@gmail.com"
 # SMTP Settings Backend
 
 

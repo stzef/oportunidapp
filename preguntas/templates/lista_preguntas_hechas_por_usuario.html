@@ -1,4 +1,5 @@
 {% extends "template.html" %}
+{% load staticfiles %}
 <!--
 
 CONTEXTO!
@@ -35,6 +36,7 @@ CONTEXTO!
 		<section class="row preguntas tab-pane active" id="respondidas">
 			{% for preguntaRespondida in preguntasRespondidas  %}
 			<article class="pregunta">
+				<p class="textoIntroductorioPregunta"><b>{{preguntaRespondida.ofertante.usuario.get_full_name}}</b> ha respondido tu pregunta en la habilidad <b>{{preguntaRespondida.habilidad}} </b>.</p>
 				<div class="contenedorPregunta">
 					<p class="preguntaEspecifica">
 						<span class="glyphicon glyphicon-comment"></span>
@@ -42,7 +44,7 @@ CONTEXTO!
 					</p>
 				</div>
 				<div class="contenedorPespuesta">
-					<p class="textoIntroductorioPregunta">Le has preguntadoa a <b>{{preguntaRespondida.ofertante.usuario.get_full_name}}</b> en la habilidad <b>{{preguntaRespondida.habilidad}} </b>:</p>
+
 					<span class="respuesta glyphicon glyphicon-check"></span>
 					<p class="repuestaEspecifica">
 						{{preguntaRespondida.respuesta}}

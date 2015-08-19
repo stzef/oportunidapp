@@ -62,7 +62,7 @@ class listarPreguntasHechasPorUsuario(LoginRequiredMixin,ListView):
 	def get_queryset(self):
 
 		perfil = perfilUsuarioModel.objects.get(usuario=self.request.user)
-		queryset = self.model.objects.filter(solicitante=perfil).exclude(respuesta=None).order_by('-fecha')
+		queryset = self.model.objects.filter(solicitante=perfil).exclude(respuesta=None).order_by('-respuesta__fecha')
 
 		return queryset
 
@@ -89,7 +89,7 @@ class listarPreguntasRecibidasPorUsuario(ListView):
 
 	def get_queryset(self):
 		perfil = perfilUsuarioModel.objects.get(usuario=self.request.user)
-		queryset = self.model.objects.filter(ofertante=perfil).exclude(respuesta=None).order_by('-fecha')
+		queryset = self.model.objects.filter(ofertante=perfil).exclude(respuesta=None).order_by('-respuesta__fecha')
 
 		return queryset
 

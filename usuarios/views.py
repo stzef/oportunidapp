@@ -37,7 +37,7 @@ class registroView(FormView):
 	form_class = registroForm
 	template_name = 'signup.html'
 	success_url = '/ingresar/'
-	
+
 	def form_valid(self,form):
 		form.save()
 		self.enviar_email_registro(form.cleaned_data.get("email"))
