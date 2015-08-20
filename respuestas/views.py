@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 from django.shortcuts import render 
 from django.http import JsonResponse
 
@@ -15,15 +16,21 @@ def crearRespuesta(request):
 		respuesta   = request.POST['respuesta']
 		pregunta = get_or_none(preguntasModel, id=pregunta_id)
 
-		nuevaRespuesta = respuestasModel(respuesta=respuesta)
-		nuevaRespuesta.save()
-
 		if pregunta is not None:
+			nuevaRespuesta = respuestasModel(respuesta=respuesta)
+			nuevaRespuesta.save()
+
 			pregunta.respuesta = nuevaRespuesta
 			pregunta.save(update_fields=['respuesta'])
 
-		mensaje = 'Listo su mensaje a sido enviado.'
+			nuevaRespuesta.enviar_respuesta_email(pregunta.solicitante.usuario)
 
+
+			mensaje = 'Listo su mensaje a sido enviado.'
+
+		else:
+
+			mensaje = 'Lo sentimos no puede responder por el momento, inténtelo mas tarde.'
 
 		return JsonResponse(
 			{

@@ -22,14 +22,14 @@
 				<a href="{% url 'preguntasRecibidas' %}">
 					Te han preguntado 
 				</a>
-			<span class="badge">5</span>
+			<span class="badge">{{preguntas_para_usuario}}</span>
 		</li>
 		<li>
 			<span class="glyphicon glyphicon-circle-arrow-left colorRojo "></span>
 			<a href="{% url 'preguntasHechas' %}">
 				Tus preguntas
 			</a>
-			<span class="badge">5</span>
+			<span class="badge">{{preguntas_hechas_por_usuario}}</span>
 		</li>
 	</ul>
 	<p class="bloqueSeparador"></p>
@@ -37,8 +37,8 @@
 	<li class="datosPrincipales"> <a href="{% url 'habilidades' %}"><p><span  class="glyphicon glyphicon-heart-empty colorAzul "></span>Habilidades</a></p></li>
 
 	<ul class="datosInformativosMiCuenta">
-		<li> <span class="glyphicon glyphicon-play colorVerde "></span>Activas <span class="badge">5</span></li>
-		<li> <span class="glyphicon glyphicon-stop colorRojo" ></span>Inactivas <span class="badge">2</span></li>
+		<li> <span class="glyphicon glyphicon-play colorVerde "></span>Activas <span class="badge">{{habilidades_activas}}</span></li>
+		<li> <span class="glyphicon glyphicon-stop colorRojo" ></span>Inactivas <span class="badge">{{habilidades_inactivas}}</span></li>
 	</ul>
 	<p class="bloqueSeparador"></p>
 

@@ -121,12 +121,12 @@ class SetPasswordForm(forms.Form):
 	}
 	new_password1 = forms.CharField(
 		label=_("New password"),
-		widget=forms.PasswordInput(attrs={'required': 'required', 'class':'form-control'})
+		widget=forms.PasswordInput(attrs={'required': '', 'class':'form-control'})
 	)
 
 	new_password2 = forms.CharField(
 		label=_("New password confirmation"),
-		widget=forms.PasswordInput(attrs={'required': 'required', 'class':'form-control'})
+		widget=forms.PasswordInput(attrs={'required': '', 'class':'form-control'})
 	)
 
 	def __init__(self, user, *args, **kwargs):

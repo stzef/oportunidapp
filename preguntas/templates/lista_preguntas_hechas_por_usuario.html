@@ -17,13 +17,13 @@ CONTEXTO!
 <div class="row space-tab">
 	<ul class="nav nav-tabs" id="tabs" data-tabs="tabs">
 		<li role="presentation" class="active">
-			<a href="#respondidas" data-toggle="tab">
-				Respondidas
+			<a href="#sin-respuesta" data-toggle="tab">
+				No respondidas
 			</a>
 		</li>
 		<li role="presentation" class="">
-			<a href="#sin-respuesta" data-toggle="tab">
-				No respondidas
+			<a href="#respondidas" data-toggle="tab">
+				Respondidas
 			</a>
 		</li>
 	</ul>
@@ -33,7 +33,7 @@ CONTEXTO!
 <div class="row">
 	<div class="tab-content">
 		<!-- Contenedor PREGUNTAS RESPONDIDAS -->
-		<section class="row preguntas tab-pane active" id="respondidas">
+		<section class="row preguntas tab-pane " id="respondidas">
 			{% for preguntaRespondida in preguntasRespondidas  %}
 			<article class="pregunta">
 				<p class="textoIntroductorioPregunta"><b>{{preguntaRespondida.ofertante.usuario.get_full_name}}</b> ha respondido tu pregunta en la habilidad <b>{{preguntaRespondida.habilidad}} </b>.</p>
@@ -65,7 +65,7 @@ CONTEXTO!
 
 		<!-- Contenedor PREGUNTAS SIN RESPONDER -->
 
-		<section class="row preguntas tab-pane" id="sin-respuesta">
+		<section class="row preguntas tab-pane active" id="sin-respuesta">
 			{% for preguntaNoRespondida in preguntasNoRespondidas  %}
 			<article class="pregunta">
 				<div class="contenedorPregunta">
