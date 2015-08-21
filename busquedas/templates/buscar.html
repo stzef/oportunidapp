@@ -10,15 +10,20 @@
 {% endblock %}
 
 {% block content %}
+
 <div class="contentWidth">
+
 	<div class="row text-center box">
+
 		<h2>Encuentra la persona correcta para tu trabajo</h2>
+
 		<div class=" formBusqueda input-group">
-			<input id="busqueda" name="busqueda" type="search" class="form-control" placeholder="¿Que Estas Buscando?" autocomplete="off">
+			<input id="busqueda" name="busqueda" type="search" class="form-control" placeholder="¿Que Estas Buscando?" autocomplete="off" required>
 			<span class="input-group-btn">
 				<button class="btn btn-block btn-find" id="buscar" type="button">Buscar</button>
 			</span>
 		</div>
+
 		<span class="divider"></span>
 
 		<div class="text-left">
@@ -33,8 +38,11 @@
 				{% endfor %}
 			</ul>
 		</div>
+
 		<section class="ofertasBusqueda">
+
 			<h2 class="text-left"><b>Ofertas</b></h2>
+
 			<div class="col-xs-12 col-sm-6 col-md-3">
 				<div class="sugerencia">
 					<a class="hoverHabilidad" href="#">
@@ -51,6 +59,7 @@
 					</a>
 				</div>
 			</div>
+
 			<div class="col-xs-12 col-sm-6 col-md-3">
 				<div class="sugerencia">
 					<a class="hoverHabilidad" href="#">
@@ -67,6 +76,7 @@
 					</a>
 				</div>
 			</div>
+
 			<div class="col-xs-12 col-sm-6 col-md-3">
 				<div class="sugerencia">
 					<a class="hoverHabilidad" href="#">
@@ -83,6 +93,7 @@
 					</a>
 				</div>
 			</div>
+
 			<div class="col-xs-12 col-sm-6 col-md-3">
 				<div class="sugerencia">
 					<a class="hoverHabilidad" href="#">
@@ -102,9 +113,11 @@
 		</section>
 	</div>
 </div>
+
 {% endblock %}
+
 {% block scripts %}
-<script >
+<script>
 	$(function(){
 			//input de busqueda en focus
 			$('#busqueda').focus();

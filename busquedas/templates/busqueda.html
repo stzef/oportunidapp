@@ -1,6 +1,8 @@
 {% extends "index.html" %}
+
 {% load staticfiles %}
 {% load humanize %}
+
 {% block head %}
 <title>Buscar | OportunidApp</title>
 
@@ -10,7 +12,9 @@
 	}
 </style>
 {% endblock %}
+
 {% block content %}
+
 <div class="contentWidth">
 	<div >
 		<div >
@@ -73,9 +77,9 @@
 						<div class="panel">
 							<ul class="text-left padding">
 								{% if todasCategorias %}
-									{% for categoria  in todasCategorias %}
-										<li><a href="#"><p>{{ categoria }}</p></a></li>
-									{% endfor %}
+								{% for categoria  in todasCategorias %}
+								<li><a href="#"><p>{{ categoria }}</p></a></li>
+								{% endfor %}
 								{% endif %}
 							</ul>
 						</div>
@@ -87,6 +91,7 @@
 			</div>
 		</div>
 		<!-- Modal -->
+
 		<div class="container div-result">
 			<div>
 				<div class="col-md-3">
@@ -121,6 +126,7 @@
 					</div>
 				</div>
 				<div class="col-md-9">
+
 					<div class="row">
 						<div id = "resultados">
 							{% if habilidades %}
@@ -182,15 +188,8 @@
 							<p>Quieres sugerir una habilidad</p>
 							{% endif %}
 						</div>
-
-
-
-
-
-
-
-
 					</div>
+
 					<div class="row paginador">
 						{% if is_paginated %}
 						<div class="pagination">
@@ -213,8 +212,11 @@
 		</div>
 	</div>
 </div>
+
 {% endblock %}
+
 {% block scripts %}
+
 <script>
 	$(function(){
 			//input de busqueda en focus
@@ -260,4 +262,5 @@
 			});
 		})
 </script>
+
 {% endblock %}
