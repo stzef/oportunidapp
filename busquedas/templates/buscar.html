@@ -17,12 +17,12 @@
 
 		<h2>Encuentra la persona correcta para tu trabajo</h2>
 
-		<div class=" formBusqueda input-group">
-			<input id="busqueda" name="busqueda" type="search" class="form-control" placeholder="¿Que Estas Buscando?" autocomplete="off">
+		<form id="formBusquedaHabilidad" class=" formBusqueda input-group">
+			<input id="busqueda" name="busqueda" type="search" class="form-control" placeholder="¿Que Estas Buscando?" autocomplete="off" required />
 			<span class="input-group-btn">
-				<button class="btn btn-block btn-find" id="buscar" type="button">Buscar</button>
+				<input class="btn btn-block btn-find" id="buscar" type="submit" value="Buscar" />
 			</span>
-		</div>
+		</form>
 
 		<span class="divider"></span>
 
@@ -119,29 +119,15 @@
 {% block scripts %}
 <script>
 	$(function(){
-			//input de busqueda en focus
-			$('#busqueda').focus();
 
-			//Funcion para evento click en boton 'buscar'
-			$('#buscar').click(function() {
-				palabraBuscada = $('#busqueda').get(0);
+		$('#formBusquedaHabilidad').submit(function(e) {
+			e.preventDefault()
+			palabraBuscada = $('#busqueda').get(0);
 
-				//remplazando caracteres en blanco por '+'
-				palabraBuscada = palabraBuscada.value;
-				window.location = '/b/pl/'+palabraBuscada;
-			});
-
-			//Funcion para evento tecla ENTER
-			$('#busqueda').keyup(function(e){
-				if (e.keyCode == 13){
-					palabraBuscada = $('#busqueda').get(0);
-
-					//remplazando caracteres en blanco por '+'
-					palabraBuscada = palabraBuscada.value;
-					window.location ='/b/pl/'+palabraBuscada;
-				}
-			});
+			palabraBuscada = palabraBuscada.value;
+			window.location = '/b/pl/'+palabraBuscada;
 		})
+	})
 </script>
 {% endblock %}
 
