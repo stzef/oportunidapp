@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 from django.shortcuts import render, redirect, render_to_response 
 from django.contrib.auth import login, logout, update_session_auth_hash, authenticate
 from django.contrib.auth.models import User
@@ -37,7 +38,7 @@ class registroView(FormView):
 	form_class = registroForm
 	template_name = 'signup.html'
 	success_url = '/ingresar/'
-	
+
 	def form_valid(self,form):
 		form.save()
 		self.enviar_email_registro(form.cleaned_data.get("email"))
@@ -199,6 +200,9 @@ def login_ajax(request):
 					)
 		else:
 			return JsonResponse(
-						{'estado': 1, 'msg':'Este usuario no esta registrado'}, 
+						{
+							'estado': 1, 
+							'msg': u'Por favor, introduce un nombre de usuario y clave correctos. Observa que ambos campos pueden ser sensibles a mayúsculas'
+						}, 
 						safe=False,
 					)

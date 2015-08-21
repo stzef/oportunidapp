@@ -5,6 +5,9 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from models import perfilUsuarioModel
 from django.core.exceptions import ValidationError
+from django.utils.translation import ugettext, ugettext_lazy as _
+
+
 
 class loginForm(AuthenticationForm):
 	username = forms.CharField(error_messages={'required': 'Ingresa tu Usuario, '},widget=forms.TextInput(attrs={'class':'form-control ','placeholder':'nombre de usuario','autofocus':''}))
@@ -108,3 +111,42 @@ class passForm(forms.Form):
 	#password_old = forms.CharField(max_length=20,required=True,widget=forms.PasswordInput(attrs={'required': 'required', 'placeholder':'Ingresa tu contraseña actual', 'class':'form-control col-md-11'}),)
 	password_new = forms.CharField(max_length=20,required=True,widget=forms.PasswordInput(attrs={'required': 'required', 'placeholder':'Ingresa tu contraseña nueva', 'class':'form-control col-md-11'}),)
 	password_confirm = forms.CharField(max_length=20,required=True,widget=forms.PasswordInput(attrs={'required': 'required', 'placeholder':'Confirma tu contraseña', 'class':'form-control col-md-11'}),)
+
+
+
+class SetPasswordForm(forms.Form):
+
+	error_messages = {
+		'password_mismatch': _("The two password fields didn't match."),
+	}
+	new_password1 = forms.CharField(
+		label=_("New password"),
+		widget=forms.PasswordInput(attrs={'required': '', 'class':'form-control'})
+	)
+
+	new_password2 = forms.CharField(
+		label=_("New password confirmation"),
+		widget=forms.PasswordInput(attrs={'required': '', 'class':'form-control'})
+	)
+
+	def __init__(self, user, *args, **kwargs):
+		self.user = user
+		super(SetPasswordForm, self).__init__(*args, **kwargs)
+
+	def clean_new_password2(self):
+		password1 = self.cleaned_data.get('new_password1')
+		password2 = self.cleaned_data.get('new_password2')
+		if password1 and password2:
+			if password1 != password2:
+				raise forms.ValidationError(
+					self.error_messages['password_mismatch'],
+					code='password_mismatch',
+				)
+		return password2
+
+	def save(self, commit=True):
+		self.user.set_password(self.cleaned_data['new_password1'])
+		if commit:
+			self.user.save()
+		return self.user
+

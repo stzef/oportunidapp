@@ -188,7 +188,7 @@ class busquedasPorPalabraLista(ListView):
 	def get_queryset(self):
 		busqueda = self.kwargs['busqueda']
 		if busqueda is not None:
-			queryset = habilidadesModel.objects.all()
+			queryset = habilidadesModel.objects.filter(estado=True)
 			queryset = self.query_por_palabra(queryset, busqueda)
 
 			ordering = self.get_ordering()

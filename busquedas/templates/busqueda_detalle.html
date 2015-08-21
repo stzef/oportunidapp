@@ -83,8 +83,8 @@
 						<input autofocus class="usuario form-control" type="text" id="usuario" name="usuario" placeholder="Usuario" required>
 						<input class="contrasena form-control" type="password" id="password" name="password" placeholder="Contraseña" required>
 						<div class="text-center">
-							<a href="/registro/" class="need-help">No tienes cuenta? <span class="blue-color">Registrate aqui!</span></a><br>
-							<a href="#" class="need-help">olvido su contraseña?</a>
+							<a href="{% url 'ingresar' %}" class="need-help">No tienes cuenta? <span class="blue-color">Registrate aqui!</span></a><br>
+							<a href="{% url 'recuperar-cuenta' %}" class="need-help" target="_blank">olvido su contraseña?</a>
 						</div>
 					</div>
 					<div class="modal-footer">
@@ -113,7 +113,6 @@
 				{% for pregunta in preguntas %}
 				<article class="pregunta">
 					<div class="contenedorPregunta">
-
 						<p class="preguntaEspecifica">
 							<span class="glyphicon glyphicon-comment"></span>
 							{{pregunta.pregunta}}
@@ -279,10 +278,10 @@ $('#formularioLogin').on('submit', function(event){
 		success: function(json){
 			if(json.estado == 0)
 				// hace algo si usuario no esta activo
-			alert('Este usuario no esta activo!')
+				alert(json.msg)
 			else if(json.estado == 1)
 				// hace algo si usuario no esta registrado
-			alert('Este usuario no esta registrado')
+				alert(json.msg)
 			else if(json.estado == 2){
 				//envia la pregunta
 				$('#modalPregunta').modal('hide')

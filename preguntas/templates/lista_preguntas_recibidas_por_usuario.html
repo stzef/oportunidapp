@@ -10,7 +10,6 @@ CONTEXTO!
 -->
 
 {% block content %}
-
 <div class="page-header">
 	<h2>Te han preguntado</h2>
 </div>
@@ -19,13 +18,13 @@ CONTEXTO!
 <div class="row space-tab">
 	<ul class="nav nav-tabs" id="tabs" data-tabs="tabs">
 		<li role="presentation" class="active">
-			<a href="#respondidas" data-toggle="tab">
-				Respondidas
+			<a href="#sin-respuesta" data-toggle="tab">
+				Sin responder
 			</a>
 		</li>
 		<li role="presentation" class="">
-			<a href="#sin-respuesta" data-toggle="tab">
-				Sin responder
+			<a href="#respondidas" data-toggle="tab">
+				Respondidas
 			</a>
 		</li>
 	</ul>
@@ -34,11 +33,7 @@ CONTEXTO!
 
 <div class="row">
 	<div class="tab-content">
-
-
-
-		<section class="tab-pane active" id="respondidas">
-
+		<section class="tab-pane " id="respondidas">
 			{% for preguntaRespondida in preguntasRespondidas  %}
 			<article class="pregunta">
 				<div class="contenedorPregunta">
@@ -66,8 +61,7 @@ CONTEXTO!
 
 		</section>
 
-		<section class="tab-pane" id="sin-respuesta">
-
+		<section class="tab-pane active" id="sin-respuesta">
 			<!-- Modal -->
 			<div data-modal class="modal fade" id="" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 				<div class="modal-dialog" role="document">
@@ -122,9 +116,6 @@ CONTEXTO!
 		</section>
 	</div>
 </div>
-
-
-
 {% endblock content %}
 {% block scripts %}
 <script src="{% static 'jsapp/csrf_load.js' %}"></script>
@@ -157,8 +148,6 @@ CONTEXTO!
 
 		})
 	});
-
-
 
 	$('#responder-form').on('submit', function(e){
 		document.getElementById("botonResponderPreguntaModal").classList.add("displayNone")
