@@ -1,9 +1,14 @@
 from django.db import models
 from django.core.mail import EmailMessage
 
+#from preguntas.models import preguntasModel
+
 class respuestasModel(models.Model):
+
+	#pregunta = models.OneToOneField(preguntasModel)
 	respuesta = models.CharField(max_length=1000)
 	fecha = models.DateTimeField(auto_now=True)
+
 
 	def enviar_respuesta_email(self, usuario):
 		msg = EmailMessage(
@@ -18,9 +23,10 @@ class respuestasModel(models.Model):
 		msg.send()
 
 
-
 	def __str__(self):
 		return u'%s' % (self.respuesta)
 
 	def __unicode__(self):
 		return u'%s' % (self.respuesta)
+
+

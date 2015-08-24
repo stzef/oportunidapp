@@ -10,6 +10,7 @@ from django.views.generic.edit import UpdateView
 from django.template import RequestContext
 from django.conf import settings
 from django.core.mail import EmailMessage
+from django.template.loader import render_to_string
 
 import os
 import json
@@ -41,22 +42,43 @@ class registroView(FormView):
 
 	def form_valid(self,form):
 		form.save()
-		self.enviar_email_registro(form.cleaned_data.get("email"))
+		self.enviar_email_registro(form)
 		return HttpResponseRedirect(self.get_success_url())
 
 	def form_invalid(self, form):
 		return self.render_to_response(self.get_context_data(form=form))
 
-	def enviar_email_registro(self, usuario_email):
+	def enviar_email_registro(self, form):
+
+		#obteniendo datos del formulario
+		emailDeUsuario  = form.cleaned_data.get("email")
+		nombreDeUsuario = form.cleaned_data.get("name")
+		apellidoDeUsuario = form.cleaned_data.get("lastname")
+
+		#datos para renderizar el template de email
+		contextoDeTemplateParaEmail = {
+			'usuario' : nombreDeUsuario+' '+apellidoDeUsuario,
+			'descripcion' : 'Te damos la bienvenida a oportunidapp, esperamos que puedas obtener gran provecho de esta herramienta',
+		}
+
+		#retorna el texto de el template renderizado
+		template = render_to_string('registro_email_template.html',contextoDeTemplateParaEmail)
+
+		#creando mensaje
 		msg = EmailMessage(
 			subject='Bienvenido',
 			from_email='sistematizaref <sistematizaref@gmail.com>',
-			to = [usuario_email],
+			to = [emailDeUsuario],
 		)
+
+		#template en mailchimp para el mensaje
 		msg.template_name = 'Bienvenida'
+
+		#contenido del template en mailchimp
 		msg.template_content = {
-			'std_content00' : '<h2>Bienvenido a oportunidapp %s </h2>' % usuario_email,
+			'std_content00' : template,
 		}
+
 		msg.send()
 
 

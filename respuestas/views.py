@@ -8,8 +8,6 @@ from preguntas.models import preguntasModel
 from app.utilidades import get_or_none
 
 
-
-
 def crearRespuesta(request):
 	if request.is_ajax():
 		pregunta_id = request.POST['pregunta']
@@ -24,7 +22,6 @@ def crearRespuesta(request):
 			pregunta.save(update_fields=['respuesta'])
 
 			nuevaRespuesta.enviar_respuesta_email(pregunta.solicitante.usuario)
-
 
 			mensaje = 'Listo su mensaje a sido enviado.'
 

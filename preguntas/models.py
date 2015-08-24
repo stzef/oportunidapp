@@ -1,9 +1,10 @@
 from django.db import models
 from django.core.mail import EmailMessage
-
+from django.template.loader import render_to_string
 
 from usuarios.models import perfilUsuarioModel
 from habilidades.models import habilidadesModel
+
 from respuestas.models import respuestasModel
 
 
@@ -18,20 +19,33 @@ class preguntasModel(models.Model):
 	solicitante = models.ForeignKey(perfilUsuarioModel, related_name='solicitante')
 
 	def enviar_pregunta_email(self):
+
+		#datos para renderizar el template de email
+		contextoDeTemplateParaEmail = {
+			'solicitante' : self.solicitante.usuario.get_full_name(),
+			'pregunta' : self.pregunta,
+		}
+
+		template = render_to_string('pregunta_email_template.html', contextoDeTemplateParaEmail)
+
+		#creando mensaje
 		msg = EmailMessage(
 			subject = 'Oportunidapp (pregunta)',
 			from_email = 'sistematizaref <sistematizaref@gmail.com>',
 			to = [self.ofertante.usuario.email]
 		)
+
 		msg.template_name = 'Bienvenida'
 		msg.template_content = {
-			'std_content00' : '<h2>%s te pregunta,<br> %s </h2>' % (self.solicitante.usuario.get_full_name(),self.pregunta),
+			'std_content00' : template,
 		}
-		msg.send()
 
+		msg.send()
 
 	def __str__(self):
 		return u'%s' % (self.pregunta)
 
 	def __unicode__(self):
 		return u'%s' % (self.categoria)
+
+
