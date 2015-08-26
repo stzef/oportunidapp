@@ -1,0 +1,1257 @@
+commit 55632201333521214fc3135cae796390da0db573
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Thu Aug 20 11:45:42 2015 -0500
+
+    miCuenta template
+
+commit 4be8a1a1d611f11c87ba54d7bac233714bec2c41
+Merge: e150ab9 46d5564
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Wed Aug 19 11:39:54 2015 -0500
+
+    pull 19 agosto
+
+commit e150ab95dfa67cf04316e6a9a97c3789a866c1f4
+Merge: 0c630fa 4dd76a8
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Wed Aug 19 11:34:07 2015 -0500
+
+    funcionalidad recuperacion de contraseña
+
+commit 46d55643ca1ce5527ddd60ad157be8c4edd0886b
+Author: carlosturnerbenites <carlosturnerbenites@gmail.com>
+Date:   Tue Aug 18 08:33:49 2015 -0500
+
+    arreglo preguntas y respuestas vacias y footer en templates de busqueda e inicio
+
+commit 0c630fac66c58532f4c7f9bc903710b5ad08fef7
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Sat Aug 15 16:21:01 2015 -0500
+
+    pull 15 agosto
+
+commit 4dd76a85c297f2488205a4584eaf76e3e6488307
+Author: carlosturnerbenites <carlosturnerbenites@gmail.com>
+Date:   Fri Aug 14 15:08:00 2015 -0500
+
+    pequeño arreglo a modal
+
+commit 651b1b67a47a4939283f8ce10ad4185c4d83f451
+Author: carlosturnerbenites <carlosturnerbenites@gmail.com>
+Date:   Fri Aug 14 10:47:25 2015 -0500
+
+    pulir evento submit el formulario de respuesta del modal
+
+commit ebd19394c412c797e1622c16861046f9882d8fb2
+Author: carlosturnerbenites <carlosturnerbenites@gmail.com>
+Date:   Fri Aug 14 09:06:05 2015 -0500
+
+    arreglo de tabs y textos de preguntas respondidas y no respondidas
+
+commit 551825c83beaff872298b8a2557caf1ba47d58a5
+Merge: 7d0b29c 1c04b8d
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Fri Aug 14 07:58:15 2015 -0500
+
+    funcion de respuestas correccion
+
+commit 7d0b29c157f96b05eea20924b6783d3d4353759a
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Fri Aug 14 07:45:03 2015 -0500
+
+    funcion para crear respuestas
+
+commit 1c04b8d7afa802e8d5d641cf2574337df5c72bc0
+Author: carlosturnerbenites <carlosturnerbenites@gmail.com>
+Date:   Thu Aug 13 11:43:17 2015 -0500
+
+    agregar informacion sobre las preguntas
+
+commit 50a1d0940f5452ce9ccd6eb80f9bfb2961ae8398
+Merge: 20c66d6 029d1a7
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Thu Aug 13 11:02:32 2015 -0500
+
+    pull respuestas
+
+commit 20c66d63c77bef35473f7b031810419aa57cfdc8
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Thu Aug 13 11:01:04 2015 -0500
+
+    crear respuesta
+
+commit 029d1a7828ad355e859f39791078c94b0e0d75c2
+Author: carlosturnerbenites <carlosturnerbenites@gmail.com>
+Date:   Thu Aug 13 10:52:29 2015 -0500
+
+    maqueta cion de preguntas y funcionalidad de responder pregunta(TERMINADO)
+
+commit f0d93b7db58c4446ea4130424094df84955770c7
+Author: carlosturnerbenites <carlosturnerbenites@gmail.com>
+Date:   Thu Aug 13 10:29:58 2015 -0500
+
+    maqueta cion de preguntas y funcionalidad de responder pregunta(no terminada)
+
+commit c2b4b7544b8c20c7651aafd6cc102ee06c76e428
+Merge: 5ed9232 bcddc41
+Author: carlosturnerbenites <carlosturnerbenites@gmail.com>
+Date:   Thu Aug 13 08:44:02 2015 -0500
+
+    preguntas y respuestas
+
+commit 5ed9232e85d8825bbb04b1a7eeb917f73c224967
+Author: carlosturnerbenites <carlosturnerbenites@gmail.com>
+Date:   Thu Aug 13 08:39:23 2015 -0500
+
+    commit de apoyo(not tiene cambios significativos)
+
+commit c7d4140fb9c3bd44ca86893dfe0ad8b92f1f7138
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Thu Aug 13 08:38:39 2015 -0500
+
+    validar que usuario existe en perfilModel al logearse
+
+commit bcddc4120740116f984a4bf9e7580e55d409e411
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Thu Aug 13 07:54:38 2015 -0500
+
+    requerimientos
+
+commit 3436ec4d27a9ed53274242461d6139481229e55f
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Thu Aug 13 07:49:15 2015 -0500
+
+    configuracion produccion
+
+commit 5b003cfd8a6ee333d32aa0bd0aa779b941d7592a
+Merge: 9da66d6 d9560f5
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Thu Aug 13 07:34:01 2015 -0500
+
+    lista de preguntas
+
+commit 9da66d6a84f2d0460ca5bff8048b5b1fe974b749
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Wed Aug 12 10:01:31 2015 -0500
+
+    pull 12 agosto
+
+commit d9560f5cb1478047f5f5cc8ab8a2ddfe0ff4102e
+Author: carlosturnerbenites <carlosturnerbenites@gmail.com>
+Date:   Tue Aug 11 11:39:11 2015 -0500
+
+    arreglo de menu y dropdown
+
+commit eec198cfca208e8a4d95384cc2b01e0e9ca92b15
+Author: carlosturnerbenites <carlosturnerbenites@gmail.com>
+Date:   Tue Aug 11 10:37:27 2015 -0500
+
+    mi cuenta
+
+commit 88e8b8b3519da2a3c32988de3d8a10471090718c
+Merge: 496a005 67bffea
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Tue Jul 28 15:08:17 2015 -0500
+
+    Merge https://github.com/stzef/oportunidapp
+
+commit 496a005632cc072cc159ad0c2641603017b2039c
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Tue Jul 28 15:07:56 2015 -0500
+
+    email de notificacion de pregunta
+
+commit 67bffea163cc339cbb431a27559567f713bc8a5a
+Author: carlosturnerbenites <carlosturnerbenites@gmail.com>
+Date:   Mon Jul 27 17:15:28 2015 -0500
+
+    maquetacion de template Mi Cuenta y arreglo de footer
+
+commit 23c36c9b5ace3c03942c8237df01d66b9080e6c0
+Merge: 8fa5143 742c0dc
+Author: carlosturnerbenites <carlosturnerbenites@gmail.com>
+Date:   Mon Jul 27 14:45:49 2015 -0500
+
+    estadisticas
+
+commit 742c0dc96276962330e2e3f9066c62410909efd9
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Mon Jul 27 14:30:34 2015 -0500
+
+    Mi cuenta template
+
+commit 8fa5143464ae075f9a19851eb2b524114f118bf0
+Merge: e24a753 a663757
+Author: carlosturnerbenites <carlosturnerbenites@gmail.com>
+Date:   Mon Jul 27 14:28:50 2015 -0500
+
+    Estilos busquedas
+
+commit e24a753c1fb189b9739c1b11d5d848d334e53d6e
+Author: carlosturnerbenites <carlosturnerbenites@gmail.com>
+Date:   Sat Jul 25 09:53:51 2015 -0500
+
+    busqueda por palabra sin categoria
+
+commit a6637577eefffcbbec9610bc8f624f0cb93ee3c3
+Merge: dee0283 2541435
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Sat Jul 25 09:47:58 2015 -0500
+
+    Merge branch 'master' of https://github.com/stzef/oportunidapp
+
+commit dee02837e662cb4c40926c87cf50455f5533bb1b
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Sat Jul 25 09:42:34 2015 -0500
+
+    repuestas de preguntas
+
+commit 254143549bb88ab2f5fe6ef431166bcbaf5cdbfb
+Author: carlosturnerbenites <carlosturnerbenites@gmail.com>
+Date:   Fri Jul 24 08:00:24 2015 -0500
+
+    Estilos del login secundario y preguntas
+
+commit 5d90db98f39712ea0e0c2192cad7ad9dbe5d76d3
+Merge: 4b5ee79 21d0d2b
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Thu Jul 23 07:38:56 2015 -0500
+
+    Merge https://github.com/stzef/oportunidapp
+
+commit 4b5ee79f4ae2e6e762d549ffa046ccc2260041cf
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Thu Jul 23 07:38:25 2015 -0500
+
+    cambio de urls
+
+commit 21d0d2b343bcbd8ad48e805b4fc8ef5398e81177
+Author: carlosturnerbenites <carlosturnerbenites@gmail.com>
+Date:   Wed Jul 22 10:44:22 2015 -0500
+
+    modal para categorias y maquetacion de busquedas por paralabra
+
+commit 4cf759524c629b83a62900b3bd3936647a78b507
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Wed Jul 22 09:15:40 2015 -0500
+
+    busqueda por palabras
+
+commit 06f7c4e26145d6a7f833388abef8678c62415d4d
+Merge: dc986c7 a6c2280
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Tue Jul 21 08:05:43 2015 -0500
+
+    Merge https://github.com/stzef/oportunidapp
+
+commit dc986c7af608f07f5ebc5807550fef927f480e74
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Tue Jul 21 08:05:05 2015 -0500
+
+    busquedas por palabras listview
+
+commit a6c2280e09b5d4a55cb87a0f416f36d374ab6628
+Author: carlosturnerbenites <carlosturnerbenites@gmail.com>
+Date:   Sat Jul 18 13:05:39 2015 -0500
+
+    retoques
+
+commit 8225a4e35f3e29cc8c9ec1da039a3b8ee338e3ae
+Author: carlosturnerbenites <carlosturnerbenites@gmail.com>
+Date:   Sat Jul 18 11:52:40 2015 -0500
+
+    Mejora de opciones de habilidad y de formulario de pregntas
+
+commit c34b4c3105fd5657f81f4b849c5271ecd1f8556c
+Author: carlosturnerbenites <carlosturnerbenites@gmail.com>
+Date:   Sat Jul 18 10:35:28 2015 -0500
+
+    eventos de formulario y accion de metrica para mostrar datos de habilidad detallada
+
+commit 820e3d0847526cdf2cb9920de6557c02606ccb9e
+Author: carlosturnerbenites <carlosturnerbenites@gmail.com>
+Date:   Fri Jul 17 11:44:45 2015 -0500
+
+    formato de precio, persepcion de posisionamiento en el menu y cambiar foto de una habilidad
+
+commit 5d7f35f58bf90adb89d62ac378883e5bad7deb91
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Fri Jul 17 10:04:05 2015 -0500
+
+    busquedas detalle
+
+commit cdfb83748347715986f29b92a369f2083505358c
+Merge: 0609b16 a03b72e
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Fri Jul 17 09:23:51 2015 -0500
+
+    pull 17 jun
+
+commit 0609b1680c6e07ba9207cda3c8f1f7bcfcedf3fb
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Fri Jul 17 07:58:00 2015 -0500
+
+    hacer preguntas
+
+commit a03b72efe65adbeb8b2ae0516c4fc0556257da5e
+Author: carlosturnerbenites <carlosturnerbenites@gmail.com>
+Date:   Fri Jul 17 07:56:37 2015 -0500
+
+    Formulario de preguntas responsive y trabajo sobre imgagenes
+
+commit 2c1e5b854eeb0c0673c54f5f2549c789141421f8
+Author: carlosturnerbenites <carlosturnerbenites@gmail.com>
+Date:   Wed Jul 15 11:55:59 2015 -0500
+
+    Agregar modal para loguearse al preguntar como anonimo
+
+commit 8c3cb26b882084448e3a7b655b69b5466b520c98
+Merge: abd5b78 87c08ee
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Wed Jul 15 10:01:10 2015 -0500
+
+    preguntas y respuestas
+
+commit abd5b7801128c22806d7fa139ef54f99f4c3fa6e
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Wed Jul 15 09:49:06 2015 -0500
+
+    preguntas en detalle de habilidad
+
+commit 87c08eed3140cebc98992205c89a267ee086073e
+Author: carlosturnerbenites <carlosturnerbenites@gmail.com>
+Date:   Wed Jul 15 08:53:23 2015 -0500
+
+    Arreglo de footer
+
+commit d9725a7edcc933e5a772d8e0e61d55fefd6c041c
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Tue Jul 14 11:37:36 2015 -0500
+
+    modulos de preguntas y respuestas
+
+commit d5a997cfa79f39f1caa03174a25ad50c6550cd97
+Author: carlosturnerbenites <carlosturnerbenites@gmail.com>
+Date:   Tue Jul 14 11:36:11 2015 -0500
+
+    Refactorizacion de frontend
+
+commit 871fa65c3f96a2a3d26d8420b7417b459c2a1625
+Author: carlosturnerbenites <carlosturnerbenites@gmail.com>
+Date:   Sat Jul 11 12:33:19 2015 -0500
+
+    Arreglo en menu e imagenes de card
+
+commit 3447823bc8d4b6370a8515d22ce24eec826364e7
+Author: carlosturnerbenites <carlosturnerbenites@gmail.com>
+Date:   Sat Jul 11 11:51:13 2015 -0500
+
+    refactorizacion de Frontend: Crad de habilidad y tag
+
+commit 9e840e46e9d1b13c828c27226afb646874d6bd7c
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Fri Jul 10 10:53:43 2015 -0500
+
+    migraciones
+
+commit feaba4da5e51ae5e654b5a5c3ecb6dacc66900a2
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Fri Jul 10 10:36:42 2015 -0500
+
+    configuracion based de datos
+
+commit 3a8821de3c661a966e1fc5f1bf5732edaa6a66e0
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Thu Jul 9 10:23:42 2015 -0500
+
+    Debug on
+
+commit c6bfc15e24323fc8702e9e4973043a2389b0dca1
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Thu Jul 9 10:16:27 2015 -0500
+
+    modelo habilidad modificada
+
+commit 817450a63a5c0e0ae5d0a5fedd75a02b4d41403e
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Thu Jul 9 10:11:13 2015 -0500
+
+    migraciones removidas
+
+commit 0d053f37cf26a8ec82c22dbd90fe8bfd24142872
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Thu Jul 9 09:53:42 2015 -0500
+
+    cambio estado modelo habilidad
+
+commit 095e7ab1c710783e029325379df90012185372de
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Thu Jul 9 09:36:52 2015 -0500
+
+    configuracion heroku
+
+commit deebd0cb4bf3f2aac4a41c37d47b43ab0a660f64
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Thu Jul 9 09:34:48 2015 -0500
+
+    archivo requerimientos
+
+commit cae366922079c8af2a61e38f0bf3e457f0b9a36e
+Author: carlosturnerbenites <carlosturnerbenites@gmail.com>
+Date:   Thu Jul 9 08:25:44 2015 -0500
+
+    Configuracion
+
+commit 2ae722559d699c0f1268bf4d6bba5a55bfced167
+Author: carlosturnerbenites <carlosturnerbenites@gmail.com>
+Date:   Tue Jul 7 11:56:17 2015 -0500
+
+    Refactorizacion de menu, tag y template.html
+
+commit 6c33fce3c7758768ee85f8697e6cc557f3bc695a
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Fri Jul 3 17:58:32 2015 -0500
+
+    informacioon modelos
+
+commit 610f7fc44962c5f52ab047952ffdeb2ec62d66ee
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Fri Jul 3 10:15:24 2015 -0500
+
+    detalle de la habilidad buscada
+
+commit 39c9d1f09458c6b12b071b8e3fd91d6d961dcca3
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Thu Jul 2 09:21:46 2015 -0500
+
+    algoritmo de busquedas
+
+commit 494513d7ab5d82544eafb45e8bedf68c630cf9c3
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Wed Jul 1 07:48:46 2015 -0500
+
+    arreglo contenedores
+
+commit bfb01416c7b3e444a5ef512da88e590f1dc439da
+Merge: 2138ca3 07ae99b
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Wed Jul 1 07:33:28 2015 -0500
+
+    estilos
+
+commit 2138ca32869203b7e3e51217f49982e676422941
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Wed Jul 1 07:30:17 2015 -0500
+
+    busquedas filtros de ordenamiento
+
+commit 07ae99b9b0625e715ed75b6ab0c019847c0cf0db
+Author: alka653 <alka65@hotmail.comm>
+Date:   Sat Jun 27 09:07:50 2015 -0500
+
+    Gray
+
+commit 3ac99a8d3068a41cfc9ffbd28a9be49ca38361d9
+Merge: 5813f32 c844e27
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Fri Jun 26 11:55:18 2015 -0500
+
+    Merge https://github.com/jsandoval86/oportunidapp
+
+commit 5813f325fb9cb9be4d8caa5a6c6ad933b6838f07
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Fri Jun 26 11:54:52 2015 -0500
+
+    pull 26 Jun 2015
+
+commit c844e2769b006b1a05ddd9d36cf916e81abcc110
+Merge: 8a0411c a3425c9
+Author: alka653 <alka65@hotmail.comm>
+Date:   Fri Jun 26 11:06:51 2015 -0500
+
+    Error 404 - 500, busquedas
+
+commit 8a0411c06c8656f82453c45f6f7dbacaab0677d5
+Author: alka653 <alka65@hotmail.comm>
+Date:   Fri Jun 26 08:05:04 2015 -0500
+
+    Bajando
+
+commit a3425c9dcd081a23321117cf16e7f014beaa180b
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Fri Jun 26 08:02:59 2015 -0500
+
+    refactoring modulo de busquedas csv
+
+commit 51b9329488263ceecb93dc726f63ca2b8e200718
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Thu Jun 25 10:44:53 2015 -0500
+
+    Refactoring modulo habildades cbv
+
+commit c6183cfa7822055fa80cf5a3b8cf8c10aca50935
+Merge: 18fb5f2 a9249b1
+Author: alka653 <alka65@hotmail.comm>
+Date:   Wed Jun 24 08:28:33 2015 -0500
+
+    Tabs Habilidades
+
+commit 18fb5f2fecb830ad39ea52673cbec09ead8da77b
+Author: alka653 <alka65@hotmail.comm>
+Date:   Wed Jun 24 08:10:19 2015 -0500
+
+    Bajando
+
+commit a9249b1094e8a713bfd91c3977c8e114ef8890e3
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Wed Jun 24 08:02:30 2015 -0500
+
+    habilidades vistas genericas
+
+commit abb1afa32c02eb52d46a011ebbe59f3691784831
+Merge: f51ae73 d07f031
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Tue Jun 23 08:15:10 2015 -0500
+
+    mejora en busquedas paginador
+
+commit f51ae737eeff72f384ca0ebce2f30566ddca8b20
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Mon Jun 22 22:39:21 2015 -0500
+
+    buscar ver mas boton
+
+commit d07f031dfaa8e1230526953806f1ead5189d8c7c
+Merge: 8dbcf59 8d18cac
+Author: alka653 <alka65@hotmail.comm>
+Date:   Mon Jun 22 10:05:56 2015 -0500
+
+    Busquedas, habilidades
+
+commit 8dbcf59b29bf7dc8604ad0774511e605e43a513e
+Author: alka653 <alka65@hotmail.comm>
+Date:   Mon Jun 22 09:09:19 2015 -0500
+
+    bajando
+
+commit 8d18cacbb8945cbab6bf8ea60aaae57187f03812
+Merge: 063c4d4 80d6f53
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Mon Jun 22 09:08:18 2015 -0500
+
+    te necesito mensajes
+
+commit 063c4d4934ebe17dfb5d0ddac7fb14803241e7ef
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Sun Jun 21 22:45:18 2015 -0500
+
+    borrar avatars
+
+commit 80d6f536e1fa17cf060c1ae0cfd8d4336744a1fc
+Author: alka653 <alka65@hotmail.comm>
+Date:   Sat Jun 20 11:08:18 2015 -0500
+
+    Foto usuario
+
+commit 8a27e851d6926b2ccb65a464a05f864c92938f8c
+Merge: aaa2b45 56ee2c6
+Author: alka653 <alka65@hotmail.comm>
+Date:   Fri Jun 19 15:06:04 2015 -0500
+
+    Upload Te ecesito
+
+commit aaa2b45391b5f52e6824ad1b1f89b6bcc9e87c7b
+Author: alka653 <alka65@hotmail.comm>
+Date:   Fri Jun 19 11:00:22 2015 -0500
+
+    Bajando
+
+commit 56ee2c6d489d0ebee2b170d79c26128f1325e140
+Merge: cb04436 32476ec
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Fri Jun 19 10:16:58 2015 -0500
+
+    mensaje te necesito
+
+commit cb044363ee6165970d98d047a6fca65c99b6fbb0
+Merge: 273fbf2 0659f85
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Thu Jun 18 14:23:36 2015 -0500
+
+    pull 18 Jun 15
+
+commit 32476ece49e62a6bf7f586eced37f07c0ef773c3
+Author: alka653 <alka65@hotmail.comm>
+Date:   Thu Jun 18 09:03:46 2015 -0500
+
+    Menu, redimencion imagen
+
+commit 0659f85829a2bf2c662eb7a33819de2b4f80655b
+Merge: c1dade8 cf2e10e
+Author: alka653 <alka65@hotmail.comm>
+Date:   Thu Jun 18 08:32:16 2015 -0500
+
+    Detalle busqueda, te necesito diseño
+
+commit 273fbf27ac72446e2c37f757f78439ccfd1c9242
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Thu Jun 18 08:28:34 2015 -0500
+
+    mensaje te necesito al usuario
+
+commit c1dade8d9a840c3827443c6402d28d722bd26720
+Author: alka653 <alka65@hotmail.comm>
+Date:   Thu Jun 18 07:40:37 2015 -0500
+
+    Bajando
+
+commit cf2e10edc4faf9db9e8901171243d608530a983c
+Merge: b1c31cd 4f45d39
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Thu Jun 18 07:37:20 2015 -0500
+
+    te necesito modulo
+
+commit b1c31cdd238c970aa5e3d411b9276ff3391ae106
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Tue Jun 16 10:56:59 2015 -0500
+
+    pull 16 Jun 2015
+
+commit 4f45d39264e5b8aabf5a3dec7e4d60750a61ebc7
+Merge: f83a0b9 a349dfe
+Author: alka653 <alka65@hotmail.comm>
+Date:   Tue Jun 16 10:55:43 2015 -0500
+
+    buscar-detalle
+
+commit f83a0b95dd007c055bdafcbce498a1368719bce7
+Author: alka653 <alka65@hotmail.comm>
+Date:   Tue Jun 16 10:51:05 2015 -0500
+
+    Bajando
+
+commit 8b162e5d38a3f86ab827f655097642417ec27be3
+Author: alka653 <alka65@hotmail.comm>
+Date:   Tue Jun 16 10:32:28 2015 -0500
+
+    Arreglos 16 jun 2015
+
+commit a349dfe7306ea6ddc0a84fb2f3834e59e6184ff7
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Tue Jun 16 10:03:18 2015 -0500
+
+    detalle de habilidad en la busqueda
+
+commit 47ef46b8e23f025f093026cdfb73e0b89bf3034e
+Merge: e1caa51 22ee2f4
+Author: alka653 <alka65@hotmail.comm>
+Date:   Tue Jun 16 08:44:36 2015 -0500
+
+    Merge branch 'master' of https://github.com/jsandoval86/oportunidapp
+
+commit e1caa515f8988b72e0c345ce53966b8a61e60b9d
+Author: alka653 <alka65@hotmail.comm>
+Date:   Tue Jun 16 08:43:14 2015 -0500
+
+    ´´we
+
+commit 22ee2f432cdbea63a8c9a678e12231f7d4fa71ae
+Merge: 809d0da b33665a
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Tue Jun 16 08:40:52 2015 -0500
+
+    Merge https://github.com/jsandoval86/oportunidapp
+
+commit 809d0dabc927b3d8936cebd5d47c95991dde96d5
+Merge: f0aadfb 2946c79
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Tue Jun 16 08:38:51 2015 -0500
+
+    slug modelos habilidades
+
+commit b33665a796360d6f8f240a057e1e3f33528b1f76
+Author: alka653 <alka65@hotmail.comm>
+Date:   Tue Jun 16 07:52:36 2015 -0500
+
+    Bajando
+
+commit f0aadfbeb2e125e06ba7138801099647dacbd8b8
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Sat Jun 13 10:40:43 2015 -0500
+
+    pull 2 13 Jun
+
+commit 2946c7921708fcc8087f21f172466f35b6c80c43
+Author: alka653 <alka65@hotmail.comm>
+Date:   Sat Jun 13 10:21:49 2015 -0500
+
+    Busquedas
+
+commit 4cffb1e74e5c9346060d63274888d840bbb6b3d1
+Merge: 1f7f21a 8078f75
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Sat Jun 13 09:46:38 2015 -0500
+
+    Merge https://github.com/jsandoval86/oportunidapp
+
+commit 1f7f21a046644b7418964e5f4468f12f69c7e27d
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Sat Jun 13 09:45:32 2015 -0500
+
+    pull paginador
+
+commit 8078f754231d1dc3bdc485cb0bff4ef2554ed17a
+Merge: 5605401 9116202
+Author: alka653 <alka65@hotmail.comm>
+Date:   Sat Jun 13 07:57:39 2015 -0500
+
+    Paginador
+
+commit 560540138e777018267659674a28f16dccc75848
+Author: alka653 <alka65@hotmail.comm>
+Date:   Sat Jun 13 07:49:52 2015 -0500
+
+    Download
+
+commit 9116202a7005d3d27b566faa64afc954cb762654
+Merge: 79002b6 8193e48
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Sat Jun 13 07:45:25 2015 -0500
+
+    Binding maqueta de busquedas con backend, tags de busqueda
+
+commit 79002b616efc3a6d34e0a65d97d04babbfb31455
+Merge: 9a84819 88582a0
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Fri Jun 12 09:42:27 2015 -0500
+
+    Pull 12 Jun
+
+commit 8193e48c0c6849e0f4f4ebcea8698990e4541de1
+Author: alka653 <alka65@hotmail.comm>
+Date:   Fri Jun 12 08:08:10 2015 -0500
+
+    Busquedas
+
+commit 9a8481929a3df9e27c7971f91ffbff74ec7522b5
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Wed Jun 10 14:39:09 2015 -0500
+
+    Pull 10 Jun
+
+commit 1a15bf0b87a8c99dfbf15b5580e0c2dd9e683622
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Wed Jun 10 14:28:42 2015 -0500
+
+    Push 10 Jun
+
+commit 88582a0706074f3c56054c904d370231bba7ecc4
+Merge: 46f5e5f b26abeb
+Author: alka653 <alka65@hotmail.comm>
+Date:   Wed Jun 10 08:47:34 2015 -0500
+
+    Busquedas
+
+commit 46f5e5f6e1f0bbb4f2a1f368bb86f968e15b7567
+Author: alka653 <alka65@hotmail.comm>
+Date:   Tue Jun 9 07:57:40 2015 -0500
+
+    Download
+
+commit b26abeb97e29d0401457170a75dbbe3c2b88332b
+Merge: 4703e37 f24e4a7
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Thu Jun 4 11:25:42 2015 -0500
+
+    Funciones de busquedas
+
+commit 4703e37fab618dc233eca0cd4db5bd046b324c2f
+Merge: b2d00c0 40deae1
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Tue Jun 2 10:59:02 2015 -0500
+
+    Pull Junio 2
+
+commit f24e4a740fb063b6d9a99e216c9efd5ab081355a
+Author: alka653 <alka65@hotmail.comm>
+Date:   Tue Jun 2 10:54:36 2015 -0500
+
+    Busquedas y habilidades
+
+commit b2d00c0cd567826b752826d773286a44f862ceed
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Mon Jun 1 08:01:54 2015 -0500
+
+    pull 1 Junio 1 - 2015
+
+commit 40deae1fd1ce5bf9cf7dc50e0e439acf527459fa
+Merge: ddff8be 9f62f7a
+Author: alka653 <alka65@hotmail.comm>
+Date:   Mon Jun 1 07:56:01 2015 -0500
+
+    Busquedas
+
+commit ddff8be3f0b5c718f8fae091428a64a969a08696
+Author: alka653 <alka65@hotmail.comm>
+Date:   Mon Jun 1 07:49:25 2015 -0500
+
+    Busquedas
+
+commit 9f62f7a65d13076408d6823bb923a53014617769
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Fri May 29 09:32:36 2015 -0500
+
+    integracion de actividades
+
+commit 1973d28b7eb6e3f021ce84bf207cd2dcc9a48520
+Merge: d83ee75 583f6f6
+Author: alka653 <alka65@hotmail.comm>
+Date:   Fri May 29 09:17:06 2015 -0500
+
+    login, registro, usuario, landing page
+
+commit d83ee7593281950a7fdd92037b64c01539109032
+Author: alka653 <alka65@hotmail.comm>
+Date:   Fri May 29 09:00:55 2015 -0500
+
+    Cambios en landing page, edicion de datos personales del usuario, presentacion de aplicacion. cambio en formulario registro y logueo
+
+commit 583f6f6a727b160da48516ff7d05d6d1d424efcf
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Fri May 29 09:00:50 2015 -0500
+
+    foto habilidades
+
+commit 949a0762669b0255197a9a6ace0ad8068a1dde8f
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Mon May 25 12:07:39 2015 -0500
+
+    refactoring edicion y activacion habilidades
+
+commit ba442d591e9b2809918b4d3a77d8ea6160c9a9a2
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Sun May 24 23:15:53 2015 -0500
+
+    edicion, activacion y desactivacion habilidades
+
+commit 8a043165e6558abee0a745a1494c2963ee258d61
+Merge: b706488 fa17df2
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Sun May 24 19:04:30 2015 -0500
+
+    modificaciones de estado de habilidades
+
+commit b706488cba2dca22968038d2dab0c0698d7b8023
+Merge: d62bf58 bb0aa06
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Tue May 19 15:29:26 2015 -0500
+
+    modificaciones en registro
+
+commit fa17df2c420b08a69f21b9f108099130c73c542f
+Author: Adriann Felipe Sanchez Sierra <alka65@hotmail.com>
+Date:   Thu May 14 12:01:20 2015 -0500
+
+    Arreglos Busquedas
+
+commit d62bf58b57ec9ad92942d63c4f66e867e42b22a3
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Wed May 13 13:16:46 2015 -0500
+
+    Busquedas por palabras
+
+commit bb0aa06d33d5f5169a5480064d9e28f21342f1ac
+Author: Adriann Felipe Sanchez Sierra <alka65@hotmail.com>
+Date:   Wed May 13 11:16:25 2015 -0500
+
+    necesito app, nav design, busquedas
+
+commit 15f25086cbee29e1fb78561f5ffbf0912c3f2e60
+Merge: fd8659a 14aefb3
+Author: Adriann Felipe Sanchez Sierra <alka65@hotmail.com>
+Date:   Tue May 12 15:43:51 2015 -0500
+
+    Merge branch 'master' of https://github.com/jsandoval86/oportunidapp
+    
+    Conflicts:
+    	db.sqlite3
+    	static/css/style.css
+
+commit fd8659a481865440bd4477c9a546c7b86acf69f9
+Author: Adriann Felipe Sanchez Sierra <alka65@hotmail.com>
+Date:   Tue May 12 08:00:35 2015 -0500
+
+    Arreglos
+
+commit 14aefb3a2d9c87a4e21284903d07eae3bd2b241b
+Merge: 71c6478 3b64144
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Mon May 11 16:02:10 2015 -0500
+
+    Busquedas por categoria
+
+commit 71c6478776752190fcb0decf65bc89688ada1916
+Merge: c0b24e7 7e9bfb1
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Tue May 5 11:23:06 2015 -0500
+
+    pull Mayo 4
+
+commit 3b64144be465d178cf6794ca8366b69dc68f8103
+Author: Adriann Felipe Sanchez Sierra <alka65@hotmail.com>
+Date:   Mon May 4 11:24:12 2015 -0500
+
+    arreglo detalle habilidad
+
+commit c0b24e770cc5f0713bcb1037111f1e81b1dd0630
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Fri May 1 19:42:00 2015 -0500
+
+    Pull requets 1 Mayo 15
+
+commit 7e9bfb14993eb65c533d658b1aaad062709e8c5b
+Merge: e7eaf53 2835fd4
+Author: Adriann Felipe Sanchez Sierra <alka65@hotmail.com>
+Date:   Thu Apr 30 10:22:29 2015 -0500
+
+    Sidebar Template, Perfil Usuario, Habilidad Individual
+    Merge branch 'master' of https://github.com/jsandoval86/oportunidapp
+    
+    Conflicts:
+    	db.sqlite3
+    	usuarios/urls.py
+
+commit e7eaf53ceda12053fd147cac106d081aaf2b31c3
+Author: Adriann Felipe Sanchez Sierra <alka65@hotmail.com>
+Date:   Tue Apr 28 10:32:17 2015 -0500
+
+    Downloading
+
+commit 2835fd4a26ad4b1455662a1ceb5fb0affa97f5fb
+Merge: 0ba3371 c2d2955
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Tue Apr 28 10:30:25 2015 -0500
+
+    template perfil
+
+commit 0ba3371b938bdf8e3ae7236c6138a14779f74f47
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Mon Apr 27 12:02:24 2015 -0500
+
+    Modificaciones en template
+
+commit c2d2955ae5c23a2884acf38490e6464feb1ae207
+Merge: b3c17df 5431f16
+Author: Adriann Felipe Sanchez Sierra <alka65@hotmail.com>
+Date:   Mon Apr 27 11:45:35 2015 -0500
+
+    Busquedas
+
+commit b3c17df431188f74cc726f09880ee2271bb1a4ca
+Author: Adriann Felipe Sanchez Sierra <alka65@hotmail.com>
+Date:   Mon Apr 27 07:46:33 2015 -0500
+
+    Descargando Habilidades
+
+commit 5431f16df81d61eaab49f484406e8205837c5d46
+Merge: 1657f52 6b1a5e2
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Mon Apr 27 07:44:06 2015 -0500
+
+    recargar DOM por nueva habilidad
+
+commit 1657f52bb96c6d16a9634e1d172d571f94889b90
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Fri Apr 24 08:25:47 2015 -0500
+
+    abril 24 antes del pull
+
+commit 6b1a5e279aff89ef49e6a40015aa948ecb23de8c
+Author: Adriann Felipe Sanchez Sierra <alka65@hotmail.com>
+Date:   Thu Apr 23 10:20:38 2015 -0500
+
+    Arreglos en habilidades y maquetacion busqueda
+
+commit aafd4f83f508e0749eb06bc1a2b0bd38bed1157b
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Thu Apr 16 15:45:26 2015 -0500
+
+    spinner
+
+commit 74e00cc9dfea5745b8d7c5a300b7acff469d21ff
+Merge: 7d48c93 d27d020
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Thu Apr 16 14:37:54 2015 -0500
+
+    listar habilidades
+
+commit 7d48c9344a86895caac2e42489015e289e2829d0
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Thu Apr 16 12:22:50 2015 -0500
+
+    handlebars agregado
+
+commit d27d0209c79aea32edab89d95b47faf3a2119c53
+Author: Adriann Felipe Sanchez Sierra <alka65@hotmail.com>
+Date:   Thu Apr 16 11:38:43 2015 -0500
+
+    Arreglos Part. 2
+
+commit d14b7748ad15cdf11290457ecc874fb0841c1cd6
+Merge: e0d8151 0231770
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Thu Apr 16 11:09:38 2015 -0500
+
+    funcion backed get lista habilidades de usuario
+
+commit e0d8151488f56da70735359c0d5903cf018dcf0a
+Merge: 2cea394 3722f8a
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Thu Apr 16 08:51:13 2015 -0500
+
+    antes del pull arreglo de habilidades,resgitro y login
+
+commit 02317705cd63b5c71e872104ad91bd709f1b6f7a
+Author: Adriann Felipe Sanchez Sierra <alka65@hotmail.com>
+Date:   Thu Apr 16 08:29:30 2015 -0500
+
+    Arreglos en Habilidades, Registro, Login y Lading Page
+
+commit 2cea394cf32b1dc8c1451a0a3ce0639420b4f14e
+Merge: 1860fac 673f76c
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Tue Apr 14 18:15:20 2015 -0500
+
+    antes de mejoras frontend
+
+commit 3722f8a277cc31eeb28376e553e44a92d1dcabca
+Author: Adriann Felipe Sanchez Sierra <alka65@hotmail.com>
+Date:   Tue Apr 14 11:42:14 2015 -0500
+
+    Cambios en el Landing Page y habilidades
+
+commit 8d06f434e10c52d9edd24d674bd830e3b7109f29
+Author: Adriann Felipe Sanchez Sierra <alka65@hotmail.com>
+Date:   Tue Apr 14 09:03:24 2015 -0500
+
+    Change dropdown menu
+
+commit 1860fac4d0c0a82e8876ee0768e776aa5f3f2c9a
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Tue Apr 14 08:55:49 2015 -0500
+
+    lista habilidades consulta
+
+commit 673f76c23459dce0a0e4153518e1fc1a9bcc0750
+Author: Adriann Felipe Sanchez Sierra <alka65@hotmail.com>
+Date:   Tue Apr 14 08:52:36 2015 -0500
+
+    Changes 1
+
+commit d5d50c43b1cab9805301b873c062579d29052dbb
+Merge: 7e3d652 6daa996
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Mon Apr 13 11:36:44 2015 -0500
+
+    formulario nueva habilidad
+
+commit 7e3d652a4532a7f26ee316f47ad5426b5f3a845c
+Merge: 08d0c7c 88cc664
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Mon Apr 13 11:33:51 2015 -0500
+
+    formulario nueva habilidad
+
+commit 6daa9965a16c272728bcf28dc227363e479847e1
+Author: Adriann Felipe Sanchez Sierra <alka65@hotmail.com>
+Date:   Mon Apr 13 11:15:16 2015 -0500
+
+    Add
+
+commit eed6a6cca2744d95bd02396f46dad2f4454d5d62
+Author: Adriann Felipe Sanchez Sierra <alka65@hotmail.com>
+Date:   Mon Apr 13 10:01:09 2015 -0500
+
+    Update styles templates
+
+commit 08d0c7c80df4d2a7ac4d9fc3e501177ef04ab18f
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Fri Apr 10 08:45:19 2015 -0500
+
+    angular
+
+commit 88cc664239aa2095b7c332532cf8d2e635e6202c
+Merge: 5dcf3b1 8026f43
+Author: Adriann Felipe Sanchez Sierra <alka65@hotmail.com>
+Date:   Thu Apr 9 23:02:54 2015 -0500
+
+    Update Perfil Habilidades Template
+    Merge branch 'master' of https://github.com/jsandoval86/oportunidapp
+    
+    Conflicts:
+    	app/templates/template.html
+    	db.sqlite3
+    	static/css/style.css
+
+commit 5dcf3b16eded6e8d6dcd98465a07026243fd81d3
+Merge: 99bd66e 5bfe342
+Author: Adriann Felipe Sanchez Sierra <alka65@hotmail.com>
+Date:   Thu Apr 9 15:21:10 2015 -0500
+
+    Downloading 1
+    Merge branch 'master' of https://github.com/jsandoval86/oportunidapp
+    
+    Conflicts:
+    	db.sqlite3
+
+commit 8026f43166119ce961dd79f59e200dc62c88903d
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Thu Apr 9 15:18:02 2015 -0500
+
+    template habilidades
+
+commit 024c27e00de8b1eb0c5691d144f1d6fd8d638ed7
+Merge: 2fdbf4a 89a04cd
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Thu Apr 9 14:18:33 2015 -0500
+
+    Merge branch 'master' of https://github.com/jsandoval86/oportunidapp
+
+commit 2fdbf4a1f316b3e4a997f02f21840c931557ad37
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Thu Apr 9 14:16:31 2015 -0500
+
+    correccion error validations.py
+
+commit 89a04cd6908f58439a4cf539609167fb17863c0d
+Author: jsandoval86 <juancsandoval86@gmail.com>
+Date:   Thu Apr 9 12:09:20 2015 -0500
+
+    Update README.md
+
+commit 99bd66ed9eba9c11848143b67a84739898715102
+Author: Adriann Felipe Sanchez Sierra <alka65@hotmail.com>
+Date:   Thu Apr 9 11:28:46 2015 -0500
+
+    Before Change
+
+commit 5bfe342570a3df768bb1ad8cebbfe3f0475de2e0
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Thu Apr 9 11:19:13 2015 -0500
+
+    template aplicacion
+
+commit 804355bbfb9aa1941df94f43233af27a9cf4e61e
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Mon Apr 6 09:00:28 2015 -0500
+
+    correccion de template
+
+commit 00d1b3ff5fd841d57771aac68befc6b2fc72bb14
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Sat Apr 4 20:43:14 2015 -0500
+
+    login con Email
+
+commit d2654750921167233cff7dce5effea8d37865b93
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Sat Apr 4 14:36:13 2015 -0500
+
+    login form y view
+
+commit 550c41489aaa2421f015008d004a7efd7a2ec811
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Fri Apr 3 18:50:21 2015 -0500
+
+    login template
+
+commit d7448902af87ece60b79cf8dac964b4d61af4f56
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Fri Apr 3 15:41:27 2015 -0500
+
+    prueba restframework
+
+commit 3f54c5c3881c9e48fb5aa8417da53b6de0da0f04
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Fri Apr 3 15:14:39 2015 -0500
+
+    configuracion del proyecto 2
+
+commit 8b12ef54c1f43f56cb0614793627e8de5289ed09
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Fri Apr 3 15:05:02 2015 -0500
+
+    configuracion del projecto
+
+commit 502a7a006a656dd6616b407cc5a0d101c7c21394
+Author: Juan Sandoval <juancsandoval86@gmail.com>
+Date:   Mon Mar 30 11:02:58 2015 -0500
+
+    cambio
+
+commit d177faef975f1b025827b563c363e3e0875caf86
+Author: Jon Mountjoy <jon@heroku.com>
+Date:   Mon Aug 25 13:54:56 2014 +0100
+
+    Update README.md
+
+commit 9b0dc25b18e337564ac6ac66a7aaef0c4fd79aff
+Author: Kenneth Reitz <me@kennethreitz.com>
+Date:   Thu Aug 14 12:20:00 2014 -0400
+
+    db page
+
+commit 96d095e2bc77a744a73ae754949afd5f60a1e122
+Author: Kenneth Reitz <me@kennethreitz.com>
+Date:   Thu Aug 14 12:04:24 2014 -0400
+
+    single view
+
+commit 84e9761833c86388c892ac11682a5d48e2fe778e
+Author: Kenneth Reitz <me@kennethreitz.com>
+Date:   Tue Aug 12 14:45:27 2014 -0400
+
+    no app.json
+
+commit 4b1bf18c5ccee332e7489f02cd5ab568d95e1f2a
+Author: Kenneth Reitz <me@kennethreitz.com>
+Date:   Tue Aug 12 14:18:14 2014 -0400
+
+    dummy static file
+
+commit 749c56e45b61b34869d1377b594b0a57a7f64ae5
+Author: Kenneth Reitz <me@kennethreitz.com>
+Date:   Tue Aug 12 14:17:50 2014 -0400
+
+    reorder settings around a bit
+
+commit 8b4c1553ecefae1aed4270e3d999bfe42a27e35a
+Author: Kenneth Reitz <me@kennethreitz.com>
+Date:   Tue Aug 12 14:12:00 2014 -0400
+
+    app.json
+
+commit 2c6c755fbd5617d7bb64dc2c0ada13910593f2b9
+Author: Kenneth Reitz <me@kennethreitz.com>
+Date:   Tue Aug 12 13:55:48 2014 -0400
+
+    readme
+
+commit 15e88c753ee660b4d92dc2e19636593e4920d198
+Author: Jon Mountjoy <jon@heroku.com>
+Date:   Tue Jul 22 19:05:30 2014 +0100
+
+    add .gitignore
+
+commit 6ba7fc387e9bc5efd768729ce8a0a69dfce217dc
+Author: Jon Mountjoy <jon@heroku.com>
+Date:   Thu Jul 17 11:45:37 2014 +0100
+
+    mm
+
+commit 1db9cf142de56cf2a74f56bc0b70b4234103c284
+Author: Jon Mountjoy <jon@heroku.com>
+Date:   Thu Jul 17 11:33:36 2014 +0100
+
+    created with 'django-admin.py startproject hellodjango .'

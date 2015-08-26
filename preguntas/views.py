@@ -39,6 +39,7 @@ def preguntanueva(request):
 
 		# guardar pregunta
 		pregunta.save()
+
 		# enviar email de notificacion
 		pregunta.enviar_pregunta_email()
 

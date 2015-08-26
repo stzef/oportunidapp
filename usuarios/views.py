@@ -79,6 +79,7 @@ class registroView(FormView):
 			'std_content00' : template,
 		}
 
+		#enviando email
 		msg.send()
 
 

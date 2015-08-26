@@ -15,13 +15,13 @@ def crearRespuesta(request):
 		pregunta = get_or_none(preguntasModel, id=pregunta_id)
 
 		if pregunta is not None:
-			nuevaRespuesta = respuestasModel(respuesta=respuesta)
+			nuevaRespuesta = respuestasModel(pregunta=pregunta,respuesta=respuesta)
 			nuevaRespuesta.save()
 
 			pregunta.respuesta = nuevaRespuesta
 			pregunta.save(update_fields=['respuesta'])
 
-			nuevaRespuesta.enviar_respuesta_email(pregunta.solicitante.usuario)
+			nuevaRespuesta.enviar_respuesta_email()
 
 			mensaje = 'Listo su mensaje a sido enviado.'
 
