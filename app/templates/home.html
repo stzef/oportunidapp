@@ -2,18 +2,17 @@
 
 {% load staticfiles %}
 
-{% block head %}<title>Inicio | OportunidApp</title>
+{% block head %}
+<title>Inicio | OportunidApp</title>
 <style>
 	.menuItemInicio{
 		background-color: rgb(12, 32, 50);
-	}
-	footer{
-		position: initial !important;
 	}
 </style>
 {% endblock %}
 
 {% block content %}
+
 <div class="img-back">
 	<div class="container first-content">
 		<div class="row text-center">
@@ -27,11 +26,12 @@
 				<a href="" class="col-md-2 col-lg-1"></a>
 				<a href="{% url 'buscar' %}" class="button-color-landing col-xs-12 col-md-4 col-lg-4">BUSCA</a>
 				<a href="" class="col-md-1 col-lg-2"></a>
-				<a href="" class="button-color-landing2 col-xs-12 col-md-4 col-lg-4">OFRECE</a>
+				<a href="#" class="button-color-landing2 col-xs-12 col-md-4 col-lg-4">OFRECE</a>
 			</div>
 		</div>
 	</div>
 </div>
+
 <section class="container">
 	<article class="col-md-8">
 
@@ -42,7 +42,7 @@
 	</article>
 	<article class="col-md-4">
 
-	<img  src="{% static 'img/computer.png' %}" class="img-responsive"/>
+		<img  src="{% static 'img/computer.png' %}" class="img-responsive"/>
 	</article>
 </section>
 
